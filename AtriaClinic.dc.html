@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Atria Clinic — estudo conceitual</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{w}}px; height: {{h}}px; position: relative; overflow: hidden; box-sizing: border-box; background: #F4EDE7; color: #2E211C; font-family: 'Jost', 'Helvetica Neue', sans-serif">
+
+<sc-if value="{{desk}}" hint-placeholder-val="{{ true }}">
+  <svg aria-hidden="true" style="position: absolute; left: 0; top: 0" width="1280" height="800" viewBox="0 0 1280 800">
+    <circle cx="640" cy="300" r="330" fill="none" stroke="#2E211C" stroke-opacity="0.09"></circle>
+    <circle cx="640" cy="300" r="250" fill="none" stroke="#2E211C" stroke-opacity="0.06" stroke-dasharray="2 6"></circle>
+    <path d="M442 800V268A198 198 0 0 1 838 268V800" fill="none" stroke="#2E211C" stroke-opacity="0.22"></path>
+    <path d="M640 40V70M310 300H340M940 300H970" stroke="#2E211C" stroke-opacity="0.3"></path>
+  </svg>
+
+  <svg aria-label="Janela em arco com luz natural" style="position: absolute; left: 470px; top: 96px" width="340" height="704" viewBox="0 0 340 704">
+    <defs>
+      <linearGradient id="at-aurora" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F8E6D8"></stop><stop offset="48%" stop-color="#EECAB6"></stop><stop offset="100%" stop-color="#D6A593"></stop></linearGradient>
+      <radialGradient id="at-perola" cx="36%" cy="30%" r="70%"><stop offset="0%" stop-color="#FFFFFF"></stop><stop offset="30%" stop-color="#FAF0E9"></stop><stop offset="68%" stop-color="#E7CDBE"></stop><stop offset="100%" stop-color="#C7998A"></stop></radialGradient>
+      <clipPath id="at-arco"><path d="M0 704V170A170 170 0 0 1 340 170V704Z"></path></clipPath>
+    </defs>
+    <g clip-path="url(#at-arco)">
+      <rect width="340" height="704" fill="url(#at-aurora)"></rect>
+      <path d="M170 0V704M0 300H340" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1.5"></path>
+      <ellipse cx="170" cy="512" rx="70" ry="10" fill="#8A5444" fill-opacity="0.16"></ellipse>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -18; 0 0" dur="8s" repeatCount="indefinite"></animateTransform>
+        <circle cx="170" cy="360" r="76" fill="url(#at-perola)"></circle>
+      </g>
+    </g>
+  </svg>
+
+  <header style="position: absolute; left: 0; top: 0; width: 1280px; height: 88px; box-sizing: border-box; padding: 0 72px; display: flex; align-items: center; justify-content: space-between">
+    <a href="#" style="display: flex; align-items: baseline; gap: 10px; color: #2E211C; text-decoration: none">
+      <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 36px; font-weight: 500; line-height: 1">Atria</span>
+      <span style="font-size: 11px; letter-spacing: 0.34em; text-transform: uppercase; color: #6B4E42">clinic</span>
+    </a>
+    <nav aria-label="Principal" style="display: flex; gap: 36px; font-size: 14px">
+      <a href="#" style="color: #4A3A33; text-decoration: none">Tratamentos</a>
+      <a href="#" style="color: #4A3A33; text-decoration: none">A clínica</a>
+      <a href="#" style="color: #4A3A33; text-decoration: none">Equipe médica</a>
+      <a href="#" style="color: #4A3A33; text-decoration: none">Contato</a>
+    </nav>
+    <a href="#" style="display: flex; align-items: center; height: 42px; padding: 0 22px; border: 1px solid #2E211C; border-radius: 999px; color: #2E211C; text-decoration: none; font-size: 14px; font-weight: 500">Agendar avaliação</a>
+  </header>
+
+  <h1 style="position: absolute; left: 72px; top: 128px; width: 1136px; margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 116px; line-height: 0.98; font-weight: 500; letter-spacing: -0.015em">
+    <span style="display: block">Cuidado que</span>
+    <span style="display: block; margin-left: 250px">começa</span>
+    <span style="display: block; margin-left: 520px; font-style: italic; color: #7A4A3A">na conversa.</span>
+  </h1>
+
+  <div style="position: absolute; left: 72px; top: 520px; width: 330px; display: flex; flex-direction: column">
+    <span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B4E42">Dermatologia estética · Vitória, ES</span>
+    <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.6; color: #4A3A33">Avaliação individual, protocolos explicados sem pressa e acompanhamento em cada etapa.</p>
+    <div style="margin-top: 26px; display: flex; align-items: center; gap: 22px">
+      <a href="#" style="display: flex; align-items: center; height: 52px; padding: 0 26px; background: #7A4A3A; color: #FBF6F1; border-radius: 999px; text-decoration: none; font-size: 15px; font-weight: 500">Agendar avaliação</a>
+      <a href="#" style="font-size: 15px; color: #2E211C; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: #B7715A">Tratamentos</a>
+    </div>
+  </div>
+  <div style="position: absolute; left: 72px; top: 762px; font-size: 11px; letter-spacing: 0.04em; color: #6B4E42">Responsável técnica: Dra. [Nome] · CRM-ES [número]</div>
+
+  <div style="position: absolute; left: 880px; top: 500px; width: 320px; box-sizing: border-box; padding: 20px; background: #FCF8F4; border-radius: 22px; box-shadow: 0 24px 60px rgba(90,50,40,0.16); display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600">Avaliação individual</span><span style="font-size: 12px; color: #6B4E42">50 min</span></div>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; text-align: center">
+      <span style="padding: 8px 0; border-radius: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; color: #6B4E42">SEG</span><span style="font-size: 15px; font-weight: 500">29</span></span>
+      <span style="padding: 8px 0; border-radius: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; color: #6B4E42">TER</span><span style="font-size: 15px; font-weight: 500">30</span></span>
+      <span style="padding: 8px 0; border-radius: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; color: #6B4E42">QUA</span><span style="font-size: 15px; font-weight: 500">01</span></span>
+      <span style="padding: 8px 0; border-radius: 12px; background: #7A4A3A; color: #FBF6F1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px">QUI</span><span style="font-size: 15px; font-weight: 600">02</span></span>
+      <span style="padding: 8px 0; border-radius: 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10px; color: #6B4E42">SEX</span><span style="font-size: 15px; font-weight: 500">03</span></span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; font-size: 14px">
+      <span style="height: 38px; border: 1px solid rgba(46,33,28,0.16); border-radius: 999px; display: flex; align-items: center; justify-content: center">09h00</span>
+      <span style="height: 38px; border: 1px solid rgba(46,33,28,0.16); border-radius: 999px; display: flex; align-items: center; justify-content: center">10h30</span>
+      <span style="height: 38px; border: 1.5px solid #7A4A3A; color: #7A4A3A; font-weight: 600; border-radius: 999px; display: flex; align-items: center; justify-content: center">14h00</span>
+      <span style="height: 38px; border: 1px solid rgba(46,33,28,0.16); border-radius: 999px; display: flex; align-items: center; justify-content: center">16h30</span>
+    </div>
+    <span style="height: 44px; background: #2E211C; color: #FBF6F1; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500">Reservar quinta, 14h00</span>
+  </div>
+</sc-if>
+
+<sc-if value="{{mob}}" hint-placeholder-val="{{ false }}">
+  <svg aria-hidden="true" style="position: absolute; left: 0; top: 0" width="390" height="844" viewBox="0 0 390 844">
+    <circle cx="195" cy="230" r="190" fill="none" stroke="#2E211C" stroke-opacity="0.08"></circle>
+  </svg>
+  <header style="position: absolute; left: 0; top: 0; width: 390px; height: 68px; box-sizing: border-box; padding: 0 20px; display: flex; align-items: center; justify-content: space-between">
+    <span style="display: flex; align-items: baseline; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px; font-weight: 500">Atria</span><span style="font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #6B4E42">clinic</span></span>
+    <span style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(46,33,28,0.25); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 5h12M2 11h12" stroke="#2E211C" stroke-width="1.5" stroke-linecap="round"></path></svg></span>
+  </header>
+  <svg aria-hidden="true" style="position: absolute; left: 80px; top: 84px" width="230" height="300" viewBox="0 0 340 444">
+    <defs>
+      <linearGradient id="at-aurora-m" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F8E6D8"></stop><stop offset="48%" stop-color="#EECAB6"></stop><stop offset="100%" stop-color="#D6A593"></stop></linearGradient>
+      <radialGradient id="at-perola-m" cx="36%" cy="30%" r="70%"><stop offset="0%" stop-color="#FFFFFF"></stop><stop offset="30%" stop-color="#FAF0E9"></stop><stop offset="68%" stop-color="#E7CDBE"></stop><stop offset="100%" stop-color="#C7998A"></stop></radialGradient>
+      <clipPath id="at-arco-m"><path d="M0 444V170A170 170 0 0 1 340 170V444Z"></path></clipPath>
+    </defs>
+    <g clip-path="url(#at-arco-m)">
+      <rect width="340" height="444" fill="url(#at-aurora-m)"></rect>
+      <path d="M170 0V444M0 280H340" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="2"></path>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -16; 0 0" dur="8s" repeatCount="indefinite"></animateTransform>
+        <circle cx="170" cy="300" r="74" fill="url(#at-perola-m)"></circle>
+      </g>
+    </g>
+  </svg>
+  <h1 style="position: absolute; left: 20px; top: 404px; width: 350px; margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 0.98; font-weight: 500">Cuidado que começa <em style="font-style: italic; color: #7A4A3A">na conversa.</em></h1>
+  <p style="position: absolute; left: 20px; top: 574px; width: 340px; margin: 0; font-size: 15px; line-height: 1.6; color: #4A3A33">Avaliação individual e protocolos explicados sem pressa.</p>
+  <div style="position: absolute; left: 16px; right: 16px; bottom: 16px; box-sizing: border-box; padding: 16px; background: #FCF8F4; border-radius: 22px; box-shadow: 0 18px 44px rgba(90,50,40,0.16); display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; justify-content: space-between; font-size: 13px"><span style="font-weight: 600">Avaliação individual</span><span style="color: #6B4E42">Qui, 02 · 14h00</span></div>
+    <span style="height: 50px; background: #7A4A3A; color: #FBF6F1; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 500">Agendar avaliação</span>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"modo":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mob = (this.props.modo ?? 'desktop') === 'mobile';
+    return { desk: !mob, mob: mob, w: mob ? 390 : 1280, h: mob ? 844 : 800 };
+  }
+}
+</script>
+</body>
+</html>

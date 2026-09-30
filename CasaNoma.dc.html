@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Casa Noma — estudo conceitual</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{w}}px; height: {{h}}px; position: relative; overflow: hidden; box-sizing: border-box; background: #110E0B; color: #F0E6D6; font-family: 'Manrope', 'Helvetica Neue', sans-serif">
+
+<sc-if value="{{desk}}" hint-placeholder-val="{{ true }}">
+  <svg aria-hidden="true" style="position: absolute; left: 0; top: 0" width="1280" height="800" viewBox="0 0 1280 800">
+    <defs>
+      <radialGradient id="cn-luz" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E0A84E" stop-opacity="0.22"></stop><stop offset="100%" stop-color="#E0A84E" stop-opacity="0"></stop></radialGradient>
+    </defs>
+    <circle cx="870" cy="420" r="420" fill="url(#cn-luz)"></circle>
+    <text x="-24" y="905" font-family="Bodoni Moda, Didot, serif" font-style="italic" font-size="430" fill="none" stroke="#F0E6D6" stroke-opacity="0.09" stroke-width="1.2">Noma</text>
+  </svg>
+
+  <header style="position: absolute; left: 0; top: 0; width: 1280px; height: 88px; box-sizing: border-box; padding: 0 64px; display: flex; align-items: center; justify-content: space-between">
+    <a href="#" style="font-family: 'Bodoni Moda', Didot, serif; font-style: italic; font-size: 28px; font-weight: 500; color: #F0E6D6; text-decoration: none; line-height: 1">Casa Noma</a>
+    <nav aria-label="Principal" style="display: flex; gap: 40px; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">
+      <a href="#" style="color: #CDBDA5; text-decoration: none">Menu</a>
+      <a href="#" style="color: #CDBDA5; text-decoration: none">Vinhos</a>
+      <a href="#" style="color: #CDBDA5; text-decoration: none">A casa</a>
+      <a href="#" style="color: #CDBDA5; text-decoration: none">Eventos</a>
+    </nav>
+    <a href="#" style="display: flex; align-items: center; height: 42px; padding: 0 22px; border: 1px solid rgba(240,230,214,0.35); border-radius: 999px; color: #F0E6D6; text-decoration: none; font-size: 14px; font-weight: 600">Reservar</a>
+  </header>
+
+  <div style="position: absolute; left: 64px; top: 150px; width: 500px; display: flex; flex-direction: column">
+    <span style="font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #B9A78F; line-height: 16px">Cozinha de estação · Vitória, ES</span>
+    <h1 style="margin: 22px 0 0; font-family: 'Bodoni Moda', Didot, serif; font-size: 88px; line-height: 0.95; font-weight: 400; letter-spacing: -0.025em">Fogo baixo,<br><em style="font-style: italic; color: #E0A84E">mesa longa.</em></h1>
+    <p style="margin: 26px 0 0; font-size: 16px; line-height: 1.7; color: #CDBDA5; max-width: 400px">Um menu curto que muda com a estação, vinhos de pequenos produtores e uma cozinha aberta para o salão.</p>
+    <div style="margin-top: 30px; display: flex; align-items: center; gap: 24px">
+      <a href="#" style="display: flex; align-items: center; height: 52px; padding: 0 28px; background: #E0A84E; color: #110E0B; border-radius: 999px; text-decoration: none; font-size: 15px; font-weight: 700">Reservar mesa</a>
+      <a href="#" style="font-size: 15px; color: #F0E6D6; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(240,230,214,0.4)">Menu da estação</a>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 64px; top: 606px; width: 470px; display: flex; flex-direction: column">
+    <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9C8B73; margin-bottom: 10px">Esta semana</span>
+    <div style="display: flex; align-items: baseline; gap: 16px; padding: 9px 0; border-top: 1px solid rgba(240,230,214,0.12)"><span style="width: 22px; font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 16px; color: #E0A84E">i</span><span style="font-size: 15px">Pupunha na brasa, manteiga de missô</span></div>
+    <div style="display: flex; align-items: baseline; gap: 16px; padding: 9px 0; border-top: 1px solid rgba(240,230,214,0.12)"><span style="width: 22px; font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 16px; color: #E0A84E">ii</span><span style="font-size: 15px">Moqueca de banana-da-terra, farofa de dendê</span></div>
+    <div style="display: flex; align-items: baseline; gap: 16px; padding: 9px 0; border-top: 1px solid rgba(240,230,214,0.12); border-bottom: 1px solid rgba(240,230,214,0.12)"><span style="width: 22px; font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 16px; color: #E0A84E">iii</span><span style="font-size: 15px">Cocada queimada, sorvete de coco verde</span></div>
+  </div>
+
+  <svg aria-label="Mesa posta vista de cima" style="position: absolute; left: 600px; top: 150px" width="540" height="540" viewBox="0 0 540 540">
+    <defs>
+      <radialGradient id="cn-vela" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#F6C46A" stop-opacity="0.55"></stop><stop offset="100%" stop-color="#F6C46A" stop-opacity="0"></stop></radialGradient>
+    </defs>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 270 270" to="360 270 270" dur="160s" repeatCount="indefinite"></animateTransform>
+      <circle cx="270" cy="270" r="262" fill="#231B14"></circle>
+      <circle cx="270" cy="270" r="246" fill="none" stroke="#F0E6D6" stroke-opacity="0.06"></circle>
+      <circle cx="270" cy="270" r="200" fill="none" stroke="#F0E6D6" stroke-opacity="0.04"></circle>
+      <circle cx="170" cy="190" r="94" fill="#F0E6D6"></circle>
+      <circle cx="170" cy="190" r="78" fill="none" stroke="#110E0B" stroke-opacity="0.1"></circle>
+      <circle cx="170" cy="190" r="46" fill="#C4492F"></circle>
+      <circle cx="184" cy="178" r="22" fill="#E0A84E"></circle>
+      <circle cx="148" cy="210" r="5" fill="#6F7D3C"></circle>
+      <circle cx="196" cy="214" r="4" fill="#6F7D3C"></circle>
+      <circle cx="152" cy="168" r="3.5" fill="#6F7D3C"></circle>
+      <rect x="276" y="112" width="7" height="150" rx="3.5" fill="#CDBDA5" transform="rotate(18 279 187)"></rect>
+      <rect x="292" y="118" width="7" height="140" rx="3.5" fill="#CDBDA5" transform="rotate(18 295 188)"></rect>
+      <circle cx="360" cy="336" r="80" fill="#E8DCC7"></circle>
+      <circle cx="360" cy="336" r="64" fill="none" stroke="#110E0B" stroke-opacity="0.1"></circle>
+      <circle cx="356" cy="340" r="36" fill="#8C5A35"></circle>
+      <circle cx="372" cy="326" r="13" fill="#E0A84E"></circle>
+      <path d="M322 362 Q360 392 398 358" fill="none" stroke="#6F7D3C" stroke-width="3" stroke-linecap="round"></path>
+      <circle cx="378" cy="150" r="46" fill="#1A1410" stroke="#F0E6D6" stroke-width="9"></circle>
+      <circle cx="378" cy="150" r="22" fill="#C4492F"></circle>
+      <circle cx="160" cy="388" r="31" fill="none" stroke="#F0E6D6" stroke-opacity="0.5" stroke-width="2"></circle>
+      <circle cx="160" cy="388" r="19" fill="#6E1F2A" fill-opacity="0.85"></circle>
+      <rect x="214" y="430" width="128" height="46" rx="23" fill="#3A2C20"></rect>
+      <circle cx="244" cy="453" r="9" fill="#C9955A"></circle>
+      <circle cx="272" cy="453" r="9" fill="#C9955A"></circle>
+      <circle cx="300" cy="453" r="9" fill="#C9955A"></circle>
+    </g>
+    <circle cx="270" cy="270" r="74" fill="url(#cn-vela)">
+      <animate attributeName="opacity" values="0.8;1;0.85;1;0.8" dur="3.2s" repeatCount="indefinite"></animate>
+    </circle>
+    <circle cx="270" cy="270" r="13" fill="#F0E6D6"></circle>
+    <circle cx="270" cy="270" r="4" fill="#E0A84E"></circle>
+  </svg>
+
+  <div style="position: absolute; left: 948px; top: 452px; width: 276px; box-sizing: border-box; padding: 20px; background: rgba(26,20,16,0.94); border: 1px solid rgba(240,230,214,0.14); border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,0.45); display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 22px">Reservar mesa</span><span style="font-size: 11px; color: #9C8B73; letter-spacing: 0.12em">OUTUBRO</span></div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+      <span style="height: 54px; border: 1px solid rgba(240,230,214,0.16); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 10px; color: #9C8B73">QUA</span><span style="font-size: 16px; font-weight: 600">01</span></span>
+      <span style="height: 54px; border: 1px solid rgba(240,230,214,0.16); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 10px; color: #9C8B73">QUI</span><span style="font-size: 16px; font-weight: 600">02</span></span>
+      <span style="height: 54px; background: #E0A84E; color: #110E0B; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 10px; font-weight: 600">SEX</span><span style="font-size: 16px; font-weight: 700">03</span></span>
+      <span style="height: 54px; border: 1px solid rgba(240,230,214,0.16); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px"><span style="font-size: 10px; color: #9C8B73">SÁB</span><span style="font-size: 16px; font-weight: 600">04</span></span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; font-size: 13px; font-weight: 600">
+      <span style="height: 34px; border: 1px solid rgba(240,230,214,0.16); border-radius: 999px; display: flex; align-items: center; justify-content: center">19h30</span>
+      <span style="height: 34px; border: 1px solid #E0A84E; color: #E0A84E; border-radius: 999px; display: flex; align-items: center; justify-content: center">20h00</span>
+      <span style="height: 34px; border: 1px solid rgba(240,230,214,0.16); border-radius: 999px; display: flex; align-items: center; justify-content: center">21h15</span>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 14px">
+      <span style="color: #CDBDA5">Pessoas</span>
+      <span style="display: flex; align-items: center; gap: 14px"><span style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(240,230,214,0.25); display: flex; align-items: center; justify-content: center">−</span><span style="font-weight: 700">2</span><span style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(240,230,214,0.25); display: flex; align-items: center; justify-content: center">+</span></span>
+    </div>
+    <span style="height: 46px; background: #F0E6D6; color: #110E0B; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">Confirmar reserva</span>
+  </div>
+
+  <svg aria-hidden="true" style="position: absolute; left: 0; top: 0; pointer-events: none; mix-blend-mode: overlay" width="1280" height="800">
+    <filter id="cn-grao"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+    <rect width="1280" height="800" filter="url(#cn-grao)" opacity="0.35"></rect>
+  </svg>
+</sc-if>
+
+<sc-if value="{{mob}}" hint-placeholder-val="{{ false }}">
+  <svg aria-hidden="true" style="position: absolute; left: 0; top: 0" width="390" height="844" viewBox="0 0 390 844">
+    <defs>
+      <radialGradient id="cn-luz-m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E0A84E" stop-opacity="0.22"></stop><stop offset="100%" stop-color="#E0A84E" stop-opacity="0"></stop></radialGradient>
+    </defs>
+    <circle cx="260" cy="590" r="300" fill="url(#cn-luz-m)"></circle>
+    <text x="-14" y="880" font-family="Bodoni Moda, Didot, serif" font-style="italic" font-size="200" fill="none" stroke="#F0E6D6" stroke-opacity="0.09" stroke-width="1">Noma</text>
+  </svg>
+  <header style="position: absolute; left: 0; top: 0; width: 390px; height: 68px; box-sizing: border-box; padding: 0 20px; display: flex; align-items: center; justify-content: space-between">
+    <span style="font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 24px">Casa Noma</span>
+    <span style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(240,230,214,0.3); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 5h12M2 11h12" stroke="#F0E6D6" stroke-width="1.5" stroke-linecap="round"></path></svg></span>
+  </header>
+  <div style="position: absolute; left: 20px; top: 96px; width: 350px; display: flex; flex-direction: column">
+    <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #B9A78F">Cozinha de estação · Vitória</span>
+    <h1 style="margin: 16px 0 0; font-family: 'Bodoni Moda', serif; font-size: 56px; line-height: 0.95; font-weight: 400; letter-spacing: -0.025em">Fogo baixo,<br><em style="font-style: italic; color: #E0A84E">mesa longa.</em></h1>
+    <p style="margin: 18px 0 0; font-size: 15px; line-height: 1.65; color: #CDBDA5">Menu curto que muda com a estação e uma cozinha aberta para o salão.</p>
+  </div>
+  <svg aria-hidden="true" style="position: absolute; left: 40px; top: 380px" width="420" height="420" viewBox="0 0 540 540">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 270 270" to="360 270 270" dur="160s" repeatCount="indefinite"></animateTransform>
+      <circle cx="270" cy="270" r="262" fill="#231B14"></circle>
+      <circle cx="270" cy="270" r="246" fill="none" stroke="#F0E6D6" stroke-opacity="0.06"></circle>
+      <circle cx="170" cy="190" r="94" fill="#F0E6D6"></circle>
+      <circle cx="170" cy="190" r="46" fill="#C4492F"></circle>
+      <circle cx="184" cy="178" r="22" fill="#E0A84E"></circle>
+      <circle cx="360" cy="336" r="80" fill="#E8DCC7"></circle>
+      <circle cx="356" cy="340" r="36" fill="#8C5A35"></circle>
+      <circle cx="372" cy="326" r="13" fill="#E0A84E"></circle>
+      <circle cx="378" cy="150" r="46" fill="#1A1410" stroke="#F0E6D6" stroke-width="9"></circle>
+      <circle cx="378" cy="150" r="22" fill="#C4492F"></circle>
+      <circle cx="160" cy="388" r="31" fill="none" stroke="#F0E6D6" stroke-opacity="0.5" stroke-width="2"></circle>
+      <circle cx="160" cy="388" r="19" fill="#6E1F2A" fill-opacity="0.85"></circle>
+    </g>
+    <circle cx="270" cy="270" r="13" fill="#F0E6D6"></circle>
+  </svg>
+  <div style="position: absolute; left: 16px; right: 16px; bottom: 16px; height: 74px; box-sizing: border-box; padding: 0 10px 0 18px; background: rgba(26,20,16,0.95); border: 1px solid rgba(240,230,214,0.16); border-radius: 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 18px 40px rgba(0,0,0,0.5)">
+    <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 11px; letter-spacing: 0.16em; color: #9C8B73">SEX 03 · 20H00</span><span style="font-size: 15px; font-weight: 600">Mesa para 2 pessoas</span></span>
+    <span style="height: 50px; padding: 0 20px; background: #E0A84E; color: #110E0B; border-radius: 14px; display: flex; align-items: center; font-size: 14px; font-weight: 700">Reservar</span>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"modo":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mob = (this.props.modo ?? 'desktop') === 'mobile';
+    return { desk: !mob, mob: mob, w: mob ? 390 : 1280, h: mob ? 844 : 800 };
+  }
+}
+</script>
+</body>
+</html>

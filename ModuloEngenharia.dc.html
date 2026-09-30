@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Módulo Engenharia — estudo conceitual</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{w}}px; height: {{h}}px; position: relative; overflow: hidden; box-sizing: border-box; background-color: #0E1114; background-image: linear-gradient(rgba(236,234,228,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(236,234,228,0.045) 1px, transparent 1px); background-size: 40px 40px; color: #ECEAE4; font-family: 'Archivo', 'Arial Narrow', sans-serif">
+
+<sc-if value="{{desk}}" hint-placeholder-val="{{ true }}">
+  <header style="position: absolute; left: 0; top: 0; width: 1280px; height: 72px; box-sizing: border-box; padding: 0 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(236,234,228,0.1); background: rgba(14,17,20,0.85)">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: #ECEAE4; text-decoration: none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="1" width="22" height="22" stroke="#ECEAE4" stroke-width="1.6"></rect><rect x="12" y="12" width="8" height="8" fill="#F2552C"></rect><path d="M1 12h11V1" stroke="#ECEAE4" stroke-width="1.2"></path></svg>
+      <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 17px; font-weight: 800; letter-spacing: 0.16em; font-stretch: 125%; line-height: 1">MÓDULO</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.34em; color: #9AA3AB; line-height: 1">ENGENHARIA</span></span>
+    </a>
+    <nav aria-label="Principal" style="display: flex; gap: 32px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em">
+      <a href="#" style="color: #9AA3AB; text-decoration: none">SERVIÇOS</a>
+      <a href="#" style="color: #9AA3AB; text-decoration: none">OBRAS</a>
+      <a href="#" style="color: #9AA3AB; text-decoration: none">ENGENHARIA</a>
+      <a href="#" style="color: #9AA3AB; text-decoration: none">CONTATO</a>
+    </nav>
+    <a href="#" style="display: flex; align-items: center; height: 40px; padding: 0 18px; background: #F2552C; color: #0E1114; text-decoration: none; font-size: 14px; font-weight: 700">Proposta técnica</a>
+  </header>
+
+  <div style="position: absolute; left: 64px; top: 124px; width: 560px; display: flex; flex-direction: column">
+    <div style="display: flex; align-items: center; gap: 10px; height: 16px"><span style="width: 8px; height: 8px; background: #F2552C"></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.16em; color: #9AA3AB">ENGENHARIA INDUSTRIAL · ESPÍRITO SANTO</span></div>
+    <h1 style="margin: 22px 0 0; font-size: 92px; line-height: 0.92; font-weight: 800; font-stretch: 62%; letter-spacing: -0.01em; text-transform: uppercase">Estrutura<br>é <span style="color: #F2552C">projeto</span><br>antes de ser<br>obra.</h1>
+    <p style="margin: 24px 0 0; font-size: 16px; line-height: 1.6; color: #B7BEC4; max-width: 440px">Estruturas metálicas, galpões e laudos técnicos para indústrias que não podem parar. Uma equipe responde pelo cálculo, pela obra e pela documentação.</p>
+    <div style="margin-top: 28px; display: flex; gap: 12px">
+      <a href="#" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; background: #F2552C; color: #0E1114; text-decoration: none; font-size: 15px; font-weight: 700">Solicitar proposta técnica <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8"></path></svg></a>
+      <a href="#" style="display: flex; align-items: center; height: 52px; padding: 0 22px; border: 1px solid rgba(236,234,228,0.3); color: #ECEAE4; text-decoration: none; font-size: 15px; font-weight: 600">Ver obras</a>
+    </div>
+  </div>
+
+  <svg aria-label="Estrutura metálica de galpão em perspectiva isométrica" style="position: absolute; left: 632px; top: 92px" width="584" height="540" viewBox="20 30 405 375">
+    <g fill="none" stroke="#ECEAE4" stroke-opacity="0.5" stroke-width="1" stroke-linecap="round">
+      <path d="M150 175L357.8 295L253.9 355L46.1 235Z" stroke-opacity="0.25" stroke-dasharray="3 4"></path>
+      <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M150 175L150 95M46.1 235L46.1 155M184.6 195L184.6 115M80.7 255L80.7 175M219.3 215L219.3 135M115.4 275L115.4 195M253.9 235L253.9 155M150 295L150 215M288.6 255L288.6 175M184.6 315L184.6 235M323.2 275L323.2 195M219.3 335L219.3 255M357.8 295L357.8 215M253.9 355L253.9 275"><animate attributeName="stroke-dashoffset" values="1;0" dur="2.2s" fill="freeze"></animate></path>
+      <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M150 95L357.8 215M46.1 155L253.9 275M98 70L305.9 190"><animate attributeName="stroke-dashoffset" values="1;0" begin="0.6s" dur="1.8s" fill="freeze"></animate></path>
+      <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M150 95L98 70L46.1 155M184.6 115L132.7 90L80.7 175M219.3 135L167.3 110L115.4 195M288.6 175L236.6 150L184.6 235M323.2 195L271.2 170L219.3 255M357.8 215L305.9 190L253.9 275"><animate attributeName="stroke-dashoffset" values="1;0" begin="1s" dur="2s" fill="freeze"></animate></path>
+      <path stroke-opacity="0.28" d="M132.7 86.7L340.5 206.7M115.4 78.3L323.2 198.3M80.7 98.3L288.6 218.3M63.4 126.7L271.2 246.7"></path>
+      <path stroke-opacity="0.35" d="M150 175L184.6 115M184.6 195L150 95M219.3 335L253.9 275M253.9 355L219.3 255"></path>
+    </g>
+    <path d="M253.9 235L253.9 155L202 130L150 215L150 295" fill="none" stroke="#F2552C" stroke-width="2.2" stroke-linejoin="round"></path>
+    <g fill="#F2552C">
+      <circle cx="253.9" cy="155" r="3.5"><animate attributeName="r" values="3.5;6;3.5" dur="2.4s" repeatCount="indefinite"></animate></circle>
+      <circle cx="202" cy="130" r="3.5"><animate attributeName="r" values="3.5;6;3.5" dur="2.4s" begin="0.8s" repeatCount="indefinite"></animate></circle>
+      <circle cx="150" cy="215" r="3.5"><animate attributeName="r" values="3.5;6;3.5" dur="2.4s" begin="1.6s" repeatCount="indefinite"></animate></circle>
+    </g>
+    <g stroke="#ECEAE4" stroke-opacity="0.55" stroke-width="0.8">
+      <path d="M170.8 163L378.6 283M165.6 166L176 160M373.4 286L383.8 280"></path>
+      <path d="M392 295V215M387 295H397M387 215H397"></path>
+    </g>
+    <text x="282" y="214" font-family="IBM Plex Mono, monospace" font-size="9" fill="#ECEAE4" fill-opacity="0.8" transform="rotate(30 282 214)">60,00 m</text>
+    <text x="400" y="258" font-family="IBM Plex Mono, monospace" font-size="9" fill="#ECEAE4" fill-opacity="0.8">10,00</text>
+  </svg>
+
+  <div style="position: absolute; left: 846px; top: 180px; display: flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid rgba(242,85,44,0.6); background: rgba(14,17,20,0.9); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: #ECEAE4">
+    <span style="color: #F2552C">N-14</span><span>X 30.00</span><span>Y 15.00</span><span>Z 13.50</span>
+  </div>
+
+  <div style="position: absolute; left: 944px; top: 476px; width: 272px; box-sizing: border-box; border: 1px solid rgba(236,234,228,0.18); background: rgba(14,17,20,0.94)">
+    <div style="padding: 10px 14px; border-bottom: 1px solid rgba(236,234,228,0.14); display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #9AA3AB"><span>FICHA TÉCNICA</span><span style="color: #F2552C">P-04</span></div>
+    <div style="padding: 8px 14px; display: flex; flex-direction: column">
+      <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(236,234,228,0.08)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #9AA3AB">USO</span><span style="font-size: 13px; font-weight: 600">Galpão logístico</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(236,234,228,0.08)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #9AA3AB">VÃO LIVRE</span><span style="font-size: 13px; font-weight: 600">30,00 m</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(236,234,228,0.08)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #9AA3AB">PÉ-DIREITO</span><span style="font-size: 13px; font-weight: 600">10,00 m</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 6px 0"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #9AA3AB">AÇO</span><span style="font-size: 13px; font-weight: 600">ASTM A572 gr. 50</span></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 64px; right: 64px; top: 704px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(236,234,228,0.16)">
+    <div style="padding: 18px 20px 0 0; display: flex; gap: 12px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #F2552C">01</span><span style="font-size: 16px; font-weight: 700">Estruturas metálicas</span></div>
+    <div style="padding: 18px 20px 0; border-left: 1px solid rgba(236,234,228,0.12); display: flex; gap: 12px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #F2552C">02</span><span style="font-size: 16px; font-weight: 700">Galpões industriais</span></div>
+    <div style="padding: 18px 20px 0; border-left: 1px solid rgba(236,234,228,0.12); display: flex; gap: 12px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #F2552C">03</span><span style="font-size: 16px; font-weight: 700">Laudos e inspeções</span></div>
+    <div style="padding: 18px 0 0 20px; border-left: 1px solid rgba(236,234,228,0.12); display: flex; gap: 12px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #F2552C">04</span><span style="font-size: 16px; font-weight: 700">Projetos executivos</span></div>
+  </div>
+</sc-if>
+
+<sc-if value="{{mob}}" hint-placeholder-val="{{ false }}">
+  <header style="position: absolute; left: 0; top: 0; width: 390px; height: 64px; box-sizing: border-box; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(236,234,228,0.1)">
+    <span style="display: flex; align-items: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1" y="1" width="22" height="22" stroke="#ECEAE4" stroke-width="1.6"></rect><rect x="12" y="12" width="8" height="8" fill="#F2552C"></rect></svg><span style="font-size: 15px; font-weight: 800; letter-spacing: 0.16em; font-stretch: 125%">MÓDULO</span></span>
+    <span style="height: 36px; padding: 0 14px; background: #F2552C; color: #0E1114; display: flex; align-items: center; font-size: 13px; font-weight: 700">Proposta</span>
+  </header>
+  <div style="position: absolute; left: 20px; top: 88px; width: 350px; display: flex; flex-direction: column">
+    <div style="display: flex; align-items: center; gap: 8px"><span style="width: 7px; height: 7px; background: #F2552C"></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #9AA3AB">ENGENHARIA INDUSTRIAL · ES</span></div>
+    <h1 style="margin: 16px 0 0; font-size: 60px; line-height: 0.92; font-weight: 800; font-stretch: 62%; text-transform: uppercase">Estrutura<br>é <span style="color: #F2552C">projeto</span><br>antes de ser<br>obra.</h1>
+    <p style="margin: 18px 0 0; font-size: 15px; line-height: 1.6; color: #B7BEC4">Estruturas metálicas, galpões e laudos técnicos. Uma equipe do cálculo à entrega.</p>
+    <span style="margin-top: 20px; height: 50px; background: #F2552C; color: #0E1114; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">Solicitar proposta técnica</span>
+  </div>
+  <svg aria-hidden="true" style="position: absolute; left: 10px; top: 520px" width="370" height="343" viewBox="20 30 405 375">
+    <g fill="none" stroke="#ECEAE4" stroke-opacity="0.5" stroke-width="1.2">
+      <path d="M150 175L150 95M46.1 235L46.1 155M184.6 195L184.6 115M80.7 255L80.7 175M219.3 215L219.3 135M115.4 275L115.4 195M253.9 235L253.9 155M150 295L150 215M288.6 255L288.6 175M184.6 315L184.6 235M323.2 275L323.2 195M219.3 335L219.3 255M357.8 295L357.8 215M253.9 355L253.9 275"></path>
+      <path d="M150 95L357.8 215M46.1 155L253.9 275M98 70L305.9 190"></path>
+      <path d="M150 95L98 70L46.1 155M184.6 115L132.7 90L80.7 175M219.3 135L167.3 110L115.4 195M288.6 175L236.6 150L184.6 235M323.2 195L271.2 170L219.3 255M357.8 215L305.9 190L253.9 275"></path>
+    </g>
+    <path d="M253.9 235L253.9 155L202 130L150 215L150 295" fill="none" stroke="#F2552C" stroke-width="2.4" stroke-linejoin="round"></path>
+    <circle cx="202" cy="130" r="4" fill="#F2552C"><animate attributeName="r" values="4;7;4" dur="2.4s" repeatCount="indefinite"></animate></circle>
+  </svg>
+  <div style="position: absolute; left: 20px; bottom: 20px; display: flex; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px">
+    <span style="padding: 6px 8px; border: 1px solid rgba(236,234,228,0.2); background: rgba(14,17,20,0.9)">VÃO 30,00 m</span>
+    <span style="padding: 6px 8px; border: 1px solid rgba(236,234,228,0.2); background: rgba(14,17,20,0.9)">PÉ-DIREITO 10,00 m</span>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"modo":{"editor":"enum","options":["desktop","mobile"],"default":"desktop"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mob = (this.props.modo ?? 'desktop') === 'mobile';
+    return { desk: !mob, mob: mob, w: mob ? 390 : 1280, h: mob ? 844 : 800 };
+  }
+}
+</script>
+</body>
+</html>
