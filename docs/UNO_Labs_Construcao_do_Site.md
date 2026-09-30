@@ -181,7 +181,7 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 
 **Palco desktop (composição fixa de 1240 × 640, escalada à largura):**
 - **Janela do navegador** em `left: 180; width: 880`, barra de 40 px com “Estudo conceitual · Casa Noma” e um selo que alterna “Projeto técnico” (claro) ↔ “Site publicado” (escuro).
-- Área de 878 × 549: por baixo, **desenho técnico em SVG** (12 colunas menta, contornos a 42% de opacidade, cotas “12 COL · GUTTER 24”, “H1 · 88 PX”, “MESA · Ø 524”, “RESERVA EM 3 TOQUES”). Por cima, o **site pronto da Casa Noma** revelado de cima para baixo com `clip-path` (`revela`, ciclo de 10 s) e uma **linha de varredura** menta com brilho que desce junto (`varre`).
+- Área de 878 × 549: por baixo, **desenho técnico em SVG** (12 colunas menta, contornos a 42% de opacidade, cotas “12 COL · GUTTER 24”, “H1 · 88 PX”, “FOTO · 586 × 480”, “RESERVA EM 3 TOQUES”). Por cima, o **site pronto da Casa Noma** revelado de cima para baixo com `clip-path` (`revela`, ciclo de 10 s) e uma **linha de varredura** menta com brilho que desce junto (`varre`).
 - **Cartão de código** (fundo `--uno-pine-deep`, Plex Mono 12 px) em `left: 0; top: 330; width: 356`: `<title>`, `<meta description>` e JSON-LD `Restaurant` com cursor piscando.
 - **Cartão de busca** (branco) em `right: 0; top: 96; width: 340`: campo “restaurante para jantar em vitória”, resultado azul estilo Google e o selo “Encontrado na busca local” com ponto pulsante.
 - Os dois cartões sobem 4 px no hover.
@@ -230,25 +230,30 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 - Três **capítulos de largura total**, cada um com a cor do próprio negócio (não da UNO Labs), alternando o lado da imagem:
   - Texto (4/12): meta em caixa alta com espaçamento largo, nome 52 px, selo “Estudo conceitual”, e dois itens (Objetivo / Decisão em destaque).
   - Composição (8/12; fixa em 820 × 560 e escalada): janela de desktop de 760 px (barra de 30 px + site em 760 × 475) e celular de 196 × 406 sobreposto no canto inferior. No celular (< 600 px), só o celular, maior (236 × 492).
-- Os sites dos estudos são desenhados em HTML/SVG, com fontes e paletas próprias, e **ficam em `<template>`**: o `site.js` só os copia para a página quando o espaço se aproxima da tela. Títulos e links internos viram `div`/`span` e o bloco recebe `aria-hidden`, `inert` e `data-nosnippet` — o texto fictício não entra na leitura de tela, no foco do teclado nem nos trechos do Google.
+- Os sites dos estudos combinam HTML, imagens conceituais e geometria técnica em SVG, com fontes e paletas próprias, e **ficam em seis `<template>`**: cada versão desktop/celular contém três composições, totalizando nove direções. O `site.js` só os copia para a página quando o espaço se aproxima da tela. Os blocos recebem `aria-hidden`, `inert` e `data-nosnippet`; os controles internos são demonstrativos, e o texto fictício fica fora da leitura de tela, do foco do teclado e dos trechos do Google.
+- **Seleção de direção:** três botões junto ao texto de cada estudo, fora das maquetes inertes. A opção ativa usa `aria-pressed`, com foco visível e anúncio `aria-live`. A escolha atualiza todas as cópias do mesmo negócio, inclusive as futuras: Casa Noma no hero, Atria na jornada e ambos os formatos dos capítulos. Padrão: primeira direção; sem rotação automática ou persistência. Os estilos novos ficam delimitados em `public/assets/css/conceitos.css`.
 
 #### Estudo 01 · Módulo Engenharia (engenharia industrial B2B)
 - **Fundo** `#E8E6E1` na seção; site em `#0E1114` com grade técnica, laranja de sinalização `#F2552C`, cinzas `#9AA3AB` e `#ECEAE4`.
 - **Tipografia:** Archivo (eixo de largura 62–125, títulos em caixa alta condensados) + IBM Plex Mono (cotas e ficha).
-- **Ideia:** “Estrutura é projeto antes de ser obra.” (“PROJETO” em laranja). Um **galpão em perspectiva isométrica se desenha sozinho** (`stroke-dashoffset`, 1,8–2,2 s) com nós que pulsam (raio 3,5 → 6, 2,4 s), cotas (60,00 m, coordenadas X/Y/Z) e **ficha técnica** (uso, vão livre, pé-direito, aço ASTM A572). Faixa de serviços numerados 01–04. CTA “Solicitar proposta técnica”.
-- **Decisão em destaque:** desenho técnico e ficha no lugar de adjetivos.
+- **Direções:** **Projeto** — tipografia condensada à esquerda, imagem de estrutura industrial à direita e cotas geométricas; **Técnica** — fotografia conceitual panorâmica acima da ficha horizontal; **Portfólio** — imagem vertical à esquerda, título e ficha à direita. “Estrutura é projeto antes de ser obra.” mantém o destaque laranja. CTA de proposta técnica e valores ilustrativos permanecem demonstrativos; nenhuma obra executada é atribuída à UNO.
+- **Decisão em destaque:** imagem conceitual estrutural com cotas e ficha no lugar de adjetivos.
 
 #### Estudo 02 · Atria Clinic (dermatologia estética)
 - **Fundo** `#2E211C` na seção; site em creme `#F4EDE7`, marrom `#2E211C`, terracota `#7A4A3A`, pêssego `#E3B9A4`.
 - **Tipografia:** Cormorant Garamond (títulos, com itálico) + Jost (textos).
-- **Ideia:** “Cuidado que começa na conversa.” Um **arco de luz** (portal em gradiente pêssego) com uma **pérola que flutua** (sobe 18 px e volta em 8 s) substitui fotos de antes e depois. **Agenda visível na primeira tela** (dias, horários e “Reservar quinta, 14h00”), duração da avaliação (50 min) e linha de responsável técnica.
+- **Direções:** **Editorial** — título em serifada à esquerda e retrato conceitual amplo à direita; **Detalhe** — faixa fotográfica horizontal em close, conteúdo e agenda abaixo; **Tipográfica** — título protagonista, retrato vertical lateral e plano terracota de agendamento. No celular, Detalhe usa foto de borda a borda e agenda em linha; Tipográfica mantém a relação entre texto, mini-retrato e agendamento. O portal e a pérola foram removidos. “Cuidado que começa na conversa.”, avaliação de 50 min e linha de responsável técnica permanecem visíveis.
 - **Decisão em destaque:** calma e segurança; nada de promessa estética.
 
 #### Estudo 03 · Casa Noma (restaurante autoral)
 - **Fundo** `#E9DFCF` na seção; site em `#110E0B` com creme `#F0E6D6`, âmbar `#E0A84E`, oliva `#6F7D3C` e vermelho `#C4492F`.
 - **Tipografia:** Bodoni Moda (títulos, com itálico) + Manrope (textos).
-- **Ideia:** “Fogo baixo, mesa longa.” **Mesa posta vista de cima girando devagar** (volta completa em 160 s), vela que tremula (opacidade, 3,2 s), palavra “Noma” gigante só em contorno ao fundo, menu da semana com numerais romanos e **reserva em três toques** (data, horário, pessoas) já na primeira tela; no celular, barra fixa de reserva no rodapé.
+- **Direções:** **Editorial** — título e menu à esquerda, imagem gastronômica à direita e reserva demonstrativa; **Imersivo** — imagem ocupando o fundo e reserva em faixa na base; **Menu** — composição em creme da mesma paleta, pratos protagonistas e imagem assimétrica. No celular, cada direção reorganiza título, imagem e reserva. A mesa ilustrada, os pratos geométricos e sua rotação foram removidos. “Fogo baixo, mesa longa.” e os três pratos do estudo continuam sendo conteúdo conceitual.
 - **Decisão em destaque:** atmosfera + reserva sem sair da primeira tela. É o mesmo estudo usado no palco do hero.
+
+**Imagens — refinamento de 30/09/2026:** geradas pelo ImageGen integrado, usadas exclusivamente como material dos estudos fictícios. Não documentam pessoas, clientes, pratos ou obras reais. Arquivos em `public/assets/img/conceitos/{modulo,atria,casanoma}.webp`, 1536 × 1024 px, cerca de 571 KB no total. Os prompts completos estão nos respectivos arquivos `.webp.json`. A otimização para WebP preserva dimensões e composição; cada `img` declara dimensões e `decoding="async"`.
+
+Referências técnicas: [botões com estado selecionado, W3C](https://www.w3.org/WAI/ARIA/apg/patterns/button/) e [dimensões e decodificação de imagens, MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img).
 
 ### 6.7 Como trabalhamos
 - Cabeçalho 7 / 5. Lista ordenada de 4 passos (4 colunas no desktop, 2 no tablet, 1 no celular), cada um com linha superior de 1 px e um ponto menta sobre ela, número em Plex Mono, H3, descrição e **“Entrega:”** do passo.
@@ -308,7 +313,7 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 | Jornada | Cenas, detalhes, cartões | .6 s / .5 s / .45 s | Crossfade e expansão controlados pela rolagem |
 | Terminal | Itens ✓ | .5 s cada, cascata até 1,15 s | Entram uma vez, quando visíveis |
 | `levita` | Cartões e maquetes | .3 s | Sobem 4 px no hover |
-| SMIL nos estudos | Módulo, Atria, Noma | 1,8 s a 160 s | Desenho que se traça, pérola flutuando, mesa girando |
+| Seleção de direção nos estudos | Módulo, Atria, Noma | Acionamento manual | Troca entre três composições, sem movimento automático dentro das maquetes |
 
 **Regras:** nada se move sem explicar algo; nenhum movimento automático bloqueia a leitura; com `prefers-reduced-motion: reduce`, todas as animações e transições são desligadas, o palco mostra direto o site publicado e a jornada deixa de ficar presa.
 
