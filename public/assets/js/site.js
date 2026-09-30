@@ -43,8 +43,22 @@
      O markup de cada estudo mora em <template id="tpl-NOME">. Só é clonado quando
      o espaço reservado chega perto da tela, e nunca se estiver oculto
      (display:none) — por isso o celular não carrega o que só aparece no desktop.
-     Os ids internos dos SVGs recebem sufixo para não colidirem entre cópias. */
+     Os ids internos dos SVGs recebem sufixo para não colidirem entre cópias.
+     Cada negócio possui três direções visuais (padrão 1), selecionáveis por botões
+     acessíveis nos capítulos da home e refletidas em todas as cópias
+     já montadas e futuras (home, jornada, desktop e celular). */
   var contadorClone = 0;
+  var variacoesAtivas = {
+    modulo: 1,
+    atria: 1,
+    casanoma: 1
+  };
+
+  function obterNegocio(el) {
+    var attr = el.getAttribute('data-estudo') || '';
+    return attr.split('-')[0];
+  }
+
   function clonarEstudo(nome) {
     var tpl = doc.getElementById('tpl-' + nome);
     if (!tpl || !tpl.content) return null;
@@ -74,6 +88,9 @@
 
   function montarEstudo(el) {
     if (el.getAttribute('data-montado')) return;
+    var negocio = obterNegocio(el);
+    var v = variacoesAtivas[negocio] || 1;
+    el.setAttribute('data-variacao', String(v));
     var frag = clonarEstudo(el.getAttribute('data-estudo'));
     if (!frag) return;
     el.appendChild(frag);
@@ -82,9 +99,60 @@
     el.inert = true;
   }
 
+  function selecionarVariacao(negocio, k, nomeVariante) {
+    variacoesAtivas[negocio] = k;
+
+    // Atualiza cópias montadas e futuras deste negócio
+    var alvos = doc.querySelectorAll('[data-estudo]');
+    alvos.forEach(function (el) {
+      if (obterNegocio(el) === negocio) {
+        el.setAttribute('data-variacao', String(k));
+      }
+    });
+
+    // Atualiza botões acessíveis e anúncio aria-live
+    var seletor = doc.querySelector('[data-seletor-estudo="' + negocio + '"]');
+    if (seletor) {
+      var botoes = seletor.querySelectorAll('[data-variante-btn]');
+      botoes.forEach(function (btn) {
+        var ativo = +btn.getAttribute('data-variante-btn') === k;
+        btn.setAttribute('aria-pressed', ativo ? 'true' : 'false');
+      });
+      var regiaoLive = seletor.querySelector('.live-variacao');
+      if (regiaoLive) {
+        regiaoLive.textContent = 'Direção ativa: ' + (nomeVariante || ('Variação ' + k));
+      }
+    }
+  }
+
+  function iniciarSeletores() {
+    var seletores = doc.querySelectorAll('[data-seletor-estudo]');
+    seletores.forEach(function (seletor) {
+      var negocio = seletor.getAttribute('data-seletor-estudo');
+      var botoes = seletor.querySelectorAll('[data-variante-btn]');
+      botoes.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var k = +btn.getAttribute('data-variante-btn');
+          var nome = btn.textContent.trim();
+          selecionarVariacao(negocio, k, nome);
+        });
+      });
+    });
+  }
+
   function iniciarEstudos() {
     var alvos = doc.querySelectorAll('[data-estudo]');
     if (!alvos.length) return;
+
+    // Pré-configura a variação inicial padrão 1 em todos os estudos
+    alvos.forEach(function (el) {
+      var negocio = obterNegocio(el);
+      var v = variacoesAtivas[negocio] || 1;
+      el.setAttribute('data-variacao', String(v));
+    });
+
+    iniciarSeletores();
+
     if (!('IntersectionObserver' in window)) {
       alvos.forEach(function (el) { if (el.offsetParent !== null) montarEstudo(el); });
       return;

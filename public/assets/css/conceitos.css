@@ -1,0 +1,1868 @@
+/* ==========================================================================
+   UNO Labs — conceitos.css
+   Estilos estritamente delimitados aos estudos conceituais (Módulo, Atria, Casa Noma)
+   e aos seletores de direção visual nos capítulos.
+   ========================================================================== */
+
+/* ---------- Seletores acessíveis de direção nos capítulos da home ---------- */
+.seletor-variantes {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+html:not(.js) .seletor-variantes {
+  display: none !important;
+}
+
+.seletor-variantes__legenda {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.seletor-variantes__botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-variante {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-variante:hover {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.btn-variante:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Botão ativo nos capítulos em fundo claro (Módulo e Casa Noma) */
+.capitulo:not(.capitulo--atria) .btn-variante[aria-pressed="true"] {
+  background: #10201C;
+  color: #FFFFFF;
+  border-color: #10201C;
+  box-shadow: 0 2px 6px rgba(16, 32, 28, 0.2);
+}
+
+/* Botão ativo no capítulo Atria (fundo escuro #2E211C) */
+.capitulo--atria .btn-variante[aria-pressed="true"] {
+  background: #F4EDE7;
+  color: #2E211C;
+  border-color: #F4EDE7;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.capitulo--atria .btn-variante:focus-visible {
+  outline: 2px solid #F4EDE7;
+  outline-offset: 3px;
+}
+
+.live-variacao {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Estrutura mestre das maquetes conceituais ---------- */
+.c-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.estudo--desk .c-canvas {
+  width: 1280px;
+  height: 800px;
+}
+
+.estudo--mob .c-canvas {
+  width: 390px;
+  height: 844px;
+}
+
+.c-var {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ativação por estado: padrão 1, ou conforme data-variacao no container .estudo */
+.estudo:not([data-variacao]) .c-var--1,
+.estudo[data-variacao="1"] .c-var--1,
+.estudo[data-variacao="2"] .c-var--2,
+.estudo[data-variacao="3"] .c-var--3 {
+  display: block;
+}
+
+/* ==========================================================================
+   MÓDULO ENGENHARIA INDUSTRIAL
+   Paleta: #0E1114 / #15191C / #9AA3AB / #ECEAE4 / #F2552C
+   Fontes: Archivo + IBM Plex Mono
+   ========================================================================== */
+.c-canvas--modulo {
+  background-color: #0E1114;
+  background-image:
+    linear-gradient(rgba(236, 234, 228, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236, 234, 228, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #ECEAE4;
+  font-family: 'Archivo', 'Arial Narrow', sans-serif;
+}
+
+.mod-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.mod-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Topos e barras Módulo Desktop */
+.mod-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 72px;
+  box-sizing: border-box;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(236, 234, 228, 0.1);
+  background: rgba(14, 17, 20, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.mod-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ECEAE4;
+  text-decoration: none;
+}
+
+.mod-marca__logo {
+  width: 24px;
+  height: 24px;
+}
+
+.mod-marca__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mod-marca__nome {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-stretch: 125%;
+  line-height: 1;
+}
+
+.mod-marca__sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.34em;
+  color: #9AA3AB;
+  line-height: 1;
+}
+
+.mod-nav {
+  display: flex;
+  gap: 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #9AA3AB;
+}
+
+.mod-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 20px;
+  background: #F2552C;
+  color: #0E1114;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mod-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 20px;
+  border: 1px solid rgba(236, 234, 228, 0.3);
+  color: #ECEAE4;
+  font-weight: 600;
+  font-size: 14px;
+  background: transparent;
+  text-decoration: none;
+}
+
+/* Módulo Desktop Variação 1: Projeto */
+.mod-v1-col-esq {
+  position: absolute;
+  left: 64px;
+  top: 116px;
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-tag-setor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: #9AA3AB;
+}
+
+.mod-ponto-laranja {
+  width: 7px;
+  height: 7px;
+  background: #F2552C;
+  display: inline-block;
+}
+
+.mod-v1-titulo {
+  margin: 18px 0 0;
+  font-size: 84px;
+  line-height: 0.92;
+  font-weight: 800;
+  font-stretch: 62%;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.mod-v1-destaque {
+  color: #F2552C;
+}
+
+.mod-v1-apoio {
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #B7BEC4;
+  max-width: 460px;
+}
+
+.mod-v1-botoes {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+}
+
+.mod-v1-foto-frame {
+  position: absolute;
+  left: 640px;
+  top: 104px;
+  width: 576px;
+  height: 520px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  background: #15191C;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.mod-v1-cotas-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mod-v1-badge-coord {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  padding: 6px 12px;
+  background: rgba(14, 17, 20, 0.92);
+  border: 1px solid rgba(242, 85, 44, 0.7);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #ECEAE4;
+  display: flex;
+  gap: 10px;
+}
+
+.mod-v1-badge-material {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  padding: 6px 12px;
+  background: rgba(14, 17, 20, 0.92);
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #9AA3AB;
+}
+
+.mod-v1-servicos {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  top: 692px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(236, 234, 228, 0.16);
+  padding-top: 16px;
+}
+
+.mod-v1-servico-item {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding-right: 16px;
+}
+
+.mod-v1-servico-item + .mod-v1-servico-item {
+  border-left: 1px solid rgba(236, 234, 228, 0.12);
+  padding-left: 16px;
+}
+
+.mod-v1-servico-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #F2552C;
+}
+
+.mod-v1-servico-nome {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Módulo Desktop Variação 2: Técnica */
+.mod-v2-pano {
+  position: absolute;
+  left: 64px;
+  top: 96px;
+  width: 1152px;
+  height: 350px;
+  border: 1px solid rgba(236, 234, 228, 0.18);
+  background: #15191C;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.mod-v2-pano-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(236, 234, 228, 0.1);
+}
+
+.mod-v2-pano-cota {
+  position: absolute;
+  left: 24px;
+  bottom: 16px;
+  background: rgba(14, 17, 20, 0.9);
+  padding: 6px 12px;
+  border: 1px solid rgba(242, 85, 44, 0.6);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #ECEAE4;
+}
+
+.mod-v2-corpo {
+  position: absolute;
+  left: 64px;
+  top: 472px;
+  width: 1152px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mod-v2-chamada {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(236, 234, 228, 0.12);
+  padding-bottom: 16px;
+}
+
+.mod-v2-titulo {
+  margin: 0;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.mod-v2-ficha-grade {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(236, 234, 228, 0.14);
+  border: 1px solid rgba(236, 234, 228, 0.14);
+}
+
+.mod-v2-ficha-celula {
+  background: #15191C;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mod-v2-ficha-rotulo {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #9AA3AB;
+}
+
+.mod-v2-ficha-valor {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ECEAE4;
+}
+
+.mod-v2-rodape-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Módulo Desktop Variação 3: Portfólio */
+.mod-v3-esq {
+  position: absolute;
+  left: 64px;
+  top: 96px;
+  width: 440px;
+  height: 640px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  background: #15191C;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+}
+
+.mod-v3-tag-obra {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 6px 12px;
+  background: rgba(14, 17, 20, 0.92);
+  border: 1px solid rgba(242, 85, 44, 0.8);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #ECEAE4;
+}
+
+.mod-v3-legenda-obra {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  padding: 12px 14px;
+  background: rgba(14, 17, 20, 0.92);
+  border: 1px solid rgba(236, 234, 228, 0.18);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #B7BEC4;
+}
+
+.mod-v3-dir {
+  position: absolute;
+  left: 540px;
+  top: 96px;
+  width: 676px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-v3-titulo {
+  margin: 16px 0 0;
+  font-size: 64px;
+  line-height: 0.94;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mod-v3-apoio {
+  margin: 18px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #B7BEC4;
+  max-width: 600px;
+}
+
+.mod-v3-ficha-card {
+  margin-top: 26px;
+  border: 1px solid rgba(236, 234, 228, 0.18);
+  background: rgba(21, 25, 28, 0.8);
+}
+
+.mod-v3-ficha-cab {
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(236, 234, 228, 0.12);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #9AA3AB;
+}
+
+.mod-v3-ficha-linhas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(236, 234, 228, 0.1);
+}
+
+.mod-v3-ficha-item {
+  background: #15191C;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* Módulo Mobile (390x844) */
+.mod-mob-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 64px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(236, 234, 228, 0.1);
+  background: rgba(14, 17, 20, 0.95);
+  z-index: 10;
+}
+
+.mod-mob-cta {
+  height: 36px;
+  padding: 0 14px;
+  background: #F2552C;
+  color: #0E1114;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  text-decoration: none;
+}
+
+.mod-mob-v1-corpo {
+  position: absolute;
+  left: 20px;
+  top: 76px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-mob-v1-titulo {
+  margin: 12px 0 0;
+  font-size: 52px;
+  line-height: 0.92;
+  font-weight: 800;
+  font-stretch: 62%;
+  text-transform: uppercase;
+}
+
+.mod-mob-v1-foto {
+  margin-top: 16px;
+  position: relative;
+  width: 350px;
+  height: 250px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  background: #15191C;
+  overflow: hidden;
+}
+
+.mod-mob-v1-cotas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mod-mob-v1-btn {
+  margin-top: 18px;
+  height: 48px;
+  background: #F2552C;
+  color: #0E1114;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.mod-mob-v2-corpo {
+  position: absolute;
+  left: 20px;
+  top: 76px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-mob-v2-pano {
+  position: relative;
+  width: 350px;
+  height: 180px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.mod-mob-v2-titulo {
+  margin: 0;
+  font-size: 32px;
+  line-height: 0.94;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mod-mob-v2-ficha {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(236, 234, 228, 0.12);
+  border: 1px solid rgba(236, 234, 228, 0.12);
+}
+
+.mod-mob-v2-celula {
+  background: #15191C;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mod-mob-v3-corpo {
+  position: absolute;
+  left: 20px;
+  top: 76px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-mob-v3-foto {
+  position: relative;
+  width: 350px;
+  height: 240px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  overflow: hidden;
+}
+
+.mod-mob-v3-titulo {
+  margin: 14px 0 0;
+  font-size: 40px;
+  line-height: 0.94;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mod-mob-v3-lista {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #B7BEC4;
+}
+
+/* ==========================================================================
+   ATRIA CLINIC
+   Paleta: #F4EDE7 / #2E211C / #7A4A3A / #E3B9A4 / #FCF8F4 / #6B4E42
+   Fontes: Cormorant Garamond + Jost
+   ========================================================================== */
+.c-canvas--atria {
+  background-color: #F4EDE7;
+  color: #2E211C;
+  font-family: 'Jost', 'Helvetica Neue', sans-serif;
+}
+
+.atr-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.atr-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.atr-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 84px;
+  box-sizing: border-box;
+  padding: 0 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(46, 33, 28, 0.08);
+  background: rgba(244, 237, 231, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.atr-marca {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  color: #2E211C;
+  text-decoration: none;
+}
+
+.atr-marca__nome {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.atr-marca__sub {
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #6B4E42;
+  line-height: 1;
+}
+
+.atr-nav {
+  display: flex;
+  gap: 36px;
+  font-size: 14px;
+  color: #4A3A33;
+}
+
+.atr-btn-nav {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 22px;
+  border: 1px solid #2E211C;
+  border-radius: 999px;
+  color: #2E211C;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.atr-btn-terracota {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 26px;
+  background: #7A4A3A;
+  color: #FBF6F1;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.atr-responsavel {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #6B4E42;
+}
+
+/* Atria Desktop Variação 1: Editorial */
+.atr-v1-esq {
+  position: absolute;
+  left: 72px;
+  top: 104px;
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-tag-loc {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6B4E42;
+}
+
+.atr-v1-titulo {
+  margin: 12px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 76px;
+  line-height: 0.98;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.atr-it-terracota {
+  font-style: italic;
+  color: #7A4A3A;
+}
+
+.atr-v1-apoio {
+  margin: 14px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4A3A33;
+  max-width: 480px;
+}
+
+.atr-v1-acoes {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.atr-v1-agenda-card {
+  margin-top: 20px;
+  padding: 14px 20px;
+  background: #FCF8F4;
+  border: 1px solid rgba(122, 74, 58, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(90, 50, 40, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+}
+
+.atr-agenda-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.atr-agenda-titulo {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.atr-agenda-dias {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  text-align: center;
+}
+
+.atr-dia-item {
+  padding: 8px 0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.atr-dia-item--ativo {
+  background: #7A4A3A;
+  color: #FBF6F1;
+}
+
+.atr-dia-sem {
+  font-size: 10px;
+  color: inherit;
+}
+
+.atr-dia-num {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.atr-v1-dir-foto {
+  position: absolute;
+  left: 690px;
+  top: 110px;
+  width: 518px;
+  height: 610px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(90, 50, 40, 0.18);
+  border: 1px solid rgba(122, 74, 58, 0.12);
+}
+
+/* Atria Desktop Variação 2: Detalhe */
+.atr-v2-faixa-foto {
+  position: absolute;
+  left: 72px;
+  top: 104px;
+  width: 1136px;
+  height: 270px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(122, 74, 58, 0.15);
+  box-shadow: 0 20px 60px rgba(90, 50, 40, 0.12);
+}
+
+.atr-v2-tag-faixa {
+  position: absolute;
+  left: 24px;
+  top: 20px;
+  padding: 6px 14px;
+  background: rgba(244, 237, 231, 0.92);
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7A4A3A;
+  font-weight: 600;
+}
+
+.atr-v2-corpo {
+  position: absolute;
+  left: 72px;
+  top: 400px;
+  width: 1136px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.atr-v2-esq {
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-v2-titulo {
+  margin: 12px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 60px;
+  line-height: 1.02;
+  font-weight: 500;
+}
+
+.atr-v2-dir-agenda {
+  width: 480px;
+  padding: 24px;
+  background: #FCF8F4;
+  border: 1px solid rgba(122, 74, 58, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(90, 50, 40, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.atr-grade-horarios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  font-size: 14px;
+}
+
+.atr-hora-btn {
+  height: 38px;
+  border: 1px solid rgba(46, 33, 28, 0.16);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atr-hora-btn--ativo {
+  border: 1.5px solid #7A4A3A;
+  color: #7A4A3A;
+  font-weight: 600;
+  background: rgba(122, 74, 58, 0.06);
+}
+
+/* Atria Desktop Variação 3: Tipográfica */
+.atr-v3-foto-lat {
+  position: absolute;
+  left: 64px;
+  top: 96px;
+  width: 250px;
+  height: 640px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(90, 50, 40, 0.15);
+  border: 1px solid rgba(122, 74, 58, 0.12);
+}
+
+.atr-v3-tag-foto {
+  position: absolute;
+  left: 18px;
+  bottom: 22px;
+  padding: 6px 12px;
+  background: rgba(244, 237, 231, 0.92);
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7A4A3A;
+  font-weight: 600;
+}
+
+.atr-v3-centro {
+  position: absolute;
+  left: 346px;
+  top: 110px;
+  width: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-v3-titulo {
+  margin: 16px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 88px;
+  line-height: 0.96;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.atr-v3-apoio {
+  margin: 24px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #4A3A33;
+  max-width: 440px;
+}
+
+.atr-v3-plano-terracota {
+  position: absolute;
+  left: 896px;
+  top: 96px;
+  width: 320px;
+  height: 640px;
+  box-sizing: border-box;
+  padding: 32px 24px;
+  background: #7A4A3A;
+  color: #FBF6F1;
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(122, 74, 58, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.atr-v3-plano-topo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.atr-v3-selo {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #F4EDE7;
+  opacity: 0.95;
+}
+
+.atr-v3-plano-tit {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.atr-v3-btn-escuro {
+  height: 48px;
+  background: #2E211C;
+  color: #FBF6F1;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Atria Mobile (390x844) */
+.atr-mob-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 68px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(46, 33, 28, 0.08);
+  background: rgba(244, 237, 231, 0.95);
+  z-index: 10;
+}
+
+.atr-mob-hamb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(46, 33, 28, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atr-mob-v1-corpo {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-mob-v1-foto {
+  position: relative;
+  width: 350px;
+  height: 250px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(90, 50, 40, 0.12);
+}
+
+.atr-mob-v1-titulo {
+  margin: 16px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 46px;
+  line-height: 0.98;
+  font-weight: 500;
+}
+
+.atr-mob-v1-card {
+  margin-top: 18px;
+  padding: 16px;
+  background: #FCF8F4;
+  border-radius: 20px;
+  border: 1px solid rgba(122, 74, 58, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.atr-mob-v2-corpo {
+  position: absolute;
+  left: 0;
+  top: 68px;
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-mob-v2-faixa {
+  position: relative;
+  width: 390px;
+  height: 210px;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.atr-mob-v2-faixa img {
+  object-fit: cover;
+  object-position: 72% 35%;
+}
+
+.atr-mob-v2-conteudo {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-mob-v2-titulo {
+  margin: 10px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 40px;
+  line-height: 0.98;
+  font-weight: 500;
+}
+
+.atr-mob-v2-agenda-linha {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #FCF8F4;
+  border: 1px solid rgba(122, 74, 58, 0.14);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.atr-mob-v3-corpo {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-mob-v3-titulo {
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 50px;
+  line-height: 0.95;
+  font-weight: 500;
+}
+
+.atr-mob-v3-linha-mista {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.atr-mob-v3-minifoto {
+  width: 110px;
+  height: 150px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.atr-mob-v3-plano {
+  margin-top: 16px;
+  padding: 20px;
+  background: #7A4A3A;
+  color: #FBF6F1;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   CASA NOMA
+   Paleta: #110E0B / #F0E6D6 / #E0A84E / #6F7D3C / #C4492F / #CDBDA5
+   Fontes: Bodoni Moda + Manrope
+   ========================================================================== */
+.c-canvas--casanoma {
+  background-color: #110E0B;
+  color: #F0E6D6;
+  font-family: 'Manrope', 'Helvetica Neue', sans-serif;
+}
+
+.cn-bodoni {
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+}
+
+.cn-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cn-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 88px;
+  box-sizing: border-box;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(240, 230, 214, 0.08);
+  background: rgba(17, 14, 11, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.cn-marca {
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 500;
+  color: #F0E6D6;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.cn-nav {
+  display: flex;
+  gap: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #CDBDA5;
+}
+
+.cn-btn-nav {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 22px;
+  border: 1px solid rgba(240, 230, 214, 0.35);
+  border-radius: 999px;
+  color: #F0E6D6;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cn-btn-ambar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 28px;
+  background: #E0A84E;
+  color: #110E0B;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+/* Casa Noma Desktop Variação 1: Editorial */
+.cn-v1-esq {
+  position: absolute;
+  left: 64px;
+  top: 130px;
+  width: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-tag-loc {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #B9A78F;
+}
+
+.cn-v1-titulo {
+  margin: 18px 0 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-size: 80px;
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.cn-it-ambar {
+  font-style: italic;
+  color: #E0A84E;
+}
+
+.cn-v1-apoio {
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #CDBDA5;
+  max-width: 420px;
+}
+
+.cn-v1-acoes {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cn-v1-menu-lista {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-v1-menu-topo {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #9C8B73;
+  margin-bottom: 10px;
+}
+
+.cn-menu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(240, 230, 214, 0.12);
+  font-size: 15px;
+}
+
+.cn-menu-num {
+  width: 22px;
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #E0A84E;
+}
+
+.cn-v1-dir-foto {
+  position: absolute;
+  left: 630px;
+  top: 120px;
+  width: 586px;
+  height: 480px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(240, 230, 214, 0.12);
+}
+
+.cn-v1-card-reserva {
+  position: absolute;
+  left: 880px;
+  top: 470px;
+  width: 336px;
+  box-sizing: border-box;
+  padding: 20px;
+  background: rgba(26, 20, 16, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(224, 168, 78, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 5;
+}
+
+.cn-grade-dias {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.cn-dia-btn {
+  height: 52px;
+  border: 1px solid rgba(240, 230, 214, 0.16);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.cn-dia-btn--ativo {
+  background: #E0A84E;
+  color: #110E0B;
+  border-color: #E0A84E;
+}
+
+/* Casa Noma Desktop Variação 2: Imersivo */
+.cn-v2-bg-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.cn-v2-overlay-grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(17, 14, 11, 0.96) 0%,
+    rgba(17, 14, 11, 0.88) 38%,
+    rgba(17, 14, 11, 0.45) 68%,
+    rgba(17, 14, 11, 0.2) 100%
+  );
+  z-index: 2;
+}
+
+.cn-v2-conteudo-esq {
+  position: absolute;
+  left: 72px;
+  top: 140px;
+  width: 580px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-v2-titulo {
+  margin: 18px 0 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-size: 88px;
+  line-height: 0.94;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.cn-v2-pratos-linha {
+  margin-top: 32px;
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #CDBDA5;
+  border-top: 1px solid rgba(240, 230, 214, 0.14);
+  padding-top: 16px;
+}
+
+.cn-v2-barra-base {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 36px;
+  height: 90px;
+  box-sizing: border-box;
+  padding: 0 32px;
+  background: rgba(26, 20, 16, 0.94);
+  border: 1px solid rgba(224, 168, 78, 0.28);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.cn-v2-barra-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cn-v2-barra-rotulo {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9C8B73;
+}
+
+.cn-v2-barra-val {
+  font-size: 16px;
+  font-weight: 600;
+  color: #F0E6D6;
+}
+
+/* Casa Noma Desktop Variação 3: Menu (Composição em tom Creme da paleta) */
+.cn-v3-fundo-creme {
+  background-color: #F0E6D6;
+  color: #110E0B;
+}
+
+.cn-v3-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 84px;
+  box-sizing: border-box;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(17, 14, 11, 0.1);
+  background: rgba(240, 230, 214, 0.94);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.cn-v3-marca {
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 500;
+  color: #110E0B;
+  text-decoration: none;
+}
+
+.cn-v3-nav {
+  display: flex;
+  gap: 36px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1A1410;
+}
+
+.cn-v3-esq-menu {
+  position: absolute;
+  left: 72px;
+  top: 116px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-v3-titulo {
+  margin: 14px 0 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-size: 60px;
+  line-height: 0.98;
+  font-weight: 400;
+  color: #110E0B;
+}
+
+.cn-v3-menu-card {
+  margin-top: 24px;
+  padding: 24px 28px;
+  background: rgba(240, 230, 214, 0.6);
+  border: 1px solid rgba(17, 14, 11, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 16px 44px rgba(17, 14, 11, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cn-v3-menu-tit {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #C4492F;
+  font-weight: 700;
+}
+
+.cn-v3-prato-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(17, 14, 11, 0.08);
+}
+
+.cn-v3-prato-nome {
+  font-family: 'Bodoni Moda', Didot, serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #110E0B;
+}
+
+.cn-v3-prato-desc {
+  font-size: 13px;
+  color: #1A1410;
+  opacity: 0.88;
+  font-weight: 500;
+}
+
+.cn-v3-prato-desc::before {
+  content: "— ";
+  color: #6F7D3C;
+  font-weight: 700;
+}
+
+.cn-v3-dir-foto {
+  position: absolute;
+  left: 710px;
+  top: 116px;
+  width: 500px;
+  height: 610px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(17, 14, 11, 0.2);
+  border: 1px solid rgba(17, 14, 11, 0.1);
+}
+
+/* Casa Noma Mobile (390x844) */
+.cn-mob-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 68px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(240, 230, 214, 0.1);
+  background: rgba(17, 14, 11, 0.95);
+  z-index: 10;
+}
+
+.cn-mob-hamb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 230, 214, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cn-mob-v1-corpo {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-mob-v1-foto {
+  position: relative;
+  width: 350px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(240, 230, 214, 0.12);
+}
+
+.cn-mob-v1-titulo {
+  margin: 16px 0 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 46px;
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.cn-mob-v1-barra-reserva {
+  margin-top: 18px;
+  height: 72px;
+  box-sizing: border-box;
+  padding: 0 12px 0 16px;
+  background: rgba(26, 20, 16, 0.95);
+  border: 1px solid rgba(240, 230, 214, 0.16);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cn-mob-v2-corpo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 844px;
+}
+
+.cn-mob-v2-foto-topo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 420px;
+}
+
+.cn-mob-v2-grad {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 420px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(17, 14, 11, 0.05) 30%,
+    rgba(17, 14, 11, 0.65) 65%,
+    rgba(17, 14, 11, 0.94) 88%,
+    #110E0B 100%
+  );
+}
+
+.cn-mob-v2-textos {
+  position: absolute;
+  left: 20px;
+  top: 360px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-mob-v3-corpo {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-mob-v3-foto {
+  position: relative;
+  width: 350px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cn-mob-v3-titulo {
+  margin: 14px 0 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 38px;
+  line-height: 0.98;
+  font-weight: 400;
+  color: #110E0B;
+}
+
+.cn-mob-v3-pratos {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: #110E0B;
+}
