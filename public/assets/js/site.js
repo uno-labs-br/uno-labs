@@ -17,6 +17,23 @@
   var raiz = doc.documentElement;
   var movimentoReduzido = raiz.classList.contains('rm');
 
+  if (window.matchMedia) {
+    var mqlRM = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var atualizarRM = function (e) {
+      movimentoReduzido = e.matches || raiz.classList.contains('rm');
+      if (movimentoReduzido) {
+        raiz.classList.add('rm');
+        var ativas = doc.querySelectorAll('.anim-play');
+        ativas.forEach(function (el) {
+          el.classList.remove('anim-play', 'is-pausado');
+          el.setAttribute('data-anim-concluida', '1');
+        });
+      }
+    };
+    if (mqlRM.addEventListener) mqlRM.addEventListener('change', atualizarRM);
+    else if (mqlRM.addListener) mqlRM.addListener(atualizarRM);
+  }
+
   /* ---------- 1. Escala proporcional ----------
      Cada .escala tem --bw/--bh (tamanho-base em px). O filho .escala__in é
      desenhado nesse tamanho fixo e reduzido/ampliado com transform: scale(--s). */
@@ -44,15 +61,10 @@
      o espaço reservado chega perto da tela, e nunca se estiver oculto
      (display:none) — por isso o celular não carrega o que só aparece no desktop.
      Os ids internos dos SVGs recebem sufixo para não colidirem entre cópias.
-     Cada negócio possui três direções visuais (padrão 1), selecionáveis por botões
-     acessíveis nos capítulos da home e refletidas em todas as cópias
-     já montadas e futuras (home, jornada, desktop e celular). */
+     Cada negócio possui a composição final aprovada (Módulo: Projeto,
+     Atria: Detalhe, Casa Noma: Imersivo), refletida em todas as cópias
+     (home, jornada, desktop e celular). */
   var contadorClone = 0;
-  var variacoesAtivas = {
-    modulo: 1,
-    atria: 1,
-    casanoma: 1
-  };
 
   function obterNegocio(el) {
     var attr = el.getAttribute('data-estudo') || '';
@@ -88,9 +100,6 @@
 
   function montarEstudo(el) {
     if (el.getAttribute('data-montado')) return;
-    var negocio = obterNegocio(el);
-    var v = variacoesAtivas[negocio] || 1;
-    el.setAttribute('data-variacao', String(v));
     var frag = clonarEstudo(el.getAttribute('data-estudo'));
     if (!frag) return;
     el.appendChild(frag);
@@ -99,70 +108,167 @@
     el.inert = true;
   }
 
-  function selecionarVariacao(negocio, k, nomeVariante) {
-    variacoesAtivas[negocio] = k;
-
-    // Atualiza cópias montadas e futuras deste negócio
-    var alvos = doc.querySelectorAll('[data-estudo]');
-    alvos.forEach(function (el) {
-      if (obterNegocio(el) === negocio) {
-        el.setAttribute('data-variacao', String(k));
-      }
-    });
-
-    // Atualiza botões acessíveis e anúncio aria-live
-    var seletor = doc.querySelector('[data-seletor-estudo="' + negocio + '"]');
-    if (seletor) {
-      var botoes = seletor.querySelectorAll('[data-variante-btn]');
-      botoes.forEach(function (btn) {
-        var ativo = +btn.getAttribute('data-variante-btn') === k;
-        btn.setAttribute('aria-pressed', ativo ? 'true' : 'false');
-      });
-      var regiaoLive = seletor.querySelector('.live-variacao');
-      if (regiaoLive) {
-        regiaoLive.textContent = 'Direção ativa: ' + (nomeVariante || ('Variação ' + k));
-      }
+  function dispararAnimacao(el) {
+    if (movimentoReduzido || !el) return;
+    if (el.getAttribute('data-animou')) return;
+    if (!el.getAttribute('data-montado')) {
+      montarEstudo(el);
     }
+    el.setAttribute('data-animou', '1');
+    el.classList.remove('is-pausado');
+    el.classList.add('anim-play');
+
+    setTimeout(function () {
+      el.setAttribute('data-anim-concluida', '1');
+      el.classList.remove('is-pausado');
+    }, 2400);
   }
 
-  function iniciarSeletores() {
-    var seletores = doc.querySelectorAll('[data-seletor-estudo]');
-    seletores.forEach(function (seletor) {
-      var negocio = seletor.getAttribute('data-seletor-estudo');
-      var botoes = seletor.querySelectorAll('[data-variante-btn]');
-      botoes.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var k = +btn.getAttribute('data-variante-btn');
-          var nome = btn.textContent.trim();
-          selecionarVariacao(negocio, k, nome);
-        });
-      });
-    });
+  function pausarAnimacao(el) {
+    if (!el || el.getAttribute('data-anim-concluida') || !el.classList.contains('anim-play')) return;
+    el.classList.add('is-pausado');
+  }
+
+  function retomarAnimacao(el) {
+    if (!el || el.getAttribute('data-anim-concluida') || !el.classList.contains('anim-play')) return;
+    el.classList.remove('is-pausado');
+  }
+
+  function reiniciarAnimacao(el) {
+    if (movimentoReduzido || !el) return;
+    if (!el.getAttribute('data-montado')) {
+      montarEstudo(el);
+    }
+    el.removeAttribute('data-anim-concluida');
+    el.classList.remove('is-pausado');
+    el.classList.remove('anim-play');
+    void el.offsetWidth;
+    el.setAttribute('data-animou', '1');
+    el.classList.add('anim-play');
+
+    setTimeout(function () {
+      el.setAttribute('data-anim-concluida', '1');
+      el.classList.remove('is-pausado');
+    }, 2400);
   }
 
   function iniciarEstudos() {
     var alvos = doc.querySelectorAll('[data-estudo]');
     if (!alvos.length) return;
 
-    // Pré-configura a variação inicial padrão 1 em todos os estudos
-    alvos.forEach(function (el) {
-      var negocio = obterNegocio(el);
-      var v = variacoesAtivas[negocio] || 1;
-      el.setAttribute('data-variacao', String(v));
-    });
-
-    iniciarSeletores();
-
     if (!('IntersectionObserver' in window)) {
-      alvos.forEach(function (el) { if (el.offsetParent !== null) montarEstudo(el); });
+      alvos.forEach(function (el) {
+        if (el.offsetParent !== null) montarEstudo(el);
+        el.setAttribute('data-animou', '1');
+        el.setAttribute('data-anim-concluida', '1');
+      });
       return;
     }
-    var io = new IntersectionObserver(function (entradas) {
+
+    // 1. Pré-carregamento/montagem do DOM 800px antes
+    var ioMontagem = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
-        if (e.isIntersecting) { montarEstudo(e.target); io.unobserve(e.target); }
+        if (e.isIntersecting) {
+          montarEstudo(e.target);
+          ioMontagem.unobserve(e.target);
+        }
       });
     }, { rootMargin: '800px 0px' });
-    alvos.forEach(function (el) { io.observe(el); });
+    alvos.forEach(function (el) { ioMontagem.observe(el); });
+
+    // 2. Disparo da sequência ao realmente aparecer na tela (rootMargin: 0px)
+    // Cópias dentro da .jornada aguardam a cena ativa
+    var ioVisivel = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        var el = e.target;
+        if (el.closest('.jornada')) return;
+        if (e.isIntersecting) {
+          if (!el.getAttribute('data-animou')) {
+            dispararAnimacao(el);
+          } else {
+            retomarAnimacao(el);
+          }
+        } else {
+          pausarAnimacao(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    alvos.forEach(function (el) {
+      if (!el.closest('.jornada')) {
+        ioVisivel.observe(el);
+      }
+    });
+
+    // 3. Pausar movimento se aba ficar oculta; retomar quando voltar
+    doc.addEventListener('visibilitychange', function () {
+      var oculta = doc.hidden;
+      var emCurso = doc.querySelectorAll('.anim-play:not([data-anim-concluida])');
+      emCurso.forEach(function (el) {
+        if (oculta) {
+          pausarAnimacao(el);
+        } else {
+          var r = el.getBoundingClientRect();
+          var visivel = (r.bottom > 0 && r.top < window.innerHeight);
+          if (visivel) {
+            retomarAnimacao(el);
+          }
+        }
+      });
+    });
+
+    iniciarBotoesReplay();
+  }
+
+  function iniciarBotoesReplay() {
+    var botoes = doc.querySelectorAll('[data-replay]');
+    if (!botoes.length) return;
+
+    var nomes = {
+      modulo: 'Módulo Engenharia',
+      atria: 'Atria Clinic',
+      casanoma: 'Casa Noma'
+    };
+
+    botoes.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cod = btn.getAttribute('data-replay');
+        var capitulo = btn.closest('.capitulo');
+        var live = capitulo ? capitulo.querySelector('.live-replay') : null;
+        var nome = nomes[cod] || 'estudo';
+
+        if (movimentoReduzido || raiz.classList.contains('rm')) {
+          if (live) {
+            live.textContent = 'Preferência de movimento reduzido ativa. Nenhuma animação espacial executada para ' + nome + '.';
+          }
+          var txtOriginal = btn.querySelector('span');
+          if (txtOriginal && !btn.getAttribute('data-notificando')) {
+            btn.setAttribute('data-notificando', '1');
+            var textoAntigo = txtOriginal.textContent;
+            txtOriginal.textContent = 'Movimento reduzido ativo';
+            setTimeout(function () {
+              txtOriginal.textContent = textoAntigo;
+              btn.removeAttribute('data-notificando');
+            }, 2200);
+          }
+          return;
+        }
+
+        if (!capitulo) return;
+
+        // Reinicia apenas as cópias visíveis deste capítulo
+        var copias = capitulo.querySelectorAll('[data-estudo]');
+        copias.forEach(function (el) {
+          if (el.offsetParent !== null) {
+            reiniciarAnimacao(el);
+          }
+        });
+
+        if (live) {
+          live.textContent = 'Animação de ' + nome + ' reiniciada.';
+        }
+      });
+    });
   }
 
   /* ---------- 3. Luz do hero ---------- */
@@ -218,6 +324,22 @@
           else b.removeAttribute('aria-current');
         });
         if (contador) contador.textContent = '0' + (passo + 1);
+
+        // Atria na jornada: dispara animação apenas quando a cena/etapa 1 estiver ativa
+        var copiasAtria = secao.querySelectorAll('.j-cam[data-etapa="1"] [data-estudo], .jm-comp [data-estudo]');
+        if (passo === 1 && !movimentoReduzido) {
+          copiasAtria.forEach(function (el) {
+            if (!el.getAttribute('data-animou')) {
+              dispararAnimacao(el);
+            } else {
+              retomarAnimacao(el);
+            }
+          });
+        } else if (passo !== 1) {
+          copiasAtria.forEach(function (el) {
+            pausarAnimacao(el);
+          });
+        }
       }
       if (sub !== atual.sub) {
         etapas.forEach(function (el) {
@@ -282,6 +404,21 @@
     } else {
       window.addEventListener('scroll', agendar, { passive: true });
       medir();
+      if ('IntersectionObserver' in window) {
+        var ioJornada = new IntersectionObserver(function (entradas) {
+          entradas.forEach(function (e) {
+            var copias = secao.querySelectorAll('.j-cam[data-etapa="1"] [data-estudo], .jm-comp [data-estudo]');
+            copias.forEach(function (el) {
+              if (!e.isIntersecting) {
+                pausarAnimacao(el);
+              } else if (+secao.getAttribute('data-passo') === 1) {
+                retomarAnimacao(el);
+              }
+            });
+          });
+        }, { threshold: 0.1 });
+        ioJornada.observe(secao);
+      }
     }
   }
 

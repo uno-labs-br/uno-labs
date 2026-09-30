@@ -1,100 +1,8 @@
 /* ==========================================================================
    UNO Labs — conceitos.css
    Estilos estritamente delimitados aos estudos conceituais (Módulo, Atria, Casa Noma)
-   e aos seletores de direção visual nos capítulos.
+   e às composições finais aprovadas.
    ========================================================================== */
-
-/* ---------- Seletores acessíveis de direção nos capítulos da home ---------- */
-.seletor-variantes {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-html:not(.js) .seletor-variantes {
-  display: none !important;
-}
-
-.seletor-variantes__legenda {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: inherit;
-  opacity: 0.8;
-}
-
-.seletor-variantes__botoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.btn-variante {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 0 18px;
-  border-radius: 999px;
-  border: 1px solid currentColor;
-  border-color: color-mix(in srgb, currentColor 24%, transparent);
-  background: color-mix(in srgb, currentColor 8%, transparent);
-  color: inherit;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn-variante:hover {
-  background: color-mix(in srgb, currentColor 16%, transparent);
-  border-color: color-mix(in srgb, currentColor 40%, transparent);
-}
-
-.btn-variante:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
-
-/* Botão ativo nos capítulos em fundo claro (Módulo e Casa Noma) */
-.capitulo:not(.capitulo--atria) .btn-variante[aria-pressed="true"] {
-  background: #10201C;
-  color: #FFFFFF;
-  border-color: #10201C;
-  box-shadow: 0 2px 6px rgba(16, 32, 28, 0.2);
-}
-
-/* Botão ativo no capítulo Atria (fundo escuro #2E211C) */
-.capitulo--atria .btn-variante[aria-pressed="true"] {
-  background: #F4EDE7;
-  color: #2E211C;
-  border-color: #F4EDE7;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-}
-
-.capitulo--atria .btn-variante:focus-visible {
-  outline: 2px solid #F4EDE7;
-  outline-offset: 3px;
-}
-
-.live-variacao {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
 
 /* ---------- Estrutura mestre das maquetes conceituais ---------- */
 .c-canvas {
@@ -115,23 +23,71 @@ html:not(.js) .seletor-variantes {
   height: 844px;
 }
 
-.c-var {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
+/* ---------- Botão acessível "Rever animação" nos capítulos ---------- */
+.capitulo__acoes {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* Ativação por estado: padrão 1, ou conforme data-variacao no container .estudo */
-.estudo:not([data-variacao]) .c-var--1,
-.estudo[data-variacao="1"] .c-var--1,
-.estudo[data-variacao="2"] .c-var--2,
-.estudo[data-variacao="3"] .c-var--3 {
+html:not(.js) .capitulo__acoes {
+  display: none !important;
+}
+
+.btn-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-replay:hover {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.btn-replay:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.capitulo--atria .btn-replay:focus-visible {
+  outline: 2px solid #F4EDE7;
+  outline-offset: 3px;
+}
+
+.btn-replay svg {
   display: block;
+  flex-shrink: 0;
+}
+
+.live-replay {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ==========================================================================
@@ -391,197 +347,6 @@ html:not(.js) .seletor-variantes {
   font-weight: 700;
 }
 
-/* Módulo Desktop Variação 2: Técnica */
-.mod-v2-pano {
-  position: absolute;
-  left: 64px;
-  top: 96px;
-  width: 1152px;
-  height: 350px;
-  border: 1px solid rgba(236, 234, 228, 0.18);
-  background: #15191C;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.mod-v2-pano-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border: 1px solid rgba(236, 234, 228, 0.1);
-}
-
-.mod-v2-pano-cota {
-  position: absolute;
-  left: 24px;
-  bottom: 16px;
-  background: rgba(14, 17, 20, 0.9);
-  padding: 6px 12px;
-  border: 1px solid rgba(242, 85, 44, 0.6);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: #ECEAE4;
-}
-
-.mod-v2-corpo {
-  position: absolute;
-  left: 64px;
-  top: 472px;
-  width: 1152px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.mod-v2-chamada {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(236, 234, 228, 0.12);
-  padding-bottom: 16px;
-}
-
-.mod-v2-titulo {
-  margin: 0;
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.mod-v2-ficha-grade {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(236, 234, 228, 0.14);
-  border: 1px solid rgba(236, 234, 228, 0.14);
-}
-
-.mod-v2-ficha-celula {
-  background: #15191C;
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.mod-v2-ficha-rotulo {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: #9AA3AB;
-}
-
-.mod-v2-ficha-valor {
-  font-size: 16px;
-  font-weight: 700;
-  color: #ECEAE4;
-}
-
-.mod-v2-rodape-linha {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Módulo Desktop Variação 3: Portfólio */
-.mod-v3-esq {
-  position: absolute;
-  left: 64px;
-  top: 96px;
-  width: 440px;
-  height: 640px;
-  border: 1px solid rgba(236, 234, 228, 0.2);
-  background: #15191C;
-  overflow: hidden;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
-}
-
-.mod-v3-tag-obra {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  padding: 6px 12px;
-  background: rgba(14, 17, 20, 0.92);
-  border: 1px solid rgba(242, 85, 44, 0.8);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: #ECEAE4;
-}
-
-.mod-v3-legenda-obra {
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  padding: 12px 14px;
-  background: rgba(14, 17, 20, 0.92);
-  border: 1px solid rgba(236, 234, 228, 0.18);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  line-height: 1.5;
-  color: #B7BEC4;
-}
-
-.mod-v3-dir {
-  position: absolute;
-  left: 540px;
-  top: 96px;
-  width: 676px;
-  display: flex;
-  flex-direction: column;
-}
-
-.mod-v3-titulo {
-  margin: 16px 0 0;
-  font-size: 64px;
-  line-height: 0.94;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.mod-v3-apoio {
-  margin: 18px 0 0;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #B7BEC4;
-  max-width: 600px;
-}
-
-.mod-v3-ficha-card {
-  margin-top: 26px;
-  border: 1px solid rgba(236, 234, 228, 0.18);
-  background: rgba(21, 25, 28, 0.8);
-}
-
-.mod-v3-ficha-cab {
-  padding: 10px 18px;
-  border-bottom: 1px solid rgba(236, 234, 228, 0.12);
-  display: flex;
-  justify-content: space-between;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: #9AA3AB;
-}
-
-.mod-v3-ficha-linhas {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(236, 234, 228, 0.1);
-}
-
-.mod-v3-ficha-item {
-  background: #15191C;
-  padding: 12px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
 /* Módulo Mobile (390x844) */
 .mod-mob-header {
   position: absolute;
@@ -662,82 +427,106 @@ html:not(.js) .seletor-variantes {
   text-decoration: none;
 }
 
-.mod-mob-v2-corpo {
-  position: absolute;
-  left: 20px;
-  top: 76px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
+/* ---------- Módulo — Movimento: Inspeção Estrutural ----------
+   Traçado de cotas em até 1,6 s; fechamento de ficha e etiquetas em até 2,3 s total.
+   A imagem e o título/CTA permanecem sempre legíveis e disponíveis. */
+.anim-play .mod-cota-linha-h {
+  animation: modTracoH 0.65s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
 }
 
-.mod-mob-v2-pano {
-  position: relative;
-  width: 350px;
-  height: 180px;
-  border: 1px solid rgba(236, 234, 228, 0.2);
-  overflow: hidden;
-  margin-bottom: 14px;
+.anim-play .mod-cota-tick-1 {
+  animation: modTickIn 0.2s ease 0.1s both;
 }
 
-.mod-mob-v2-titulo {
-  margin: 0;
-  font-size: 32px;
-  line-height: 0.94;
-  font-weight: 800;
-  text-transform: uppercase;
+.anim-play .mod-cota-txt-h {
+  animation: modFadeIn 0.35s ease 0.35s both;
 }
 
-.mod-mob-v2-ficha {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(236, 234, 228, 0.12);
-  border: 1px solid rgba(236, 234, 228, 0.12);
+.anim-play .mod-cota-tick-2 {
+  animation: modTickIn 0.2s ease 0.75s both;
 }
 
-.mod-mob-v2-celula {
-  background: #15191C;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.anim-play .mod-cota-linha-v {
+  animation: modTracoV 0.6s cubic-bezier(0.2, 0.8, 0.25, 1) 0.75s both;
 }
 
-.mod-mob-v3-corpo {
-  position: absolute;
-  left: 20px;
-  top: 76px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
+.anim-play .mod-cota-txt-v {
+  animation: modFadeIn 0.35s ease 1.0s both;
 }
 
-.mod-mob-v3-foto {
-  position: relative;
-  width: 350px;
-  height: 240px;
-  border: 1px solid rgba(236, 234, 228, 0.2);
-  overflow: hidden;
+.anim-play .mod-cota-tick-3 {
+  animation: modTickIn 0.2s ease 1.35s both;
 }
 
-.mod-mob-v3-titulo {
-  margin: 14px 0 0;
-  font-size: 40px;
-  line-height: 0.94;
-  font-weight: 800;
-  text-transform: uppercase;
+.anim-play .mod-v1-badge-coord {
+  animation: modBadgeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 1.45s both;
 }
 
-.mod-mob-v3-lista {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: #B7BEC4;
+.anim-play .mod-v1-badge-material {
+  animation: modBadgeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 1.75s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(1) {
+  animation: modItemIn 0.3s ease 1.85s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(2) {
+  animation: modItemIn 0.3s ease 1.95s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(3) {
+  animation: modItemIn 0.3s ease 2.05s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(4) {
+  animation: modItemIn 0.3s ease 2.15s both;
+}
+
+/* Mobile: traçado de cota e marcas */
+.anim-play .mod-mob-cota-linha {
+  animation: modTracoH 0.75s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .mod-mob-cota-tick-1 {
+  animation: modTickIn 0.2s ease 0.15s both;
+}
+
+.anim-play .mod-mob-cota-txt {
+  animation: modFadeIn 0.35s ease 0.45s both;
+}
+
+.anim-play .mod-mob-cota-tick-2 {
+  animation: modTickIn 0.2s ease 0.9s both;
+}
+
+@keyframes modTracoH {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes modTracoV {
+  0% { clip-path: inset(100% 0 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes modTickIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes modFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes modBadgeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modItemIn {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================================================
@@ -845,30 +634,11 @@ html:not(.js) .seletor-variantes {
   color: #6B4E42;
 }
 
-/* Atria Desktop Variação 1: Editorial */
-.atr-v1-esq {
-  position: absolute;
-  left: 72px;
-  top: 104px;
-  width: 560px;
-  display: flex;
-  flex-direction: column;
-}
-
 .atr-tag-loc {
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #6B4E42;
-}
-
-.atr-v1-titulo {
-  margin: 12px 0 0;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 76px;
-  line-height: 0.98;
-  font-weight: 500;
-  letter-spacing: -0.015em;
 }
 
 .atr-it-terracota {
@@ -881,26 +651,6 @@ html:not(.js) .seletor-variantes {
   font-size: 16px;
   line-height: 1.55;
   color: #4A3A33;
-  max-width: 480px;
-}
-
-.atr-v1-acoes {
-  margin-top: 18px;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
-.atr-v1-agenda-card {
-  margin-top: 20px;
-  padding: 14px 20px;
-  background: #FCF8F4;
-  border: 1px solid rgba(122, 74, 58, 0.14);
-  border-radius: 18px;
-  box-shadow: 0 16px 40px rgba(90, 50, 40, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
   max-width: 480px;
 }
 
@@ -944,18 +694,6 @@ html:not(.js) .seletor-variantes {
 .atr-dia-num {
   font-size: 15px;
   font-weight: 600;
-}
-
-.atr-v1-dir-foto {
-  position: absolute;
-  left: 690px;
-  top: 110px;
-  width: 518px;
-  height: 610px;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(90, 50, 40, 0.18);
-  border: 1px solid rgba(122, 74, 58, 0.12);
 }
 
 /* Atria Desktop Variação 2: Detalhe */
@@ -1043,110 +781,6 @@ html:not(.js) .seletor-variantes {
   background: rgba(122, 74, 58, 0.06);
 }
 
-/* Atria Desktop Variação 3: Tipográfica */
-.atr-v3-foto-lat {
-  position: absolute;
-  left: 64px;
-  top: 96px;
-  width: 250px;
-  height: 640px;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 24px 70px rgba(90, 50, 40, 0.15);
-  border: 1px solid rgba(122, 74, 58, 0.12);
-}
-
-.atr-v3-tag-foto {
-  position: absolute;
-  left: 18px;
-  bottom: 22px;
-  padding: 6px 12px;
-  background: rgba(244, 237, 231, 0.92);
-  border-radius: 999px;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #7A4A3A;
-  font-weight: 600;
-}
-
-.atr-v3-centro {
-  position: absolute;
-  left: 346px;
-  top: 110px;
-  width: 520px;
-  display: flex;
-  flex-direction: column;
-}
-
-.atr-v3-titulo {
-  margin: 16px 0 0;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 88px;
-  line-height: 0.96;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-}
-
-.atr-v3-apoio {
-  margin: 24px 0 0;
-  font-size: 17px;
-  line-height: 1.6;
-  color: #4A3A33;
-  max-width: 440px;
-}
-
-.atr-v3-plano-terracota {
-  position: absolute;
-  left: 896px;
-  top: 96px;
-  width: 320px;
-  height: 640px;
-  box-sizing: border-box;
-  padding: 32px 24px;
-  background: #7A4A3A;
-  color: #FBF6F1;
-  border-radius: 28px;
-  box-shadow: 0 30px 80px rgba(122, 74, 58, 0.35);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.atr-v3-plano-topo {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.atr-v3-selo {
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #F4EDE7;
-  opacity: 0.95;
-}
-
-.atr-v3-plano-tit {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.05;
-}
-
-.atr-v3-btn-escuro {
-  height: 48px;
-  background: #2E211C;
-  color: #FBF6F1;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-}
-
 /* Atria Mobile (390x844) */
 .atr-mob-header {
   position: absolute;
@@ -1172,43 +806,6 @@ html:not(.js) .seletor-variantes {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.atr-mob-v1-corpo {
-  position: absolute;
-  left: 20px;
-  top: 80px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-}
-
-.atr-mob-v1-foto {
-  position: relative;
-  width: 350px;
-  height: 250px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 16px 40px rgba(90, 50, 40, 0.12);
-}
-
-.atr-mob-v1-titulo {
-  margin: 16px 0 0;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 46px;
-  line-height: 0.98;
-  font-weight: 500;
-}
-
-.atr-mob-v1-card {
-  margin-top: 18px;
-  padding: 16px;
-  background: #FCF8F4;
-  border-radius: 20px;
-  border: 1px solid rgba(122, 74, 58, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .atr-mob-v2-corpo {
@@ -1258,46 +855,75 @@ html:not(.js) .seletor-variantes {
   justify-content: space-between;
 }
 
-.atr-mob-v3-corpo {
-  position: absolute;
-  left: 20px;
-  top: 80px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
+/* ---------- Atria — Movimento: Abertura Editorial Fotográfica ----------
+   Máscara horizontal suave, deslocamento/zoom mínimo do retrato e assentamento
+   da agenda. Sequência completa entre 1,2 e 2,2 s (total: ~1,85 s).
+   Título, dados e responsável permanecem visíveis desde o primeiro momento. */
+.anim-play .atr-v2-faixa-foto {
+  animation: atrMascaraFaixa 1.05s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
 }
 
-.atr-mob-v3-titulo {
-  margin: 0;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 50px;
-  line-height: 0.95;
-  font-weight: 500;
+.anim-play .atr-v2-faixa-foto .atr-img {
+  animation: atrZoomFoto 1.35s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
 }
 
-.atr-mob-v3-linha-mista {
-  margin-top: 14px;
-  display: flex;
-  gap: 12px;
+.anim-play .atr-v2-tag-faixa {
+  animation: atrFadeIn 0.35s ease 0.8s both;
 }
 
-.atr-mob-v3-minifoto {
-  width: 110px;
-  height: 150px;
-  border-radius: 14px;
-  overflow: hidden;
-  flex-shrink: 0;
+.anim-play .atr-v2-dir-agenda {
+  animation: atrAssentaAgenda 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
 }
 
-.atr-mob-v3-plano {
-  margin-top: 16px;
-  padding: 20px;
-  background: #7A4A3A;
-  color: #FBF6F1;
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.anim-play .atr-dia-item--ativo {
+  animation: atrDestaqueDia 0.35s ease 1.25s both;
+}
+
+.anim-play .atr-hora-btn--ativo {
+  animation: atrDestaqueHora 0.35s ease 1.45s both;
+}
+
+/* Mobile: abertura da faixa de borda a borda e agenda em linha */
+.anim-play .atr-mob-v2-faixa {
+  animation: atrMascaraFaixa 1.0s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+}
+
+.anim-play .atr-mob-v2-faixa img {
+  animation: atrZoomFoto 1.3s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+}
+
+.anim-play .atr-mob-v2-agenda-linha {
+  animation: atrAssentaAgenda 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+
+@keyframes atrMascaraFaixa {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes atrZoomFoto {
+  0% { transform: scale(1.045) translateX(6px); }
+  100% { transform: scale(1) translateX(0); }
+}
+
+@keyframes atrFadeIn {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atrAssentaAgenda {
+  0% { opacity: 0.15; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atrDestaqueDia {
+  0% { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes atrDestaqueHora {
+  0% { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /* ==========================================================================
@@ -1388,30 +1014,11 @@ html:not(.js) .seletor-variantes {
   cursor: pointer;
 }
 
-/* Casa Noma Desktop Variação 1: Editorial */
-.cn-v1-esq {
-  position: absolute;
-  left: 64px;
-  top: 130px;
-  width: 520px;
-  display: flex;
-  flex-direction: column;
-}
-
 .cn-tag-loc {
   font-size: 12px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: #B9A78F;
-}
-
-.cn-v1-titulo {
-  margin: 18px 0 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-size: 80px;
-  line-height: 0.95;
-  font-weight: 400;
-  letter-spacing: -0.025em;
 }
 
 .cn-it-ambar {
@@ -1425,97 +1032,6 @@ html:not(.js) .seletor-variantes {
   line-height: 1.7;
   color: #CDBDA5;
   max-width: 420px;
-}
-
-.cn-v1-acoes {
-  margin-top: 24px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.cn-v1-menu-lista {
-  margin-top: 36px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cn-v1-menu-topo {
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #9C8B73;
-  margin-bottom: 10px;
-}
-
-.cn-menu-item {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding: 10px 0;
-  border-top: 1px solid rgba(240, 230, 214, 0.12);
-  font-size: 15px;
-}
-
-.cn-menu-num {
-  width: 22px;
-  font-family: 'Bodoni Moda', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: #E0A84E;
-}
-
-.cn-v1-dir-foto {
-  position: absolute;
-  left: 630px;
-  top: 120px;
-  width: 586px;
-  height: 480px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(240, 230, 214, 0.12);
-}
-
-.cn-v1-card-reserva {
-  position: absolute;
-  left: 880px;
-  top: 470px;
-  width: 336px;
-  box-sizing: border-box;
-  padding: 20px;
-  background: rgba(26, 20, 16, 0.94);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(224, 168, 78, 0.25);
-  border-radius: 18px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 5;
-}
-
-.cn-grade-dias {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
-}
-
-.cn-dia-btn {
-  height: 52px;
-  border: 1px solid rgba(240, 230, 214, 0.16);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-}
-
-.cn-dia-btn--ativo {
-  background: #E0A84E;
-  color: #110E0B;
-  border-color: #E0A84E;
 }
 
 /* Casa Noma Desktop Variação 2: Imersivo */
@@ -1606,126 +1122,6 @@ html:not(.js) .seletor-variantes {
   color: #F0E6D6;
 }
 
-/* Casa Noma Desktop Variação 3: Menu (Composição em tom Creme da paleta) */
-.cn-v3-fundo-creme {
-  background-color: #F0E6D6;
-  color: #110E0B;
-}
-
-.cn-v3-topbar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1280px;
-  height: 84px;
-  box-sizing: border-box;
-  padding: 0 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(17, 14, 11, 0.1);
-  background: rgba(240, 230, 214, 0.94);
-  backdrop-filter: blur(8px);
-  z-index: 10;
-}
-
-.cn-v3-marca {
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-style: italic;
-  font-size: 28px;
-  font-weight: 500;
-  color: #110E0B;
-  text-decoration: none;
-}
-
-.cn-v3-nav {
-  display: flex;
-  gap: 36px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #1A1410;
-}
-
-.cn-v3-esq-menu {
-  position: absolute;
-  left: 72px;
-  top: 116px;
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cn-v3-titulo {
-  margin: 14px 0 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-size: 60px;
-  line-height: 0.98;
-  font-weight: 400;
-  color: #110E0B;
-}
-
-.cn-v3-menu-card {
-  margin-top: 24px;
-  padding: 24px 28px;
-  background: rgba(240, 230, 214, 0.6);
-  border: 1px solid rgba(17, 14, 11, 0.14);
-  border-radius: 20px;
-  box-shadow: 0 16px 44px rgba(17, 14, 11, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.cn-v3-menu-tit {
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #C4492F;
-  font-weight: 700;
-}
-
-.cn-v3-prato-item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(17, 14, 11, 0.08);
-}
-
-.cn-v3-prato-nome {
-  font-family: 'Bodoni Moda', Didot, serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: #110E0B;
-}
-
-.cn-v3-prato-desc {
-  font-size: 13px;
-  color: #1A1410;
-  opacity: 0.88;
-  font-weight: 500;
-}
-
-.cn-v3-prato-desc::before {
-  content: "— ";
-  color: #6F7D3C;
-  font-weight: 700;
-}
-
-.cn-v3-dir-foto {
-  position: absolute;
-  left: 710px;
-  top: 116px;
-  width: 500px;
-  height: 610px;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 24px 70px rgba(17, 14, 11, 0.2);
-  border: 1px solid rgba(17, 14, 11, 0.1);
-}
-
 /* Casa Noma Mobile (390x844) */
 .cn-mob-header {
   position: absolute;
@@ -1753,43 +1149,12 @@ html:not(.js) .seletor-variantes {
   justify-content: center;
 }
 
-.cn-mob-v1-corpo {
-  position: absolute;
-  left: 20px;
-  top: 80px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cn-mob-v1-foto {
-  position: relative;
-  width: 350px;
-  height: 220px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(240, 230, 214, 0.12);
-}
-
 .cn-mob-v1-titulo {
   margin: 16px 0 0;
   font-family: 'Bodoni Moda', serif;
   font-size: 46px;
   line-height: 0.95;
   font-weight: 400;
-}
-
-.cn-mob-v1-barra-reserva {
-  margin-top: 18px;
-  height: 72px;
-  box-sizing: border-box;
-  padding: 0 12px 0 16px;
-  background: rgba(26, 20, 16, 0.95);
-  border: 1px solid rgba(240, 230, 214, 0.16);
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .cn-mob-v2-corpo {
@@ -1832,37 +1197,100 @@ html:not(.js) .seletor-variantes {
   flex-direction: column;
 }
 
-.cn-mob-v3-corpo {
+/* ---------- Casa Noma — Movimento: Abertura Cinematográfica ----------
+   Acomodação de escala da fotografia (~1,045 para 1), passagem sutil de luz âmbar
+   restrita à foto (sem halo no texto) e assentamento da faixa de reserva.
+   Duração total em até 2,35 s (máx. 2,8 s). Título permanece 100% estático e legível. */
+.cn-v2-bg-canvas::after {
+  content: "";
   position: absolute;
-  left: 20px;
-  top: 80px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
+  inset: 0;
+  background: radial-gradient(circle at 70% 38%, rgba(224, 168, 78, 0.28) 0%, rgba(224, 168, 78, 0.08) 45%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
 }
 
-.cn-mob-v3-foto {
-  position: relative;
-  width: 350px;
-  height: 200px;
-  border-radius: 16px;
-  overflow: hidden;
+.anim-play .cn-v2-bg-canvas .cn-img {
+  animation: cnAcomodaFoto 2.2s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
 }
 
-.cn-mob-v3-titulo {
-  margin: 14px 0 0;
-  font-family: 'Bodoni Moda', serif;
-  font-size: 38px;
-  line-height: 0.98;
-  font-weight: 400;
-  color: #110E0B;
+.anim-play .cn-v2-bg-canvas::after {
+  animation: cnLuzAmbar 1.6s cubic-bezier(0.2, 0.8, 0.25, 1) 0.25s both;
 }
 
-.cn-mob-v3-pratos {
-  margin-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 13px;
-  color: #110E0B;
+.anim-play .cn-v2-barra-base {
+  animation: cnAssentaReserva 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1.55s both;
+}
+
+/* Mobile: foto de topo, luz âmbar restrita e cartão de reserva */
+.cn-mob-v2-foto-topo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center 35%, rgba(224, 168, 78, 0.24) 0%, transparent 68%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.anim-play .cn-mob-v2-foto-topo .cn-img {
+  animation: cnAcomodaFoto 2.2s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+}
+
+.anim-play .cn-mob-v2-foto-topo::after {
+  animation: cnLuzAmbar 1.6s cubic-bezier(0.2, 0.8, 0.25, 1) 0.25s both;
+}
+
+.anim-play .cn-mob-v2-card-reserva {
+  animation: cnAssentaReserva 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1.5s both;
+}
+
+@keyframes cnAcomodaFoto {
+  0% { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+@keyframes cnLuzAmbar {
+  0% { opacity: 0; transform: scale(0.96); }
+  45% { opacity: 0.7; transform: scale(1.03); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes cnAssentaReserva {
+  0% { opacity: 0.15; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Controle de Pausa e Movimento Reduzido ---------- */
+.anim-play.is-pausado,
+.anim-play.is-pausado * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-play,
+  .anim-play * {
+    animation: none !important;
+    transition: none !important;
+    clip-path: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .cn-v2-bg-canvas::after,
+  .cn-mob-v2-foto-topo::after {
+    display: none !important;
+  }
+}
+
+.rm .anim-play,
+.rm .anim-play * {
+  animation: none !important;
+  transition: none !important;
+  clip-path: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+.rm .cn-v2-bg-canvas::after,
+.rm .cn-mob-v2-foto-topo::after {
+  display: none !important;
 }
