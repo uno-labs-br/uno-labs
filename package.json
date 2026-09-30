@@ -1,0 +1,14 @@
+{
+  "name": "unolabs-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site da UNO Labs: HTML estático + Cloudflare Worker para o formulário de contato.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "verificar": "wrangler deploy --dry-run",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.144.0"
+  }
+}

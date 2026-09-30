@@ -1,0 +1,32 @@
+// Configuração do Cloudflare Workers (Static Assets) para unolabs.com.br
+// Documentação: https://developers.cloudflare.com/workers/static-assets/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "unolabs-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+
+  // Tudo o que está em public/ é publicado como arquivo estático.
+  // Os arquivos são servidos ANTES do Worker; o Worker só roda para caminhos que não existem (ex.: /api/contato).
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+
+  // Domínios próprios. O domínio precisa estar ativo na sua conta Cloudflare (DNS na Cloudflare)
+  // e NÃO pode haver registro DNS para esses nomes antes do primeiro deploy — o Wrangler cria os registros.
+  // Para testar antes, comente este bloco: o site fica em https://unolabs-site.<sua-conta>.workers.dev
+  "routes": [
+    { "pattern": "unolabs.com.br", "custom_domain": true },
+    { "pattern": "www.unolabs.com.br", "custom_domain": true }
+  ],
+
+  "vars": {
+    "ORIGENS_PERMITIDAS": "https://unolabs.com.br,https://www.unolabs.com.br"
+  },
+
+  // Logs do Worker no painel (Workers → unolabs-site → Logs)
+  "observability": { "enabled": true }
+}
