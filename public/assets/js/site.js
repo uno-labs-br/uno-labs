@@ -16,22 +16,25 @@
   var doc = document;
   var raiz = doc.documentElement;
   var movimentoReduzido = raiz.classList.contains('rm');
+  var mqlMovimentoEstudos = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var motivoReplayEstatico = '';
+  var controleMovimentoEstudosIniciado = false;
 
-  if (window.matchMedia) {
-    var mqlRM = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var atualizarRM = function (e) {
-      movimentoReduzido = e.matches || raiz.classList.contains('rm');
-      if (movimentoReduzido) {
-        raiz.classList.add('rm');
-        var ativas = doc.querySelectorAll('.anim-play');
-        ativas.forEach(function (el) {
-          el.classList.remove('anim-play', 'is-pausado');
-          el.setAttribute('data-anim-concluida', '1');
-        });
-      }
-    };
-    if (mqlRM.addEventListener) mqlRM.addEventListener('change', atualizarRM);
-    else if (mqlRM.addListener) mqlRM.addListener(atualizarRM);
+  function movimentoEstudosReduzido() {
+    return raiz.classList.contains('rm') || !!(mqlMovimentoEstudos && mqlMovimentoEstudos.matches);
+  }
+
+  function retanguloNaTela(el) {
+    if (!el || doc.hidden) return false;
+    var r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 &&
+      r.top < window.innerHeight && r.left < window.innerWidth;
+  }
+
+  function copiaElegivel(el) {
+    if (!retanguloNaTela(el)) return false;
+    var etapa = el.closest('[data-etapa]');
+    return !etapa || etapa.classList.contains('is-ativo');
   }
 
   /* ---------- 1. Escala proporcional ----------
@@ -108,20 +111,45 @@
     el.inert = true;
   }
 
+  function estadoAnimacao(el) {
+    if (!el._unoAnimacaoEstudo) el._unoAnimacaoEstudo = { geracao: 0 };
+    return el._unoAnimacaoEstudo;
+  }
+
+  function concluirAnimacao(el, geracao) {
+    var estado = estadoAnimacao(el);
+    if (estado.geracao !== geracao || !el.classList.contains('anim-play')) return;
+    el.setAttribute('data-anim-concluida', '1');
+    el.classList.remove('anim-play', 'is-pausado');
+  }
+
+  function iniciarEfeitosAnimacao(el) {
+    var estado = estadoAnimacao(el);
+    var geracao = ++estado.geracao;
+    el.removeAttribute('data-anim-concluida');
+    el.classList.remove('is-pausado');
+    el.classList.add('anim-play');
+
+    // A conclusão acompanha os efeitos CSS finitos ativos, inclusive os de pseudo-elementos.
+    var animacoes = el.getAnimations({ subtree: true });
+    var finitas = animacoes.filter(function (animacao) {
+      var efeito = animacao.effect;
+      var tempo = efeito && efeito.getComputedTiming ? efeito.getComputedTiming() : null;
+      return tempo && isFinite(tempo.endTime) && tempo.endTime > 0;
+    });
+    Promise.all(finitas.map(function (animacao) {
+      return animacao.finished.then(function () {}, function () {});
+    })).then(function () { concluirAnimacao(el, geracao); });
+  }
+
   function dispararAnimacao(el) {
-    if (movimentoReduzido || !el) return;
+    if (motivoReplayEstatico || movimentoEstudosReduzido() || !el || !copiaElegivel(el) || typeof el.getAnimations !== 'function') return;
     if (el.getAttribute('data-animou')) return;
     if (!el.getAttribute('data-montado')) {
       montarEstudo(el);
     }
     el.setAttribute('data-animou', '1');
-    el.classList.remove('is-pausado');
-    el.classList.add('anim-play');
-
-    setTimeout(function () {
-      el.setAttribute('data-anim-concluida', '1');
-      el.classList.remove('is-pausado');
-    }, 2400);
+    iniciarEfeitosAnimacao(el);
   }
 
   function pausarAnimacao(el) {
@@ -130,26 +158,55 @@
   }
 
   function retomarAnimacao(el) {
-    if (!el || el.getAttribute('data-anim-concluida') || !el.classList.contains('anim-play')) return;
+    if (!el || !el.classList.contains('anim-play')) return;
+    if (movimentoEstudosReduzido()) {
+      cancelarAnimacaoEstudo(el);
+      return;
+    }
+    if (!copiaElegivel(el)) {
+      pausarAnimacao(el);
+      return;
+    }
+    if (el.getAttribute('data-anim-concluida')) return;
     el.classList.remove('is-pausado');
   }
 
   function reiniciarAnimacao(el) {
-    if (movimentoReduzido || !el) return;
+    if (movimentoEstudosReduzido() || !el || !copiaElegivel(el) || typeof el.getAnimations !== 'function') return;
     if (!el.getAttribute('data-montado')) {
       montarEstudo(el);
     }
-    el.removeAttribute('data-anim-concluida');
-    el.classList.remove('is-pausado');
-    el.classList.remove('anim-play');
+    var estado = estadoAnimacao(el);
+    estado.geracao++;
+    el.classList.remove('anim-play', 'is-pausado');
     void el.offsetWidth;
     el.setAttribute('data-animou', '1');
-    el.classList.add('anim-play');
+    iniciarEfeitosAnimacao(el);
+  }
 
-    setTimeout(function () {
-      el.setAttribute('data-anim-concluida', '1');
-      el.classList.remove('is-pausado');
-    }, 2400);
+  function cancelarAnimacaoEstudo(el) {
+    if (!el) return;
+    estadoAnimacao(el).geracao++;
+    el.classList.remove('anim-play', 'is-pausado');
+    el.setAttribute('data-anim-concluida', '1');
+  }
+
+  function sincronizarPreferenciaEstudos() {
+    if (!movimentoEstudosReduzido()) return;
+    doc.querySelectorAll('.anim-play[data-estudo]').forEach(cancelarAnimacaoEstudo);
+  }
+
+  function iniciarControleMovimentoEstudos() {
+    if (controleMovimentoEstudosIniciado) return;
+    controleMovimentoEstudosIniciado = true;
+    if (mqlMovimentoEstudos) {
+      if (mqlMovimentoEstudos.addEventListener) mqlMovimentoEstudos.addEventListener('change', sincronizarPreferenciaEstudos);
+      else if (mqlMovimentoEstudos.addListener) mqlMovimentoEstudos.addListener(sincronizarPreferenciaEstudos);
+    }
+    if ('MutationObserver' in window) {
+      var observerRm = new MutationObserver(sincronizarPreferenciaEstudos);
+      observerRm.observe(raiz, { attributes: true, attributeFilter: ['class'] });
+    }
   }
 
   function iniciarEstudos() {
@@ -157,11 +214,9 @@
     if (!alvos.length) return;
 
     if (!('IntersectionObserver' in window)) {
-      alvos.forEach(function (el) {
-        if (el.offsetParent !== null) montarEstudo(el);
-        el.setAttribute('data-animou', '1');
-        el.setAttribute('data-anim-concluida', '1');
-      });
+      motivoReplayEstatico = 'Este navegador não oferece suporte à observação de visibilidade; os estudos permanecem estáticos.';
+      alvos.forEach(montarEstudo);
+      iniciarBotoesReplay();
       return;
     }
 
@@ -176,43 +231,44 @@
     }, { rootMargin: '800px 0px' });
     alvos.forEach(function (el) { ioMontagem.observe(el); });
 
-    // 2. Disparo da sequência ao realmente aparecer na tela (rootMargin: 0px)
-    // Cópias dentro da .jornada aguardam a cena ativa
+    // 2. Disparo quando a cópia aparece na tela; as cenas da jornada também exigem etapa ativa.
+    if (!window.Element || typeof window.Element.prototype.getAnimations !== 'function') {
+      motivoReplayEstatico = 'Este navegador não oferece suporte à sincronização das animações; os estudos permanecem estáticos.';
+      iniciarBotoesReplay();
+      return;
+    }
+    iniciarControleMovimentoEstudos();
+
     var ioVisivel = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
         var el = e.target;
-        if (el.closest('.jornada')) return;
-        if (e.isIntersecting) {
+        if (!e.isIntersecting || !copiaElegivel(el)) {
+          pausarAnimacao(el);
+        } else if (movimentoEstudosReduzido()) {
+          cancelarAnimacaoEstudo(el);
+        } else if (!el.closest('.jornada')) {
           if (!el.getAttribute('data-animou')) {
             dispararAnimacao(el);
           } else {
             retomarAnimacao(el);
           }
         } else {
-          pausarAnimacao(el);
+          sincronizarCopiaJornada(el);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0 });
 
-    alvos.forEach(function (el) {
-      if (!el.closest('.jornada')) {
-        ioVisivel.observe(el);
-      }
-    });
+    alvos.forEach(function (el) { ioVisivel.observe(el); });
 
     // 3. Pausar movimento se aba ficar oculta; retomar quando voltar
     doc.addEventListener('visibilitychange', function () {
       var oculta = doc.hidden;
-      var emCurso = doc.querySelectorAll('.anim-play:not([data-anim-concluida])');
+      var emCurso = doc.querySelectorAll('.anim-play[data-estudo]:not([data-anim-concluida])');
       emCurso.forEach(function (el) {
-        if (oculta) {
+        if (oculta || !copiaElegivel(el)) {
           pausarAnimacao(el);
         } else {
-          var r = el.getBoundingClientRect();
-          var visivel = (r.bottom > 0 && r.top < window.innerHeight);
-          if (visivel) {
-            retomarAnimacao(el);
-          }
+          retomarAnimacao(el);
         }
       });
     });
@@ -237,7 +293,12 @@
         var live = capitulo ? capitulo.querySelector('.live-replay') : null;
         var nome = nomes[cod] || 'estudo';
 
-        if (movimentoReduzido || raiz.classList.contains('rm')) {
+        if (motivoReplayEstatico) {
+          if (live) live.textContent = motivoReplayEstatico;
+          return;
+        }
+
+        if (movimentoEstudosReduzido()) {
           if (live) {
             live.textContent = 'Preferência de movimento reduzido ativa. Nenhuma animação espacial executada para ' + nome + '.';
           }
@@ -256,10 +317,10 @@
 
         if (!capitulo) return;
 
-        // Reinicia apenas as cópias visíveis deste capítulo
+        // Reinicia apenas cópias do capítulo que têm área e interseção reais na tela.
         var copias = capitulo.querySelectorAll('[data-estudo]');
         copias.forEach(function (el) {
-          if (el.offsetParent !== null) {
+          if (copiaElegivel(el)) {
             reiniciarAnimacao(el);
           }
         });
@@ -269,6 +330,20 @@
         }
       });
     });
+  }
+
+  function sincronizarCopiaJornada(el) {
+    if (!el) return;
+    if (movimentoEstudosReduzido()) {
+      if (el.classList.contains('anim-play')) cancelarAnimacaoEstudo(el);
+      return;
+    }
+    if (!copiaElegivel(el)) {
+      pausarAnimacao(el);
+      return;
+    }
+    if (!el.getAttribute('data-animou')) dispararAnimacao(el);
+    else retomarAnimacao(el);
   }
 
   /* ---------- 3. Luz do hero ---------- */
@@ -325,21 +400,8 @@
         });
         if (contador) contador.textContent = '0' + (passo + 1);
 
-        // Atria na jornada: dispara animação apenas quando a cena/etapa 1 estiver ativa
-        var copiasAtria = secao.querySelectorAll('.j-cam[data-etapa="1"] [data-estudo], .jm-comp [data-estudo]');
-        if (passo === 1 && !movimentoReduzido) {
-          copiasAtria.forEach(function (el) {
-            if (!el.getAttribute('data-animou')) {
-              dispararAnimacao(el);
-            } else {
-              retomarAnimacao(el);
-            }
-          });
-        } else if (passo !== 1) {
-          copiasAtria.forEach(function (el) {
-            pausarAnimacao(el);
-          });
-        }
+        // Só inicia a cópia cuja camada da jornada está ativa e realmente visível.
+        secao.querySelectorAll('[data-estudo]').forEach(sincronizarCopiaJornada);
       }
       if (sub !== atual.sub) {
         etapas.forEach(function (el) {
@@ -404,21 +466,6 @@
     } else {
       window.addEventListener('scroll', agendar, { passive: true });
       medir();
-      if ('IntersectionObserver' in window) {
-        var ioJornada = new IntersectionObserver(function (entradas) {
-          entradas.forEach(function (e) {
-            var copias = secao.querySelectorAll('.j-cam[data-etapa="1"] [data-estudo], .jm-comp [data-estudo]');
-            copias.forEach(function (el) {
-              if (!e.isIntersecting) {
-                pausarAnimacao(el);
-              } else if (+secao.getAttribute('data-passo') === 1) {
-                retomarAnimacao(el);
-              }
-            });
-          });
-        }, { threshold: 0.1 });
-        ioJornada.observe(secao);
-      }
     }
   }
 

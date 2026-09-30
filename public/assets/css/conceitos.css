@@ -1200,7 +1200,7 @@ html:not(.js) .capitulo__acoes {
 /* ---------- Casa Noma — Movimento: Abertura Cinematográfica ----------
    Acomodação de escala da fotografia (~1,045 para 1), passagem sutil de luz âmbar
    restrita à foto (sem halo no texto) e assentamento da faixa de reserva.
-   Duração total em até 2,35 s (máx. 2,8 s). Título permanece 100% estático e legível. */
+   Duração máxima com atrasos: 2,3 s. Título permanece 100% estático e legível. */
 .cn-v2-bg-canvas::after {
   content: "";
   position: absolute;
@@ -1263,34 +1263,30 @@ html:not(.js) .capitulo__acoes {
 
 /* ---------- Controle de Pausa e Movimento Reduzido ---------- */
 .anim-play.is-pausado,
-.anim-play.is-pausado * {
+.anim-play.is-pausado *,
+.anim-play.is-pausado::before,
+.anim-play.is-pausado::after,
+.anim-play.is-pausado *::before,
+.anim-play.is-pausado *::after {
   animation-play-state: paused !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .anim-play,
-  .anim-play * {
+  .anim-play *,
+  .anim-play::before,
+  .anim-play::after,
+  .anim-play *::before,
+  .anim-play *::after {
     animation: none !important;
-    transition: none !important;
-    clip-path: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-  }
-  .cn-v2-bg-canvas::after,
-  .cn-mob-v2-foto-topo::after {
-    display: none !important;
   }
 }
 
 .rm .anim-play,
-.rm .anim-play * {
+.rm .anim-play *,
+.rm .anim-play::before,
+.rm .anim-play::after,
+.rm .anim-play *::before,
+.rm .anim-play *::after {
   animation: none !important;
-  transition: none !important;
-  clip-path: none !important;
-  transform: none !important;
-  opacity: 1 !important;
-}
-.rm .cn-v2-bg-canvas::after,
-.rm .cn-mob-v2-foto-topo::after {
-  display: none !important;
 }
