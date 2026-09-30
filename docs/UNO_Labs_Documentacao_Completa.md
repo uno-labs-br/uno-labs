@@ -83,6 +83,8 @@ Urias Loures e Bruno Gonzaga (criadores) e Milena Dias (Publicidade e Propaganda
 
 ## 0.8 Stack técnica de unolabs.com.br
 
+**Implementação vigente:** HTML, CSS e JavaScript em `04 - SITE/public`, com o formulário em `worker/index.js`, conforme D28 abaixo. A tabela registra a arquitetura planejada para a futura fase Astro; ela não descreve o código atual. Hospedagem padrão e e-mail continuam conforme as decisões desta seção.
+
 | Camada | Decisão |
 |---|---|
 | Framework | Astro 7 (páginas geradas no build) + TypeScript; JavaScript só nas partes interativas |

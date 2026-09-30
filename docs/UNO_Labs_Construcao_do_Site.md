@@ -2,6 +2,8 @@
 
 **Versão 1.1 · 30/09/2026 · Referente ao checkout oficial `04 - SITE/`**
 
+Este documento descreve a implementação local e a hospedagem pretendida. Não comprova publicação em `unolabs.com.br`; conferir a integração na `main`, as pendências e o estado real do deploy.
+
 Este documento descreve, com precisão suficiente para ser reproduzido, **o que** foi construído em `unolabs.com.br`, **como** foi construído e **por que** cada decisão foi tomada. Serve para dois usos:
 
 1. **Manutenção:** qualquer pessoa (ou IA) que for mexer no site entende a lógica antes de alterar.
