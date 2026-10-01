@@ -1,6 +1,6 @@
 # UNO Labs — Como o site foi construído
 
-**Versão 1.3 · 30/09/2026 · Referente ao checkout oficial `04 - SITE/`**
+**Versão 1.4 · 01/10/2026 · Referente ao checkout oficial `04 - SITE/`**
 
 Este documento descreve a implementação local e a hospedagem pretendida. Não comprova publicação em `unolabs.com.br`; conferir a integração na `main`, as pendências e o estado real do deploy.
 
@@ -37,7 +37,7 @@ Este documento descreve, com precisão suficiente para ser reproduzido, **o que*
 | Garantia e prazo | Os termos e prazos por escopo são informados na proposta. A home não anuncia números nem usa marcadores provisórios |
 | Onde atende | Presencial na Grande Vitória (Vitória, Vila Velha, Serra, Cariacica — ES) e em Curitiba (PR); remoto em todo o Brasil |
 | Público | Empresas que “tratam o digital como parte do negócio”: arquitetura e interiores, engenharia e construção, clínicas e consultórios, advocacia/contabilidade/consultorias, gastronomia e hospitalidade autorais |
-| Equipe | Urias Loures e Bruno Gonzaga são criadores; suas funções específicas não estão definidas. Milena Dias está em formação em Publicidade e Propaganda na UVV. Não atribuir cargos não informados |
+| Equipe | Urias Loures e Bruno Gonzaga são cofundadores; Milena Dias atua em Comunicação e Conteúdo. Cargos e textos integrais aprovados em 01/10/2026; ver §6.10 e Apêndice A |
 | Canais | `contato@unolabs.com.br`; WhatsApp `(27) 93618-5141`, `+5527936185141`, link `https://wa.me/5527936185141`. Dados confirmados em 30/09/2026; funcionamento não homologado |
 | Dados empresariais | CNPJ e razão social ainda precisam ser informados ou confirmados; Perfil da Empresa no Google depende de endereço verificável |
 | Prova social | Ainda não há cases publicáveis. Por isso, estudos conceituais explicitamente rotulados |
@@ -151,7 +151,7 @@ A ordem segue a lógica de decisão de um comprador desconfiado: **o que é → 
 | 7 | Como trabalhamos (`#processo`) | Reduz risco: 4 etapas com entregável cada |
 | 8 | Investimento | Preço de entrada, o que muda o valor, garantia e mensais |
 | 9 | Para quem / Onde | Qualifica o lead e reforça SEO local |
-| 10 | Equipe | Rostos (iniciais por enquanto) e proximidade |
+| 10 | Equipe | Retratos, cargos e textos aprovados que apresentam as pessoas responsáveis pelo trabalho |
 | 11 | Blog (`#blog`) | Sinaliza autoridade futura; cartões “Em breve” |
 | 12 | Dúvidas (`#duvidas`) | Quebra objeções; honestidade sobre garantias |
 | 13 | Contato (`#contato`) | Formulário qualificador + canais diretos |
@@ -273,8 +273,16 @@ Referências técnicas: [padrão de botão básico, W3C](https://www.w3.org/WAI/
 - Direita (4/12): cartão branco “Onde atendemos” com três locais e ícones de pino/globo. Reforça o SEO local sem página falsa de cidade.
 
 ### 6.10 Equipe
-- Três colunas separadas por linhas verticais: círculo de 96 px com iniciais, nome 26 px, função e formação (marcadas como pendentes). No celular, vira lista com avatar de 60 px à esquerda.
-- Quando houver fotos: retratos reais, mesmo enquadramento e tratamento, 96 px no desktop.
+
+O texto aprovado para a seção é “Experiências em negócios, tecnologia e comunicação que orientam os sites, as campanhas e o conteúdo da UNO Labs.” Usar os cargos e os dois parágrafos integrais reproduzidos no Apêndice A.
+
+Cada pessoa é um article na ordem retrato, h3 com o nome, cargo e dois parágrafos. Usar somente a classe .equipe para delimitar os estilos. A foto é quadrada, largura 100% e tamanho máximo de 320 px; o nome usa 26 px e a biografia 17 px com line-height 1.65. Não fixar alturas nem adicionar controles, hover ou animação. Aplicar margens e divisórias discretas compatíveis com Pine, Mint e Inter.
+
+**Fotografias aprovadas em 01/10/2026:** os originais fornecidos são foto-apresentacao-urias-loures.jpeg (1122 × 1402), foto-apresentacao-bruno-gonzaga.jpeg (640 × 640) e foto-apresentacao-milena-novaes.png (1122 × 1402). Preservar os originais na pasta externa. Usar os derivados WebP locais da pasta public/assets/img/equipe/: urias-loures-320.webp, urias-loures-640.webp, bruno-gonzaga-320.webp, bruno-gonzaga-640.webp, milena-dias-320.webp e milena-dias-640.webp. Identificar as fotos pelos nomes públicos nos derivados, inclusive Milena Dias.
+
+A preparação limita-se ao recorte, à conversão e à compressão, sem retoques ou geração. Usar qualidade WebP 85 e Lanczos; o crop é quadrado a partir do topo, sem cortar o rosto. Não ampliar a foto original de Bruno, que já mede 640 × 640 px. Exibir a foto em no máximo 320 px para preservar sua resolução em DPR2.
+
+No layout, usar três colunas a partir de 1100 px, duas colunas entre 700 e 1099 px e uma coluna abaixo de 700 px.
 
 ### 6.11 Blog
 - Fundo `--uno-off-white-2`. Cabeçalho com texto à direita: “Os primeiros artigos estão em produção.”
@@ -459,7 +467,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links foram conferid
 - Política de privacidade: responsável, contato de privacidade, onde roda o n8n, prazo de guarda e data; revisão jurídica. Não presumir que o e-mail comercial seja o contato de privacidade.
 - Configurar e homologar o Worker, o webhook do n8n e o SMTP HostGator, incluindo credenciais e remetente autorizado, sem registrar segredos na documentação. Resposta exigida do n8n após aceitação do SMTP: `{"ok":true,"encaminhamento":"smtp_aceito"}`.
 - Homologação real em três etapas: resposta de aceitação do backend, confirmação de encaminhamento aceito pelo SMTP e recebimento observado na caixa `contato@unolabs.com.br`.
-- Funções específicas de Urias e Bruno seguem indefinidas; não atribuir cargos. Milena está em formação em Publicidade e Propaganda na UVV; confirmar fotos se forem usadas.
+- Equipe: cargos, textos e fotografias definidos em 01/10/2026; antes de publicar, conferir que a aplicação segue a seção 6.10 e o Apêndice A.
 - Termos e prazos de garantia/projeto são definidos na proposta de cada escopo; não preencher números ou marcadores provisórios na home.
 - Turnstile (opcional, recomendado quando começar a chegar spam).
 - Perfil da Empresa no Google depende de endereço verificável (quando existir, acrescentar dados confirmados ao JSON-LD).
@@ -510,7 +518,7 @@ Pasta `docs/referencias-visuais/` (capturas da versão publicada, 1440 × 900 e 
 
 ## Apêndice A — Texto exato de cada seção
 
-Extraído do DOM atual de `public/index.html` em 30/09/2026. Formato: `tag` _(contexto)_: texto. As alternativas responsivas e os textos visíveis das ilustrações fora de templates aparecem separados; mensagens condicionais do formulário são mantidas. As demonstrações são conceituais e não representam resultados reais. O apêndice exclui o conteúdo das maquetes em `<template>`, do `<dialog>` fechado por padrão e de elementos com o atributo `hidden`.
+Extraído do DOM de `public/index.html` em 30/09/2026; seção da equipe atualizada em 01/10/2026. Formato: `tag` _(contexto)_: texto. As alternativas responsivas e os textos visíveis das ilustrações fora de templates aparecem separados; mensagens condicionais do formulário são mantidas. As demonstrações são conceituais e não representam resultados reais. O apêndice exclui o conteúdo das maquetes em `<template>`, do `<dialog>` fechado por padrão e de elementos com o atributo `hidden`.
 
 ### Acesso rápido
 - `a`: Pular para o conteúdo
@@ -691,13 +699,25 @@ Extraído do DOM atual de `public/index.html` em 30/09/2026. Formato: `tag` _(co
 
 ### Quem conduz o seu projeto.
 - `p`: Equipe
-- `p`: Urias Loures e Bruno Gonzaga são os criadores da UNO Labs. Milena Dias também integra a equipe.
+- `p`: Experiências em negócios, tecnologia e comunicação que orientam os sites, as campanhas e o conteúdo da UNO Labs.
+- `article`: Urias Loures
+- `img`: retrato de Urias Loures
 - `h3`: Urias Loures
-- `p`: Criador da UNO Labs
+- `p`: Cofundador da UNO Labs
+- `p`: Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.
+- `p`: Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.
+- `article`: Bruno Gonzaga
+- `img`: retrato de Bruno Gonzaga
 - `h3`: Bruno Gonzaga
-- `p`: Criador da UNO Labs
+- `p`: Cofundador da UNO Labs
+- `p`: Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.
+- `p`: Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.
+- `article`: Milena Dias
+- `img`: retrato de Milena Dias
 - `h3`: Milena Dias
-- `p`: Publicidade e Propaganda UVV, em formação
+- `p`: Comunicação e Conteúdo
+- `p`: Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.
+- `p`: Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.
 
 ### Conteúdo para decidir melhor. (`#blog`)
 - `p`: Blog

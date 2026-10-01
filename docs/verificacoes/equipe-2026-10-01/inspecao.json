@@ -1,0 +1,2460 @@
+{
+  "date": "2026-10-01",
+  "base": "04ff81c",
+  "previewDirectory": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public",
+  "url": "http://127.0.0.1:8011",
+  "checks": [
+    {
+      "name": "HTML fora da equipe preservado",
+      "ok": true
+    },
+    {
+      "name": "CSS fora da equipe preservado",
+      "ok": true
+    },
+    {
+      "name": "320x568: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "320x568: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "320x568: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "320x568: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "320x568: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "320x568: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "320x568: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "320x568: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "390x844: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "390x844: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "390x844: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "390x844: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "390x844: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "390x844: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "390x844: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "390x844: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "844x390: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "844x390: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "844x390: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "844x390: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "844x390: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "844x390: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "844x390: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "844x390: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "768x1024: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "768x1024: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "768x1024: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "768x1024: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "768x1024: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "768x1024: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "768x1024: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "768x1024: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1280x720: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "1280x720: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1280x720: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "1280x720: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "1280x720: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "1280x720: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "1280x720: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "1280x720: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1440x900: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "1440x900: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1440x900: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "1440x900: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "1440x900: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "1440x900: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "1440x900: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "1440x900: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "390x844-sem-js: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "390x844-sem-js: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "390x844-sem-js: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "390x844-sem-js: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "390x844-sem-js: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "390x844-sem-js: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "390x844-sem-js: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "390x844-sem-js: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "390x844-dpr2: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "390x844-dpr2: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "390x844-dpr2: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "390x844-dpr2: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "390x844-dpr2: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "390x844-dpr2: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "390x844-dpr2: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "390x844-dpr2: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1280x720: zoom nativo 200%",
+      "ok": true,
+      "data": {
+        "zoom": 2
+      }
+    },
+    {
+      "name": "1280x720-zoom200: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "1280x720-zoom200: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1280x720-zoom200: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "1280x720-zoom200: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "1280x720-zoom200: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "1280x720-zoom200: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "1280x720-zoom200: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "1280x720-zoom200: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1440x900: zoom nativo 200%",
+      "ok": true,
+      "data": {
+        "zoom": 2
+      }
+    },
+    {
+      "name": "1440x900-zoom200: nomes, cargos e biografias integrais",
+      "ok": true
+    },
+    {
+      "name": "1440x900-zoom200: sem overflow horizontal",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "1440x900-zoom200: texto visivel e sem corte",
+      "ok": true
+    },
+    {
+      "name": "1440x900-zoom200: fotos corretas e quadradas sem ampliacao",
+      "ok": true
+    },
+    {
+      "name": "1440x900-zoom200: biografias confortaveis e contraste AA",
+      "ok": true
+    },
+    {
+      "name": "1440x900-zoom200: colunas adequadas",
+      "ok": true
+    },
+    {
+      "name": "1440x900-zoom200: imagens lazy, async e sem efeitos",
+      "ok": true
+    },
+    {
+      "name": "1440x900-zoom200: sem erros JS",
+      "ok": true,
+      "data": []
+    },
+    {
+      "name": "HTTP dos retratos aprovado",
+      "ok": true
+    }
+  ],
+  "viewports": [
+    {
+      "label": "320x568",
+      "width": 320,
+      "height": 568,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 1,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 280,
+            "height": 280,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 280,
+            "height": 280,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 280,
+            "height": 280,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 72,
+      "teamHeight": 2926.296875
+    },
+    {
+      "label": "390x844",
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 1,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 72,
+      "teamHeight": 2768.28125
+    },
+    {
+      "label": "844x390",
+      "width": 844,
+      "height": 390,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 2,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 84.4,
+      "teamHeight": 1897.890625
+    },
+    {
+      "label": "768x1024",
+      "width": 768,
+      "height": 1024,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 2,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 76.8,
+      "teamHeight": 1907.3125
+    },
+    {
+      "label": "1280x720",
+      "width": 1280,
+      "height": 720,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 3,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 128,
+      "teamHeight": 1177.25
+    },
+    {
+      "label": "1440x900",
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 3,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 128,
+      "teamHeight": 1237.046875
+    },
+    {
+      "label": "390x844-sem-js",
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "globalOverflow": false,
+      "columns": 1,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 72,
+      "teamHeight": 2768.28125
+    },
+    {
+      "label": "390x844-dpr2",
+      "width": 390,
+      "height": 844,
+      "dpr": 2,
+      "globalOverflow": false,
+      "columns": 1,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-640.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-640.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-640.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 72,
+      "teamHeight": 2768.28125
+    },
+    {
+      "label": "1280x720-zoom200",
+      "width": 632,
+      "height": 312,
+      "dpr": 2,
+      "globalOverflow": false,
+      "columns": 1,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-640.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-640.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-640.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 320,
+            "height": 320,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 72,
+      "teamHeight": 2372.5546875
+    },
+    {
+      "label": "1440x900-zoom200",
+      "width": 712,
+      "height": 402,
+      "dpr": 2,
+      "globalOverflow": false,
+      "columns": 2,
+      "bg": "rgb(243, 247, 243)",
+      "people": [
+        {
+          "name": "Urias Loures",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+            "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial."
+          ],
+          "texts": [
+            {
+              "text": "Urias Loures",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-640.webp",
+            "alt": "Retrato de Urias Loures",
+            "width": 318,
+            "height": 318,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Bruno Gonzaga",
+          "cargo": "Cofundador da UNO Labs",
+          "bio": [
+            "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+            "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto."
+          ],
+          "texts": [
+            {
+              "text": "Bruno Gonzaga",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Cofundador da UNO Labs",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-640.webp",
+            "alt": "Retrato de Bruno Gonzaga",
+            "width": 318,
+            "height": 318,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        },
+        {
+          "name": "Milena Dias",
+          "cargo": "Comunicação e Conteúdo",
+          "bio": [
+            "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+            "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar."
+          ],
+          "texts": [
+            {
+              "text": "Milena Dias",
+              "font": 26,
+              "line": 31.2,
+              "color": "rgb(14, 43, 36)",
+              "visible": true,
+              "fits": true,
+              "contrast": 13.97
+            },
+            {
+              "text": "Comunicação e Conteúdo",
+              "font": 15,
+              "line": 21.75,
+              "color": "rgb(18, 54, 45)",
+              "visible": true,
+              "fits": true,
+              "contrast": 12.2
+            },
+            {
+              "text": "Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            },
+            {
+              "text": "Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.",
+              "font": 17,
+              "line": 28.05,
+              "color": "rgb(53, 80, 72)",
+              "visible": true,
+              "fits": true,
+              "contrast": 8.11
+            }
+          ],
+          "contained": true,
+          "photo": {
+            "src": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-640.webp",
+            "alt": "Retrato de Milena Dias",
+            "width": 318,
+            "height": 318,
+            "complete": true,
+            "natural": 320,
+            "loading": "lazy",
+            "decoding": "async",
+            "filter": "none",
+            "transform": "none"
+          }
+        }
+      ],
+      "over": [],
+      "paddingTop": 72,
+      "teamHeight": 2004.84375
+    }
+  ],
+  "errors": [],
+  "httpImages": [
+    {
+      "label": "320x568",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "320x568",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "320x568",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "844x390",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "844x390",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "844x390",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "768x1024",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "768x1024",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "768x1024",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "1280x720",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "1280x720",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "1280x720",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "1440x900",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "1440x900",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "1440x900",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844-sem-js",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844-sem-js",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844-sem-js",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-320.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844-dpr2",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-640.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844-dpr2",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-640.webp",
+      "status": 200
+    },
+    {
+      "label": "390x844-dpr2",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-640.webp",
+      "status": 200
+    },
+    {
+      "label": "1280x720-zoom200",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-640.webp",
+      "status": 200
+    },
+    {
+      "label": "1280x720-zoom200",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-640.webp",
+      "status": 200
+    },
+    {
+      "label": "1280x720-zoom200",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-640.webp",
+      "status": 200
+    },
+    {
+      "label": "1440x900-zoom200",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/bruno-gonzaga-640.webp",
+      "status": 200
+    },
+    {
+      "label": "1440x900-zoom200",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/milena-dias-640.webp",
+      "status": 200
+    },
+    {
+      "label": "1440x900-zoom200",
+      "url": "http://127.0.0.1:8011/assets/img/equipe/urias-loures-640.webp",
+      "status": 200
+    }
+  ],
+  "detector": {
+    "previousHistoricalCount": 78,
+    "count": 64,
+    "rules": [
+      "low-contrast",
+      "dark-glow",
+      "layout-transition",
+      "cramped-padding",
+      "undersized-ui-text",
+      "tiny-text",
+      "wide-tracking",
+      "all-caps-body",
+      "clipped-overflow-container",
+      "gpt-thin-border-wide-shadow",
+      "overused-font",
+      "kicker-above-heading",
+      "nested-cards",
+      "codex-grid-background"
+    ],
+    "newSignals": []
+  }
+}

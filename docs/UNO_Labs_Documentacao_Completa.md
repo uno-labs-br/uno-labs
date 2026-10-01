@@ -1,6 +1,6 @@
 # UNO Labs — Documentação completa de marca, posicionamento e site
 
-**Versão 1.5 · 30 de setembro de 2026** — incorpora os contatos comerciais confirmados e atualiza o fluxo de homologação do formulário. **A Parte 0 prevalece sobre o restante.**
+**Versão 1.6 · 01 de outubro de 2026. Incorpora a aprovação da equipe e das fotografias. A Parte 0 prevalece sobre o restante.**
 **Destinatários:** direção da UNO Labs, Claude, Codex, profissionais de marca, design e desenvolvimento.
 
 > **Sites sob medida para negócios que precisam ser percebidos à altura do que entregam.**
@@ -15,7 +15,7 @@ A documentação orienta a marca e o site. A implementação vigente está em `p
 
 ## Conteúdo
 
-0. Decisões vigentes (v1.4) — prevalecem sobre as demais partes.
+0. Decisões vigentes (v1.6), que prevalecem sobre as demais partes.
 1. Marca, posicionamento e geração de valor.
 2. Especificação estratégica, criativa e funcional do site.
 3. Copy proposta para as páginas e interações.
@@ -23,14 +23,14 @@ A documentação orienta a marca e o site. A implementação vigente está em `p
 5. Fontes, conflitos, precedência e decisões.
 6. Prompts para alinhamento, criação, implementação e revisão.
 
-Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a referência vigente de marca, posicionamento e requisitos. O documento de construção fica ao lado; as regras obrigatórias de colaboração estão no `AGENTS.md` da raiz do checkout e prevalecem nas operações de Git e publicação. O acervo original de marca continua na pasta externa `01 - IDENTIDADE VISUAL`. Os arquivos de `02 - DOCUMENTACAO` são apenas avisos de transferência. Trechos superados pelas decisões de 29/09/2026 estão marcados com **[v1.1]**.
+Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a referência vigente de marca, posicionamento e requisitos. O documento de construção fica ao lado; as regras obrigatórias de colaboração estão no `AGENTS.md` da raiz do checkout e prevalecem nas operações de Git e publicação. O acervo original de marca continua na pasta externa `01 - IDENTIDADE VISUAL`. Os arquivos de `02 - DOCUMENTACAO` são apenas avisos de transferência. Trechos superados por decisões anteriores estão marcados com **[v1.1]**; atualizações posteriores constam na Parte 0.
 
 ---
 
 
-# PARTE 0 — Decisões vigentes (v1.5 · 30/09/2026)
+# PARTE 0 — Decisões vigentes (v1.6 · 01/10/2026)
 
-**Esta parte prevalece sobre as Partes I a VI.** Ela registra as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta oficial e os contatos confirmados em 30/09/2026. Nas outras partes, os trechos superados estão marcados com **[v1.1]**. Se houver conflito com qualquer texto antigo, vale o que está aqui.
+**Esta parte prevalece sobre as Partes I a VI.** Ela reúne as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta oficial e os contatos confirmados em 30/09/2026, além da aprovação da equipe e das fotografias em 01/10/2026. Nas outras partes, os trechos superados estão marcados com **[v1.1]**. Em caso de conflito, valem as decisões mais recentes registradas aqui.
 
 ## 0.1 A empresa
 
@@ -66,7 +66,34 @@ Hospedagem, domínio e e-mail corporativo como serviços oferecidos: **confirmar
 
 ## 0.5 Equipe
 
-Urias Loures e Bruno Gonzaga são criadores; suas funções específicas no time não estão definidas. Milena Dias está em formação em Publicidade e Propaganda na UVV. Não atribuir cargos ou qualificações não informados nem chamar alguém de “especialista” sem formação ou experiência correspondente. Fotos: a confirmar.
+**Apoio da seção:** Experiências em negócios, tecnologia e comunicação que orientam os sites, as campanhas e o conteúdo da UNO Labs.
+
+**Urias Loures**
+Cargo: Cofundador da UNO Labs
+
+Empresário, Urias combina experiência prática em gestão de negócios com mais de seis anos de atuação em Meta Ads e uma trajetória que inclui mais de 1 milhão investidos em marketing.
+
+Na UNO Labs, conecta sua vivência em vendas, atendimento e aquisição de clientes à criação de sites e campanhas, com foco em comunicar o valor da empresa, atrair públicos relevantes e facilitar o contato comercial.
+
+**Bruno Gonzaga**
+Cargo: Cofundador da UNO Labs
+
+Com duas décadas de experiência em tecnologia e atuação em projetos para Bradesco, HSBC, Dow Jones e uma grande fintech brasileira, Bruno reúne competências em arquitetura de software, sistemas em nuvem, liderança técnica e automação com IA.
+
+Na UNO Labs, aplica essa experiência à construção de sites rápidos, confiáveis e bem estruturados, com atenção à qualidade técnica, à experiência do visitante e à evolução de cada projeto.
+
+**Milena Dias**
+Cargo: Comunicação e Conteúdo
+
+Formanda em Publicidade e Propaganda, Milena combina experiência de marketing e atendimento ao cliente com conhecimentos em UGC e social media.
+
+Na UNO Labs, contribui para uma comunicação clara e próxima do público, ajudando a apresentar o valor de cada empresa e responder às dúvidas de quem está decidindo contratar.
+
+**Fotografias e apresentação aprovadas em 01/10/2026:** os arquivos originais fornecidos são foto-apresentacao-urias-loures.jpeg (1122 × 1402), foto-apresentacao-bruno-gonzaga.jpeg (640 × 640) e foto-apresentacao-milena-novaes.png (1122 × 1402). Preservar os originais na pasta externa. Os derivados WebP locais ficam na pasta public/assets/img/equipe/ e são urias-loures-320.webp, urias-loures-640.webp, bruno-gonzaga-320.webp, bruno-gonzaga-640.webp, milena-dias-320.webp e milena-dias-640.webp. Os nomes públicos nos derivados são Urias Loures, Bruno Gonzaga e Milena Dias.
+
+A preparação limita-se ao recorte, à conversão e à compressão, sem retoques ou geração. Usar WebP qualidade 85 e Lanczos, com crop quadrado a partir do topo sem cortar o rosto. Não ampliar o original de Bruno, que já tem 640 × 640 px. Exibir as fotos em no máximo 320 px para preservar a resolução de Bruno em DPR2.
+
+A ordem de cada article é retrato, h3 com o nome, cargo e os dois parágrafos aprovados. A grade usa uma coluna abaixo de 700 px, duas entre 700 e 1099 px e três a partir de 1100 px. Delimitar o CSS a .equipe. A foto é quadrada, tem largura 100% e máximo de 320 px; o nome usa 26 px e a biografia 17 px com line-height 1.65. Usar margens e divisórias discretas, compatíveis com Pine, Mint e Inter. Não usar alturas fixas, controles, hover ou animação.
 
 ## 0.6 Mensagem
 
@@ -132,7 +159,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e Wh
 | Política de privacidade | Rascunho em `04 - SITE/public/politica-de-privacidade/`; completar o fluxo real, responsável, contato de privacidade, local do n8n, prazo de guarda e data; fazer revisão jurídica | Sim |
 | Worker, n8n e SMTP HostGator | Validar configuração real e o contrato de resposta `{"ok":true,"encaminhamento":"smtp_aceito"}`; configuração, credenciais e remetente autorizado não estão comprovados | Sim, para o formulário |
 | Homologação do e-mail | Registrar em separado a aceitação do backend, a aceitação/encaminhamento pelo SMTP e o recebimento observado na caixa de destino | Sim |
-| Funções e fotos da equipe | Funções de Urias e Bruno indefinidas; não criar cargos. Milena está em formação em Publicidade e Propaganda na UVV. Fotos a confirmar | Não (a seção pode ser enxuta) |
+| Equipe | Cargos, textos integrais e fotografias aprovados em 01/10/2026 na Parte 0, §0.5; conferir a aplicação no site antes da publicação | Não |
 | Termos comerciais de prazo e garantia | Informar as condições na proposta de cada escopo; não preencher números ou marcadores provisórios na home | Não |
 | Verba de mídia paga direto às plataformas | Confirmar | Não |
 | Hospedagem, domínio e e-mail como serviços | Confirmar | Não |
@@ -581,7 +608,7 @@ As fontes de marca consultadas originalmente não confirmavam contatos oficiais,
 
 Campos ainda não confirmados devem permanecer ausentes ou marcados como pendentes no ambiente de desenvolvimento. Antes da publicação, substituir pelo dado verificado ou remover a funcionalidade dependente. Os contatos posteriores constam na Parte 0, §0.10 e estão integrados ao HTML e ao JSON-LD; a caixa e o envio continuam sem homologação. Não publicar links falsos, rodapé inventado, política genérica que descreve outra operação ou mensagem de envio sem integração real.
 
-**[v1.1; atualização v1.5 na Parte 0]** Já confirmados: domínio `unolabs.com.br`, os contatos comerciais e seus formatos, nomes da equipe, atendimento presencial na Grande Vitória/ES e em Curitiba/PR e preço público de entrada. Os contatos foram integrados ao HTML e ao JSON-LD e os links conferidos localmente; permanecem pendentes as configurações e a homologação real descritas na Parte 0, §0.11.
+**[v1.1; atualizações v1.5 e v1.6 na Parte 0]** Já confirmados: domínio `unolabs.com.br`, os contatos comerciais e seus formatos, nomes e conteúdo aprovados da equipe, atendimento presencial na Grande Vitória/ES e em Curitiba/PR e preço público de entrada. Os contatos foram integrados ao HTML e ao JSON-LD e os links conferidos localmente; permanecem pendentes as configurações e a homologação real descritas na Parte 0, §0.11.
 
 A falta desses dados não impede definir estratégia, desenhar o site e construir um protótipo. Impede apenas tratar esse protótipo como uma presença comercial plenamente validada.
 
@@ -1402,6 +1429,7 @@ Não confundir leitura dos manuais com homologação dos vetores, propriedade da
 | U1 | Pedido atual do usuário | Conversa de 29/09/2026 | Documentação completa para Claude/Codex; foco high ticket; site extremamente elegante, profissional e surpreendente |
 | U2 | Conversa anterior sobre identidade | Contexto de 28/09/2026 | Preferência pela logo horizontal, cuidado com consistência dos derivados e distinção entre fundo claro aplicado e branco do cenário de apresentação |
 | U3 | Respostas do usuário na sessão Cowork | 29/09/2026 | Todas as decisões da Parte 0 |
+| U4 | Conteúdo aprovado pelo usuário para a equipe | 01/10/2026 | Cargos, textos integrais, fotografias e especificação de apresentação registrados na Parte 0, §0.5 |
 | S1 | `UNO_Labs_Manual_Completo.md` | Versão 1.0, 29/09/2026; versão de arquivo recuperada: 1 | Essência, mensagens, paleta vigente, logo, limites de uso e fatos não confirmados |
 | S2 | `MANUAL_COMPLETO.md` | Edição técnica 1.0, 29/09/2026; versão de arquivo recuperada: 1 | Confirmação da identidade central, governança e uma formalização técnica distinta dos ativos |
 | S3 | `index(1).html` | Referência verde; versão de arquivo recuperada: 1 | Oferta, jornada, processo, estudos conceituais e limitações dos contatos/política de referência |
@@ -1477,7 +1505,7 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 | D14 | Serviços ativos: sites, SEO, Google Ads, Meta Ads, manutenção mensal | Decisão do usuário (v1.1) | Podem ser publicados como serviços |
 | D15 | Preço público “a partir de R$ 1.490 em até 10x sem juros” | Decisão do usuário (v1.1) | Único valor publicável |
 | D16 | Domínio unolabs.com.br | Confirmado (v1.1) | Canonical, e-mail e dados estruturados |
-| D17 | Equipe: Urias Loures e Bruno Gonzaga são criadores; Milena Dias está em formação em Publicidade e Propaganda na UVV | Atualizado em 30/09/2026 | Funções específicas de Urias e Bruno não estão definidas; não atribuir cargos |
+| D17 | Equipe: Urias Loures e Bruno Gonzaga são cofundadores; Milena Dias atua em Comunicação e Conteúdo | Decisão do usuário, atualizada em 01/10/2026; substitui o registro de 30/09/2026 | Ver Parte 0, §0.5, para os cargos e os textos integrais aprovados |
 | D18 | Presencial na Grande Vitória/ES e em Curitiba/PR; remoto no Brasil | Decisão do usuário (v1.1) | SEO local nas 5 cidades |
 | D19 | Blog desde o lançamento, 2 a 4 artigos por mês, IA com revisão humana | Decisão do usuário (v1.1) | Substitui a restrição anterior ao blog |
 | D20 | Inter mantida; escopos A/B/C em avaliação | Decisão do usuário (v1.1) | Substitui a recomendação de trocar a fonte |
@@ -1490,6 +1518,7 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 | D27 | Jornada da home presa na tela durante a rolagem (sticky), com rolagem nativa | Decisão do usuário (v1.2) | Substitui as abas clicáveis; manter alternativa estática para movimento reduzido |
 | D28 | Lançar a v1 como HTML estático (sem build) em Cloudflare Workers; migrar para Astro quando o blog tiver artigos | Proposta do Claude para lançar rápido (v1.3) | Ver Parte 0, §0.8 e `04 - SITE/LEIA-ME.md` |
 | D29 | `04 - SITE` é a única pasta oficial para análises, Impeccable, localhost, alterações e Git; documentação em `docs/`; `03 - ANALISE LP` é histórico | Padronização solicitada pelo usuário (v1.4) | Ver Parte 0, §0.13 e `AGENTS.md` |
+| D30 | Retratos reais convertidos em derivados WebP locais e apresentados na ordem retrato, nome, cargo e dois parágrafos | Aprovação do usuário em 01/10/2026 | Ver Parte 0, §0.5; preservar originais, sem retoques ou geração, com exibição máxima de 320 px |
 
 ## 6. Registro de informações a confirmar
 
