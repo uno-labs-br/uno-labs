@@ -124,4 +124,3 @@ Práticas a manter: conteúdo integral, ordem semântica, uso de fotos reais, pr
 ## Testes não realizados e limites
 
 Sem dispositivo físico, Firefox/Safari, leitor de tela real, benchmark de bateria/latência em campo ou homologação de e-mail. Browser principal das seis larguras: Edge/Chromium headless; zoom nativo: Chromium com extensão local de teste. Nenhuma certificação completa WCAG ou medição de Core Web Vitals em produção. Os testes do contato são simulados; a prévia estática não executa o Worker. Isso não deixa pendências confirmadas na seção Equipe, mas limita as conclusões sobre o site completo.
-
