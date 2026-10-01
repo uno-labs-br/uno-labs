@@ -1,0 +1,11 @@
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.exemplo
+.env
+.env.*
+!.env.exemplo
+hospedagem-tradicional/uno-contato-config.php
+.DS_Store
+Thumbs.db

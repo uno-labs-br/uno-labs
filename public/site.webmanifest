@@ -1,0 +1,15 @@
+{
+  "name": "UNO Labs",
+  "short_name": "UNO Labs",
+  "description": "Criação de sites, SEO local, Google Ads e Meta Ads.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F3F7F3",
+  "theme_color": "#0E2B24",
+  "icons": [
+    { "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icons/maskable-icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,1296 @@
+/* ==========================================================================
+   UNO Labs — conceitos.css
+   Estilos estritamente delimitados aos estudos conceituais (Módulo, Atria, Casa Noma)
+   e às composições finais aprovadas.
+   ========================================================================== */
+
+/* ---------- Estrutura mestre das maquetes conceituais ---------- */
+.c-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.estudo--desk .c-canvas {
+  width: 1280px;
+  height: 800px;
+}
+
+.estudo--mob .c-canvas {
+  width: 390px;
+  height: 844px;
+}
+
+/* ---------- Botão acessível "Rever animação" nos capítulos ---------- */
+.capitulo__acoes {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+html:not(.js) .capitulo__acoes {
+  display: none !important;
+}
+
+.btn-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-replay:hover {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.btn-replay:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.capitulo--atria .btn-replay:focus-visible {
+  outline: 2px solid #F4EDE7;
+  outline-offset: 3px;
+}
+
+.btn-replay svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.live-replay {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   MÓDULO ENGENHARIA INDUSTRIAL
+   Paleta: #0E1114 / #15191C / #9AA3AB / #ECEAE4 / #F2552C
+   Fontes: Archivo + IBM Plex Mono
+   ========================================================================== */
+.c-canvas--modulo {
+  background-color: #0E1114;
+  background-image:
+    linear-gradient(rgba(236, 234, 228, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236, 234, 228, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #ECEAE4;
+  font-family: 'Archivo', 'Arial Narrow', sans-serif;
+}
+
+.mod-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.mod-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Topos e barras Módulo Desktop */
+.mod-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 72px;
+  box-sizing: border-box;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(236, 234, 228, 0.1);
+  background: rgba(14, 17, 20, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.mod-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ECEAE4;
+  text-decoration: none;
+}
+
+.mod-marca__logo {
+  width: 24px;
+  height: 24px;
+}
+
+.mod-marca__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mod-marca__nome {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-stretch: 125%;
+  line-height: 1;
+}
+
+.mod-marca__sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.34em;
+  color: #9AA3AB;
+  line-height: 1;
+}
+
+.mod-nav {
+  display: flex;
+  gap: 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #9AA3AB;
+}
+
+.mod-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 20px;
+  background: #F2552C;
+  color: #0E1114;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mod-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 20px;
+  border: 1px solid rgba(236, 234, 228, 0.3);
+  color: #ECEAE4;
+  font-weight: 600;
+  font-size: 14px;
+  background: transparent;
+  text-decoration: none;
+}
+
+/* Módulo Desktop Variação 1: Projeto */
+.mod-v1-col-esq {
+  position: absolute;
+  left: 64px;
+  top: 116px;
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-tag-setor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: #9AA3AB;
+}
+
+.mod-ponto-laranja {
+  width: 7px;
+  height: 7px;
+  background: #F2552C;
+  display: inline-block;
+}
+
+.mod-v1-titulo {
+  margin: 18px 0 0;
+  font-size: 84px;
+  line-height: 0.92;
+  font-weight: 800;
+  font-stretch: 62%;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.mod-v1-destaque {
+  color: #F2552C;
+}
+
+.mod-v1-apoio {
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #B7BEC4;
+  max-width: 460px;
+}
+
+.mod-v1-botoes {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+}
+
+.mod-v1-foto-frame {
+  position: absolute;
+  left: 640px;
+  top: 104px;
+  width: 576px;
+  height: 520px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  background: #15191C;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.mod-v1-cotas-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mod-v1-badge-coord {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  padding: 6px 12px;
+  background: rgba(14, 17, 20, 0.92);
+  border: 1px solid rgba(242, 85, 44, 0.7);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #ECEAE4;
+  display: flex;
+  gap: 10px;
+}
+
+.mod-v1-badge-material {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  padding: 6px 12px;
+  background: rgba(14, 17, 20, 0.92);
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #9AA3AB;
+}
+
+.mod-v1-servicos {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  top: 692px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(236, 234, 228, 0.16);
+  padding-top: 16px;
+}
+
+.mod-v1-servico-item {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding-right: 16px;
+}
+
+.mod-v1-servico-item + .mod-v1-servico-item {
+  border-left: 1px solid rgba(236, 234, 228, 0.12);
+  padding-left: 16px;
+}
+
+.mod-v1-servico-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #F2552C;
+}
+
+.mod-v1-servico-nome {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Módulo Mobile (390x844) */
+.mod-mob-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 64px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(236, 234, 228, 0.1);
+  background: rgba(14, 17, 20, 0.95);
+  z-index: 10;
+}
+
+.mod-mob-cta {
+  height: 36px;
+  padding: 0 14px;
+  background: #F2552C;
+  color: #0E1114;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  text-decoration: none;
+}
+
+.mod-mob-v1-corpo {
+  position: absolute;
+  left: 20px;
+  top: 76px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod-mob-v1-titulo {
+  margin: 12px 0 0;
+  font-size: 52px;
+  line-height: 0.92;
+  font-weight: 800;
+  font-stretch: 62%;
+  text-transform: uppercase;
+}
+
+.mod-mob-v1-foto {
+  margin-top: 16px;
+  position: relative;
+  width: 350px;
+  height: 250px;
+  border: 1px solid rgba(236, 234, 228, 0.2);
+  background: #15191C;
+  overflow: hidden;
+}
+
+.mod-mob-v1-cotas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mod-mob-v1-btn {
+  margin-top: 18px;
+  height: 48px;
+  background: #F2552C;
+  color: #0E1114;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---------- Módulo — Movimento: Inspeção Estrutural ----------
+   Traçado técnico de cotas, coordenadas e fechamento em cascata de serviços em 4,00 s reais.
+   A imagem e o título/CTA permanecem sempre legíveis e disponíveis. */
+.anim-play .mod-cota-linha-h {
+  animation: modTracoH 1.1s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .mod-cota-tick-1 {
+  animation: modTickIn 0.3s ease 0.15s both;
+}
+
+.anim-play .mod-cota-txt-h {
+  animation: modFadeIn 0.55s ease 0.6s both;
+}
+
+.anim-play .mod-cota-tick-2 {
+  animation: modTickIn 0.3s ease 1.25s both;
+}
+
+.anim-play .mod-cota-linha-v {
+  animation: modTracoV 1.05s cubic-bezier(0.2, 0.8, 0.25, 1) 1.35s both;
+}
+
+.anim-play .mod-cota-txt-v {
+  animation: modFadeIn 0.55s ease 1.8s both;
+}
+
+.anim-play .mod-cota-tick-3 {
+  animation: modTickIn 0.3s ease 2.4s both;
+}
+
+.anim-play .mod-v1-badge-coord {
+  animation: modBadgeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
+}
+
+.anim-play .mod-v1-badge-material {
+  animation: modBadgeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.95s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(1) {
+  animation: modItemIn 0.45s ease 3.15s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(2) {
+  animation: modItemIn 0.45s ease 3.3s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(3) {
+  animation: modItemIn 0.45s ease 3.45s both;
+}
+
+.anim-play .mod-v1-servico-item:nth-child(4) {
+  animation: modItemIn 0.45s ease 3.55s both;
+}
+
+/* Mobile: traçado de cota e marcas em 4,00 s reais */
+.anim-play .mod-mob-cota-linha {
+  animation: modTracoH 3.85s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .mod-mob-cota-tick-1 {
+  animation: modTickIn 0.35s ease 0.15s both;
+}
+
+.anim-play .mod-mob-cota-txt {
+  animation: modFadeIn 0.8s ease 1.2s both;
+}
+
+.anim-play .mod-mob-cota-tick-2 {
+  animation: modTickIn 0.4s ease 3.6s both;
+}
+
+@keyframes modTracoH {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes modTracoV {
+  0% { clip-path: inset(100% 0 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes modTickIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes modFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes modBadgeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modItemIn {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   ATRIA CLINIC
+   Paleta: #F4EDE7 / #2E211C / #7A4A3A / #E3B9A4 / #FCF8F4 / #6B4E42
+   Fontes: Cormorant Garamond + Jost
+   ========================================================================== */
+.c-canvas--atria {
+  background-color: #F4EDE7;
+  color: #2E211C;
+  font-family: 'Jost', 'Helvetica Neue', sans-serif;
+}
+
+.atr-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.atr-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.atr-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 84px;
+  box-sizing: border-box;
+  padding: 0 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(46, 33, 28, 0.08);
+  background: rgba(244, 237, 231, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.atr-marca {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  color: #2E211C;
+  text-decoration: none;
+}
+
+.atr-marca__nome {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.atr-marca__sub {
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #6B4E42;
+  line-height: 1;
+}
+
+.atr-nav {
+  display: flex;
+  gap: 36px;
+  font-size: 14px;
+  color: #4A3A33;
+}
+
+.atr-btn-nav {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 22px;
+  border: 1px solid #2E211C;
+  border-radius: 999px;
+  color: #2E211C;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.atr-btn-terracota {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 26px;
+  background: #7A4A3A;
+  color: #FBF6F1;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.atr-responsavel {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #6B4E42;
+}
+
+.atr-tag-loc {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6B4E42;
+}
+
+.atr-it-terracota {
+  font-style: italic;
+  color: #7A4A3A;
+}
+
+.atr-v1-apoio {
+  margin: 14px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4A3A33;
+  max-width: 480px;
+}
+
+.atr-agenda-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.atr-agenda-titulo {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.atr-agenda-dias {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  text-align: center;
+}
+
+.atr-dia-item {
+  padding: 8px 0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.atr-dia-item--ativo {
+  background: #7A4A3A;
+  color: #FBF6F1;
+}
+
+.atr-dia-sem {
+  font-size: 10px;
+  color: inherit;
+}
+
+.atr-dia-num {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Atria Desktop Variação 2: Detalhe */
+.atr-v2-faixa-foto {
+  position: absolute;
+  left: 72px;
+  top: 104px;
+  width: 1136px;
+  height: 270px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(122, 74, 58, 0.15);
+  box-shadow: 0 20px 60px rgba(90, 50, 40, 0.12);
+}
+
+.atr-v2-tag-faixa {
+  position: absolute;
+  left: 24px;
+  top: 20px;
+  padding: 6px 14px;
+  background: rgba(244, 237, 231, 0.92);
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7A4A3A;
+  font-weight: 600;
+}
+
+.atr-v2-corpo {
+  position: absolute;
+  left: 72px;
+  top: 400px;
+  width: 1136px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.atr-v2-esq {
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-v2-titulo {
+  margin: 12px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 60px;
+  line-height: 1.02;
+  font-weight: 500;
+}
+
+.atr-v2-dir-agenda {
+  width: 480px;
+  padding: 24px;
+  background: #FCF8F4;
+  border: 1px solid rgba(122, 74, 58, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(90, 50, 40, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.atr-grade-horarios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  font-size: 14px;
+}
+
+.atr-hora-btn {
+  height: 38px;
+  border: 1px solid rgba(46, 33, 28, 0.16);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atr-hora-btn--ativo {
+  border: 1.5px solid #7A4A3A;
+  color: #7A4A3A;
+  font-weight: 600;
+  background: rgba(122, 74, 58, 0.06);
+}
+
+/* Atria Mobile (390x844) */
+.atr-mob-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 68px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(46, 33, 28, 0.08);
+  background: rgba(244, 237, 231, 0.95);
+  z-index: 10;
+}
+
+.atr-mob-hamb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(46, 33, 28, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atr-mob-v2-corpo {
+  position: absolute;
+  left: 0;
+  top: 68px;
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-mob-v2-faixa {
+  position: relative;
+  width: 390px;
+  height: 210px;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.atr-mob-v2-faixa img {
+  object-fit: cover;
+  object-position: 72% 35%;
+}
+
+.atr-mob-v2-conteudo {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.atr-mob-v2-titulo {
+  margin: 10px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 40px;
+  line-height: 0.98;
+  font-weight: 500;
+}
+
+.atr-mob-v2-agenda-linha {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #FCF8F4;
+  border: 1px solid rgba(122, 74, 58, 0.14);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ---------- Atria — Movimento: Abertura Editorial Fotográfica ----------
+   Máscara horizontal suave, respiração da fotografia, assentamento de agenda e
+   confirmação de horário em 4,00 s reais.
+   Título, dados e responsável permanecem visíveis desde o primeiro momento. */
+.anim-play .atr-v2-faixa-foto {
+  animation: atrMascaraFaixa 1.95s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .atr-v2-faixa-foto .atr-img {
+  animation: atrZoomFoto 2.75s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .atr-v2-tag-faixa {
+  animation: atrFadeIn 0.7s ease 1.7s both;
+}
+
+.anim-play .atr-v2-dir-agenda {
+  animation: atrAssentaAgenda 1.15s cubic-bezier(0.16, 1, 0.3, 1) 1.95s both;
+}
+
+.anim-play .atr-dia-item--ativo {
+  animation: atrDestaqueDia 0.65s ease 2.75s both;
+}
+
+.anim-play .atr-hora-btn--ativo {
+  animation: atrDestaqueHora 0.75s ease 3.25s both;
+}
+
+/* Mobile: abertura da faixa de borda a borda, agenda em linha e confirmação em 4,00 s reais */
+.anim-play .atr-mob-v2-faixa {
+  animation: atrMascaraFaixa 1.95s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .atr-mob-v2-faixa img {
+  animation: atrZoomFoto 2.75s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .atr-mob-v2-agenda-linha {
+  animation: atrAssentaAgenda 1.15s cubic-bezier(0.16, 1, 0.3, 1) 1.95s both;
+}
+
+.anim-play .atr-mob-v2-agenda-linha .atr-btn-terracota {
+  animation: atrDestaqueHora 0.75s ease 3.25s both;
+}
+
+@keyframes atrMascaraFaixa {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes atrZoomFoto {
+  0% { transform: scale(1.045) translateX(6px); }
+  100% { transform: scale(1) translateX(0); }
+}
+
+@keyframes atrFadeIn {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atrAssentaAgenda {
+  0% { opacity: 0.15; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atrDestaqueDia {
+  0% { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes atrDestaqueHora {
+  0% { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   CASA NOMA
+   Paleta: #110E0B / #F0E6D6 / #E0A84E / #6F7D3C / #C4492F / #CDBDA5
+   Fontes: Bodoni Moda + Manrope
+   ========================================================================== */
+.c-canvas--casanoma {
+  background-color: #110E0B;
+  color: #F0E6D6;
+  font-family: 'Manrope', 'Helvetica Neue', sans-serif;
+}
+
+.cn-bodoni {
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+}
+
+.cn-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cn-topbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 88px;
+  box-sizing: border-box;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(240, 230, 214, 0.08);
+  background: rgba(17, 14, 11, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.cn-marca {
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 500;
+  color: #F0E6D6;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.cn-nav {
+  display: flex;
+  gap: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #CDBDA5;
+}
+
+.cn-btn-nav {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 22px;
+  border: 1px solid rgba(240, 230, 214, 0.35);
+  border-radius: 999px;
+  color: #F0E6D6;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cn-btn-ambar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 28px;
+  background: #E0A84E;
+  color: #110E0B;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.cn-tag-loc {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #B9A78F;
+}
+
+.cn-it-ambar {
+  font-style: italic;
+  color: #E0A84E;
+}
+
+.cn-v1-apoio {
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #CDBDA5;
+  max-width: 420px;
+}
+
+/* Casa Noma Desktop Variação 2: Imersivo */
+.cn-v2-bg-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.cn-v2-overlay-grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(17, 14, 11, 0.96) 0%,
+    rgba(17, 14, 11, 0.88) 38%,
+    rgba(17, 14, 11, 0.45) 68%,
+    rgba(17, 14, 11, 0.2) 100%
+  );
+  z-index: 2;
+}
+
+.cn-v2-conteudo-esq {
+  position: absolute;
+  left: 72px;
+  top: 140px;
+  width: 580px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.cn-v2-titulo {
+  margin: 18px 0 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-size: 88px;
+  line-height: 0.94;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.cn-v2-pratos-linha {
+  margin-top: 32px;
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #CDBDA5;
+  border-top: 1px solid rgba(240, 230, 214, 0.14);
+  padding-top: 16px;
+}
+
+.cn-v2-barra-base {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 36px;
+  height: 90px;
+  box-sizing: border-box;
+  padding: 0 32px;
+  background: rgba(26, 20, 16, 0.94);
+  border: 1px solid rgba(224, 168, 78, 0.28);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.cn-v2-barra-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cn-v2-barra-rotulo {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9C8B73;
+}
+
+.cn-v2-barra-val {
+  font-size: 16px;
+  font-weight: 600;
+  color: #F0E6D6;
+}
+
+/* Casa Noma Mobile (390x844) */
+.cn-mob-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 68px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(240, 230, 214, 0.1);
+  background: rgba(17, 14, 11, 0.95);
+  z-index: 10;
+}
+
+.cn-mob-hamb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 230, 214, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cn-mob-v1-titulo {
+  margin: 16px 0 0;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 46px;
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.cn-mob-v2-corpo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 844px;
+}
+
+.cn-mob-v2-foto-topo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 420px;
+}
+
+.cn-mob-v2-grad {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 420px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(17, 14, 11, 0.05) 30%,
+    rgba(17, 14, 11, 0.65) 65%,
+    rgba(17, 14, 11, 0.94) 88%,
+    #110E0B 100%
+  );
+}
+
+.cn-mob-v2-textos {
+  position: absolute;
+  left: 20px;
+  top: 360px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Casa Noma — Movimento: Abertura Cinematográfica ----------
+   Acomodação de escala da fotografia (~1,045 para 1), passagem suave de luz âmbar
+   restrita à foto (sem halo no texto) e assentamento da faixa de reserva em 4,00 s reais.
+   Título permanece 100% estático e legível. */
+.cn-v2-bg-canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 38%, rgba(224, 168, 78, 0.28) 0%, rgba(224, 168, 78, 0.08) 45%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+
+.anim-play .cn-v2-bg-canvas .cn-img {
+  animation: cnAcomodaFoto 3.85s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .cn-v2-bg-canvas::after {
+  animation: cnLuzAmbar 2.45s cubic-bezier(0.2, 0.8, 0.25, 1) 0.35s both;
+}
+
+.anim-play .cn-v2-barra-base {
+  animation: cnAssentaReserva 1.45s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
+}
+
+/* Mobile: foto de topo, luz âmbar restrita e cartão de reserva em 4,00 s reais */
+.cn-mob-v2-foto-topo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center 35%, rgba(224, 168, 78, 0.24) 0%, transparent 68%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.anim-play .cn-mob-v2-foto-topo .cn-img {
+  animation: cnAcomodaFoto 3.85s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+}
+
+.anim-play .cn-mob-v2-foto-topo::after {
+  animation: cnLuzAmbar 2.45s cubic-bezier(0.2, 0.8, 0.25, 1) 0.35s both;
+}
+
+.anim-play .cn-mob-v2-card-reserva {
+  animation: cnAssentaReserva 1.45s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
+}
+
+@keyframes cnAcomodaFoto {
+  0% { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+@keyframes cnLuzAmbar {
+  0% { opacity: 0; transform: scale(0.96); }
+  45% { opacity: 0.7; transform: scale(1.03); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes cnAssentaReserva {
+  0% { opacity: 0.15; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Controle de Pausa e Movimento Reduzido ---------- */
+.anim-play.is-pausado,
+.anim-play.is-pausado *,
+.anim-play.is-pausado::before,
+.anim-play.is-pausado::after,
+.anim-play.is-pausado *::before,
+.anim-play.is-pausado *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-play,
+  .anim-play *,
+  .anim-play::before,
+  .anim-play::after,
+  .anim-play *::before,
+  .anim-play *::after {
+    animation: none !important;
+  }
+}
+
+.rm .anim-play,
+.rm .anim-play *,
+.rm .anim-play::before,
+.rm .anim-play::after,
+.rm .anim-play *::before,
+.rm .anim-play *::after {
+  animation: none !important;
+}

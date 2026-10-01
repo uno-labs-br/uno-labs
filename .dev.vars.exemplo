@@ -1,0 +1,5 @@
+# Copie este arquivo para ".dev.vars" (sem ".exemplo") para testar localmente com `npm run dev`.
+# NUNCA publique o arquivo .dev.vars — ele já está no .gitignore.
+N8N_WEBHOOK_URL=https://SEU-N8N/webhook/contato-unolabs
+N8N_WEBHOOK_TOKEN=troque-por-um-token-longo-e-aleatorio
+# TURNSTILE_SECRET=0x4AAAAAAA...

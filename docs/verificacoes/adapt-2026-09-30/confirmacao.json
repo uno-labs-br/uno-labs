@@ -1,0 +1,778 @@
+{
+  "viewports": [
+    {
+      "viewport": [
+        320,
+        568
+      ],
+      "mode": "linear",
+      "height": 1667,
+      "stickyHeight": 1667,
+      "texts": [
+        {
+          "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+          "top": 637.046875,
+          "bottom": 910.546875
+        },
+        {
+          "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+          "top": 938.546875,
+          "bottom": 1164.046875
+        },
+        {
+          "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+          "top": 1192.046875,
+          "bottom": 1417.546875
+        },
+        {
+          "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+          "top": 1445.546875,
+          "bottom": 1671.046875
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    },
+    {
+      "viewport": [
+        360,
+        640
+      ],
+      "mode": "linear",
+      "height": 1689,
+      "stickyHeight": 1689,
+      "texts": [
+        {
+          "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+          "top": 682.703125,
+          "bottom": 932.203125
+        },
+        {
+          "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+          "top": 960.203125,
+          "bottom": 1185.703125
+        },
+        {
+          "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+          "top": 1213.703125,
+          "bottom": 1439.203125
+        },
+        {
+          "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+          "top": 1467.203125,
+          "bottom": 1692.703125
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "mode": "sticky",
+      "height": 2532,
+      "stickyHeight": 780,
+      "texts": [
+        {
+          "text": "Ser encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+          "top": 642.96875,
+          "bottom": 821.96875
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "mode": "linear",
+      "height": 1489,
+      "stickyHeight": 1489,
+      "texts": [
+        {
+          "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+          "top": 772.71875,
+          "bottom": 950.859375
+        },
+        {
+          "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+          "top": 978.859375,
+          "bottom": 1133
+        },
+        {
+          "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+          "top": 1161,
+          "bottom": 1315.140625
+        },
+        {
+          "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+          "top": 1343.140625,
+          "bottom": 1497.28125
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "mode": "sticky",
+      "height": 3072,
+      "stickyHeight": 944,
+      "texts": [
+        {
+          "text": "Ser encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+          "top": 798.96875,
+          "bottom": 968.96875
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "mode": "linear",
+      "height": 1594,
+      "stickyHeight": 1594,
+      "texts": [
+        {
+          "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+          "top": 820.0625,
+          "bottom": 1001.5625
+        },
+        {
+          "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+          "top": 1029.5625,
+          "bottom": 1187.0625
+        },
+        {
+          "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+          "top": 1215.0625,
+          "bottom": 1372.5625
+        },
+        {
+          "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+          "top": 1400.5625,
+          "bottom": 1558.0625
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "mode": "sticky",
+      "height": 2700,
+      "stickyHeight": 820,
+      "texts": [
+        {
+          "text": "Da busca ao contato\n\nAntes de ligar, seu cliente pesquisa.\n\nSão quatro momentos. Em cada um, uma parte do nosso trabalho entra em ação.\n\n01\nEncontra\nSer encontrado por quem já está procurando.\n\nGoogle Ads pode aproximar sua empresa de quem procura pelo serviço. O SEO local organiza informações para ampliar sua presença nas buscas, sem garantia de posição.\n\nGoogle Ads\nSEO local\n02\nEntende\n03\nConfia\n04\nChama",
+          "top": 171.3125,
+          "bottom": 831.984375
+        }
+      ],
+      "cut": false,
+      "overflow": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "journey fit 320",
+      "ok": true,
+      "details": {
+        "viewport": [
+          320,
+          568
+        ],
+        "mode": "linear",
+        "height": 1667,
+        "stickyHeight": 1667,
+        "texts": [
+          {
+            "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+            "top": 637.046875,
+            "bottom": 910.546875
+          },
+          {
+            "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+            "top": 938.546875,
+            "bottom": 1164.046875
+          },
+          {
+            "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+            "top": 1192.046875,
+            "bottom": 1417.546875
+          },
+          {
+            "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+            "top": 1445.546875,
+            "bottom": 1671.046875
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 320",
+      "ok": true
+    },
+    {
+      "name": "linear all stages 320",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 320",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 320",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "journey fit 360",
+      "ok": true,
+      "details": {
+        "viewport": [
+          360,
+          640
+        ],
+        "mode": "linear",
+        "height": 1689,
+        "stickyHeight": 1689,
+        "texts": [
+          {
+            "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+            "top": 682.703125,
+            "bottom": 932.203125
+          },
+          {
+            "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+            "top": 960.203125,
+            "bottom": 1185.703125
+          },
+          {
+            "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+            "top": 1213.703125,
+            "bottom": 1439.203125
+          },
+          {
+            "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+            "top": 1467.203125,
+            "bottom": 1692.703125
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 360",
+      "ok": true
+    },
+    {
+      "name": "linear all stages 360",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 360",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 360",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "journey fit 390",
+      "ok": true,
+      "details": {
+        "viewport": [
+          390,
+          844
+        ],
+        "mode": "sticky",
+        "height": 2532,
+        "stickyHeight": 780,
+        "texts": [
+          {
+            "text": "Ser encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+            "top": 642.96875,
+            "bottom": 821.96875
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 390",
+      "ok": true
+    },
+    {
+      "name": "step 390/0",
+      "ok": true
+    },
+    {
+      "name": "step 390/1",
+      "ok": true
+    },
+    {
+      "name": "step 390/2",
+      "ok": true
+    },
+    {
+      "name": "step 390/3",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 390",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 390",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "journey fit 844",
+      "ok": true,
+      "details": {
+        "viewport": [
+          844,
+          390
+        ],
+        "mode": "linear",
+        "height": 1489,
+        "stickyHeight": 1489,
+        "texts": [
+          {
+            "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+            "top": 772.71875,
+            "bottom": 950.859375
+          },
+          {
+            "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+            "top": 978.859375,
+            "bottom": 1133
+          },
+          {
+            "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+            "top": 1161,
+            "bottom": 1315.140625
+          },
+          {
+            "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+            "top": 1343.140625,
+            "bottom": 1497.28125
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 844",
+      "ok": true
+    },
+    {
+      "name": "linear all stages 844",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 844",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 844",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "journey fit 768",
+      "ok": true,
+      "details": {
+        "viewport": [
+          768,
+          1024
+        ],
+        "mode": "sticky",
+        "height": 3072,
+        "stickyHeight": 944,
+        "texts": [
+          {
+            "text": "Ser encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+            "top": 798.96875,
+            "bottom": 968.96875
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 768",
+      "ok": true
+    },
+    {
+      "name": "step 768/0",
+      "ok": true
+    },
+    {
+      "name": "step 768/1",
+      "ok": true
+    },
+    {
+      "name": "step 768/2",
+      "ok": true
+    },
+    {
+      "name": "step 768/3",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 768",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 768",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "journey fit 1280",
+      "ok": true,
+      "details": {
+        "viewport": [
+          1280,
+          720
+        ],
+        "mode": "linear",
+        "height": 1594,
+        "stickyHeight": 1594,
+        "texts": [
+          {
+            "text": "Encontra\n\nSer encontrado por quem já está procurando.\n\nAnúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.\n\nGoogle Ads · SEO local",
+            "top": 820.0625,
+            "bottom": 1001.5625
+          },
+          {
+            "text": "Entende\n\nEntender a oferta na primeira tela.\n\nO que a empresa oferece, para quem e como entrar em contato, já na primeira tela.\n\nSite sob medida · Arquitetura de conteúdo",
+            "top": 1029.5625,
+            "bottom": 1187.0625
+          },
+          {
+            "text": "Confia\n\nPassar confiança antes da conversa.\n\nVisual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.\n\nDireção visual · Conteúdo",
+            "top": 1215.0625,
+            "bottom": 1372.5625
+          },
+          {
+            "text": "Chama\n\nTransformar interesse em contato.\n\nUm caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.\n\nFormulário integrado · Meta Ads",
+            "top": 1400.5625,
+            "bottom": 1558.0625
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 1280",
+      "ok": true
+    },
+    {
+      "name": "linear all stages 1280",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 1280",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 1280",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "journey fit 1440",
+      "ok": true,
+      "details": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "mode": "sticky",
+        "height": 2700,
+        "stickyHeight": 820,
+        "texts": [
+          {
+            "text": "Da busca ao contato\n\nAntes de ligar, seu cliente pesquisa.\n\nSão quatro momentos. Em cada um, uma parte do nosso trabalho entra em ação.\n\n01\nEncontra\nSer encontrado por quem já está procurando.\n\nGoogle Ads pode aproximar sua empresa de quem procura pelo serviço. O SEO local organiza informações para ampliar sua presença nas buscas, sem garantia de posição.\n\nGoogle Ads\nSEO local\n02\nEntende\n03\nConfia\n04\nChama",
+            "top": 171.3125,
+            "bottom": 831.984375
+          }
+        ],
+        "cut": false,
+        "overflow": false
+      }
+    },
+    {
+      "name": "overflow 1440",
+      "ok": true
+    },
+    {
+      "name": "step 1440/0",
+      "ok": true
+    },
+    {
+      "name": "step 1440/1",
+      "ok": true
+    },
+    {
+      "name": "step 1440/2",
+      "ok": true
+    },
+    {
+      "name": "step 1440/3",
+      "ok": true
+    },
+    {
+      "name": "mint CTA 1440",
+      "ok": true,
+      "details": {
+        "background": "rgb(125, 211, 168)",
+        "color": "rgb(14, 43, 36)",
+        "height": 56
+      }
+    },
+    {
+      "name": "CTA hover contrast 1440",
+      "ok": true,
+      "details": 8.458766047351544
+    },
+    {
+      "name": "menu keyboard open",
+      "ok": true
+    },
+    {
+      "name": "menu Escape focus",
+      "ok": true
+    },
+    {
+      "name": "FAQ Enter",
+      "ok": true
+    },
+    {
+      "name": "viewer keyboard opens",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 0",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 1",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 2",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 3",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 4",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 5",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 6",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 7",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 8",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 9",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 10",
+      "ok": true
+    },
+    {
+      "name": "viewer focus contained 11",
+      "ok": true
+    },
+    {
+      "name": "viewer desktop choice",
+      "ok": true
+    },
+    {
+      "name": "viewer Escape returns",
+      "ok": true
+    },
+    {
+      "name": "study finite completed",
+      "ok": true
+    },
+    {
+      "name": "replay starts actual visible model",
+      "ok": true
+    },
+    {
+      "name": "study pauses offscreen",
+      "ok": true
+    },
+    {
+      "name": "mid animation reduce is static",
+      "ok": true
+    },
+    {
+      "name": "orientation linear",
+      "ok": true
+    },
+    {
+      "name": "motion changed live",
+      "ok": false
+    },
+    {
+      "name": "motion journey full",
+      "ok": false
+    },
+    {
+      "name": "motion study visible",
+      "ok": true
+    },
+    {
+      "name": "motion restored live",
+      "ok": true
+    },
+    {
+      "name": "empty validation",
+      "ok": true
+    },
+    {
+      "name": "422 specific field",
+      "ok": true
+    },
+    {
+      "name": "422 retained data",
+      "ok": true
+    },
+    {
+      "name": "network error alternative",
+      "ok": true
+    },
+    {
+      "name": "network retains data",
+      "ok": true
+    },
+    {
+      "name": "real local 503",
+      "ok": true
+    },
+    {
+      "name": "loading disabled",
+      "ok": true
+    },
+    {
+      "name": "loading accessible",
+      "ok": true
+    },
+    {
+      "name": "duplicate prevented",
+      "ok": true,
+      "details": 1
+    },
+    {
+      "name": "simulated success",
+      "ok": true
+    },
+    {
+      "name": "success focus",
+      "ok": true
+    },
+    {
+      "name": "motion at load",
+      "ok": true
+    },
+    {
+      "name": "emulated touch viewer",
+      "ok": true
+    },
+    {
+      "name": "no JS menu navigable",
+      "ok": true
+    },
+    {
+      "name": "no JS useful study",
+      "ok": true
+    },
+    {
+      "name": "no JS explicit alternatives",
+      "ok": true
+    },
+    {
+      "name": "no JS POST safe",
+      "ok": true
+    },
+    {
+      "name": "200% logical reflow",
+      "ok": true
+    }
+  ],
+  "errors": []
+}

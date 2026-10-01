@@ -1,0 +1,107 @@
+{
+  "name": "UNO Labs | Contato → SMTP HostGator (modelo)",
+  "active": false,
+  "nodes": [
+    {
+      "id": "uno-webhook",
+      "name": "Receber contexto",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "uno-contato",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contato-unolabs",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "uno-smtp",
+      "name": "Encaminhar via HostGator",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "operation": "send",
+        "fromEmail": "CONFIGURAR_REMETENTE_AUTORIZADO@example.invalid",
+        "toEmail": "contato@unolabs.com.br",
+        "subject": "Novo contexto de projeto | UNO Labs",
+        "emailFormat": "text",
+        "text": "={{ ['Novo contato pelo site UNO Labs', 'Nome: ' + $json.body.nome, 'Empresa: ' + $json.body.empresa, 'Retorno: ' + $json.body.canal, 'Site: ' + ($json.body.site || 'Não informado'), 'Serviços: ' + $json.body.servicosTexto, 'Investimento: ' + $json.body.investTexto, '', $json.body.contexto, '', 'Recebido pelo Worker: ' + $json.body.recebidoEm].join('\\n') }}",
+        "options": {
+          "appendAttribution": false,
+          "allowUnauthorizedCerts": false,
+          "replyTo": "={{ /^[A-Za-z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/.test($json.body.canal || '') ? $json.body.canal : '' }}"
+        }
+      }
+    },
+    {
+      "id": "uno-resposta",
+      "name": "Confirmar aceitação SMTP",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\":true,\"encaminhamento\":\"smtp_aceito\"}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "uno-nota",
+      "name": "Configuração obrigatória",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -300
+      ],
+      "parameters": {
+        "width": 820,
+        "height": 230,
+        "content": "## Modelo inativo, sem segredos\nAntes de habilitar: selecionar Header Auth X-Uno-Token e SMTP HostGator; trocar remetente por endereço autorizado; revisar privacidade e retenção. O destinatário é fixo. A resposta confirma somente que o nó SMTP concluiu, não o recebimento na caixa postal. Homologação externa exige autorização. Não ativar continueOnFail no SMTP. Telegram depende de configuração separada e não está implementado neste modelo."
+      }
+    }
+  ],
+  "connections": {
+    "Receber contexto": {
+      "main": [
+        [
+          {
+            "node": "Encaminhar via HostGator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Encaminhar via HostGator": {
+      "main": [
+        [
+          {
+            "node": "Confirmar aceitação SMTP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

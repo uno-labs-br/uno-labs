@@ -1,32 +1,24 @@
-# Home — desktop (abra em tela cheia e role) — design reference
+# UNO Labs — projeto oficial do site
 
-This is a design mockup created in a visual design tool (an appifact
-design canvas), exported as a standalone page. Treat it as a REFERENCE
-MOCKUP, not production code: the markup and inline styles carry the
-design's precise values — colors, font sizes, spacing, radii, shadows,
-layout — which an implementation should replicate faithfully in its own
-components and styling system rather than copy wholesale.
+Este repositório reúne a implementação da landing page, o backend do formulário, as configurações de hospedagem e a documentação vigente.
 
-## Contents
+**Pasta oficial no computador de Urias:** `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`.
 
-- `index.html` — the artboard (a Design Component: an `<x-dc>`
-  template + a small logic class). The values to replicate live in its
-  inline `style="…"` attributes and the `<helmet><style>` block.
-- `AtriaClinic.dc.html` — referenced resource
-- `CasaNoma.dc.html` — referenced resource
-- `ModuloEngenharia.dc.html` — referenced resource
-- `assets/` — files uploaded to the design (images, fonts, media)
-- `support.js`, `vendor/react*.js` — the runtime that renders the
-  component in a browser; not part of the design.
+| Uso | Caminho dentro do repositório |
+|---|---|
+| Página inicial; análise visual e Impeccable | `public/index.html` |
+| CSS e JavaScript | `public/assets/css/` e `public/assets/js/` |
+| Formulário na Cloudflare | `worker/index.js` |
+| Configuração de hospedagem | `wrangler.jsonc` |
+| Marca, mensagem e requisitos | [Documentação completa](docs/UNO_Labs_Documentacao_Completa.md) |
+| Design e implementação | [Construção do site](docs/UNO_Labs_Construcao_do_Site.md) |
+| Testes, pendências e publicação | [LEIA-ME.md](LEIA-ME.md) |
+| Regras de colaboração | [AGENTS.md](AGENTS.md) |
 
-## Uploaded files
+Execute Git e npm na raiz desta pasta. O conteúdo de `04 - SITE` corresponde diretamente à raiz do repositório `uno-labs-br/uno-labs`; não há uma subpasta `04 - SITE` no GitHub.
 
-Images, fonts and media uploaded to the design are written once each under
-`assets/` — 1 in this export — and the exported files refer to them there. A
-reference a script puts together while the page runs (for example
-`"/_blob/" + id`) is not rewritten and does not load from this folder.
+Para testar site e Worker, execute `npm install` e `npm run dev` nesta raiz. Para uma prévia apenas visual, execute `python -m http.server 8000 --directory public` e abra `http://localhost:8000`.
 
-## Viewing
+O protótipo exportado anteriormente, com páginas `.dc.html`, `support.js` e `vendor/`, permanece recuperável no histórico anterior à consolidação. A extração local em `03 - ANALISE LP/uno-labs-main` é um arquivo histórico dispensável para executar o site. Todas as próximas análises e alterações usam `public/index.html`.
 
-Serve the folder (e.g. `python3 -m http.server`) and open `index.html`;
-some browsers block the scripts over file://.
+Mudanças seguem branch → commit → push da branch → PR para `main` → revisão e autorização humana para integrar. Produção usa somente a `main` aprovada. Há dados comerciais e de contato pendentes; consulte o LEIA-ME antes de publicar.

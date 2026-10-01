@@ -1,0 +1,1952 @@
+{
+  "checks": [
+    {
+      "name": "cores, fonte e pesos da seção iguais ao CSS anterior",
+      "ok": true,
+      "details": {
+        "before": {
+          "#servicos-titulo": {
+            "color": "rgb(14, 43, 36)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".orbita .rotulo-orbita": {
+            "color": "rgb(14, 43, 36)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".orbita-centro b": {
+            "color": "rgb(243, 247, 243)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".orbita-centro small": {
+            "color": "rgb(167, 229, 197)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "400"
+          },
+          ".orbita-fig figcaption": {
+            "color": "rgb(53, 80, 72)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "400"
+          },
+          ".servico h3": {
+            "color": "rgb(14, 43, 36)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".servico p": {
+            "color": "rgb(53, 80, 72)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "400"
+          }
+        },
+        "after": {
+          "#servicos-titulo": {
+            "color": "rgb(14, 43, 36)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".orbita .rotulo-orbita": {
+            "color": "rgb(14, 43, 36)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".orbita-centro b": {
+            "color": "rgb(243, 247, 243)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".orbita-centro small": {
+            "color": "rgb(167, 229, 197)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "400"
+          },
+          ".orbita-fig figcaption": {
+            "color": "rgb(53, 80, 72)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "400"
+          },
+          ".servico h3": {
+            "color": "rgb(14, 43, 36)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "600"
+          },
+          ".servico p": {
+            "color": "rgb(53, 80, 72)",
+            "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+            "fontWeight": "400"
+          }
+        }
+      }
+    },
+    {
+      "name": "giro e onda mantêm durações e cor anteriores",
+      "ok": true,
+      "details": {
+        "orbit": [
+          "gira",
+          "90s",
+          "infinite"
+        ],
+        "labelDirection": "reverse",
+        "pulse": [
+          "pulso",
+          "3.2s",
+          "rgb(125, 211, 168)"
+        ]
+      }
+    },
+    {
+      "name": "bolinha muda de posição durante execução",
+      "ok": true,
+      "details": {
+        "before": {
+          "x": 187,
+          "y": 397.734375,
+          "width": 14,
+          "height": 14
+        },
+        "after": {
+          "x": 192.9038543701172,
+          "y": 391.50225830078125,
+          "width": 14.589523315429688,
+          "height": 14.589508056640625
+        }
+      }
+    },
+    {
+      "name": "pausa por teclado e nome de retomada",
+      "ok": true
+    },
+    {
+      "name": "pausa congela todas as seis animações",
+      "ok": true,
+      "details": {
+        "before": [
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          }
+        ],
+        "after": [
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Enter retoma o movimento",
+      "ok": true
+    },
+    {
+      "name": "fora da área visível não avança",
+      "ok": true,
+      "details": {
+        "before": [
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          }
+        ],
+        "after": [
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          }
+        ]
+      }
+    },
+    {
+      "name": "retorno à área visível retoma",
+      "ok": true
+    },
+    {
+      "name": "evento de aba oculta simulado congela o movimento",
+      "ok": true,
+      "details": {
+        "before": [
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          }
+        ],
+        "after": [
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          },
+          {
+            "time": 633.3269999658688,
+            "state": "paused"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mudança em sessão mantém conteúdo estático",
+      "ok": true
+    },
+    {
+      "name": "preferência retorna sem desfazer pausa do visitante",
+      "ok": true
+    },
+    {
+      "name": "mudança em sessão mantém conteúdo estático",
+      "ok": true
+    },
+    {
+      "name": "preferência retorna sem desfazer pausa do visitante",
+      "ok": true
+    },
+    {
+      "name": "rótulos cabem durante o giro 320",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 31,
+            "right": 121
+          },
+          {
+            "text": "Google Ads",
+            "left": 199,
+            "right": 289
+          },
+          {
+            "text": "Meta Ads",
+            "left": 199,
+            "right": 289
+          },
+          {
+            "text": "Manutenção",
+            "left": 31,
+            "right": 121
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 215.265625,
+            "right": 305.265625
+          },
+          {
+            "text": "Google Ads",
+            "left": 215.265625,
+            "right": 305.265625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 6.34375,
+            "right": 96.34375
+          },
+          {
+            "text": "Manutenção",
+            "left": 6.34375,
+            "right": 96.34375
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 199,
+            "right": 289
+          },
+          {
+            "text": "Google Ads",
+            "left": 31,
+            "right": 121
+          },
+          {
+            "text": "Meta Ads",
+            "left": 31,
+            "right": 121
+          },
+          {
+            "text": "Manutenção",
+            "left": 199,
+            "right": 289
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 14.734375,
+            "right": 104.734375
+          },
+          {
+            "text": "Google Ads",
+            "left": 14.734375,
+            "right": 104.734375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 223.65625,
+            "right": 313.65625
+          },
+          {
+            "text": "Manutenção",
+            "left": 223.65625,
+            "right": 313.65625
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 320",
+      "ok": true,
+      "details": {
+        "width": 320,
+        "documentWidth": 320,
+        "button": {
+          "x": 83.9375,
+          "y": 587.578125,
+          "width": 152.109375,
+          "height": 44,
+          "top": 587.578125,
+          "right": 236.046875,
+          "bottom": 631.578125,
+          "left": 83.9375
+        }
+      }
+    },
+    {
+      "name": "rótulos cabem durante o giro 360",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 51,
+            "right": 141
+          },
+          {
+            "text": "Google Ads",
+            "left": 219,
+            "right": 309
+          },
+          {
+            "text": "Meta Ads",
+            "left": 219,
+            "right": 309
+          },
+          {
+            "text": "Manutenção",
+            "left": 51,
+            "right": 141
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 235.265625,
+            "right": 325.265625
+          },
+          {
+            "text": "Google Ads",
+            "left": 235.265625,
+            "right": 325.265625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 26.34375,
+            "right": 116.34375
+          },
+          {
+            "text": "Manutenção",
+            "left": 26.34375,
+            "right": 116.34375
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 219,
+            "right": 309
+          },
+          {
+            "text": "Google Ads",
+            "left": 51,
+            "right": 141
+          },
+          {
+            "text": "Meta Ads",
+            "left": 51,
+            "right": 141
+          },
+          {
+            "text": "Manutenção",
+            "left": 219,
+            "right": 309
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 34.734375,
+            "right": 124.734375
+          },
+          {
+            "text": "Google Ads",
+            "left": 34.734375,
+            "right": 124.734375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 243.65625,
+            "right": 333.65625
+          },
+          {
+            "text": "Manutenção",
+            "left": 243.65625,
+            "right": 333.65625
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 360",
+      "ok": true,
+      "details": {
+        "width": 360,
+        "documentWidth": 360,
+        "button": {
+          "x": 103.9375,
+          "y": 624.234375,
+          "width": 152.109375,
+          "height": 44,
+          "top": 624.234375,
+          "right": 256.046875,
+          "bottom": 668.234375,
+          "left": 103.9375
+        }
+      }
+    },
+    {
+      "name": "rótulos cabem durante o giro 390",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 66,
+            "right": 156
+          },
+          {
+            "text": "Google Ads",
+            "left": 234,
+            "right": 324
+          },
+          {
+            "text": "Meta Ads",
+            "left": 234,
+            "right": 324
+          },
+          {
+            "text": "Manutenção",
+            "left": 66,
+            "right": 156
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 250.265625,
+            "right": 340.265625
+          },
+          {
+            "text": "Google Ads",
+            "left": 250.265625,
+            "right": 340.265625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 41.34375,
+            "right": 131.34375
+          },
+          {
+            "text": "Manutenção",
+            "left": 41.34375,
+            "right": 131.34375
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 234,
+            "right": 324
+          },
+          {
+            "text": "Google Ads",
+            "left": 66,
+            "right": 156
+          },
+          {
+            "text": "Meta Ads",
+            "left": 66,
+            "right": 156
+          },
+          {
+            "text": "Manutenção",
+            "left": 234,
+            "right": 324
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 49.734375,
+            "right": 139.734375
+          },
+          {
+            "text": "Google Ads",
+            "left": 49.734375,
+            "right": 139.734375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 258.65625,
+            "right": 348.65625
+          },
+          {
+            "text": "Manutenção",
+            "left": 258.65625,
+            "right": 348.65625
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 390",
+      "ok": true,
+      "details": {
+        "width": 390,
+        "documentWidth": 390,
+        "button": {
+          "x": 118.9375,
+          "y": 702.578125,
+          "width": 152.109375,
+          "height": 44,
+          "top": 702.578125,
+          "right": 271.046875,
+          "bottom": 746.578125,
+          "left": 118.9375
+        }
+      }
+    },
+    {
+      "name": "rótulos cabem durante o giro 844",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 201,
+            "right": 331
+          },
+          {
+            "text": "Google Ads",
+            "left": 513,
+            "right": 643
+          },
+          {
+            "text": "Meta Ads",
+            "left": 513,
+            "right": 643
+          },
+          {
+            "text": "Manutenção",
+            "left": 201,
+            "right": 331
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 549,
+            "right": 679
+          },
+          {
+            "text": "Google Ads",
+            "left": 549,
+            "right": 679
+          },
+          {
+            "text": "Meta Ads",
+            "left": 161.03125,
+            "right": 291.03125
+          },
+          {
+            "text": "Manutenção",
+            "left": 161.03125,
+            "right": 291.03125
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 513,
+            "right": 643
+          },
+          {
+            "text": "Google Ads",
+            "left": 201,
+            "right": 331
+          },
+          {
+            "text": "Meta Ads",
+            "left": 201,
+            "right": 331
+          },
+          {
+            "text": "Manutenção",
+            "left": 513,
+            "right": 643
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 165,
+            "right": 295
+          },
+          {
+            "text": "Google Ads",
+            "left": 165,
+            "right": 295
+          },
+          {
+            "text": "Meta Ads",
+            "left": 552.96875,
+            "right": 682.96875
+          },
+          {
+            "text": "Manutenção",
+            "left": 552.96875,
+            "right": 682.96875
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 844",
+      "ok": true,
+      "details": {
+        "width": 844,
+        "documentWidth": 844,
+        "button": {
+          "x": 345.9375,
+          "y": 603.671875,
+          "width": 152.109375,
+          "height": 44,
+          "top": 603.671875,
+          "right": 498.046875,
+          "bottom": 647.671875,
+          "left": 345.9375
+        }
+      }
+    },
+    {
+      "name": "rótulos cabem durante o giro 768",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 163,
+            "right": 293
+          },
+          {
+            "text": "Google Ads",
+            "left": 475,
+            "right": 605
+          },
+          {
+            "text": "Meta Ads",
+            "left": 475,
+            "right": 605
+          },
+          {
+            "text": "Manutenção",
+            "left": 163,
+            "right": 293
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 511,
+            "right": 641
+          },
+          {
+            "text": "Google Ads",
+            "left": 511,
+            "right": 641
+          },
+          {
+            "text": "Meta Ads",
+            "left": 123.03125,
+            "right": 253.03125
+          },
+          {
+            "text": "Manutenção",
+            "left": 123.03125,
+            "right": 253.03125
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 475,
+            "right": 605
+          },
+          {
+            "text": "Google Ads",
+            "left": 163,
+            "right": 293
+          },
+          {
+            "text": "Meta Ads",
+            "left": 163,
+            "right": 293
+          },
+          {
+            "text": "Manutenção",
+            "left": 475,
+            "right": 605
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 127,
+            "right": 257
+          },
+          {
+            "text": "Google Ads",
+            "left": 127,
+            "right": 257
+          },
+          {
+            "text": "Meta Ads",
+            "left": 514.96875,
+            "right": 644.96875
+          },
+          {
+            "text": "Manutenção",
+            "left": 514.96875,
+            "right": 644.96875
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 768",
+      "ok": true,
+      "details": {
+        "width": 768,
+        "documentWidth": 768,
+        "button": {
+          "x": 307.9375,
+          "y": 920.46875,
+          "width": 152.109375,
+          "height": 44,
+          "top": 920.46875,
+          "right": 460.046875,
+          "bottom": 964.46875,
+          "left": 307.9375
+        }
+      }
+    },
+    {
+      "name": "rótulos cabem durante o giro 1280",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 49,
+            "right": 179
+          },
+          {
+            "text": "Google Ads",
+            "left": 331,
+            "right": 461
+          },
+          {
+            "text": "Meta Ads",
+            "left": 331,
+            "right": 461
+          },
+          {
+            "text": "Manutenção",
+            "left": 49,
+            "right": 179
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 362.390625,
+            "right": 492.390625
+          },
+          {
+            "text": "Google Ads",
+            "left": 362.390625,
+            "right": 492.390625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 11.71875,
+            "right": 141.71875
+          },
+          {
+            "text": "Manutenção",
+            "left": 11.71875,
+            "right": 141.71875
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 331,
+            "right": 461
+          },
+          {
+            "text": "Google Ads",
+            "left": 49,
+            "right": 179
+          },
+          {
+            "text": "Meta Ads",
+            "left": 49,
+            "right": 179
+          },
+          {
+            "text": "Manutenção",
+            "left": 331,
+            "right": 461
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 17.609375,
+            "right": 147.609375
+          },
+          {
+            "text": "Google Ads",
+            "left": 17.609375,
+            "right": 147.609375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 368.28125,
+            "right": 498.28125
+          },
+          {
+            "text": "Manutenção",
+            "left": 368.28125,
+            "right": 498.28125
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 1280",
+      "ok": true,
+      "details": {
+        "width": 1280,
+        "documentWidth": 1280,
+        "button": {
+          "x": 178.9375,
+          "y": 743.640625,
+          "width": 152.109375,
+          "height": 44,
+          "top": 743.640625,
+          "right": 331.046875,
+          "bottom": 787.640625,
+          "left": 178.9375
+        }
+      }
+    },
+    {
+      "name": "rótulos cabem durante o giro 1440",
+      "ok": true,
+      "details": [
+        [
+          {
+            "text": "SEO local",
+            "left": 129,
+            "right": 259
+          },
+          {
+            "text": "Google Ads",
+            "left": 411,
+            "right": 541
+          },
+          {
+            "text": "Meta Ads",
+            "left": 411,
+            "right": 541
+          },
+          {
+            "text": "Manutenção",
+            "left": 129,
+            "right": 259
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 442.390625,
+            "right": 572.390625
+          },
+          {
+            "text": "Google Ads",
+            "left": 442.390625,
+            "right": 572.390625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 91.71875,
+            "right": 221.71875
+          },
+          {
+            "text": "Manutenção",
+            "left": 91.71875,
+            "right": 221.71875
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 411,
+            "right": 541
+          },
+          {
+            "text": "Google Ads",
+            "left": 129,
+            "right": 259
+          },
+          {
+            "text": "Meta Ads",
+            "left": 129,
+            "right": 259
+          },
+          {
+            "text": "Manutenção",
+            "left": 411,
+            "right": 541
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 97.609375,
+            "right": 227.609375
+          },
+          {
+            "text": "Google Ads",
+            "left": 97.609375,
+            "right": 227.609375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 448.28125,
+            "right": 578.28125
+          },
+          {
+            "text": "Manutenção",
+            "left": 448.28125,
+            "right": 578.28125
+          }
+        ]
+      ]
+    },
+    {
+      "name": "controle cabe e tem altura de toque 1440",
+      "ok": true,
+      "details": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "button": {
+          "x": 258.9375,
+          "y": 833.234375,
+          "width": 152.109375,
+          "height": 44,
+          "top": 833.234375,
+          "right": 411.046875,
+          "bottom": 877.234375,
+          "left": 258.9375
+        }
+      }
+    },
+    {
+      "name": "movimento reduzido no carregamento",
+      "ok": true
+    },
+    {
+      "name": "sem JS mantém figura estática sem controle vazio",
+      "ok": true
+    },
+    {
+      "name": "sem JS esconde controles indisponíveis",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "colors": {
+    "before": {
+      "#servicos-titulo": {
+        "color": "rgb(14, 43, 36)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".orbita .rotulo-orbita": {
+        "color": "rgb(14, 43, 36)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".orbita-centro b": {
+        "color": "rgb(243, 247, 243)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".orbita-centro small": {
+        "color": "rgb(167, 229, 197)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "400"
+      },
+      ".orbita-fig figcaption": {
+        "color": "rgb(53, 80, 72)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "400"
+      },
+      ".servico h3": {
+        "color": "rgb(14, 43, 36)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".servico p": {
+        "color": "rgb(53, 80, 72)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "400"
+      }
+    },
+    "after": {
+      "#servicos-titulo": {
+        "color": "rgb(14, 43, 36)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".orbita .rotulo-orbita": {
+        "color": "rgb(14, 43, 36)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".orbita-centro b": {
+        "color": "rgb(243, 247, 243)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".orbita-centro small": {
+        "color": "rgb(167, 229, 197)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "400"
+      },
+      ".orbita-fig figcaption": {
+        "color": "rgb(53, 80, 72)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "400"
+      },
+      ".servico h3": {
+        "color": "rgb(14, 43, 36)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "600"
+      },
+      ".servico p": {
+        "color": "rgb(53, 80, 72)",
+        "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "fontWeight": "400"
+      }
+    }
+  },
+  "viewports": [
+    {
+      "width": 320,
+      "height": 568,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 31,
+            "right": 121
+          },
+          {
+            "text": "Google Ads",
+            "left": 199,
+            "right": 289
+          },
+          {
+            "text": "Meta Ads",
+            "left": 199,
+            "right": 289
+          },
+          {
+            "text": "Manutenção",
+            "left": 31,
+            "right": 121
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 215.265625,
+            "right": 305.265625
+          },
+          {
+            "text": "Google Ads",
+            "left": 215.265625,
+            "right": 305.265625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 6.34375,
+            "right": 96.34375
+          },
+          {
+            "text": "Manutenção",
+            "left": 6.34375,
+            "right": 96.34375
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 199,
+            "right": 289
+          },
+          {
+            "text": "Google Ads",
+            "left": 31,
+            "right": 121
+          },
+          {
+            "text": "Meta Ads",
+            "left": 31,
+            "right": 121
+          },
+          {
+            "text": "Manutenção",
+            "left": 199,
+            "right": 289
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 14.734375,
+            "right": 104.734375
+          },
+          {
+            "text": "Google Ads",
+            "left": 14.734375,
+            "right": 104.734375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 223.65625,
+            "right": 313.65625
+          },
+          {
+            "text": "Manutenção",
+            "left": 223.65625,
+            "right": 313.65625
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 320,
+        "documentWidth": 320,
+        "button": {
+          "x": 83.9375,
+          "y": 587.578125,
+          "width": 152.109375,
+          "height": 44,
+          "top": 587.578125,
+          "right": 236.046875,
+          "bottom": 631.578125,
+          "left": 83.9375
+        }
+      }
+    },
+    {
+      "width": 360,
+      "height": 640,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 51,
+            "right": 141
+          },
+          {
+            "text": "Google Ads",
+            "left": 219,
+            "right": 309
+          },
+          {
+            "text": "Meta Ads",
+            "left": 219,
+            "right": 309
+          },
+          {
+            "text": "Manutenção",
+            "left": 51,
+            "right": 141
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 235.265625,
+            "right": 325.265625
+          },
+          {
+            "text": "Google Ads",
+            "left": 235.265625,
+            "right": 325.265625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 26.34375,
+            "right": 116.34375
+          },
+          {
+            "text": "Manutenção",
+            "left": 26.34375,
+            "right": 116.34375
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 219,
+            "right": 309
+          },
+          {
+            "text": "Google Ads",
+            "left": 51,
+            "right": 141
+          },
+          {
+            "text": "Meta Ads",
+            "left": 51,
+            "right": 141
+          },
+          {
+            "text": "Manutenção",
+            "left": 219,
+            "right": 309
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 34.734375,
+            "right": 124.734375
+          },
+          {
+            "text": "Google Ads",
+            "left": 34.734375,
+            "right": 124.734375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 243.65625,
+            "right": 333.65625
+          },
+          {
+            "text": "Manutenção",
+            "left": 243.65625,
+            "right": 333.65625
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 360,
+        "documentWidth": 360,
+        "button": {
+          "x": 103.9375,
+          "y": 624.234375,
+          "width": 152.109375,
+          "height": 44,
+          "top": 624.234375,
+          "right": 256.046875,
+          "bottom": 668.234375,
+          "left": 103.9375
+        }
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 66,
+            "right": 156
+          },
+          {
+            "text": "Google Ads",
+            "left": 234,
+            "right": 324
+          },
+          {
+            "text": "Meta Ads",
+            "left": 234,
+            "right": 324
+          },
+          {
+            "text": "Manutenção",
+            "left": 66,
+            "right": 156
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 250.265625,
+            "right": 340.265625
+          },
+          {
+            "text": "Google Ads",
+            "left": 250.265625,
+            "right": 340.265625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 41.34375,
+            "right": 131.34375
+          },
+          {
+            "text": "Manutenção",
+            "left": 41.34375,
+            "right": 131.34375
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 234,
+            "right": 324
+          },
+          {
+            "text": "Google Ads",
+            "left": 66,
+            "right": 156
+          },
+          {
+            "text": "Meta Ads",
+            "left": 66,
+            "right": 156
+          },
+          {
+            "text": "Manutenção",
+            "left": 234,
+            "right": 324
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 49.734375,
+            "right": 139.734375
+          },
+          {
+            "text": "Google Ads",
+            "left": 49.734375,
+            "right": 139.734375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 258.65625,
+            "right": 348.65625
+          },
+          {
+            "text": "Manutenção",
+            "left": 258.65625,
+            "right": 348.65625
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 390,
+        "documentWidth": 390,
+        "button": {
+          "x": 118.9375,
+          "y": 702.578125,
+          "width": 152.109375,
+          "height": 44,
+          "top": 702.578125,
+          "right": 271.046875,
+          "bottom": 746.578125,
+          "left": 118.9375
+        }
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 201,
+            "right": 331
+          },
+          {
+            "text": "Google Ads",
+            "left": 513,
+            "right": 643
+          },
+          {
+            "text": "Meta Ads",
+            "left": 513,
+            "right": 643
+          },
+          {
+            "text": "Manutenção",
+            "left": 201,
+            "right": 331
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 549,
+            "right": 679
+          },
+          {
+            "text": "Google Ads",
+            "left": 549,
+            "right": 679
+          },
+          {
+            "text": "Meta Ads",
+            "left": 161.03125,
+            "right": 291.03125
+          },
+          {
+            "text": "Manutenção",
+            "left": 161.03125,
+            "right": 291.03125
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 513,
+            "right": 643
+          },
+          {
+            "text": "Google Ads",
+            "left": 201,
+            "right": 331
+          },
+          {
+            "text": "Meta Ads",
+            "left": 201,
+            "right": 331
+          },
+          {
+            "text": "Manutenção",
+            "left": 513,
+            "right": 643
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 165,
+            "right": 295
+          },
+          {
+            "text": "Google Ads",
+            "left": 165,
+            "right": 295
+          },
+          {
+            "text": "Meta Ads",
+            "left": 552.96875,
+            "right": 682.96875
+          },
+          {
+            "text": "Manutenção",
+            "left": 552.96875,
+            "right": 682.96875
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 844,
+        "documentWidth": 844,
+        "button": {
+          "x": 345.9375,
+          "y": 603.671875,
+          "width": 152.109375,
+          "height": 44,
+          "top": 603.671875,
+          "right": 498.046875,
+          "bottom": 647.671875,
+          "left": 345.9375
+        }
+      }
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 163,
+            "right": 293
+          },
+          {
+            "text": "Google Ads",
+            "left": 475,
+            "right": 605
+          },
+          {
+            "text": "Meta Ads",
+            "left": 475,
+            "right": 605
+          },
+          {
+            "text": "Manutenção",
+            "left": 163,
+            "right": 293
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 511,
+            "right": 641
+          },
+          {
+            "text": "Google Ads",
+            "left": 511,
+            "right": 641
+          },
+          {
+            "text": "Meta Ads",
+            "left": 123.03125,
+            "right": 253.03125
+          },
+          {
+            "text": "Manutenção",
+            "left": 123.03125,
+            "right": 253.03125
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 475,
+            "right": 605
+          },
+          {
+            "text": "Google Ads",
+            "left": 163,
+            "right": 293
+          },
+          {
+            "text": "Meta Ads",
+            "left": 163,
+            "right": 293
+          },
+          {
+            "text": "Manutenção",
+            "left": 475,
+            "right": 605
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 127,
+            "right": 257
+          },
+          {
+            "text": "Google Ads",
+            "left": 127,
+            "right": 257
+          },
+          {
+            "text": "Meta Ads",
+            "left": 514.96875,
+            "right": 644.96875
+          },
+          {
+            "text": "Manutenção",
+            "left": 514.96875,
+            "right": 644.96875
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 768,
+        "documentWidth": 768,
+        "button": {
+          "x": 307.9375,
+          "y": 920.46875,
+          "width": 152.109375,
+          "height": 44,
+          "top": 920.46875,
+          "right": 460.046875,
+          "bottom": 964.46875,
+          "left": 307.9375
+        }
+      }
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 49,
+            "right": 179
+          },
+          {
+            "text": "Google Ads",
+            "left": 331,
+            "right": 461
+          },
+          {
+            "text": "Meta Ads",
+            "left": 331,
+            "right": 461
+          },
+          {
+            "text": "Manutenção",
+            "left": 49,
+            "right": 179
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 362.390625,
+            "right": 492.390625
+          },
+          {
+            "text": "Google Ads",
+            "left": 362.390625,
+            "right": 492.390625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 11.71875,
+            "right": 141.71875
+          },
+          {
+            "text": "Manutenção",
+            "left": 11.71875,
+            "right": 141.71875
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 331,
+            "right": 461
+          },
+          {
+            "text": "Google Ads",
+            "left": 49,
+            "right": 179
+          },
+          {
+            "text": "Meta Ads",
+            "left": 49,
+            "right": 179
+          },
+          {
+            "text": "Manutenção",
+            "left": 331,
+            "right": 461
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 17.609375,
+            "right": 147.609375
+          },
+          {
+            "text": "Google Ads",
+            "left": 17.609375,
+            "right": 147.609375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 368.28125,
+            "right": 498.28125
+          },
+          {
+            "text": "Manutenção",
+            "left": 368.28125,
+            "right": 498.28125
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 1280,
+        "documentWidth": 1280,
+        "button": {
+          "x": 178.9375,
+          "y": 743.640625,
+          "width": 152.109375,
+          "height": 44,
+          "top": 743.640625,
+          "right": 331.046875,
+          "bottom": 787.640625,
+          "left": 178.9375
+        }
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "phaseBounds": [
+        [
+          {
+            "text": "SEO local",
+            "left": 129,
+            "right": 259
+          },
+          {
+            "text": "Google Ads",
+            "left": 411,
+            "right": 541
+          },
+          {
+            "text": "Meta Ads",
+            "left": 411,
+            "right": 541
+          },
+          {
+            "text": "Manutenção",
+            "left": 129,
+            "right": 259
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 442.390625,
+            "right": 572.390625
+          },
+          {
+            "text": "Google Ads",
+            "left": 442.390625,
+            "right": 572.390625
+          },
+          {
+            "text": "Meta Ads",
+            "left": 91.71875,
+            "right": 221.71875
+          },
+          {
+            "text": "Manutenção",
+            "left": 91.71875,
+            "right": 221.71875
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 411,
+            "right": 541
+          },
+          {
+            "text": "Google Ads",
+            "left": 129,
+            "right": 259
+          },
+          {
+            "text": "Meta Ads",
+            "left": 129,
+            "right": 259
+          },
+          {
+            "text": "Manutenção",
+            "left": 411,
+            "right": 541
+          }
+        ],
+        [
+          {
+            "text": "SEO local",
+            "left": 97.609375,
+            "right": 227.609375
+          },
+          {
+            "text": "Google Ads",
+            "left": 97.609375,
+            "right": 227.609375
+          },
+          {
+            "text": "Meta Ads",
+            "left": 448.28125,
+            "right": 578.28125
+          },
+          {
+            "text": "Manutenção",
+            "left": 448.28125,
+            "right": 578.28125
+          }
+        ]
+      ],
+      "dimensions": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "button": {
+          "x": 258.9375,
+          "y": 833.234375,
+          "width": 152.109375,
+          "height": 44,
+          "top": 833.234375,
+          "right": 411.046875,
+          "bottom": 877.234375,
+          "left": 258.9375
+        }
+      }
+    }
+  ]
+}
