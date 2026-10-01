@@ -428,75 +428,75 @@ html:not(.js) .capitulo__acoes {
 }
 
 /* ---------- Módulo — Movimento: Inspeção Estrutural ----------
-   Traçado de cotas em até 1,6 s; fechamento de ficha e etiquetas em até 2,3 s total.
+   Traçado técnico de cotas, coordenadas e fechamento em cascata de serviços em 4,00 s reais.
    A imagem e o título/CTA permanecem sempre legíveis e disponíveis. */
 .anim-play .mod-cota-linha-h {
-  animation: modTracoH 0.65s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: modTracoH 1.1s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .mod-cota-tick-1 {
-  animation: modTickIn 0.2s ease 0.1s both;
+  animation: modTickIn 0.3s ease 0.15s both;
 }
 
 .anim-play .mod-cota-txt-h {
-  animation: modFadeIn 0.35s ease 0.35s both;
+  animation: modFadeIn 0.55s ease 0.6s both;
 }
 
 .anim-play .mod-cota-tick-2 {
-  animation: modTickIn 0.2s ease 0.75s both;
+  animation: modTickIn 0.3s ease 1.25s both;
 }
 
 .anim-play .mod-cota-linha-v {
-  animation: modTracoV 0.6s cubic-bezier(0.2, 0.8, 0.25, 1) 0.75s both;
+  animation: modTracoV 1.05s cubic-bezier(0.2, 0.8, 0.25, 1) 1.35s both;
 }
 
 .anim-play .mod-cota-txt-v {
-  animation: modFadeIn 0.35s ease 1.0s both;
+  animation: modFadeIn 0.55s ease 1.8s both;
 }
 
 .anim-play .mod-cota-tick-3 {
-  animation: modTickIn 0.2s ease 1.35s both;
+  animation: modTickIn 0.3s ease 2.4s both;
 }
 
 .anim-play .mod-v1-badge-coord {
-  animation: modBadgeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 1.45s both;
+  animation: modBadgeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
 }
 
 .anim-play .mod-v1-badge-material {
-  animation: modBadgeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 1.75s both;
+  animation: modBadgeIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.95s both;
 }
 
 .anim-play .mod-v1-servico-item:nth-child(1) {
-  animation: modItemIn 0.3s ease 1.85s both;
+  animation: modItemIn 0.45s ease 3.15s both;
 }
 
 .anim-play .mod-v1-servico-item:nth-child(2) {
-  animation: modItemIn 0.3s ease 1.95s both;
+  animation: modItemIn 0.45s ease 3.3s both;
 }
 
 .anim-play .mod-v1-servico-item:nth-child(3) {
-  animation: modItemIn 0.3s ease 2.05s both;
+  animation: modItemIn 0.45s ease 3.45s both;
 }
 
 .anim-play .mod-v1-servico-item:nth-child(4) {
-  animation: modItemIn 0.3s ease 2.15s both;
+  animation: modItemIn 0.45s ease 3.55s both;
 }
 
-/* Mobile: traçado de cota e marcas */
+/* Mobile: traçado de cota e marcas em 4,00 s reais */
 .anim-play .mod-mob-cota-linha {
-  animation: modTracoH 0.75s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
+  animation: modTracoH 3.85s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .mod-mob-cota-tick-1 {
-  animation: modTickIn 0.2s ease 0.15s both;
+  animation: modTickIn 0.35s ease 0.15s both;
 }
 
 .anim-play .mod-mob-cota-txt {
-  animation: modFadeIn 0.35s ease 0.45s both;
+  animation: modFadeIn 0.8s ease 1.2s both;
 }
 
 .anim-play .mod-mob-cota-tick-2 {
-  animation: modTickIn 0.2s ease 0.9s both;
+  animation: modTickIn 0.4s ease 3.6s both;
 }
 
 @keyframes modTracoH {
@@ -856,44 +856,48 @@ html:not(.js) .capitulo__acoes {
 }
 
 /* ---------- Atria — Movimento: Abertura Editorial Fotográfica ----------
-   Máscara horizontal suave, deslocamento/zoom mínimo do retrato e assentamento
-   da agenda. Sequência completa entre 1,2 e 2,2 s (total: ~1,85 s).
+   Máscara horizontal suave, respiração da fotografia, assentamento de agenda e
+   confirmação de horário em 4,00 s reais.
    Título, dados e responsável permanecem visíveis desde o primeiro momento. */
 .anim-play .atr-v2-faixa-foto {
-  animation: atrMascaraFaixa 1.05s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: atrMascaraFaixa 1.95s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .atr-v2-faixa-foto .atr-img {
-  animation: atrZoomFoto 1.35s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: atrZoomFoto 2.75s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .atr-v2-tag-faixa {
-  animation: atrFadeIn 0.35s ease 0.8s both;
+  animation: atrFadeIn 0.7s ease 1.7s both;
 }
 
 .anim-play .atr-v2-dir-agenda {
-  animation: atrAssentaAgenda 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+  animation: atrAssentaAgenda 1.15s cubic-bezier(0.16, 1, 0.3, 1) 1.95s both;
 }
 
 .anim-play .atr-dia-item--ativo {
-  animation: atrDestaqueDia 0.35s ease 1.25s both;
+  animation: atrDestaqueDia 0.65s ease 2.75s both;
 }
 
 .anim-play .atr-hora-btn--ativo {
-  animation: atrDestaqueHora 0.35s ease 1.45s both;
+  animation: atrDestaqueHora 0.75s ease 3.25s both;
 }
 
-/* Mobile: abertura da faixa de borda a borda e agenda em linha */
+/* Mobile: abertura da faixa de borda a borda, agenda em linha e confirmação em 4,00 s reais */
 .anim-play .atr-mob-v2-faixa {
-  animation: atrMascaraFaixa 1.0s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: atrMascaraFaixa 1.95s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .atr-mob-v2-faixa img {
-  animation: atrZoomFoto 1.3s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: atrZoomFoto 2.75s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .atr-mob-v2-agenda-linha {
-  animation: atrAssentaAgenda 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+  animation: atrAssentaAgenda 1.15s cubic-bezier(0.16, 1, 0.3, 1) 1.95s both;
+}
+
+.anim-play .atr-mob-v2-agenda-linha .atr-btn-terracota {
+  animation: atrDestaqueHora 0.75s ease 3.25s both;
 }
 
 @keyframes atrMascaraFaixa {
@@ -1198,9 +1202,9 @@ html:not(.js) .capitulo__acoes {
 }
 
 /* ---------- Casa Noma — Movimento: Abertura Cinematográfica ----------
-   Acomodação de escala da fotografia (~1,045 para 1), passagem sutil de luz âmbar
-   restrita à foto (sem halo no texto) e assentamento da faixa de reserva.
-   Duração máxima com atrasos: 2,3 s. Título permanece 100% estático e legível. */
+   Acomodação de escala da fotografia (~1,045 para 1), passagem suave de luz âmbar
+   restrita à foto (sem halo no texto) e assentamento da faixa de reserva em 4,00 s reais.
+   Título permanece 100% estático e legível. */
 .cn-v2-bg-canvas::after {
   content: "";
   position: absolute;
@@ -1212,18 +1216,18 @@ html:not(.js) .capitulo__acoes {
 }
 
 .anim-play .cn-v2-bg-canvas .cn-img {
-  animation: cnAcomodaFoto 2.2s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: cnAcomodaFoto 3.85s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .cn-v2-bg-canvas::after {
-  animation: cnLuzAmbar 1.6s cubic-bezier(0.2, 0.8, 0.25, 1) 0.25s both;
+  animation: cnLuzAmbar 2.45s cubic-bezier(0.2, 0.8, 0.25, 1) 0.35s both;
 }
 
 .anim-play .cn-v2-barra-base {
-  animation: cnAssentaReserva 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1.55s both;
+  animation: cnAssentaReserva 1.45s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
 }
 
-/* Mobile: foto de topo, luz âmbar restrita e cartão de reserva */
+/* Mobile: foto de topo, luz âmbar restrita e cartão de reserva em 4,00 s reais */
 .cn-mob-v2-foto-topo::after {
   content: "";
   position: absolute;
@@ -1234,15 +1238,15 @@ html:not(.js) .capitulo__acoes {
 }
 
 .anim-play .cn-mob-v2-foto-topo .cn-img {
-  animation: cnAcomodaFoto 2.2s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s both;
+  animation: cnAcomodaFoto 3.85s cubic-bezier(0.2, 0.8, 0.25, 1) 0.15s both;
 }
 
 .anim-play .cn-mob-v2-foto-topo::after {
-  animation: cnLuzAmbar 1.6s cubic-bezier(0.2, 0.8, 0.25, 1) 0.25s both;
+  animation: cnLuzAmbar 2.45s cubic-bezier(0.2, 0.8, 0.25, 1) 0.35s both;
 }
 
 .anim-play .cn-mob-v2-card-reserva {
-  animation: cnAssentaReserva 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1.5s both;
+  animation: cnAssentaReserva 1.45s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
 }
 
 @keyframes cnAcomodaFoto {

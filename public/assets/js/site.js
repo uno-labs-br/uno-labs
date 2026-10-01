@@ -24,17 +24,75 @@
     return raiz.classList.contains('rm') || !!(mqlMovimentoEstudos && mqlMovimentoEstudos.matches);
   }
 
-  function retanguloNaTela(el) {
-    if (!el || doc.hidden) return false;
-    var r = el.getBoundingClientRect();
-    return r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 &&
-      r.top < window.innerHeight && r.left < window.innerWidth;
+  function obterTopoUtil() {
+    var header = doc.querySelector('.topo');
+    if (!header) return 0;
+    var r = header.getBoundingClientRect();
+    return (r.bottom > 0 && r.top <= 0) ? Math.max(0, r.bottom) : 0;
   }
 
   function copiaElegivel(el) {
-    if (!retanguloNaTela(el)) return false;
+    if (!el || !el.isConnected || doc.hidden) return false;
     var etapa = el.closest('[data-etapa]');
-    return !etapa || etapa.classList.contains('is-ativo');
+    if (etapa && !etapa.classList.contains('is-ativo')) return false;
+
+    var r = el.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return false;
+
+    // Considera o clipping de todos os ancestrais com overflow oculto/scroll/clip
+    var x1 = r.left;
+    var y1 = r.top;
+    var x2 = r.right;
+    var y2 = r.bottom;
+
+    var p = el.parentElement;
+    while (p && p !== doc.body) {
+      var style = window.getComputedStyle(p);
+      if (style.display === 'none' || style.visibility === 'hidden') return false;
+      var ox = style.overflowX;
+      var oy = style.overflowY;
+      if (ox === 'hidden' || ox === 'clip' || ox === 'scroll' || ox === 'auto' ||
+          oy === 'hidden' || oy === 'clip' || oy === 'scroll' || oy === 'auto') {
+        var pr = p.getBoundingClientRect();
+        x1 = Math.max(x1, pr.left);
+        y1 = Math.max(y1, pr.top);
+        x2 = Math.min(x2, pr.right);
+        y2 = Math.min(y2, pr.bottom);
+        if (x2 <= x1 || y2 <= y1) return false;
+      }
+      p = p.parentElement;
+    }
+
+    // Área útil da viewport, descontando o cabeçalho fixo no topo
+    var topoUtil = obterTopoUtil();
+    var baseUtil = window.innerHeight;
+    var esqUtil = 0;
+    var dirUtil = window.innerWidth;
+
+    var vx1 = Math.max(x1, esqUtil);
+    var vy1 = Math.max(y1, topoUtil);
+    var vx2 = Math.min(x2, dirUtil);
+    var vy2 = Math.min(y2, baseUtil);
+
+    if (vx2 <= vx1 || vy2 <= vy1) return false;
+
+    var larguraVis = vx2 - vx1;
+    var alturaVis = vy2 - vy1;
+    var areaVis = larguraVis * alturaVis;
+
+    var larguraModelo = Math.max(0, x2 - x1);
+    var alturaModelo = Math.max(0, y2 - y1);
+    if (larguraModelo <= 0 || alturaModelo <= 0) return false;
+
+    var alturaUtil = Math.max(0, baseUtil - topoUtil);
+    var larguraUtil = Math.max(0, dirUtil - esqUtil);
+    if (alturaUtil <= 0 || larguraUtil <= 0) return false;
+
+    // Em telas normais, exige pelo menos 50% da área do modelo.
+    // Em telas baixas ou estreitas em que o modelo excede a área útil,
+    // adapta para a porção máxima atingível na área útil (sem bloqueá-lo).
+    var areaReferencia = Math.min(alturaModelo, alturaUtil) * Math.min(larguraModelo, larguraUtil);
+    return areaVis >= 0.5 * areaReferencia;
   }
 
   /* ---------- 1. Escala proporcional ----------
@@ -239,26 +297,31 @@
     }
     iniciarControleMovimentoEstudos();
 
+    var thresholds = [];
+    for (var i = 0; i <= 20; i++) {
+      thresholds.push(i / 20);
+    }
+
     var ioVisivel = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
-        var el = e.target;
-        if (!e.isIntersecting || !copiaElegivel(el)) {
-          pausarAnimacao(el);
-        } else if (movimentoEstudosReduzido()) {
-          cancelarAnimacaoEstudo(el);
-        } else if (!el.closest('.jornada')) {
-          if (!el.getAttribute('data-animou')) {
-            dispararAnimacao(el);
-          } else {
-            retomarAnimacao(el);
-          }
-        } else {
-          sincronizarCopiaJornada(el);
-        }
+        sincronizarCopiaEstudo(e.target);
       });
-    }, { threshold: 0 });
+    }, { threshold: thresholds });
 
     alvos.forEach(function (el) { ioVisivel.observe(el); });
+
+    var agendadoScrollEstudos = false;
+    function aoMudarScrollOuJanela() {
+      if (agendadoScrollEstudos) return;
+      agendadoScrollEstudos = true;
+      requestAnimationFrame(function () {
+        agendadoScrollEstudos = false;
+        alvos.forEach(sincronizarCopiaEstudo);
+      });
+    }
+
+    window.addEventListener('scroll', aoMudarScrollOuJanela, { passive: true });
+    window.addEventListener('resize', aoMudarScrollOuJanela, { passive: true });
 
     // 3. Pausar movimento se aba ficar oculta; retomar quando voltar
     doc.addEventListener('visibilitychange', function () {
@@ -317,22 +380,28 @@
 
         if (!capitulo) return;
 
-        // Reinicia apenas cópias do capítulo que têm área e interseção reais na tela.
+        // Reinicia apenas cópias do capítulo que têm exposição significativa na tela.
         var copias = capitulo.querySelectorAll('[data-estudo]');
+        var reiniciadas = 0;
         copias.forEach(function (el) {
           if (copiaElegivel(el)) {
             reiniciarAnimacao(el);
+            reiniciadas++;
           }
         });
 
         if (live) {
-          live.textContent = 'Animação de ' + nome + ' reiniciada.';
+          if (reiniciadas > 0) {
+            live.textContent = 'Animação de ' + nome + ' reiniciada.';
+          } else {
+            live.textContent = 'Role a página para visualizar o modelo de ' + nome + ' antes de reiniciar a animação.';
+          }
         }
       });
     });
   }
 
-  function sincronizarCopiaJornada(el) {
+  function sincronizarCopiaEstudo(el) {
     if (!el) return;
     if (movimentoEstudosReduzido()) {
       if (el.classList.contains('anim-play')) cancelarAnimacaoEstudo(el);
@@ -342,8 +411,11 @@
       pausarAnimacao(el);
       return;
     }
-    if (!el.getAttribute('data-animou')) dispararAnimacao(el);
-    else retomarAnimacao(el);
+    if (!el.getAttribute('data-animou')) {
+      dispararAnimacao(el);
+    } else {
+      retomarAnimacao(el);
+    }
   }
 
   /* ---------- 3. Luz do hero ---------- */
@@ -400,8 +472,8 @@
         });
         if (contador) contador.textContent = '0' + (passo + 1);
 
-        // Só inicia a cópia cuja camada da jornada está ativa e realmente visível.
-        secao.querySelectorAll('[data-estudo]').forEach(sincronizarCopiaJornada);
+        // Só inicia a cópia cuja camada da jornada está ativa e tem exposição significativa.
+        secao.querySelectorAll('[data-estudo]').forEach(sincronizarCopiaEstudo);
       }
       if (sub !== atual.sub) {
         etapas.forEach(function (el) {
