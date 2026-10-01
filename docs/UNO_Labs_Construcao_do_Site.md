@@ -220,7 +220,8 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 ### 6.4 Serviços
 - Título “O site é o centro. O resto trabalha para ele.” (máx. 820 px).
 - Grade 5 / 1 / 6:
-  - **Órbita** (520 px; 280 px no celular): halo radial menta, anel interno tracejado e anel externo estático com quatro nós menta e os rótulos SEO local, Google Ads, Meta Ads e Manutenção. No centro, círculo `--uno-pine` “Site / sob medida”. Legenda abaixo.
+  - **Órbita** (520 px; 280 px no celular): halo radial menta, anel interno tracejado e anel externo com quatro nós menta e os rótulos SEO local, Google Ads, Meta Ads e Manutenção. O conjunto gira em 90 s; os rótulos fazem contrarrotação para continuarem na orientação de leitura. No centro, círculo `--uno-pine` “Site / sob medida” com uma onda Mint que cresce e desaparece em ciclos de 3,2 s. Giro e onda anteriores ao adapt foram restaurados por solicitação de 01/10/2026. Há legenda e controle “Pausar animação”/“Retomar animação”, com altura mínima de 44px. Pausa fora da área visível e com aba oculta; preferência por movimento reduzido mantém figura estática e controle desabilitado. Sem JS ou sem IntersectionObserver, a figura permanece estática e não oferece um controle indisponível.
+  - **Cores preservadas:** títulos e rótulos Pine `#0E2B24`, apoio `#355048`, “Site” Off White `#F3F7F3` e “sob medida” Mint2 `#A7E5C5`. Inter e pesos conferidos contra o CSS do checkpoint `15cd947`. Não houve troca para preto nessa seção.
   - **Lista** de 5 serviços separados por linhas de 1 px: nome (24 px) + modelo de cobrança à direita (“Projeto · a partir de R$ 1.490”, “Mensal”, “Mensal · mídia à parte”, “Plano mensal”) + descrição.
 
 ### 6.5 Por baixo do capô
@@ -309,6 +310,7 @@ Referências técnicas: [padrão de botão básico, W3C](https://www.w3.org/WAI/
 | `revela` | Palco do hero | 4 s, `cubic-bezier(.65,0,.35,1)`, finita | `clip-path` revela o site sobre o desenho técnico e termina no estado final |
 | `varre` | Palco do hero | 4 s, mesma curva, finita | Linha menta com brilho acompanha a revelação e desaparece ao final |
 | `st1` / `st2` | Selo do palco | 4 s linear, finita | Troca “Projeto técnico” por “Apresentação visual” |
+| `gira` / `pulso` | Órbita de serviços | 90 s linear / 3,2 s ease-out, contínuas com controle | Nós giram com rótulos legíveis; onda Mint parte do centro. Pausam por controle, fora da área visível e com aba oculta; desativadas com movimento reduzido |
 | Jornada | Cenas, detalhes, cartões | .6 s / .5 s / .45 s | Crossfade e expansão controlados pela rolagem |
 | Terminal | Itens ✓ | .5 s cada, cascata até 1,15 s | Entram uma vez, quando visíveis |
 | `levita` | Cartões e maquetes | .3 s | Sobem 4 px no hover |
@@ -593,6 +595,7 @@ Extraído do DOM atual de `public/index.html` em 30/09/2026. Formato: `tag` _(co
 - `p`: Serviços
 - `figcaption`: Tudo começa pelo site. Os serviços mensais trabalham para levar as pessoas certas até ele.
 - `div` _(centro da ilustração orbital)_: Site · sob medida
+- `button` _(com JavaScript pronto)_: Pausar animação / Retomar animação; com movimento reduzido: Animação estática
 - `h3`: Sites sob medida
 - `span`: Projeto · a partir de R$ 1.490
 - `p`: Sites institucionais, landing pages e páginas de serviço, desenhados a partir do que sua empresa precisa comunicar.

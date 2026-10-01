@@ -2,6 +2,8 @@
 
 Data do pedido: 30/09/2026. Fonte: `04 - SITE/public/index.html`, servida por `npm run dev -- --ip 127.0.0.1 --port 8787` a partir do checkout oficial. A prévia incluiu `public/` e o Worker, sem credenciais de envio. Não houve merge, publicação ou mensagem externa.
 
+Este relatório e suas notas referem-se à entrega `044ed3d`. Em 01/10/2026, uma continuação solicitada pelo usuário restaurou giro e onda da órbita de serviços, com pausa e respeito a movimento reduzido. As cores anteriores foram confirmadas como idênticas. [Registro específico](../orbita-2026-10-01/RELATORIO.md). Não houve nova atribuição de notas às alterações posteriores.
+
 ## Base e trabalho preservado
 
 - Branch: `feat/adapt-contato`, criada na pasta oficial a partir da implementação de `feat/variacoes-modelos-conceituais`.

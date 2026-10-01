@@ -251,15 +251,22 @@ html:not(.js) .jm-texto { position: static; opacity: 1; visibility: visible; tra
 .orbita-caixa { position: relative; width: min(520px, 100%); aspect-ratio: 1; }
 .orbita-caixa .brilho { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(125, 211, 168, .18) 0%, rgba(125, 211, 168, 0) 62%); }
 .orbita-caixa .anel-int { position: absolute; inset: 23.08%; border-radius: 50%; border: 1px dashed rgba(16, 32, 28, .2); }
-.orbita { position: absolute; inset: 0;  }
+.orbita { position: absolute; inset: 0; }
 .orbita .anel { position: absolute; inset: 7.69%; border-radius: 50%; border: 1px solid var(--uno-sage-2); }
 .orbita .no { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--uno-mint); box-shadow: 0 0 0 4px var(--uno-off-white); }
-.orbita .rotulo-orbita { position: absolute; width: 130px; margin-left: -65px; text-align: center; font-size: 15px; font-weight: 600; color: var(--uno-pine);  }
+.orbita .rotulo-orbita { position: absolute; width: 130px; margin-left: -65px; text-align: center; font-size: 15px; font-weight: 600; color: var(--uno-pine); }
 .orbita-centro { position: absolute; left: 35.58%; top: 35.58%; width: 28.85%; height: 28.85%; border-radius: 50%; background: var(--uno-pine); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 20px 50px rgba(14, 43, 36, .3); }
 .orbita-centro::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--uno-mint); opacity: 0; }
 .orbita-centro b { font-size: clamp(16px, 2vw, 22px); font-weight: 600; color: var(--uno-off-white); }
 .orbita-centro small { font-size: 13px; color: var(--uno-mint-2); }
 .orbita-fig figcaption { max-width: 400px; text-align: center; font-size: 15px; line-height: 1.55; color: var(--uno-ink-2); }
+.orbita-fig.is-motion-ready .orbita { animation: gira 90s linear infinite; }
+.orbita-fig.is-motion-ready .rotulo-orbita { animation: gira 90s linear infinite reverse; }
+.orbita-fig.is-motion-ready .orbita-centro::before { animation: pulso 3.2s ease-out infinite; }
+.orbita-fig.is-paused .orbita, .orbita-fig.is-paused .rotulo-orbita,
+.orbita-fig.is-paused .orbita-centro::before { animation-play-state: paused; }
+.orbita-controles .btn { min-height: 44px; padding: 8px 18px; font-size: 14px; }
+.orbita-controles .btn[disabled] { cursor: default; }
 .servico { display: grid; grid-template-columns: 1fr auto; gap: 8px 32px; padding: 28px 0; border-top: 1px solid var(--uno-line); }
 .servico:last-child { border-bottom: 1px solid var(--uno-line); }
 .servico h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }

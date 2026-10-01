@@ -150,6 +150,8 @@ Roteiro para registrar evidências de homologação: [docs/CONTATO_HOMOLOGACAO.m
 4. **“Por baixo do capô”:** painel em estilo terminal com o que toda entrega inclui (metas de Core Web Vitals, dados estruturados, sitemap, acessibilidade, anti-spam, LGPD). São metas e itens de entrega, nunca resultados medidos.
 5. **Animações:** a revelação do hero dura 4 s; as sequências dos estudos também duram 4 s de tempo visível real, pausam quando saem da área visível e podem ser repetidas pelo controle “Rever animação”. A preferência por movimento reduzido é aplicada ao carregar a página e quando o sistema muda essa preferência; as animações são suprimidas e os estados finais ficam estáticos.
 
+**Correção solicitada em 01/10/2026:** a ilustração “O site é o centro” mantém o giro contínuo aprovado de 90 s, a contrarrotação dos rótulos e a onda Mint de 3,2 s. Há controle visível para pausar/retomar, pausa fora da área visível e com aba oculta. Sem JavaScript ou com movimento reduzido, a figura fica completa e estática. As cores dos títulos e textos da seção são as mesmas do checkpoint anterior ao adapt; não foram substituídas por preto.
+
 
 ## 0.13 Pasta oficial, análises e Git (D29 · 30/09/2026)
 

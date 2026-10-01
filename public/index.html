@@ -33,14 +33,14 @@
 
 <link rel="preload" href="assets/fonts/inter-normal-400-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css?v=1">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=6">
 <link rel="stylesheet" href="assets/css/conceitos.css?v=3">
 <script>
   /* Marca que o JavaScript está ativo (a jornada só fica presa na tela com JS) e se o visitante pediu menos movimento. */
   document.documentElement.classList.add('js');
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('rm');
 </script>
-<script src="assets/js/site.js?v=5" defer></script>
+<script src="assets/js/site.js?v=6" defer></script>
 
 <script type="application/ld+json">
 {
@@ -485,7 +485,7 @@
     <h2 class="titulo-secao" id="servicos-titulo" style="max-width:820px">O site é o centro. O resto trabalha para ele.</h2>
     <div class="servicos__corpo">
       <figure class="orbita-fig">
-        <div class="orbita-caixa" aria-hidden="true">
+        <div class="orbita-caixa motion-paused" aria-hidden="true">
           <div class="brilho"></div>
           <div class="anel-int"></div>
           <div class="orbita">
@@ -502,6 +502,10 @@
           <div class="orbita-centro"><b>Site</b><small>sob medida</small></div>
         </div>
         <figcaption>Tudo começa pelo site. Os serviços mensais trabalham para levar as pessoas certas até ele.</figcaption>
+        <div class="orbita-controles" hidden>
+          <button type="button" class="btn btn--contorno" data-pausar-orbita hidden>Pausar animação</button>
+          <span class="sr" data-estado-orbita role="status" aria-live="polite"></span>
+        </div>
       </figure>
       <div class="servicos__lista">
         <div class="servico"><h3>Sites sob medida</h3><span class="modelo">Projeto · a partir de R$ 1.490</span><p>Sites institucionais, landing pages e páginas de serviço, desenhados a partir do que sua empresa precisa comunicar.</p></div>

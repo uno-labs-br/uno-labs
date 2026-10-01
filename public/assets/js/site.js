@@ -830,8 +830,34 @@
       var io = new IntersectionObserver(function (entradas) {
         entradas.forEach(function (e) { e.target.classList.toggle('motion-paused', !e.isIntersecting); });
       });
-      doc.querySelectorAll('.hero-palco').forEach(function (e) { io.observe(e); });
+      doc.querySelectorAll('.hero-palco, .orbita-caixa').forEach(function (e) { io.observe(e); });
     }
+  }
+
+  /* A órbita mantém o movimento aprovado, com pausa independente da rolagem. */
+  function iniciarOrbita() {
+    var figura = doc.querySelector('.orbita-fig');
+    if (!figura || !('IntersectionObserver' in window)) return;
+    var botao = figura.querySelector('[data-pausar-orbita]');
+    var estado = figura.querySelector('[data-estado-orbita]');
+    if (!botao) return;
+    var pausado = false;
+    function atualizar() {
+      var reduzido = movimentoEstudosReduzido();
+      figura.classList.toggle('is-paused', pausado);
+      botao.disabled = reduzido;
+      botao.textContent = reduzido ? 'Animação estática' : pausado ? 'Retomar animação' : 'Pausar animação';
+      if (estado) estado.textContent = reduzido ? 'Sua preferência por movimento reduzido mantém a imagem estática.' : pausado ? 'Animação pausada.' : 'Animação em movimento.';
+    }
+    botao.addEventListener('click', function () { pausado = !pausado; atualizar(); });
+    if (mqlMovimentoEstudos) {
+      if (mqlMovimentoEstudos.addEventListener) mqlMovimentoEstudos.addEventListener('change', atualizar);
+      else mqlMovimentoEstudos.addListener(atualizar);
+    }
+    atualizar();
+    botao.hidden = false;
+    botao.parentElement.hidden = false;
+    figura.classList.add('is-motion-ready');
   }
 
   /* ---------- 8. Ano do rodapé ---------- */
@@ -841,6 +867,7 @@
 
   function iniciar() {
     iniciarPreferencias();
+    iniciarOrbita();
     iniciarEscalas();
     iniciarEstudos();
     iniciarLuz();
