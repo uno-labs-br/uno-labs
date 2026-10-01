@@ -50,6 +50,10 @@ Quando o pedido autorizar uma mudança no site, executar o fluxo até entregar a
 - Se a seleção de Luna xHigh estiver indisponível, informar a limitação e continuar com o modelo disponível dentro do escopo autorizado. Nunca afirmar que usou Luna sem realmente selecioná-lo.
 - Estas instruções orientam a escolha dos subagentes; um arquivo Markdown não altera automaticamente o modelo da conversa principal nem as configurações globais do aplicativo.
 
+## Preferência dos workers — decisão de 30/09/2026
+
+- Continuar usando Gemini 3.8 Flash para os workers do OpenCode. Caso Muse ou DeepSeek sejam necessários, dar preferência às rotas do provedor `private-beta-llm` (beta-llm), conferindo o catálogo disponível antes da chamada. Esta preferência não altera a proibição de chamar GPT-6 Luna pelo OpenCode: Luna somente como subagente direto do Codex.
+
 ## Localização e manutenção das regras
 
 - O nome reconhecido para estas instruções é **`AGENTS.md`**, no plural. Mantê-lo na raiz do projeto/repositório, fora da pasta pública do site.
