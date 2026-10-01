@@ -378,14 +378,20 @@ html:not(.js) .jm-texto { position: static; opacity: 1; visibility: visible; tra
 
 /* ---------- Equipe ---------- */
 .equipe { padding: var(--secao) 0; border-top: 1px solid rgba(16, 32, 28, .09); }
-.pessoas { margin-top: 64px; display: grid; gap: 32px; }
-@media (min-width: 768px) { .pessoas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; } .pessoa + .pessoa { border-left: 1px solid var(--uno-line); padding-left: 32px; } .pessoa { padding-right: 32px; } }
-.pessoa { display: flex; flex-direction: column; gap: 18px; }
-.pessoa > div { display: flex; flex-direction: column; gap: 8px; }
-.pessoa .iniciais { width: 96px; height: 96px; border-radius: 50%; background: var(--uno-off-white-2); border: 1px solid rgba(16, 32, 28, .1); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600; color: var(--uno-pine); }
-.pessoa h3 { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
-.pessoa p { font-size: 16px; line-height: 1.55; color: var(--uno-ink-2); }
-@media (max-width: 767px) { .pessoa { flex-direction: row; align-items: center; gap: 16px; padding: 16px 0; border-top: 1px solid var(--uno-line); } .pessoa .iniciais { width: 60px; height: 60px; font-size: 18px; flex: none; } .pessoa h3 { font-size: 19px; } .pessoa p { font-size: 14px; } .pessoas { gap: 0; margin-top: 28px; } }
+.equipe .pessoas { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 48px; }
+.equipe .pessoa { display: flex; flex-direction: column; border-top: 1px solid var(--uno-line); padding-top: 28px; }
+.equipe .pessoa img { width: 100%; max-width: 320px; aspect-ratio: 1 / 1; height: auto; object-fit: cover; display: block; border-radius: var(--uno-radius-sm); }
+.equipe .pessoa h3 { margin: 20px 0 0; font-size: 26px; line-height: 1.2; font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
+.equipe .pessoa p { margin: 16px 0 0; font-size: 17px; line-height: 1.65; color: var(--uno-ink-2); max-width: 58ch; }
+.equipe .pessoa .cargo { margin: 6px 0 0; font-size: 15px; line-height: 1.45; font-weight: 600; color: var(--uno-pine-2); letter-spacing: -0.01em; }
+.equipe .pessoa .cargo + p { margin-top: 16px; }
+.equipe .pessoa p + p { margin-top: 12px; }
+@media (min-width: 700px) {
+  .equipe .pessoas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 36px; }
+}
+@media (min-width: 1100px) {
+  .equipe .pessoas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+}
 
 /* ---------- Blog ---------- */
 .blog { padding: var(--secao) 0; background: var(--uno-off-white-2); }
@@ -627,7 +633,6 @@ html:not(.js) .j-det { visibility: visible; }
   .hero__acoes .link-sublinhado { justify-content: center; }
   .terminal__corpo { font-size: 13px; }
   .canal b { font-size: 16px; }
-  .pessoa p { font-size: 16px; }
   .invest-cartao .btn { width: 100%; }
   .visualizador__cab { gap: 12px; }
   .visualizador__cab button { padding-inline: 14px; }
