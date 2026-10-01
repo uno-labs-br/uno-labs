@@ -1,6 +1,6 @@
 # UNO Labs — Como o site foi construído
 
-**Versão 1.1 · 30/09/2026 · Referente ao checkout oficial `04 - SITE/`**
+**Versão 1.3 · 30/09/2026 · Referente ao checkout oficial `04 - SITE/`**
 
 Este documento descreve a implementação local e a hospedagem pretendida. Não comprova publicação em `unolabs.com.br`; conferir a integração na `main`, as pendências e o estado real do deploy.
 
@@ -22,8 +22,8 @@ Este documento descreve, com precisão suficiente para ser reproduzido, **o que*
 - **Conceito criativo:** *Precisão que se revela* — o site se apresenta como engenharia visível: grade técnica, desenho que vira produto, checklist de entrega em terminal.
 - **Diferencial de experiência:** a seção “Da busca ao contato” fica **presa na tela** enquanto a pessoa rola, avançando por 4 etapas (Encontra → Entende → Confia → Chama) com uma demonstração que muda a cada etapa.
 - **Prova sem cases:** três **estudos conceituais** de negócios fictícios, cada um com identidade própria, rotulados como conceituais.
-- **Tecnologia:** HTML, CSS e JavaScript puros, sem framework e sem etapa de build. Hospedagem em **Cloudflare Workers (Static Assets)**; um Worker de ~170 linhas recebe o formulário e repassa ao n8n (→ Telegram e e-mail). Há alternativa em PHP para HostGator.
-- **Peso da home (transferido, com gzip):** HTML ≈ 23 KB, CSS ≈ 10 KB, JS ≈ 5 KB, Inter ≈ 48 KB. Nenhuma imagem de foto. Nenhum script de terceiros no carregamento.
+- **Tecnologia:** HTML, CSS e JavaScript puros, sem framework e sem etapa de build. Hospedagem em **Cloudflare Workers (Static Assets)**; o formulário envia `POST /api/contato` ao Worker, que encaminha ao n8n para envio via SMTP HostGator à caixa `contato@unolabs.com.br`. Há alternativa técnica em PHP para HostGator, fora do fluxo vigente.
+- **Peso da home (medição histórica, com gzip):** HTML ≈ 23 KB, CSS ≈ 10 KB, JS ≈ 5 KB, Inter ≈ 48 KB. Essa medição antecede a inclusão recente de imagens conceituais e está superada; não foi feita nova medição nesta atualização. Nenhum script de terceiros no carregamento inicial.
 
 ---
 
@@ -34,11 +34,12 @@ Este documento descreve, com precisão suficiente para ser reproduzido, **o que*
 | Marca | UNO Labs (nome que substituiu o projeto “Audaro – Engenharia Digital”, que nunca existiu publicamente). A “Audaro – Engenharia de Resultado” é outra empresa e não aparece no site |
 | Serviços vendidos | Sites sob medida (projeto), SEO local, Google Ads, Meta Ads e manutenção (mensais). E-commerce fora do escopo por enquanto |
 | Preço de entrada | “A partir de R$ 1.490 em até 10x sem juros”. Projetos-alvo até ~R$ 10 mil |
-| Garantia | Cobre só falhas no que foi entregue, por [X] dias. Mudanças entram no plano de manutenção |
+| Garantia e prazo | Os termos e prazos por escopo são informados na proposta. A home não anuncia números nem usa marcadores provisórios |
 | Onde atende | Presencial na Grande Vitória (Vitória, Vila Velha, Serra, Cariacica — ES) e em Curitiba (PR); remoto em todo o Brasil |
 | Público | Empresas que “tratam o digital como parte do negócio”: arquitetura e interiores, engenharia e construção, clínicas e consultórios, advocacia/contabilidade/consultorias, gastronomia e hospitalidade autorais |
-| Equipe | Urias Loures e Bruno Gonzaga (criadores), Milena Dias (Publicidade e Propaganda, UVV). Funções a preencher |
-| Canais | WhatsApp comercial e e-mail do domínio (a preencher). Sem CNPJ e sem Perfil da Empresa no Google por enquanto |
+| Equipe | Urias Loures e Bruno Gonzaga são criadores; suas funções específicas não estão definidas. Milena Dias está em formação em Publicidade e Propaganda na UVV. Não atribuir cargos não informados |
+| Canais | `contato@unolabs.com.br`; WhatsApp `(27) 93618-5141`, `+5527936185141`, link `https://wa.me/5527936185141`. Dados confirmados em 30/09/2026; funcionamento não homologado |
+| Dados empresariais | CNPJ e razão social ainda precisam ser informados ou confirmados; Perfil da Empresa no Google depende de endereço verificável |
 | Prova social | Ainda não há cases publicáveis. Por isso, estudos conceituais explicitamente rotulados |
 
 **Posicionamento em uma frase:** um time pequeno que trata site como engenharia — e mostra o método em vez de prometer resultado.
@@ -52,7 +53,7 @@ Este documento descreve, com precisão suficiente para ser reproduzido, **o que*
 ### 3.1 A ideia
 Empresas pequenas desconfiam de agências porque não veem o que está sendo feito. A home resolve isso **tornando o processo visível**:
 
-- No **hero**, um desenho técnico (wireframe com cotas e grade de 12 colunas) é “varrido” por uma linha verde e se transforma no site pronto de um restaurante fictício. Um cartão mostra o código SEO (title, meta e Schema.org) e outro mostra o restaurante aparecendo na busca local. Em 10 segundos, a pessoa vê *projeto → site → ser encontrado*.
+- No **hero**, um desenho técnico (wireframe com cotas e grade de 12 colunas) é “varrido” por uma linha verde e se transforma no site pronto de um restaurante fictício. Um cartão mostra o código SEO (title, meta e Schema.org) e outro mostra o restaurante aparecendo na busca local. A revelação é uma animação finita de 4 s que termina com o site visível.
 - Na **jornada presa na tela**, cada rolagem mostra uma etapa da decisão do cliente final e qual serviço atua nela.
 - No **terminal “por baixo do capô”**, a lista técnica de entrega aparece como um comando sendo verificado.
 - Nos **estudos conceituais**, três negócios muito diferentes provam que não há modelo pronto.
@@ -142,7 +143,7 @@ A ordem segue a lógica de decisão de um comprador desconfiado: **o que é → 
 | # | Seção (âncora) | Função na venda |
 |---|---|---|
 | 1 | Cabeçalho | Navegação curta + CTA sempre visível |
-| 2 | Hero (`#topo`) | Promessa, para quem, preço de entrada e demonstração em 10 s |
+| 2 | Hero (`#topo`) | Promessa, para quem, preço de entrada e demonstração visual |
 | 3 | Jornada presa (`#abordagem`) | Explica o mecanismo: cada serviço atua num momento da decisão do cliente final |
 | 4 | Serviços (`#servicos`) | O site no centro, os mensais em órbita; lista com modelo de cobrança |
 | 5 | Por baixo do capô | Autoridade técnica com metas verificáveis, sem prometer resultado |
@@ -180,26 +181,26 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 - Entradas em sequência (`aparece`, 0,9 s): texto 0,35 s, fatos 0,5 s, palco 0,6 s.
 
 **Palco desktop (composição fixa de 1240 × 640, escalada à largura):**
-- **Janela do navegador** em `left: 180; width: 880`, barra de 40 px com “Estudo conceitual · Casa Noma” e um selo que alterna “Projeto técnico” (claro) ↔ “Site publicado” (escuro).
-- Área de 878 × 549: por baixo, **desenho técnico em SVG** (12 colunas menta, contornos a 42% de opacidade, cotas “12 COL · GUTTER 24”, “H1 · 88 PX”, “FOTO · 586 × 480”, “RESERVA EM 3 TOQUES”). Por cima, o **site pronto da Casa Noma** revelado de cima para baixo com `clip-path` (`revela`, ciclo de 10 s) e uma **linha de varredura** menta com brilho que desce junto (`varre`).
-- **Cartão de código** (fundo `--uno-pine-deep`, Plex Mono 12 px) em `left: 0; top: 330; width: 356`: `<title>`, `<meta description>` e JSON-LD `Restaurant` com cursor piscando.
-- **Cartão de busca** (branco) em `right: 0; top: 96; width: 340`: campo “restaurante para jantar em vitória”, resultado azul estilo Google e o selo “Encontrado na busca local” com ponto pulsante.
+- **Janela do navegador** em `left: 180; width: 880`, barra de 40 px com “Estudo conceitual · Casa Noma” e um selo que alterna “Projeto técnico” (claro) ↔ “Apresentação visual” (escuro).
+- Área de 878 × 549: por baixo, **desenho técnico em SVG** (12 colunas menta, contornos a 42% de opacidade, cotas “12 COL · GUTTER 24”, “H1 · 88 PX”, “FOTO · 586 × 480”, “RESERVA EM 3 TOQUES”). Por cima, o **site pronto da Casa Noma** é revelado de cima para baixo com `clip-path` (`revela`, 4 s finitos) e uma **linha de varredura** menta com brilho que desce junto (`varre`, 4 s finitos).
+- **Cartão de código** (fundo `--uno-pine-deep`, Plex Mono 12 px) em `left: 0; top: 330; width: 356`: `<title>`, `<meta description>` e JSON-LD `Restaurant` com cursor visual estático.
+- **Cartão de busca** (branco) em `right: 0; top: 96; width: 340`: campo “restaurante para jantar em vitória”, resultado azul estilo Google e o selo “Encontrado na busca local” com ponto menta.
 - Os dois cartões sobem 4 px no hover.
 
 **Palco celular/tablet (< 1100; composição 350 × 610, até 420 px de largura):** um celular (236 × 492) com o desenho técnico de 4 colunas sendo revelado no site mobile da Casa Noma, e o cartão de código ocupando a largura toda na base.
 
-**Ciclo de 10 s do palco:** 0–1 s desenho técnico; 1–5 s varredura revela o site; 5–8,8 s site parado (selo “Site publicado”); 8,8–9,5 s o site some; volta ao desenho.
+**Animação do palco:** a revelação, a varredura e a troca do selo são finitas e duram 4 s; ao final, o site fica visível e o selo mostra “Apresentação visual”. Com movimento reduzido, o estado final aparece sem animação.
 
 ### 6.3 Jornada “Da busca ao contato” (presa na tela)
 **Por que existe:** explicar, sem jargão, que cada serviço atua num momento da decisão do cliente final. A primeira versão tinha abas clicáveis; foi trocada por rolagem presa (pedido do usuário: “quando a pessoa rolasse… ficasse parado… e ia mudando de um para o outro”).
 
 **Mecânica:**
-- A seção tem **400vh** de altura; dentro dela, um bloco `position: sticky` com a altura da janela menos o cabeçalho.
-- Progresso `p` (0–1) = quanto já se rolou dentro da faixa presa. **Etapa = ⌊p × 4⌋**; o avanço dentro da etapa (`--sub`, 0–1) preenche a linha de progresso. A rolagem é a nativa do navegador (sem “sequestro” de scroll).
-- Clicar numa etapa rola suavemente até ela (posição k/4 + 6% da faixa).
-- Com **movimento reduzido**, a seção deixa de ficar presa: vira um bloco normal com abas clicáveis (decisão D27). Sem JavaScript, todos os textos aparecem abertos.
+- O modo preso, quando cabe, ocupa **três alturas estáveis de tela (`svh`)**; o bloco interno fica `position: sticky` com a altura útil medida menos o cabeçalho.
+- O JavaScript mede o conteúdo e a altura útil da janela. O sticky só é ativado quando a composição cabe: no desktop, a escala depende da largura e a altura dos detalhes é conferida; em telas menores, o texto mais alto e a composição mobile de 404 px entram no cálculo. Se não couber, a jornada vira uma sequência linear com as quatro explicações completas.
+- Progresso `p` (0–1) = quanto já se rolou no percurso sticky disponível. Os quatro estágios dividem o percurso em intervalos iguais; **etapa = ⌊p × 4⌋**, e o avanço dentro da etapa (`--sub`, 0–1) preenche a linha de progresso. A rolagem é nativa. Clicar numa etapa rola até um ponto dentro do intervalo correspondente.
+- Com **movimento reduzido**, a jornada não fica presa e apresenta as quatro etapas completas em sequência estática. Sem JavaScript, os textos também aparecem abertos.
 
-**Desktop (≥ 1100): composição fixa de 1240 px** escalada por `--je = min(1, max(0.55, (altura − 40)/650), (largura/2 − 12)/648)`.
+**Desktop (≥ 1100): composição-base de 1240 px**, escalada por `--je = min(1, (largura − 64)/1296)`; o sticky depende também da altura útil medida.
 - Coluna esquerda (5/12, altura mínima 610 px para não “pular”): rótulo menta, H2 46 px, introdução, e a lista de 4 etapas.
   - Cada etapa: nó circular de 32 px com número em Plex Mono; nome 17 px. Estados: *futura* (borda translúcida, texto `#8FA59A`), *feita* (borda menta), *ativa* (nó menta preenchido com anel de 6 px, nome off-white).
   - Linha vertical de 2 px entre os nós, preenchida em menta conforme o progresso.
@@ -212,17 +213,19 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
   - Os cartões flutuantes (300 px) ficam em `right: −28px; bottom: 0` e entram com atraso de .15 s.
 - Dica “Role para avançar” (mouse desenhado com rodinha animada) no rodapé do bloco; some na última etapa e no celular.
 
-**Celular/tablet (< 1100):** rótulo, H2 28 px (36 px no tablet), **4 abas com barra de progresso** (a ativa preenche conforme `--sub`), celular de 195 × 404 com as mesmas 4 cenas em versão mobile, cartões flutuantes de 178 px e texto curto de cada etapa (troca com fade + 12 px). A composição escala por `--jm` para caber na altura (até 1,4× no tablet).
+**Celular/tablet (< 1100):** quando a composição cabe e o sticky está ativo, há rótulo, H2 28 px (36 px no tablet), **4 abas com barra de progresso** (a ativa preenche conforme `--sub`), celular de 195 × 404 com as mesmas 4 cenas em versão mobile, cartões flutuantes de 178 px e texto curto da etapa (troca com fade + 12 px). A composição escala por `--jm` e a medição impede ativar o sticky se o conteúdo não couber. No modo linear, as abas somem e as quatro explicações ficam visíveis em sequência.
+
+**Registro de verificação local em 30/09/2026:** em Chromium emulado, a medição manteve o layout linear em 320 × 568, 360 × 640, 844 × 390 e 1280 × 720; o modo sticky coube em 390 × 844, 768 × 1024 e 1440 × 900. Movimento reduzido apresenta as quatro explicações estáticas. A verificação foi somente em navegador emulado, sem dispositivos físicos; não é prova de envio ou entrega SMTP real.
 
 ### 6.4 Serviços
 - Título “O site é o centro. O resto trabalha para ele.” (máx. 820 px).
 - Grade 5 / 1 / 6:
-  - **Órbita** (520 px; 280 px no celular): halo radial menta, anel interno tracejado, anel externo que **gira em 90 s** com quatro nós menta e os rótulos SEO local, Google Ads, Meta Ads e Manutenção (que giram ao contrário para ficarem sempre de pé). No centro, círculo `--uno-pine` “Site / sob medida” com anel que pulsa (3,2 s). Legenda abaixo.
+  - **Órbita** (520 px; 280 px no celular): halo radial menta, anel interno tracejado e anel externo estático com quatro nós menta e os rótulos SEO local, Google Ads, Meta Ads e Manutenção. No centro, círculo `--uno-pine` “Site / sob medida”. Legenda abaixo.
   - **Lista** de 5 serviços separados por linhas de 1 px: nome (24 px) + modelo de cobrança à direita (“Projeto · a partir de R$ 1.490”, “Mensal”, “Mensal · mídia à parte”, “Plano mensal”) + descrição.
 
 ### 6.5 Por baixo do capô
 - Grade 5 / 1 / 6. Texto: “Engenharia que você não vê — e o Google sente.” e a ressalva “São metas de projeto… não promessas de resultado”.
-- **Terminal** (fundo `--uno-pine-deep`, raio 22 px, Plex Mono 13,5 px): cabeçalho “unolabs / checklist-de-entrega” e status “pronto para publicar”; comando `$ uno entrega --verificar`; **8 itens com ✓** que aparecem em cascata (.5 s cada, atraso de 0,1 a 1,15 s) quando o terminal entra na tela; cursor piscando no fim.
+- **Terminal** (fundo `--uno-pine-deep`, raio 22 px, Plex Mono 13,5 px): cabeçalho “unolabs / checklist-de-entrega” e rótulo “itens previstos”; comando `$ uno entrega --verificar`; **8 itens “A verificar”** que aparecem em cascata (.5 s cada, atraso de 0,1 a 1,15 s) quando o terminal entra na tela; cursor visual estático no fim.
 - Os itens são uma lista acessível (`role="list"`); o comando e o cursor são decorativos.
 
 ### 6.6 Estudos de direção
@@ -281,7 +284,7 @@ Referências técnicas: [padrão de botão básico, W3C](https://www.w3.org/WAI/
 - 9 perguntas em `<details>` nativos (a primeira aberta), sinal “+” que gira 45° ao abrir. Espelhadas no JSON-LD `FAQPage`.
 
 ### 6.13 Contato
-- Fundo `--uno-off-white-2`. Esquerda (5/12): título médio, parágrafo e canais diretos (WhatsApp, e-mail) em linhas com seta diagonal — ocultos até serem preenchidos.
+- Fundo `--uno-off-white-2`. Esquerda (5/12): título médio, parágrafo e canais diretos: WhatsApp `(27) 93618-5141` (`https://wa.me/5527936185141`) e `contato@unolabs.com.br`. Os contatos foram informados; a implementação dos links e sua abertura real ainda precisam ser conferidas.
 - Direita (6/12): cartão branco com o formulário:
   - Nome, Empresa, WhatsApp ou e-mail, Site atual (opcional) em duas colunas; “Do que você precisa?” em pílulas com caixa de seleção; “O que você quer construir ou melhorar?” (área de texto com ajuda); “Investimento previsto” (faixas até R$ 3 mil, 3–6, 6–10, acima de 10, não definido).
   - Campo-armadilha invisível para robôs; espaço opcional para o Turnstile.
@@ -292,7 +295,7 @@ Referências técnicas: [padrão de botão básico, W3C](https://www.w3.org/WAI/
 - Grade 4 / 1 / 2 / 2 / 3: logo 60 px + assinatura “Presença digital que gera oportunidades.”; Navegação; Serviços; Atendimento (cidades). Linha final com © (ano automático) e link da política. No celular, duas colunas.
 
 ### 6.15 Páginas auxiliares
-- `/politica-de-privacidade/`: texto específico do fluxo real (formulário → servidor → n8n → Telegram e e-mail), operadores citados, base legal LGPD, direitos, guarda. Trechos a preencher destacados em amarelo.
+- `/politica-de-privacidade/`: texto específico do fluxo previsto (formulário → Worker `/api/contato` → n8n → SMTP HostGator → `contato@unolabs.com.br`), operadores, base legal LGPD, direitos e guarda. Responsável, contato de privacidade, local do n8n, prazo de guarda e revisão jurídica continuam pendentes; não presumir que o contato comercial seja o contato de privacidade.
 - `/404.html`: título “Esta página não existe — ou mudou de lugar.”, botões para o início e o contato, `noindex`.
 
 ---
@@ -303,19 +306,15 @@ Referências técnicas: [padrão de botão básico, W3C](https://www.w3.org/WAI/
 |---|---|---|---|
 | `sobe` | Linhas do H1 | 1 s, `cubic-bezier(.16,.84,.2,1)` | Texto sobe de dentro de uma máscara |
 | `aparece` | Blocos do hero | .9 s ease, atrasos .35/.5/.6 s | Opacidade 0→1 e 16 px para cima |
-| `revela` | Palco do hero | 10 s, `cubic-bezier(.65,0,.35,1)`, infinito | `clip-path` revela o site sobre o desenho técnico |
-| `varre` | Palco do hero | 10 s, mesma curva | Linha menta com brilho acompanha a revelação |
-| `st1` / `st2` | Selo do palco | 10 s linear | Alterna “Projeto técnico” ↔ “Site publicado” |
-| `pisca` | Cursores | 1,1 s `steps(1)` | Cursor de terminal |
-| `pulso` | Ponto “encontrado” e centro da órbita | 2,4 s / 3,2 s | Anel que expande 2,8× e some |
-| `gira` | Órbita de serviços | 90 s linear | Anel gira; rótulos giram ao contrário |
-| `rola` | Dica da jornada | 1,6 s | Rodinha do mouse desce 6 px |
+| `revela` | Palco do hero | 4 s, `cubic-bezier(.65,0,.35,1)`, finita | `clip-path` revela o site sobre o desenho técnico e termina no estado final |
+| `varre` | Palco do hero | 4 s, mesma curva, finita | Linha menta com brilho acompanha a revelação e desaparece ao final |
+| `st1` / `st2` | Selo do palco | 4 s linear, finita | Troca “Projeto técnico” por “Apresentação visual” |
 | Jornada | Cenas, detalhes, cartões | .6 s / .5 s / .45 s | Crossfade e expansão controlados pela rolagem |
 | Terminal | Itens ✓ | .5 s cada, cascata até 1,15 s | Entram uma vez, quando visíveis |
 | `levita` | Cartões e maquetes | .3 s | Sobem 4 px no hover |
 | Movimento autoral dos estudos | Módulo, Atria, Noma | Finita (~4 s reais; exatamente 4,00 s calculados nas 6 versões desk/mob) | Inspeção estrutural em Módulo (cotas, marcas e cascata de serviços no desktop; traçado técnico contínuo no celular com CTA sempre legível), abertura editorial em Atria (máscara de faixa, respiração da foto e confirmação de agenda), acomodação cinematográfica e luz âmbar em Casa Noma; disparo somente sob exposição significativa (≥50% na área útil sem header), pausa fora da tela e conclusão sem pausa ociosa |
 
-**Regras:** nada se move sem explicar algo; nenhum movimento automático bloqueia a leitura; com `prefers-reduced-motion: reduce`, todas as animações e transições são desligadas, o palco mostra direto o site publicado e a jornada deixa de ficar presa.
+**Regras:** nada se move sem explicar algo; nenhum movimento automático bloqueia a leitura; com `prefers-reduced-motion: reduce`, todas as animações e transições são desligadas, o palco mostra direto o estado final da apresentação visual e a jornada deixa de ficar presa.
 
 ---
 
@@ -385,13 +384,13 @@ Cada espaço reservado é `<div class="estudo estudo--desk|mob" data-estudo="atr
 ---
 
 ## 13. Formulário e backend
-Fluxo: **navegador → `POST /api/contato` (JSON) → Worker (ou PHP) → webhook do n8n → Telegram (bot privado) + e-mail (SMTP HostGator)**.
+Fluxo vigente: **navegador → `POST /api/contato` (JSON) → Worker → webhook do n8n → SMTP HostGator → `contato@unolabs.com.br`**. A rota PHP é uma alternativa técnica e não integra a homologação deste fluxo.
 
 Validação no servidor: origem permitida (cabeçalho `Origin`), `Content-Type` JSON, corpo ≤ 16 KB, limpeza de caracteres de controle e limite por campo, listas fechadas para serviços e faixas de investimento, nome/empresa ≥ 2 caracteres, canal = e-mail válido ou ≥ 10 dígitos, contexto ≥ 10 caracteres. Campo-armadilha preenchido → responde sucesso e descarta. Turnstile obrigatório se a chave secreta existir. Chamada ao n8n com o token `X-Uno-Token` e tempo-limite de 10 s.
 
-Respostas: `200 {ok:true}`, `422` (campos), `403` (origem/Turnstile), `400/413/415` (malformado), `502` (n8n falhou), `503` (não configurado). O navegador só mostra sucesso com `200` + `ok: true`; no n8n, o webhook deve responder “When Last Node Finishes” para que o sucesso signifique aviso entregue.
+Contrato vigente esperado: depois de o nó de e-mail confirmar aceitação pelo SMTP, o n8n responde `{"ok":true,"encaminhamento":"smtp_aceito"}`. O Worker deve rejeitar resposta 2xx genérica; `200` com esse corpo comprova a aceitação reportada pelo fluxo backend/SMTP, mas não o recebimento na caixa. A aceitação do backend, o encaminhamento aceito pelo SMTP e a mensagem observada na caixa são evidências distintas. Os demais códigos documentados são `422` (campos), `403` (origem/Turnstile), `400/413/415` (malformado), `502` (n8n falhou) e `503` (não configurado). Configuração real, credenciais e remetente autorizado não estão comprovados.
 
-Testes feitos: 11 cenários do Worker (rotas, 404, redirecionamento de barra, origem, validação, armadilha, método, cabeçalhos) e 4 do PHP, com um n8n simulado; ponta a ponta no navegador (erros de validação, sucesso, falha com dados preservados).
+Testes locais documentados: 11 cenários do Worker (rotas, 404, redirecionamento de barra, origem, validação, armadilha, método, cabeçalhos) e 4 do PHP, com um n8n simulado; ponta a ponta no navegador (erros de validação, sucesso, falha com dados preservados). Isso não é homologação de SMTP real nem prova de recebimento na caixa. O roteiro de evidências fica em [CONTATO_HOMOLOGACAO.md](CONTATO_HOMOLOGACAO.md).
 
 ---
 
@@ -450,13 +449,19 @@ Testes feitos: 11 cenários do Worker (rotas, 404, redirecionamento de barra, or
 ---
 
 ## 17. Pendências (antes e depois de publicar)
-- Prazo da garantia ([X] dias) e prazo típico do projeto ([X] semanas).
-- Funções e formação da equipe; depois, fotos.
-- WhatsApp comercial e e-mail do domínio (HTML e JSON-LD).
-- Política de privacidade: responsável, e-mail, onde roda o n8n, prazo de guarda, data; revisão jurídica.
-- Bot do Telegram e fluxo do n8n.
+
+Os contatos confirmados já estão no HTML e no JSON-LD; os links foram conferidos localmente. Isso não comprova funcionamento da caixa nem recebimento de e-mail.
+
+- Pacote inicial que cabe no preço público a partir de R$ 1.490: escopo e entregáveis ainda não definidos.
+- CNPJ e razão social: informar ou confirmar os dados empresariais.
+- Política de privacidade: responsável, contato de privacidade, onde roda o n8n, prazo de guarda e data; revisão jurídica. Não presumir que o e-mail comercial seja o contato de privacidade.
+- Configurar e homologar o Worker, o webhook do n8n e o SMTP HostGator, incluindo credenciais e remetente autorizado, sem registrar segredos na documentação. Resposta exigida do n8n após aceitação do SMTP: `{"ok":true,"encaminhamento":"smtp_aceito"}`.
+- Homologação real em três etapas: resposta de aceitação do backend, confirmação de encaminhamento aceito pelo SMTP e recebimento observado na caixa `contato@unolabs.com.br`.
+- Funções específicas de Urias e Bruno seguem indefinidas; não atribuir cargos. Milena está em formação em Publicidade e Propaganda na UVV; confirmar fotos se forem usadas.
+- Termos e prazos de garantia/projeto são definidos na proposta de cada escopo; não preencher números ou marcadores provisórios na home.
 - Turnstile (opcional, recomendado quando começar a chegar spam).
-- CNPJ e Perfil da Empresa no Google (quando existirem, acrescentar endereço/telefone ao JSON-LD).
+- Perfil da Empresa no Google depende de endereço verificável (quando existir, acrescentar dados confirmados ao JSON-LD).
+- Verba de mídia paga diretamente às plataformas: confirmar.
 - Instagram e LinkedIn (`sameAs`).
 - Cases reais com autorização (ex.: La Bella Mesa) substituindo ou somando-se aos estudos.
 - 4–6 artigos pilares do blog e migração para Astro (D28).
@@ -503,7 +508,10 @@ Pasta `docs/referencias-visuais/` (capturas da versão publicada, 1440 × 900 e 
 
 ## Apêndice A — Texto exato de cada seção
 
-Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: texto. Itens marcados como _ilustração_ são texto das maquetes (não lidos por leitores de tela). Marcadores `[X]` e `[Função no time]` são pendências.
+Extraído do DOM atual de `public/index.html` em 30/09/2026. Formato: `tag` _(contexto)_: texto. As alternativas responsivas e os textos visíveis das ilustrações fora de templates aparecem separados; mensagens condicionais do formulário são mantidas. As demonstrações são conceituais e não representam resultados reais. O apêndice exclui o conteúdo das maquetes em `<template>`, do `<dialog>` fechado por padrão e de elementos com o atributo `hidden`.
+
+### Acesso rápido
+- `a`: Pular para o conteúdo
 
 ### Cabeçalho
 - `a`: Serviços
@@ -520,9 +528,9 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 - `a`: Conversar sobre meu projeto
 
 ### Presença digital que atrai clientes. (`#topo`)
-- `p`: Criação de sites · SEO local · Google Ads · Meta Ads
-- `h1`: Presença digital que atrai clientes.
-- `p`: Sites profissionais, SEO local e anúncios no Google e no Meta para empresas que querem ser encontradas com facilidade — e escolhidas com confiança.
+- `p` _(desktop)_: Criação de sites · SEO local · Google Ads · Meta Ads
+- `p` _(celular)_: Sites · SEO local · Google Ads · Meta Ads
+- `p`: Sites profissionais, SEO local e anúncios no Google e no Meta para empresas que querem ser encontradas com facilidade e escolhidas com confiança.
 - `a`: Conversar sobre meu projeto
 - `a`: Ver estudos de projeto
 - `dt`: A partir de R$ 1.490
@@ -531,183 +539,129 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 - `dd`: Grande Vitória e Curitiba
 - `dt`: Um só time
 - `dd`: site, SEO e anúncios
-- `div` _(palco desktop, ilustração)_: Estudo conceitual · Casa Noma Projeto técnico Site publicado
-- `div` _(palco desktop, ilustração)_: seo / casa-noma Schema.org
-- `div` _(palco desktop, ilustração)_: <title> Casa Noma · Vitória, ES </title>
-- `div` _(palco desktop, ilustração)_: <meta name = "description"
-- `div` _(palco desktop, ilustração)_: content = "Menu de estação e reservas" >
-- `div` _(palco desktop, ilustração)_: {
-- `div` _(palco desktop, ilustração)_: "@type" : "Restaurant",
-- `div` _(palco desktop, ilustração)_: "servesCuisine" : "Brasileira",
-- `div` _(palco desktop, ilustração)_: "areaServed" : "Vitória, ES"
-- `div` _(palco desktop, ilustração)_: }
-- `div` _(palco desktop, ilustração)_: restaurante para jantar em vitória
-- `div` _(palco desktop, ilustração)_: Casa Noma › reservas Casa Noma — Cozinha de estação em Vitória Menu de estação e reservas on-line. Ter a sáb, 19h às 23h30.
-- `div` _(palco desktop, ilustração)_: Encontrado na busca local
-- `div` _(palco celular, ilustração)_: seo / casa-noma Schema.org
-- `div` _(palco celular, ilustração)_: <title> Casa Noma · Vitória, ES </title>
-- `div` _(palco celular, ilustração)_: "@type" : "Restaurant",
-- `div` _(palco celular, ilustração)_: "areaServed" : "Vitória, ES"
+- `svg text` _(ilustração desktop)_: 12 COL · GUTTER 24; H1 · 88 PX; FOTO · 586 × 480; RESERVA EM 3 TOQUES
+- `svg text` _(ilustração celular)_: 4 COL; FOTO · 350 × 340; RESERVA FIXA
+- `div` _(cartão visual SEO desktop)_: seo / casa-noma; Schema.org; `<title>Casa Noma · Vitória, ES</title>`; `<meta name="description" content="Menu de estação e reservas">`; `"@type": "Restaurant"`; `"servesCuisine": "Brasileira"`; `"areaServed": "Vitória, ES"`
+- `div` _(cartão visual SEO celular)_: seo / casa-noma; Schema.org; `<title>Casa Noma · Vitória, ES</title>`; `"@type": "Restaurant"`; `"areaServed": "Vitória, ES"`
+- `div` _(resultado de busca ilustrativo)_: restaurante para jantar em vitória; Casa Noma › reservas; Casa Noma: Cozinha de estação em Vitória; Menu de estação e reservas on-line. Ter a sáb, 19h às 23h30.; Encontrado na busca local
+- `figcaption` _(alternativa sem JavaScript)_: Casa Noma, estudo conceitual de direção visual.
 
 ### Antes de ligar, seu cliente pesquisa. (`#abordagem`)
-- `p` _(desktop)_: Da busca ao contato
-- `h2` _(desktop)_: Antes de ligar, seu cliente pesquisa.
-- `p` _(desktop)_: São quatro momentos. Em cada um, uma parte do nosso trabalho entra em ação.
-- `button` _(desktop)_: 01 Encontra
-- `h3` _(desktop)_: Ser encontrado por quem já está procurando.
-- `p` _(desktop)_: Quem pesquisa um serviço na sua cidade está perto de contratar. O anúncio coloca sua empresa no topo hoje; o SEO constrói uma posição que se acumula.
-- `div` _(desktop)_: Google Ads SEO local
-- `button` _(desktop)_: 02 Entende
-- `h3` _(desktop)_: Ser entendido em cinco segundos.
-- `p` _(desktop)_: A primeira tela precisa responder o que é, para quem é e qual o próximo passo. Se o visitante precisa decifrar, ele volta para a busca.
-- `div` _(desktop)_: Site sob medida Arquitetura de conteúdo
-- `button` _(desktop)_: 03 Confia
-- `h3` _(desktop)_: Passar confiança antes da conversa.
-- `p` _(desktop)_: Visual coerente e as informações que o cliente procura — quem é o responsável, como funciona, quanto tempo leva — fazem a empresa parecer tão séria quanto é.
-- `div` _(desktop)_: Direção visual Conteúdo
-- `button` _(desktop)_: 04 Chama
-- `h3` _(desktop)_: Transformar interesse em contato.
-- `p` _(desktop)_: Agendamento em poucos toques, aviso imediato para a sua equipe e um lembrete para quem ainda está decidindo.
-- `div` _(desktop)_: Formulário integrado Meta Ads
-- `div` _(ilustração, desktop)_: Demonstração conceitual · Atria Clinic 01 / 04
-- `div` _(ilustração, desktop)_: clínica de estética em vitória
-- `div` _(ilustração, desktop)_: A Atria Clinic Patrocinado · avaliação
-- `div` _(ilustração, desktop)_: Dermatologia estética em Vitória | Atria Clinic Avaliação individual e protocolos explicados sem pressa. Agende on-line.
-- `div` _(ilustração, desktop)_: A Atria Clinic blog › primeira consulta
-- `div` _(ilustração, desktop)_: Avaliação de pele em Vitória: como funciona a primeira consulta
-- `div` _(ilustração, desktop)_: Novo pedido de avaliação agora · enviado pelo site
-- `div` _(ilustração, desktop)_: Interesse Avaliação de pele
-- `div` _(ilustração, desktop)_: Melhor horário Quinta, 14h00
-- `div` _(ilustração, desktop)_: Origem Anúncio no Google
-- `div` _(ilustração, desktop)_: LEMBRETE · INSTAGRAM Sua avaliação, no seu tempo. Agendar
-- `div` _(ilustração, desktop)_: Teste dos 5 segundos 00:05
-- `div` _(ilustração, desktop)_: O que é Dermatologia estética
-- `div` _(ilustração, desktop)_: Para quem Quem quer cuidar da pele sem pressa
-- `div` _(ilustração, desktop)_: Próximo passo Agendar avaliação
-- `div` _(ilustração, desktop)_: Sistema visual
-- `div` _(ilustração, desktop)_: Aa Cormorant títulos
-- `div` _(ilustração, desktop)_: Aa Jost textos
-- `div` _(ilustração, desktop)_: Sinais de confiança Responsável técnica identificada Duração da avaliação: 50 min Horários reais para escolher
-- `p` _(celular)_: Da busca ao contato
-- `h2` _(celular)_: Antes de ligar, seu cliente pesquisa.
-- `button` _(celular)_: Encontra
-- `button` _(celular)_: Entende
-- `button` _(celular)_: Confia
-- `button` _(celular)_: Chama
-- `div` _(ilustração, celular)_: estética em vitória
-- `div` _(ilustração, celular)_: Patrocinado · Atria Clinic Dermatologia estética em Vitória Avaliação individual. Agende on-line.
-- `div` _(ilustração, celular)_: Atria Clinic › blog Avaliação de pele em Vitória: como funciona
-- `div` _(ilustração, celular)_: Novo pedido de avaliação Avaliação de pele · quinta, 14h · via Google
-- `div` _(ilustração, celular)_: Teste dos 5 s 00:05
-- `div` _(ilustração, celular)_: O que é: dermatologia estética Para quem: quem quer cuidar da pele sem pressa Próximo passo: agendar
-- `div` _(ilustração, celular)_: Sistema visual
-- `div` _(ilustração, celular)_: Responsável técnica Avaliação de 50 min Horários reais
-- `h3` _(celular)_: Ser encontrado por quem já está procurando.
-- `p` _(celular)_: Anúncio no topo hoje; SEO que se acumula com o tempo.
-- `p` _(celular)_: Google Ads · SEO local
-- `h3` _(celular)_: Ser entendido em cinco segundos.
-- `p` _(celular)_: O que é, para quem é e qual o próximo passo — já na primeira tela.
-- `p` _(celular)_: Site sob medida · Arquitetura de conteúdo
-- `h3` _(celular)_: Passar confiança antes da conversa.
-- `p` _(celular)_: Visual coerente e as informações que o cliente procura.
-- `p` _(celular)_: Direção visual · Conteúdo
-- `h3` _(celular)_: Transformar interesse em contato.
-- `p` _(celular)_: Agendamento em poucos toques e aviso imediato para a equipe.
-- `p` _(celular)_: Formulário integrado · Meta Ads
-- `div`: Role para avançar
+- `p`: Da busca ao contato
+- `p`: São quatro momentos. Em cada um, uma parte do nosso trabalho entra em ação.
+- `button`: 01 Encontra
+- `h3`: Ser encontrado por quem já está procurando.
+- `p`: Google Ads pode aproximar sua empresa de quem procura pelo serviço. O SEO local organiza informações para ampliar sua presença nas buscas, sem garantia de posição.
+- `button`: 02 Entende
+- `h3`: Entender a oferta na primeira tela.
+- `p`: A primeira tela precisa responder o que é, para quem é e qual o próximo passo. Se o visitante precisa decifrar, ele volta para a busca.
+- `button`: 03 Confia
+- `h3`: Passar confiança antes da conversa.
+- `p`: Visual coerente, responsáveis identificados e processo explicado ajudam o visitante a avaliar a empresa antes de conversar.
+- `button`: 04 Chama
+- `h3`: Transformar interesse em contato.
+- `p`: Um caminho claro para o contato. Formulários, agendamento e avisos à equipe podem compor o escopo, conforme as integrações necessárias.
+- `p`: Da busca ao contato
+- `button`: Encontra
+- `button`: Entende
+- `button`: Confia
+- `button`: Chama
+- `p`: Encontra
+- `h3`: Ser encontrado por quem já está procurando.
+- `p`: Anúncios para buscas relevantes e SEO local para ampliar sua presença. A posição depende da concorrência e dos critérios do Google.
+- `p`: Google Ads · SEO local
+- `p`: Entende
+- `h3`: Entender a oferta na primeira tela.
+- `p`: O que a empresa oferece, para quem e como entrar em contato, já na primeira tela.
+- `p`: Site sob medida · Arquitetura de conteúdo
+- `p`: Confia
+- `h3`: Passar confiança antes da conversa.
+- `p`: Visual coerente, responsáveis identificados e processo explicado ajudam a avaliar a empresa.
+- `p`: Direção visual · Conteúdo
+- `p`: Chama
+- `h3`: Transformar interesse em contato.
+- `p`: Um caminho claro para o contato. Formulários, agendamento e avisos podem compor o escopo.
+- `p`: Formulário integrado · Meta Ads
+- `div` _(demonstração visual desktop, Encontra)_: Demonstração conceitual · Atria Clinic; 01 / 04; clínica de estética em vitória; Patrocinado · avaliação; Dermatologia estética em Vitória | Atria Clinic; Avaliação individual e protocolos explicados sem pressa. Agende on-line.; blog › primeira consulta; Avaliação de pele em Vitória: como funciona a primeira consulta
+- `div` _(cartões ilustrativos, Entende)_: Teste dos 5 segundos · 00:05; O que é — Dermatologia estética; Para quem — Quem quer cuidar da pele sem pressa; Próximo passo — Agendar avaliação
+- `div` _(cartão ilustrativo, Confia)_: Sistema visual; Aa; Cormorant · títulos; Aa; Jost · textos; Sinais de confiança; Responsável técnica identificada; Duração da avaliação: 50 min; Horários reais para escolher
+- `div` _(cartões ilustrativos, Chama)_: Novo pedido de avaliação; agora · enviado pelo site; Interesse — Avaliação de pele; Melhor horário — Quinta, 14h00; Origem — Anúncio no Google; LEMBRETE · INSTAGRAM; Sua avaliação, no seu tempo.; Agendar
+- `div` _(alternativa visual celular)_: estética em vitória; Patrocinado · Atria Clinic; Dermatologia estética em Vitória; Avaliação individual. Agende on-line.; Atria Clinic › blog; Avaliação de pele em Vitória: como funciona; Novo pedido de avaliação; Avaliação de pele · quinta, 14h · via Google; Teste dos 5 s · 00:05; O que é: dermatologia estética; Para quem: quem quer cuidar da pele sem pressa; Próximo passo: agendar; Sistema visual; Responsável técnica; Avaliação de 50 min; Horários reais
+- `div` _(instrução visual)_: Role para avançar
 
 ### O site é o centro. O resto trabalha para ele. (`#servicos`)
 - `p`: Serviços
-- `h2`: O site é o centro. O resto trabalha para ele.
-- `div` _(ilustração)_: SEO local Google Ads Meta Ads Manutenção
-- `div` _(ilustração)_: Site sob medida
 - `figcaption`: Tudo começa pelo site. Os serviços mensais trabalham para levar as pessoas certas até ele.
+- `div` _(centro da ilustração orbital)_: Site · sob medida
 - `h3`: Sites sob medida
-- `div`: Projeto · a partir de R$ 1.490
+- `span`: Projeto · a partir de R$ 1.490
 - `p`: Sites institucionais, landing pages e páginas de serviço, desenhados a partir do que sua empresa precisa comunicar.
 - `h3`: SEO local
-- `div`: Mensal
+- `span`: Mensal
 - `p`: Estrutura técnica, conteúdo e presença nas buscas da sua cidade, para aparecer quando procuram pelo que você faz.
 - `h3`: Google Ads
-- `div`: Mensal · mídia à parte
-- `p`: Campanhas de pesquisa para estar no topo quando o cliente já está procurando pelo seu serviço.
+- `span`: Mensal · mídia à parte
+- `p`: Campanhas de pesquisa para apresentar sua empresa em buscas relacionadas ao serviço. Exibição e posição dependem do leilão e da qualidade da campanha.
 - `h3`: Meta Ads
-- `div`: Mensal · mídia à parte
+- `span`: Mensal · mídia à parte
 - `p`: Anúncios no Instagram e no Facebook para ser lembrado por quem ainda está decidindo.
 - `h3`: Manutenção e evolução
-- `div`: Plano mensal
+- `span`: Plano mensal
 - `p`: Atualizações, segurança, ajustes de conteúdo e melhorias contínuas depois que o site está no ar.
 
-### Engenharia que você não vê — e o Google sente.
+### Uma entrega cuidada também por dentro.
 - `p`: Por baixo do capô
-- `h2`: Engenharia que você não vê — e o Google sente.
-- `p`: Cada entrega sai com a mesma lista técnica. São metas de projeto e itens verificados antes de publicar, não promessas de resultado.
-- `div`: unolabs / checklist-de-entrega pronto para publicar
-- `div`: $ uno entrega --verificar
-- `div`: ✓ HTML semântico + dados estruturados (Schema.org)
-- `div`: ✓ Metas Core Web Vitals: LCP ≤ 2,5 s · INP ≤ 200 ms · CLS ≤ 0,1
-- `div`: ✓ Imagens AVIF/WebP com espaço reservado
-- `div`: ✓ Sitemap, canonical e Search Console configurados
-- `div`: ✓ Acessibilidade com meta WCAG 2.2 AA
-- `div`: ✓ Formulário com anti-spam e aviso imediato à sua equipe
-- `div`: ✓ LGPD: dados usados só para responder ao contato
-- `div`: ✓ Domínio e acessos em nome da sua empresa
-- `div`: $
+- `p`: O checklist orienta o projeto e a revisão antes de publicar. As verificações concluídas ficam documentadas na entrega; cada integração depende do escopo e dos acessos disponíveis.
+- `div` _(terminal ilustrativo)_: unolabs / checklist-de-entrega; itens previstos; `$ uno entrega --verificar`; A verificar — HTML semântico + dados estruturados (Schema.org); A verificar — Medir carregamento, resposta aos toques e estabilidade visual; A verificar — Imagens AVIF/WebP com espaço reservado; A verificar — Sitemap, endereço principal e configuração do Search Console; A verificar — Acessibilidade com meta WCAG 2.2 AA; A verificar — Validar proteção contra spam e recebimento dos contatos; A verificar — Revisar política de privacidade e fluxo de dados; A verificar — Domínio e acessos em nome da sua empresa; `$`
 
-### Três negócios. Três expressões. Nenhum modelo pronto. (`#projetos`)
+### Três negócios. Três direções visuais. (`#projetos`)
 - `p`: Estudos de direção
-- `h2`: Três negócios. Três expressões. Nenhum modelo pronto.
-- `p`: Estudos conceituais criados por nós para mostrar direção, acabamento e comportamento. Não são clientes: são a régua do que entregamos.
-- `div`: ESTUDO 01 · ENGENHARIA INDUSTRIAL B2B Estudo conceitual
+- `p`: Estudos conceituais criados por nós para mostrar direção, acabamento e comportamento. Mostram decisões de design, sem representar trabalhos de clientes ou resultados medidos. Os controles dentro das maquetes são ilustrativos.
+- `span` _(estudo 01)_: ESTUDO 01 · ENGENHARIA INDUSTRIAL B2B; Estudo conceitual; Módulo Engenharia · estudo conceitual
+- `span` _(estudo 02)_: ESTUDO 02 · DERMATOLOGIA ESTÉTICA; Estudo conceitual; Atria Clinic · estudo conceitual
+- `span` _(estudo 03)_: ESTUDO 03 · RESTAURANTE AUTORAL; Estudo conceitual; Casa Noma · estudo conceitual
+- `figcaption` _(alternativa sem JavaScript, repetida em cada estudo)_: Imagem do estudo conceitual. As decisões estão descritas ao lado.
 - `h3`: Módulo Engenharia
 - `dt`: Objetivo
 - `dd`: Explicar um serviço técnico complexo e gerar pedidos de proposta qualificados.
 - `dt`: Decisão em destaque
-- `dd`: Desenho técnico que se monta na tela e ficha técnica no lugar de adjetivos.
-- `div` _(ilustração)_: Módulo Engenharia · estudo conceitual
-- `div`: ESTUDO 02 · DERMATOLOGIA ESTÉTICA Estudo conceitual
+- `dd`: Imagem conceitual estrutural com cotas geométricas discretas e ficha técnica no lugar de adjetivos.
+- `button`: Rever animação
 - `h3`: Atria Clinic
 - `dt`: Objetivo
 - `dd`: Transmitir calma e segurança e levar a pessoa até a avaliação.
 - `dt`: Decisão em destaque
-- `dd`: Arco de luz no lugar de fotos de antes e depois; agenda visível já na primeira tela.
-- `div` _(ilustração)_: Atria Clinic · estudo conceitual
-- `div`: ESTUDO 03 · RESTAURANTE AUTORAL Estudo conceitual
+- `dd`: Retrato conceitual e detalhes de cuidado no lugar de fotos de antes e depois; agenda visível já na primeira tela.
+- `button`: Rever animação
 - `h3`: Casa Noma
 - `dt`: Objetivo
 - `dd`: Traduzir a atmosfera da casa e transformar vontade em reserva.
 - `dt`: Decisão em destaque
-- `dd`: Mesa posta girando devagar e reserva em três toques, sem sair da primeira tela.
-- `div` _(ilustração)_: Casa Noma · estudo conceitual
+- `dd`: Imagem conceitual gastronômica e menu da estação em destaque, com reserva demonstrativa sem sair da primeira tela.
+- `button`: Rever animação
 
 ### Direção antes da execução. Cuidado até a entrega. (`#processo`)
 - `p`: Como trabalhamos
-- `h2`: Direção antes da execução. Cuidado até a entrega.
 - `p`: Escopo, investimento e prazo ficam definidos na proposta, antes do início. Você sabe o que vai receber e quando.
-- `li`: 01
 - `h3`: Entender
 - `p`: Conversa sobre a empresa, a oferta, o público e o que precisa mudar no digital.
-- `p`: Entrega: brief e prioridades
-- `li`: 02
+- `p`: Entrega: contexto e prioridades
 - `h3`: Direcionar
 - `p`: Estrutura das páginas, mensagem e direção visual, validadas com você antes de construir.
 - `p`: Entrega: mapa do site e conceito visual
-- `li`: 03
 - `h3`: Construir
 - `p`: Design e desenvolvimento juntos, pensando o celular desde o início.
 - `p`: Entrega: versão navegável para revisão
-- `li`: 04
 - `h3`: Publicar
 - `p`: Revisão final, testes de velocidade e formulários, domínio configurado e site no ar.
 - `p`: Entrega: site publicado e acessos documentados
 - `p`: Depois, se fizer sentido: evoluir. SEO, anúncios e manutenção mensal, contratados à parte e no seu ritmo.
 
 ### Investimento
-- `h2`: Investimento
 - `p`: Projetos a partir de
 - `p`: R$ 1.490
 - `p`: em até 10x sem juros
-- `p`: O valor final acompanha o escopo. Você recebe uma proposta fechada, com entregas, prazo e investimento, antes de começar.
+- `p`: A proposta reúne estrutura, conteúdo, direção visual e funcionalidades. Produção de textos e imagens, mais páginas e integrações podem ampliar o trabalho. Entregas, prazo e investimento ficam definidos antes do início.
 - `a`: Pedir minha proposta
 - `h3`: O que define o valor
 - `li`: Quantidade de páginas e seções
@@ -715,13 +669,12 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 - `li`: Direção visual e interações
 - `li`: Integrações e formulários
 - `h3`: Garantia
-- `p`: Por [X] dias após a publicação, corrigimos sem custo qualquer falha no que foi entregue. Novas páginas, mudanças de conteúdo e novas funções entram no plano de manutenção.
+- `p`: A garantia cobre a correção de falhas no que foi entregue. Prazo e condições ficam na proposta. Novas páginas, mudanças de conteúdo e novas funções são alterações posteriores, contratadas à parte no plano de manutenção ou em outro serviço.
 - `h3`: Serviços mensais
-- `p`: SEO, Google Ads, Meta Ads e manutenção têm escopo e valor próprios. A verba dos anúncios é paga diretamente às plataformas.
+- `p`: SEO, Google Ads, Meta Ads e manutenção têm escopo e valor próprios. A verba de mídia fica separada da gestão. A forma de pagamento será definida na proposta.
 
 ### Para empresas que tratam o digital como parte do negócio.
 - `p`: Para quem
-- `h2`: Para empresas que tratam o digital como parte do negócio.
 - `p`: Trabalhamos melhor com quem tem qualidade a mostrar, quer se diferenciar com consistência e participa do projeto com a gente.
 - `li`: Arquitetura e interiores portfólio e autoria
 - `li`: Engenharia e construção capacidade técnica
@@ -735,24 +688,19 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 
 ### Quem conduz o seu projeto.
 - `p`: Equipe
-- `h2`: Quem conduz o seu projeto.
-- `p`: Um time pequeno e direto: quem conversa com você é quem desenha, constrói e acompanha.
-- `div`: UL
+- `p`: Urias Loures e Bruno Gonzaga são os criadores da UNO Labs. Milena Dias também integra a equipe.
 - `h3`: Urias Loures
-- `p`: [Função no time] [Formação e experiência]
-- `div`: BG
+- `p`: Criador da UNO Labs
 - `h3`: Bruno Gonzaga
-- `p`: [Função no time] [Formação e experiência]
-- `div`: MD
+- `p`: Criador da UNO Labs
 - `h3`: Milena Dias
-- `p`: [Função no time] Publicidade e Propaganda · UVV
+- `p`: Publicidade e Propaganda UVV, em formação
 
 ### Conteúdo para decidir melhor. (`#blog`)
 - `p`: Blog
-- `h2`: Conteúdo para decidir melhor.
-- `p`: Guias práticos sobre sites, SEO local e anúncios. Os primeiros artigos estão em produção.
+- `p`: Guias práticos sobre sites, SEO local e anúncios. Os temas abaixo estão previstos. Os artigos ainda não estão disponíveis.
 - `p`: Guia Em breve
-- `h3`: Quanto custa um site profissional — e o que realmente muda o preço
+- `h3`: Quanto custa um site profissional e o que muda o preço
 - `p`: Páginas, conteúdo, direção visual e integrações: o que entra na conta e como comparar propostas diferentes sem cair só no preço.
 - `p`: Comparativo Em breve
 - `h3`: Site institucional ou landing page: qual sua empresa precisa agora?
@@ -761,19 +709,18 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 
 ### Perguntas antes de começar. (`#duvidas`)
 - `p`: Dúvidas
-- `h2`: Perguntas antes de começar.
-- `p`: Não encontrou sua dúvida?.
+- `p`: Não encontrou sua dúvida? Fale com a gente.
 - `a`: Fale com a gente
 - `summary`: Quanto custa um projeto?
 - `p`: Projetos começam em R$ 1.490, em até 10x sem juros. O valor final depende do número de páginas, do conteúdo, da direção visual e das funcionalidades. Você recebe a proposta fechada antes de começar.
 - `summary`: Quanto tempo leva?
-- `p`: Depende do escopo e de quando o conteúdo fica pronto. Um projeto típico leva [X] semanas; o prazo exato fica na proposta.
+- `p`: O prazo depende do escopo, do conteúdo e das validações. O cronograma fica definido na proposta antes do início.
 - `summary`: O que a garantia cobre?
-- `p`: Por [X] dias após a publicação, corrigimos sem custo qualquer falha no que foi entregue. Novas páginas, mudanças de conteúdo e novas funções ficam no plano de manutenção mensal.
+- `p`: A garantia cobre a correção de falhas no que foi entregue. Prazo e condições ficam na proposta. Alterações de conteúdo, novas páginas e funções são contratadas à parte no plano de manutenção ou em outro serviço.
 - `summary`: Vocês garantem a primeira posição no Google?
-- `p`: Não — e desconfie de quem garante. Entregamos a base técnica, o conteúdo e o acompanhamento que aumentam as chances de sua empresa aparecer nas buscas da sua região.
+- `p`: Não. A posição depende de fatores que nenhuma empresa controla sozinha. Entregamos a base técnica, o conteúdo e o acompanhamento que aumentam as chances de sua empresa aparecer nas buscas da sua região.
 - `summary`: Como funcionam os anúncios no Google e no Meta?
-- `p`: Planejamos, criamos e acompanhamos as campanhas. A verba de mídia é paga diretamente às plataformas e fica separada da nossa gestão.
+- `p`: Planejamos, criamos e acompanhamos as campanhas. A verba de mídia fica separada da gestão. A forma de pagamento será definida na proposta.
 - `summary`: Vocês ajudam com o conteúdo?
 - `p`: Sim. Organizamos a mensagem e a estrutura das páginas. Textos completos, fotos e vídeos podem entrar no escopo, se combinados na proposta.
 - `summary`: O site fica no nome da minha empresa?
@@ -785,16 +732,18 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 
 ### Sua empresa já tem valor. Vamos fazer o digital mostrar isso. (`#contato`)
 - `p`: Contato
-- `h2`: Sua empresa já tem valor. Vamos fazer o digital mostrar isso.
 - `p`: Conte o momento da sua empresa e o que você quer construir. A conversa começa pelo contexto para chegar a uma proposta coerente.
-- `a`: Prefere conversar agora? WhatsApp comercial · (DDD) NÚMERO
+- `a`: Prefere conversar agora? WhatsApp · (27) 93618-5141
 - `a`: E-mail contato@unolabs.com.br
+- `p`: Para enviar o formulário, ative o JavaScript. Você também pode escrever para contato@unolabs.com.br ou conversar pelo WhatsApp: (27) 93618-5141.
+- `a`: contato@unolabs.com.br
+- `a`: WhatsApp: (27) 93618-5141
 - `label`: Seu nome
-- `div`: Informe seu nome.
+- `span`: Informe seu nome com pelo menos 2 caracteres.
 - `label`: Empresa
-- `div`: Informe o nome da empresa.
+- `span`: Informe a empresa com pelo menos 2 caracteres.
 - `label`: WhatsApp ou e-mail para retorno
-- `div`: Informe um WhatsApp com DDD ou um e-mail válido.
+- `span`: Informe um WhatsApp com DDD ou um e-mail válido.
 - `label`: Site atual (opcional)
 - `legend`: Do que você precisa?
 - `label`: Site
@@ -803,7 +752,8 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 - `label`: Meta Ads
 - `label`: Manutenção
 - `label`: O que você quer construir ou melhorar?
-- `div`: Conte o objetivo, a situação atual e o que é importante para você. Conte um pouco sobre o projeto.
+- `span`: Conte o objetivo, a situação atual e o que é importante para você.
+- `span`: Descreva o projeto com pelo menos 10 caracteres.
 - `label`: Investimento previsto
 - `option`: Selecione
 - `option`: Até R$ 3 mil
@@ -811,37 +761,27 @@ Extraído automaticamente de `public/index.html`. Formato: `tag` _(contexto)_: t
 - `option`: De R$ 6 mil a R$ 10 mil
 - `option`: Acima de R$ 10 mil
 - `option`: Ainda não definido
-- `label` _(ilustração)_: Deixe este campo em branco
-- `p`: Usamos seus dados apenas para responder a este contato..
+- `label`: Deixe este campo em branco
+- `p`: Seus dados são usados para avaliar o projeto e responder ao contato. Política de privacidade.
 - `a`: Política de privacidade
 - `button`: Enviar contexto do projeto
-- `h3`: Recebemos suas informações.
-- `p`: Obrigado por compartilhar o contexto do projeto. Vamos responder pelo canal que você indicou.
+- `h3`: Seu contexto foi encaminhado.
+- `p`: O serviço de e-mail aceitou o encaminhamento para a UNO Labs. Vamos responder pelo canal informado. Essa confirmação ainda não comprova o recebimento na caixa postal.
 - `button`: Enviar outro pedido
 
 ### Rodapé
 - `p`: Presença digital que gera oportunidades.
-- `div`: Navegação
+- `span`: Navegação
 - `a`: Serviços
 - `a`: Projetos
 - `a`: Abordagem
 - `a`: Blog
 - `a`: Contato
-- `div`: Serviços
+- `span`: Serviços
 - `a`: Criação de sites
 - `a`: SEO local
 - `a`: Google Ads
 - `a`: Meta Ads
 - `a`: Manutenção
-- `div`: Atendimento Vitória · Vila Velha · Serra · Cariacica — ES Curitiba — PR Todo o Brasil, de forma remota
-- `div`: © 2026 UNO Labs · unolabs.com.br
+- `span`: Atendimento
 - `a`: Política de privacidade
-
-### Textos das maquetes dos estudos conceituais (`<template>`)
-
-- **tpl-casanoma-desk**: Casa Noma · Menu · Vinhos · A casa · Eventos · Reservar · Cozinha de estação · Vitória, ES · Fogo baixo, · mesa longa. · Um menu autoral que respeita os ciclos da terra, com pratos pensados para partilhar e vinhos naturais selecionados. · i. Pupunha na brasa · ii. Moqueca de banana · iii. Cocada queimada · DATA · Sexta, 03 Out · HORÁRIO · 20h00 · RESERVA · 2 pessoas · Reservar mesa
-- **tpl-casanoma-mob**: Casa Noma · Vitória, ES · Fogo baixo, · mesa longa. · Vinhos de pequenos produtores, ingredientes colhidos no tempo certo e reserva sem intermediários. · SEXTA-FEIRA · 20H00 · 2 lugares no salão · Reservar
-- **tpl-atria-desk**: Atria · clinic · Tratamentos · A clínica · Equipe médica · Contato · Agendar avaliação · Cuidado natural & atenção individual · Dermatologia estética · Vitória, ES · Cuidado que começa · na conversa. · Avaliação individual, protocolos explicados sem pressa e acompanhamento em cada etapa. · Agendar consulta · Conhecer tratamentos · Responsável técnica: Dra. [Nome] · CRM-ES [número] · Avaliação individual · Duração: 50 min · SEG · 29 · TER · 30 · QUA · 01 · QUI · 02 · SEX · 03 · 09h00 · 10h30 · 14h00 · 16h30 · Agendar para quinta-feira, 14h00
-- **tpl-atria-mob**: Atria · clinic · Dermatologia estética · Vitória, ES · Cuidado que começa · na conversa. · Avaliação individual, protocolos explicados sem pressa e acompanhamento em cada etapa. · Avaliação individual · 50 min · Qui, 02 · 14h00 · Agendar · Responsável técnica: Dra. [Nome] · CRM-ES [número]
-- **tpl-modulo-desk**: MÓDULO · ENGENHARIA · SERVIÇOS · OBRAS · ENGENHARIA · CONTATO · Proposta técnica · ENGENHARIA INDUSTRIAL · ESPÍRITO SANTO · Estrutura · é · projeto · antes de ser · obra. · Estruturas metálicas, galpões e laudos técnicos para indústrias que não podem parar. Uma equipe responde pelo cálculo, pela obra e pela documentação. · Solicitar proposta técnica · Ver projetos · VÃO LIVRE: 30,00 m · PÉ-DIREITO: 10,00 m · N-14 · X 30.00 · Y 15.00 · Z 13.50 · AÇO ESTRUTURAL ASTM A572 gr. 50 · 01 · Estruturas metálicas · 02 · Galpões industriais · 03 · Laudos e inspeções · 04 · Projetos executivos
-- **tpl-modulo-mob**: MÓDULO · Proposta · ENGENHARIA INDUSTRIAL · ES · Estrutura · é · projeto · antes de ser · obra. · VÃO: 30,00 m · Estruturas metálicas, galpões e laudos técnicos. Uma equipe do cálculo à entrega. · Solicitar proposta técnica

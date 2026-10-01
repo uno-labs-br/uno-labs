@@ -38,7 +38,7 @@ export default {
       try {
         return await receberContato(request, env);
       } catch (e) {
-        console.error('contato: erro inesperado', e && e.message);
+        console.error('contato: erro inesperado');
         return json({ ok: false, erro: 'erro_interno' }, 500);
       }
     }
@@ -87,8 +87,8 @@ async function receberContato(request, env) {
     if (!aprovado) return json({ ok: false, erro: 'turnstile' }, 403);
   }
 
-  if (!env.N8N_WEBHOOK_URL) {
-    console.error('contato: N8N_WEBHOOK_URL não configurada');
+  if (!env.N8N_WEBHOOK_URL || !env.N8N_WEBHOOK_TOKEN) {
+    console.error('contato: integração não configurada');
     return json({ ok: false, erro: 'nao_configurado' }, 503);
   }
 
@@ -97,6 +97,8 @@ async function receberContato(request, env) {
     pagina: limpar(d.pagina, MAXIMO.pagina),
     recebidoEm: new Date().toISOString(),
     ...dados,
+    // Destinatário e remetente são fixados no fluxo n8n, nunca recebidos do navegador.
+    replyTo: emailValido(dados.canal) ? dados.canal : '',
     servicosTexto: dados.servicos.map((s) => SERVICOS[s]).join(', ') || 'Não informado',
     investTexto: INVESTIMENTO[dados.invest]
   };
@@ -110,7 +112,7 @@ async function receberContato(request, env) {
       signal: AbortSignal.timeout(10000)
     });
   } catch (e) {
-    console.error('contato: n8n inacessível', e && e.message);
+    console.error('contato: n8n inacessível');
     return json({ ok: false, erro: 'encaminhamento' }, 502);
   }
   if (!resposta.ok) {
@@ -118,7 +120,15 @@ async function receberContato(request, env) {
     return json({ ok: false, erro: 'encaminhamento' }, 502);
   }
 
-  return json({ ok: true }, 200);
+  // HTTP positivo, sozinho, só prova aceitação pelo webhook. Exigimos a
+  // confirmação explícita do nó posterior ao SMTP, sem alegar entrega na caixa.
+  let confirmacao;
+  try { confirmacao = await resposta.json(); } catch { confirmacao = null; }
+  if (!confirmacao || confirmacao.ok !== true || confirmacao.encaminhamento !== 'smtp_aceito') {
+    console.error('contato: encaminhamento não confirmado');
+    return json({ ok: false, erro: 'encaminhamento' }, 502);
+  }
+  return json({ ok: true, encaminhamento: 'smtp_aceito' }, 200);
 }
 
 /* Aceita a própria origem (inclui a URL *.workers.dev de teste) e as listadas em ORIGENS_PERMITIDAS. */
@@ -139,8 +149,13 @@ function limpar(valor, maximo, manterLinhas = false) {
 }
 
 function canalValido(v) {
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return true;
-  return v.replace(/\D/g, '').length >= 10;
+  if (emailValido(v)) return true;
+  const digitos = v.replace(/\D/g, '').length;
+  return /^[+()\d\s.-]+$/.test(v) && digitos >= 10 && digitos <= 15;
+}
+
+function emailValido(v) {
+  return /^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v);
 }
 
 async function verificarTurnstile(token, request, segredo) {
@@ -155,7 +170,7 @@ async function verificarTurnstile(token, request, segredo) {
     const j = await r.json();
     return j && j.success === true;
   } catch (e) {
-    console.error('contato: falha ao verificar Turnstile', e && e.message);
+    console.error('contato: falha ao verificar Turnstile');
     return false;
   }
 }

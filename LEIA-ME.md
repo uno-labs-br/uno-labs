@@ -1,6 +1,6 @@
 # UNO Labs — pasta oficial e instruções do site
 
-Esta é a **única pasta oficial** do projeto: `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`. Ela contém a implementação e os arquivos de hospedagem; a publicação depende de resolver as pendências, revisar o PR, integrar na `main` e obter autorização de deploy. O site é HTML, CSS e JavaScript puros (sem etapa de compilação). O formulário de contato tem dois “servidores” prontos: um Worker da Cloudflare (recomendado) e um script PHP para hospedagem tradicional (HostGator e similares).
+Esta é a **única pasta oficial** do projeto: `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`. Ela contém a implementação e os arquivos de hospedagem; a publicação depende de resolver as pendências, revisar o PR, integrar na `main` e obter autorização de deploy. O site é HTML, CSS e JavaScript puros (sem etapa de compilação). O fluxo vigente do formulário usa o Worker da Cloudflare. O script PHP para hospedagem tradicional é uma alternativa técnica separada.
 
 > Construção: [docs/UNO_Labs_Construcao_do_Site.md](docs/UNO_Labs_Construcao_do_Site.md). Marca e requisitos: [docs/UNO_Labs_Documentacao_Completa.md](docs/UNO_Labs_Documentacao_Completa.md). Regras: [AGENTS.md](AGENTS.md).
 
@@ -52,26 +52,26 @@ Análises visuais, Impeccable e prévias usam `public/index.html` desta implemen
 
 ---
 
-## 2. Antes de publicar: preencha as pendências
+## 2. Antes de publicar: pendências comerciais e de homologação
 
-O site foi entregue com marcadores visíveis onde falta informação sua. **Não publique com eles.** Para achar todos de uma vez, rode na pasta `04 - SITE`:
+Contatos informados pelo usuário em 30/09/2026: `contato@unolabs.com.br`, WhatsApp `(27) 93618-5141` (internacional `+5527936185141`) e link `https://wa.me/5527936185141`. A confirmação dos dados não comprova que os links, a caixa postal ou o fluxo do formulário estejam funcionando.
 
-```bash
-grep -rn "\[X\]\|\[Função\|\[Formação\|PREENCHER\|pendente\|DDDNUMERO\|\[DD/MM\|\[e-mail\|\[razão\|\[provedor\|\[Definir\|\[Revisar\|\[Se um dia" public/
-```
+Os contatos já estão no HTML e no JSON-LD; os links `mailto:` e WhatsApp foram conferidos localmente. Isso não comprova funcionamento da caixa ou entrega de e-mail.
 
-| Onde | O que preencher |
+| Pendência | O que falta |
 |---|---|
-| `index.html` → Investimento, Dúvidas e o bloco JSON-LD no `<head>` | Prazo da garantia (`[X]` dias) e prazo típico do projeto (`[X]` semanas). São **3 lugares para a garantia e 2 para o prazo** |
-| `index.html` → Equipe | Função e formação de Urias, Bruno e Milena. Depois, apague `<span class="pendente">` e deixe só o texto |
-| `index.html` → Contato (bloco `canais`) | Número do WhatsApp (`https://wa.me/55` + DDD + número, só dígitos) e e-mail. **Remova o atributo `hidden`** de cada canal. Enquanto os dois estiverem ocultos, o bloco inteiro some |
-| `index.html` → formulário (`data-turnstile`) | Opcional: chave pública do Turnstile (seção 7) |
-| `politica-de-privacidade/index.html` | Data, responsável, e-mail de privacidade, onde o n8n roda e prazo de guarda. Recomendo revisão jurídica |
-| Imagens dos estudos | Nada a fazer. Os estudos são conceituais e já estão identificados como tal |
+| Pacote inicial a partir de R$ 1.490 | Definir escopo e entregáveis incluídos; não inventar quantidades ou entregas |
+| Termos comerciais | Garantia e prazo do projeto ficam na proposta de cada escopo; a home não deve conter números provisórios |
+| Equipe | Urias Loures e Bruno Gonzaga são criadores, com funções específicas ainda indefinidas. Milena Dias está em formação em Publicidade e Propaganda na UVV. Não atribuir cargos ou qualificações não informados |
+| Dados empresariais | Informar ou confirmar CNPJ e razão social |
+| Privacidade | Completar responsável, contato de privacidade, local do n8n, prazo de guarda e data; revisar juridicamente. Não presumir que o contato comercial seja o contato de privacidade |
+| n8n e SMTP | Configurar e verificar o Worker, webhook do n8n, SMTP HostGator, credenciais e remetente autorizado; não registrar segredos neste repositório |
+| Homologação real | Comprovar em etapas distintas a aceitação do backend, a aceitação do encaminhamento pelo SMTP e o recebimento observado na caixa `contato@unolabs.com.br` |
+| Mídia paga | Confirmar que a verba de Google Ads e Meta Ads é paga diretamente às plataformas |
+| Conteúdo do blog | Preparar e revisar 4 a 6 artigos antes da migração planejada para Astro |
+| Turnstile | Opcional; se usado, configurar as chaves conforme a seção 7 |
 
-Quando o WhatsApp e o e-mail existirem, vale também acrescentá-los ao JSON-LD da organização (`"telephone"` e `"email"`) e, quando houver Instagram/LinkedIn, `"sameAs": ["https://..."]`.
-
-**Classe `pendente`:** deixa o texto com fundo amarelo para você achar fácil. Ao preencher, remova o `<span class="pendente">…</span>` em volta.
+O contrato esperado do webhook e o roteiro das evidências estão em [docs/CONTATO_HOMOLOGACAO.md](docs/CONTATO_HOMOLOGACAO.md). O arquivo ainda não confirma credenciais, configuração nem homologação.
 
 ---
 
@@ -155,31 +155,19 @@ O `.htaccess` já força HTTPS, redireciona `www` para o domínio sem `www`, lig
 
 ---
 
-## 7. Formulário → n8n → Telegram e e-mail
+## 7. Formulário → Worker `/api/contato` → n8n → SMTP HostGator
 
-O site envia um JSON para `/api/contato`. O servidor (Worker ou PHP) valida, descarta robôs (campo invisível + Turnstile opcional) e repassa ao n8n com o cabeçalho `X-Uno-Token`.
+Fluxo vigente: formulário no site → `POST /api/contato` → Worker valida e encaminha ao n8n → n8n envia pelo SMTP HostGator à caixa fixa `contato@unolabs.com.br`. Esse é o destino configurado no desenho do fluxo; credenciais, remetente autorizado, conta, DNS e funcionamento ainda precisam ser comprovados na homologação.
 
-**No n8n:**
-1. Nó **Webhook**: método `POST`, caminho `contato-unolabs`, autenticação **Header Auth** com nome `X-Uno-Token` e o mesmo valor de `N8N_WEBHOOK_TOKEN`.
-2. Em **Respond**, use **“When Last Node Finishes”**. Assim, a mensagem de sucesso no site só aparece se o aviso realmente saiu. Com “Immediately”, o site confirmaria mesmo se o Telegram falhasse.
-3. Nó **Telegram** (bot privado da equipe) e nó **Send Email** (SMTP da HostGator).
-4. Campos recebidos: `nome`, `empresa`, `canal`, `site`, `servicos` (lista), `servicosTexto`, `invest`, `investTexto`, `contexto`, `pagina`, `origem`, `recebidoEm`.
+No modelo de workflow, o n8n só deve responder após o nó SMTP indicar aceitação, com o corpo exato `{"ok":true,"encaminhamento":"smtp_aceito"}`. O Worker deve rejeitar uma resposta HTTP 2xx genérica ou qualquer corpo sem essa confirmação. A resposta do backend atesta apenas o encaminhamento aceito pelo SMTP no fluxo configurado; não comprova o recebimento na caixa.
 
-Exemplo de mensagem para o Telegram:
-```
-Novo contato pelo site
-{{$json.body.nome}} — {{$json.body.empresa}}
-Retorno: {{$json.body.canal}}
-Site atual: {{$json.body.site || '—'}}
-Precisa de: {{$json.body.servicosTexto}}
-Investimento: {{$json.body.investTexto}}
+Trate como evidências separadas: (1) resposta válida de aceitação do backend; (2) confirmação de que o SMTP aceitou o encaminhamento; (3) recebimento observado na caixa `contato@unolabs.com.br`. Faça envio real e registre cada resultado somente após autorização explícita de Urias ou Bruno para o destinatário, ambiente e mensagem. O roteiro fica em [docs/CONTATO_HOMOLOGACAO.md](docs/CONTATO_HOMOLOGACAO.md); o modelo importável está em [docs/n8n/uno-contato.modelo.json](docs/n8n/uno-contato.modelo.json) e permanece inativo, sem credenciais e sem homologação.
 
-{{$json.body.contexto}}
-```
+Os campos enviados incluem `nome`, `empresa`, `canal`, `site`, `servicos` (lista), `servicosTexto`, `invest`, `investTexto`, `contexto`, `pagina`, `origem` e `recebidoEm`. A configuração de autenticação do webhook e as credenciais do SMTP devem ser conferidas no modelo e no ambiente real; não publique URLs privadas, tokens ou senhas.
 
 **Turnstile (anti-spam da Cloudflare, gratuito, opcional):** painel da Cloudflare → Turnstile → Add widget (domínio `unolabs.com.br`, modo *Managed*). A **chave pública** vai no atributo `data-turnstile=""` do `<form>`; a **chave secreta** vai em `TURNSTILE_SECRET` (Worker) ou `turnstile_secret` (PHP). Com a chave secreta cadastrada, envios sem verificação são recusados.
 
-**Respostas do servidor:** `200 {"ok":true}` (enviado), `422` (campos inválidos), `403` (origem ou Turnstile), `413/415/400` (envio malformado), `502` (n8n não respondeu 2xx), `503` (webhook não configurado). Qualquer resposta diferente de `200 + ok:true` mantém os dados no formulário e mostra erro.
+**Respostas do servidor:** `200 {"ok":true,"encaminhamento":"smtp_aceito"}` (SMTP aceitou o encaminhamento), `422` (campos inválidos), `403` (origem ou Turnstile), `413/415/400` (envio malformado), `502` (n8n ou encaminhamento falhou), `503` (webhook não configurado). Um 2xx genérico não é confirmação válida. Respostas inválidas ou de erro mantêm os dados no formulário e mostram erro. Nenhuma delas, isoladamente, comprova recebimento na caixa.
 
 ---
 
@@ -197,7 +185,7 @@ Investimento: {{$json.body.investTexto}}
 1. **Google Search Console:** adicione a propriedade de domínio `unolabs.com.br` (verificação por TXT no DNS da Cloudflare) e envie `https://unolabs.com.br/sitemap.xml`.
 2. **PageSpeed Insights** (`pagespeed.web.dev`): confira as metas LCP ≤ 2,5 s, INP ≤ 200 ms e CLS ≤ 0,1.
 3. **Teste de resultados avançados** do Google: valide o JSON-LD.
-4. **Formulário:** envie um contato real e confirme que chegou no Telegram e no e-mail.
+4. **Formulário:** somente após autorização explícita de Urias ou Bruno para destinatário, ambiente e mensagem, envie um contato real; registre separadamente a resposta de aceitação do backend, a aceitação do SMTP e o recebimento na caixa `contato@unolabs.com.br`.
 5. **Compartilhamento:** cole o link no WhatsApp e confira a imagem `og-unolabs.png`.
 6. **Métricas (opcional):** o Cloudflare Web Analytics (sem cookies) pode ser ligado no painel da Cloudflare. Ao ligar, atualize a seção “Quais dados coletamos” da política de privacidade.
 

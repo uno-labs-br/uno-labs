@@ -34,8 +34,9 @@ function limpar($valor, int $maximo, bool $manterLinhas = false): string
 
 function canalValido(string $v): bool
 {
-    if (preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/u', $v)) return true;
-    return strlen(preg_replace('/\D/', '', $v) ?? '') >= 10;
+    if (filter_var($v, FILTER_VALIDATE_EMAIL)) return true;
+    $digitos = strlen(preg_replace('/\D/', '', $v) ?? '');
+    return preg_match('/^[+()\d\s.-]+$/', $v) === 1 && $digitos >= 10 && $digitos <= 15;
 }
 
 function postar(string $url, $corpo, array $cabecalhos, int $tempo = 10): array
@@ -59,7 +60,7 @@ function postar(string $url, $corpo, array $cabecalhos, int $tempo = 10): array
 // ---- Configuração ----
 $arquivoConfig = dirname(__DIR__, 2) . '/uno-contato-config.php';
 if (!is_file($arquivoConfig)) {
-    error_log('UNO contato: arquivo de configuração não encontrado em ' . $arquivoConfig);
+    error_log('UNO contato: configuração não encontrada');
     responder(503, ['ok' => false, 'erro' => 'nao_configurado']);
 }
 $config = require $arquivoConfig;
@@ -138,8 +139,8 @@ if ($segredoTurnstile !== '') {
 
 // ---- Encaminhamento ao n8n ----
 $webhook = (string) ($config['n8n_webhook_url'] ?? '');
-if ($webhook === '') {
-    error_log('UNO contato: n8n_webhook_url vazio');
+if ($webhook === '' || empty($config['n8n_webhook_token'])) {
+    error_log('UNO contato: integração não configurada');
     responder(503, ['ok' => false, 'erro' => 'nao_configurado']);
 }
 
@@ -147,18 +148,24 @@ $payload = $dados + [
     'origem' => $_SERVER['HTTP_HOST'] ?? '',
     'pagina' => limpar($d['pagina'] ?? '', 200),
     'recebidoEm' => gmdate('Y-m-d\TH:i:s\Z'),
+    'replyTo' => filter_var($dados['canal'], FILTER_VALIDATE_EMAIL) ? $dados['canal'] : '',
     'servicosTexto' => $servicos ? implode(', ', array_map(fn($s) => $servicosValidos[$s], $servicos)) : 'Não informado',
     'investTexto' => $investimentos[$invest],
 ];
 
-[$status, , $erro] = postar($webhook, json_encode($payload, JSON_UNESCAPED_UNICODE), [
+[$status, $corpoResposta] = postar($webhook, json_encode($payload, JSON_UNESCAPED_UNICODE), [
     'Content-Type: application/json',
     'X-Uno-Token: ' . (string) ($config['n8n_webhook_token'] ?? ''),
 ]);
 
 if ($status < 200 || $status >= 300) {
-    error_log('UNO contato: n8n respondeu ' . $status . ($erro ? ' (' . $erro . ')' : ''));
+    error_log('UNO contato: n8n respondeu ' . $status);
     responder(502, ['ok' => false, 'erro' => 'encaminhamento']);
 }
 
-responder(200, ['ok' => true]);
+$confirmacao = json_decode($corpoResposta, true);
+if (!is_array($confirmacao) || ($confirmacao['ok'] ?? false) !== true || ($confirmacao['encaminhamento'] ?? '') !== 'smtp_aceito') {
+    error_log('UNO contato: encaminhamento não confirmado');
+    responder(502, ['ok' => false, 'erro' => 'encaminhamento']);
+}
+responder(200, ['ok' => true, 'encaminhamento' => 'smtp_aceito']);

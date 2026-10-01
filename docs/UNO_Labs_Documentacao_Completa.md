@@ -1,6 +1,6 @@
 # UNO Labs — Documentação completa de marca, posicionamento e site
 
-**Versão 1.4 · 30 de setembro de 2026** — v1.0 limpa e atualizada com as decisões do usuário (v1.1), com hospedagem em Workers e e-mail na HostGator (v1.2) e com a primeira versão publicável do site em HTML estático na pasta `04 - SITE` (v1.3) e com a pasta oficial e o fluxo Git padronizados (v1.4). **A Parte 0 prevalece sobre o restante.**\
+**Versão 1.5 · 30 de setembro de 2026** — incorpora os contatos comerciais confirmados e atualiza o fluxo de homologação do formulário. **A Parte 0 prevalece sobre o restante.**
 **Destinatários:** direção da UNO Labs, Claude, Codex, profissionais de marca, design e desenvolvimento.
 
 > **Sites sob medida para negócios que precisam ser percebidos à altura do que entregam.**
@@ -28,9 +28,9 @@ Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a refer�
 ---
 
 
-# PARTE 0 — Decisões vigentes (v1.4 · 30/09/2026)
+# PARTE 0 — Decisões vigentes (v1.5 · 30/09/2026)
 
-**Esta parte prevalece sobre as Partes I a VI.** Ela registra as respostas do usuário (Urias Loures) de 29/09/2026 e a padronização da pasta oficial solicitada em 30/09/2026. Nas outras partes, os trechos superados estão marcados com **[v1.1]**. Se houver conflito com qualquer texto antigo, vale o que está aqui.
+**Esta parte prevalece sobre as Partes I a VI.** Ela registra as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta oficial e os contatos confirmados em 30/09/2026. Nas outras partes, os trechos superados estão marcados com **[v1.1]**. Se houver conflito com qualquer texto antigo, vale o que está aqui.
 
 ## 0.1 A empresa
 
@@ -54,8 +54,8 @@ Hospedagem, domínio e e-mail corporativo como serviços oferecidos: **confirmar
 
 1. **Preço público:** “Projetos a partir de R$ 1.490,00 em até 10x sem juros”. É o único valor publicável.
 2. **Ticket desejado:** projetos bem acima do piso, até cerca de R$ 10 mil.
-3. **Garantia:** cobre falhas no que foi entregue. Não inclui alterações no site; alterações só pelo plano de manutenção mensal ou outro serviço contratado. **Prazo da garantia em dias: a definir.**
-4. **Prazo típico de projeto:** pode ser citado no site. **Valor: a definir.**
+3. **Garantia:** cobre falhas no que foi entregue. Não inclui alterações no site; alterações só pelo plano de manutenção mensal ou outro serviço contratado. Os termos e o prazo são definidos na proposta; não publicar número ou marcador provisório na home.
+4. **Prazo do projeto:** definido para cada escopo na proposta. Não anunciar prazo típico ou número fixo na home.
 5. **Qualificação no formulário:** faixas “até R$ 3 mil / R$ 3 a 6 mil / R$ 6 a 10 mil / acima de R$ 10 mil / ainda não definido”.
 
 ## 0.4 Público e geografia
@@ -66,7 +66,7 @@ Hospedagem, domínio e e-mail corporativo como serviços oferecidos: **confirmar
 
 ## 0.5 Equipe
 
-Urias Loures e Bruno Gonzaga (criadores) e Milena Dias (Publicidade e Propaganda, UVV, em formação). Os três podem aparecer no site. **Funções, formação e fotos: a informar.** Não chamar ninguém de “especialista” sem a formação ou experiência correspondente.
+Urias Loures e Bruno Gonzaga são criadores; suas funções específicas no time não estão definidas. Milena Dias está em formação em Publicidade e Propaganda na UVV. Não atribuir cargos ou qualificações não informados nem chamar alguém de “especialista” sem formação ou experiência correspondente. Fotos: a confirmar.
 
 ## 0.6 Mensagem
 
@@ -83,7 +83,7 @@ Urias Loures e Bruno Gonzaga (criadores) e Milena Dias (Publicidade e Propaganda
 
 ## 0.8 Stack técnica de unolabs.com.br
 
-**Implementação vigente:** HTML, CSS e JavaScript em `04 - SITE/public`, com o formulário em `worker/index.js`, conforme D28 abaixo. A tabela registra a arquitetura planejada para a futura fase Astro; ela não descreve o código atual. Hospedagem padrão e e-mail continuam conforme as decisões desta seção.
+**Implementação vigente:** HTML, CSS e JavaScript em `04 - SITE/public`, com o formulário em `worker/index.js`, conforme D28 abaixo. A tabela descreve a stack planejada para a futura fase Astro; as linhas de formulário e e-mail também registram o fluxo e o contrato esperados para a operação atual. Isso não comprova configuração ou funcionamento. Hospedagem padrão e e-mail seguem as decisões desta seção.
 
 | Camada | Decisão |
 |---|---|
@@ -93,9 +93,9 @@ Urias Loures e Bruno Gonzaga (criadores) e Milena Dias (Publicidade e Propaganda
 | Hospedagem | **Cloudflare Workers com Static Assets**, plano gratuito. **Não usar Cloudflare Pages** (ver nota abaixo). DNS de unolabs.com.br na Cloudflare |
 | Configuração | Astro com o adaptador `@astrojs/cloudflare`: páginas pré-renderizadas (estáticas) e só a rota do formulário (`/api/contato`, `export const prerender = false`) executando no Worker. `wrangler.jsonc` com `main: "@astrojs/cloudflare/entrypoints/server"`, `compatibility_flags: ["nodejs_compat", "global_fetch_strictly_public"]` e `assets: { binding: "ASSETS", directory: "./dist" }`. Não ativar `run_worker_first` (faria toda página contar na cota do Worker) |
 | Publicação | Local: `npx astro build && npx wrangler deploy`. Contínua: Workers Builds ligado ao repositório GitHub (a cada push na branch principal) |
-| Formulário | Endpoint no servidor (Astro + adaptador Cloudflare) com validação e Cloudflare Turnstile → webhook do n8n → e-mail + bot privado do Telegram da equipe. A mensagem de sucesso só aparece com resposta 2xx do backend |
+| Formulário | Fluxo vigente: formulário → Worker `POST /api/contato` → n8n → SMTP HostGator → `contato@unolabs.com.br`. Para indicar encaminhamento ao SMTP, o n8n deve responder `{"ok":true,"encaminhamento":"smtp_aceito"}`; resposta 2xx genérica não basta e deve ser rejeitada pelo Worker. Isso define o contrato esperado, não comprova configuração ou funcionamento |
 | Métricas | Google Search Console + Cloudflare Web Analytics (sem cookies) + eventos da Parte II, §15 |
-| E-mail | **HostGator, Plano M (já contratado).** Na zona DNS da Cloudflare: registro MX apontando para o servidor de e-mail da HostGator; registro `mail` (A ou CNAME) em modo **DNS only / nuvem cinza** — nunca proxied; TXT de SPF, DKIM e DMARC com os valores exibidos no cPanel da HostGator. **Não ativar o Cloudflare Email Routing**: ele assume os registros MX e conflita com a HostGator. O n8n envia os avisos por SMTP da HostGator |
+| E-mail | A contratação do plano HostGator M está registrada como confirmada. HostGator é o serviço SMTP previsto. Isso não comprova acesso operacional, conta de e-mail criada, DNS, credenciais, remetente autorizado ou entrega. Na zona DNS da Cloudflare, validar MX, `mail` em **DNS only / nuvem cinza**, SPF, DKIM e DMARC conforme os dados efetivos do cPanel; não ativar Cloudflare Email Routing |
 
 **Limites do plano gratuito (documentação oficial da Cloudflare, set/2026):** requisições a arquivos estáticos grátis e ilimitadas; 100.000 execuções de código de servidor por dia, com 10 ms de CPU cada; até 20.000 arquivos por versão publicada, 25 MiB por arquivo; Workers Builds com 3.000 minutos de build por mês, 1 build por vez e 20 minutos por build. Se algum limite for atingido, o plano pago começa em US$ 5/mês.
 
@@ -111,32 +111,44 @@ Urias Loures e Bruno Gonzaga (criadores) e Milena Dias (Publicidade e Propaganda
 
 ## 0.10 Canais
 
-Lançamento com **WhatsApp comercial** e **e-mail do domínio**. Instagram e LinkedIn ficam para depois.
+Contatos comerciais confirmados pelo usuário em 30/09/2026:
+
+- E-mail: `contato@unolabs.com.br`.
+- WhatsApp exibido: `(27) 93618-5141`.
+- Link do WhatsApp: `https://wa.me/5527936185141`.
+- Telefone em formato internacional: `+5527936185141`.
+
+A confirmação dos dados não comprova que links, caixa postal, DNS, Worker, n8n ou SMTP estejam configurados ou funcionando. Instagram e LinkedIn ficam para depois.
 
 ## 0.11 Pendências
 
+Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e WhatsApp foram conferidos localmente. Isso não comprova funcionamento da caixa ou entrega de e-mail.
+
 | Item | Situação | Bloqueia publicação? |
 |---|---|---|
-| CNPJ e razão social | Ainda não existem | Sim, para cobrar em 10x e passar confiança |
-| Número do WhatsApp comercial | A informar | Sim |
-| Endereço de e-mail do domínio | A criar na HostGator (Plano M) e apontar o DNS na Cloudflare | Sim |
-| Política de privacidade (fluxo real n8n → Telegram) | Rascunho em `04 - SITE/public/politica-de-privacidade/` — completar marcadores e revisar | Sim |
-| Bot do Telegram e webhook do n8n | A criar | Sim, para o formulário |
-| Funções, formação e fotos da equipe | A informar | Não (seção pode sair depois) |
-| Prazo da garantia e prazo típico de projeto | A definir | Não (texto sai sem o número) |
+| Pacote inicial a partir de R$ 1.490 | Escopo e entregáveis ainda não definidos; definir antes de vender o preço público | Sim |
+| CNPJ e razão social | Dados empresariais a informar ou confirmar | Sim, para formalizar cobrança e identificação da empresa |
+| Caixa `contato@unolabs.com.br` | Endereço confirmado; existência e recebimento na caixa ainda não homologados | Sim |
+| Política de privacidade | Rascunho em `04 - SITE/public/politica-de-privacidade/`; completar o fluxo real, responsável, contato de privacidade, local do n8n, prazo de guarda e data; fazer revisão jurídica | Sim |
+| Worker, n8n e SMTP HostGator | Validar configuração real e o contrato de resposta `{"ok":true,"encaminhamento":"smtp_aceito"}`; configuração, credenciais e remetente autorizado não estão comprovados | Sim, para o formulário |
+| Homologação do e-mail | Registrar em separado a aceitação do backend, a aceitação/encaminhamento pelo SMTP e o recebimento observado na caixa de destino | Sim |
+| Funções e fotos da equipe | Funções de Urias e Bruno indefinidas; não criar cargos. Milena está em formação em Publicidade e Propaganda na UVV. Fotos a confirmar | Não (a seção pode ser enxuta) |
+| Termos comerciais de prazo e garantia | Informar as condições na proposta de cada escopo; não preencher números ou marcadores provisórios na home | Não |
 | Verba de mídia paga direto às plataformas | Confirmar | Não |
 | Hospedagem, domínio e e-mail como serviços | Confirmar | Não |
 | Perfil de Empresa no Google | Não existe; depende de endereço verificável | Não, mas limita o SEO local |
 | Cases reais com autorização (La Bella Mesa e outros) | Pendência futura | Não |
 | Escolha final de tipografia (A, B ou C) | Em avaliação | Não |
 
+Roteiro para registrar evidências de homologação: [docs/CONTATO_HOMOLOGACAO.md](CONTATO_HOMOLOGACAO.md).
+
 ## 0.12 Experiência da home (v1.2)
 
-1. **Hero “do projeto ao site”:** a composição da direita mostra o wireframe técnico de um estudo conceitual e uma linha de varredura Mint revela o site final por cima, em ciclo. Ao lado, um cartão de código com o `<title>`, a meta description e os dados estruturados do estudo (prova de SEO técnico). O fundo tem a grade da marca, iluminada em Mint sob o cursor. Com movimento reduzido, aparece direto o site final.
-2. **Jornada presa na tela (sticky scroll / scrollytelling):** a seção “Da busca ao contato” fica fixa enquanto a pessoa rola; as quatro etapas (Encontra, Entende, Confia, Chama) trocam sozinhas com a rolagem e a página só segue depois da última. A rolagem continua nativa (não é sequestro de rolagem) e os marcadores de etapa são clicáveis. Cerca de 3 alturas de tela no total — não prender além disso.
+1. **Hero “do projeto ao site”:** a composição da direita mostra o wireframe técnico de um estudo conceitual e uma linha de varredura Mint revela o site final por cima em uma animação finita de 4 s. Ao lado, um cartão de código com o `<title>`, a meta description e os dados estruturados do estudo. O fundo tem a grade da marca, iluminada em Mint sob o cursor. Com movimento reduzido, aparece direto o site final.
+2. **Jornada presa na tela (sticky scroll / scrollytelling):** quando o conteúdo cabe na altura útil medida, “Da busca ao contato” fica fixa por três alturas estáveis de tela. As etapas Encontra, Entende, Confia e Chama dividem esse percurso em quatro intervalos iguais; a rolagem continua nativa e os marcadores são clicáveis. Se o conteúdo não couber ou a pessoa preferir movimento reduzido, as quatro explicações aparecem em sequência estática.
 3. **Estudos conceituais como capítulos:** cada estudo ocupa uma faixa com a paleta do próprio projeto, com versões desktop e celular lado a lado.
 4. **“Por baixo do capô”:** painel em estilo terminal com o que toda entrega inclui (metas de Core Web Vitals, dados estruturados, sitemap, acessibilidade, anti-spam, LGPD). São metas e itens de entrega, nunca resultados medidos.
-5. **Animações:** poucas e contínuas (varredura do hero, órbita dos serviços, desenho técnico). Todas desligam com `prefers-reduced-motion`.
+5. **Animações:** a revelação do hero dura 4 s; as sequências dos estudos também duram 4 s de tempo visível real, pausam quando saem da área visível e podem ser repetidas pelo controle “Rever animação”. A preferência por movimento reduzido é aplicada ao carregar a página e quando o sistema muda essa preferência; as animações são suprimidas e os estados finais ficam estáticos.
 
 
 ## 0.13 Pasta oficial, análises e Git (D29 · 30/09/2026)
@@ -562,12 +574,12 @@ Também medir a qualidade da experiência: problemas de navegação, compreensã
 
 ## 24. Fatos pendentes e limites de publicação
 
-Não estão confirmados nas fontes consultadas: contatos oficiais, domínio, razão social, CNPJ, responsáveis, equipe, endereço, ticket mínimo, prazos, condições de pagamento, política de suporte e cases reais autorizados. Os manuais alertam explicitamente contra adotar dados ilustrativos de mockups. [S1, capítulos 09 e 11; S2, dados]
+As fontes de marca consultadas originalmente não confirmavam contatos oficiais, domínio, razão social, CNPJ, responsáveis, equipe, endereço, ticket mínimo, prazos, condições de pagamento, política de suporte ou cases reais autorizados. Os contatos e outros itens confirmados depois constam na Parte 0; não adotar dados ilustrativos de mockups. [S1, capítulos 09 e 11; S2, dados]
 
 
-Esses campos devem permanecer ausentes ou marcados como pendentes no ambiente de desenvolvimento. Antes da publicação, substituir pelo dado verificado ou remover a funcionalidade dependente. Não publicar links falsos, rodapé inventado, política genérica que descreve outra operação ou mensagem de envio sem integração real.
+Campos ainda não confirmados devem permanecer ausentes ou marcados como pendentes no ambiente de desenvolvimento. Antes da publicação, substituir pelo dado verificado ou remover a funcionalidade dependente. Os contatos posteriores constam na Parte 0, §0.10 e estão integrados ao HTML e ao JSON-LD; a caixa e o envio continuam sem homologação. Não publicar links falsos, rodapé inventado, política genérica que descreve outra operação ou mensagem de envio sem integração real.
 
-**[v1.1]** Já confirmados: domínio unolabs.com.br, equipe (Urias Loures, Bruno Gonzaga, Milena Dias), atendimento presencial na Grande Vitória/ES e em Curitiba/PR e preço de entrada. Seguem pendentes os itens da Parte 0, §0.11.
+**[v1.1; atualização v1.5 na Parte 0]** Já confirmados: domínio `unolabs.com.br`, os contatos comerciais e seus formatos, nomes da equipe, atendimento presencial na Grande Vitória/ES e em Curitiba/PR e preço público de entrada. Os contatos foram integrados ao HTML e ao JSON-LD e os links conferidos localmente; permanecem pendentes as configurações e a homologação real descritas na Parte 0, §0.11.
 
 A falta desses dados não impede definir estratégia, desenhar o site e construir um protótipo. Impede apenas tratar esse protótipo como uma presença comercial plenamente validada.
 
@@ -1213,7 +1225,7 @@ Continuar no WhatsApp
 **Aviso de encaminhamento**\
 Você poderá revisar a mensagem e enviá-la no WhatsApp.
 
-**[v1.1]** Fluxo real do formulário: servidor (Cloudflare) valida e envia ao n8n, que avisa por e-mail e por um bot privado do Telegram da equipe. **Nota editorial:** não prometer prazo de resposta sem política definida. A informação de privacidade deve explicar o fluxo real, não ser um texto genérico de aparência jurídica.
+**[v1.5]** Fluxo previsto do formulário: navegador → Worker `/api/contato` → n8n → SMTP HostGator → `contato@unolabs.com.br`. A resposta esperada do n8n após a aceitação SMTP é `{"ok":true,"encaminhamento":"smtp_aceito"}`; uma resposta 2xx genérica não comprova o encaminhamento. Aceitação do backend, aceitação SMTP e recebimento na caixa são evidências distintas. A configuração e a homologação real continuam pendentes. Não prometer prazo de resposta sem política definida. A política de privacidade deve explicar a operação real.
 
 ## 11. Página Abordagem
 
@@ -1457,22 +1469,22 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 | D08 | Inter como baseline do protótipo | Proposta conservadora | Registrar escolha final do sistema web |
 | D09 | Selecionar um único pacote técnico de logos | Pendente de ativo e validação | Não combinar margens, geometria e variantes entre kits |
 | D10 | Oferta central; complementos subordinados e validados | Proposta baseada nas fontes | Não publicar catálogo ampliado por inferência |
-| D11 | Sem números comerciais inventados | Regra de integridade | Ticket, prazo, métricas e contatos permanecem não confirmados |
+| D11 | Sem números comerciais inventados | Regra de integridade | Termos e prazos definidos por escopo na proposta; contatos confirmados em §0.10, funcionamento ainda não homologado |
 | D12 | Acessibilidade, desempenho e honestidade como condições de qualidade | Requisito de projeto | Efeitos não compensam falhas críticas de uso |
 | D13 | UNO Labs substitui a “Audaro — Engenharia Digital”; Audaro — Engenharia de Resultado é outra empresa | Decisão do usuário (v1.1) | Sem redirecionamento; automação/IA fora da UNO |
 | D14 | Serviços ativos: sites, SEO, Google Ads, Meta Ads, manutenção mensal | Decisão do usuário (v1.1) | Podem ser publicados como serviços |
 | D15 | Preço público “a partir de R$ 1.490 em até 10x sem juros” | Decisão do usuário (v1.1) | Único valor publicável |
 | D16 | Domínio unolabs.com.br | Confirmado (v1.1) | Canonical, e-mail e dados estruturados |
-| D17 | Equipe: Urias Loures, Bruno Gonzaga, Milena Dias | Decisão do usuário (v1.1) | Seção de equipe com dados a completar |
+| D17 | Equipe: Urias Loures e Bruno Gonzaga são criadores; Milena Dias está em formação em Publicidade e Propaganda na UVV | Atualizado em 30/09/2026 | Funções específicas de Urias e Bruno não estão definidas; não atribuir cargos |
 | D18 | Presencial na Grande Vitória/ES e em Curitiba/PR; remoto no Brasil | Decisão do usuário (v1.1) | SEO local nas 5 cidades |
 | D19 | Blog desde o lançamento, 2 a 4 artigos por mês, IA com revisão humana | Decisão do usuário (v1.1) | Substitui a restrição anterior ao blog |
 | D20 | Inter mantida; escopos A/B/C em avaliação | Decisão do usuário (v1.1) | Substitui a recomendação de trocar a fonte |
-| D21 | Stack Astro 7 + Cloudflare Workers; formulário → n8n → Telegram | Decisão do usuário (v1.1) | Ver Parte 0, §0.8 |
+| D21 | Stack Astro 7 + Cloudflare Workers; fluxo atual do formulário via Worker → n8n → SMTP HostGator → `contato@unolabs.com.br` | Atualizado em 30/09/2026 | Ver Parte 0, §0.8 e §0.11; homologação pendente |
 | D22 | Headline “Presença digital que atrai clientes.” | Decisão do usuário (v1.1) | Substitui a headline anterior |
-| D23 | Garantia cobre falhas do entregue; alterações só via manutenção mensal | Decisão do usuário (v1.1) | Prazo em dias a definir |
+| D23 | Garantia cobre falhas do entregue; alterações só via manutenção mensal | Decisão do usuário (v1.1), termos comerciais atualizados em 30/09/2026 | Detalhar termos e prazos na proposta; não publicar marcadores ou números provisórios na home |
 | D24 | E-commerce fora do escopo por enquanto | Decisão do usuário (v1.1) | Não anunciar |
 | D25 | Hospedagem em Cloudflare Workers (Static Assets), não em Pages | Verificado na documentação oficial (v1.2) | Seguir a configuração da Parte 0, §0.8 |
-| D26 | E-mail do domínio na HostGator (Plano M), sem Cloudflare Email Routing | Decisão do usuário (v1.2) | MX para HostGator; registro `mail` sem proxy |
+| D26 | E-mail do domínio na HostGator (Plano M contratado), sem Cloudflare Email Routing | Decisão do usuário (v1.2) | A contratação está confirmada; acesso operacional, conta, DNS e envio não estão verificados. Conferir MX e `mail` sem proxy |
 | D27 | Jornada da home presa na tela durante a rolagem (sticky), com rolagem nativa | Decisão do usuário (v1.2) | Substitui as abas clicáveis; manter alternativa estática para movimento reduzido |
 | D28 | Lançar a v1 como HTML estático (sem build) em Cloudflare Workers; migrar para Astro quando o blog tiver artigos | Proposta do Claude para lançar rápido (v1.3) | Ver Parte 0, §0.8 e `04 - SITE/LEIA-ME.md` |
 | D29 | `04 - SITE` é a única pasta oficial para análises, Impeccable, localhost, alterações e Git; documentação em `docs/`; `03 - ANALISE LP` é histórico | Padronização solicitada pelo usuário (v1.4) | Ver Parte 0, §0.13 e `AGENTS.md` |
@@ -1481,11 +1493,11 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 
 **Para desenhar e prototipar:** é possível avançar com o nome, a essência, a direção high ticket, a paleta de consenso e os textos de trabalho. Marcar dependências pontuais, sem paralisar o projeto.
 
-**Antes de publicar:** confirmar logo/pacote final; contatos e domínio; dados institucionais necessários; natureza e autorização dos projetos; serviços efetivamente ativos; política de operação e de dados; infraestrutura do contato; conteúdo final e autorização de publicação.
+**Antes de publicar:** confirmar logo/pacote final; validar os dados empresariais necessários; natureza e autorização dos projetos; serviços efetivamente ativos; política de operação e de dados; infraestrutura e homologação real do contato; conteúdo final e autorização de publicação. Os contatos confirmados já estão no HTML e no JSON-LD, e os links foram validados localmente; caixa e entrega SMTP continuam sem homologação.
 
 **Antes de anunciar condições comerciais específicas:** confirmar ticket mínimo, prazo, parcelamento, revisões, manutenção, custos recorrentes, direitos e responsabilidades. Não importar números dos mockups ou condições do HTML antigo.
 
-S1 e S2 registram que contatos, responsáveis e dados empresariais não foram confirmados.
+S1 e S2 registram que contatos, responsáveis e dados empresariais não estavam confirmados nas fontes consultadas originalmente. Os contatos foram informados depois e estão na Parte 0, §0.10; os dados empresariais seguem pendentes.
 
 
 ## 7. Referências técnicas externas

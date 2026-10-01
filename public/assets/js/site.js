@@ -421,10 +421,11 @@
   /* ---------- 3. Luz do hero ---------- */
   function iniciarLuz() {
     var hero = doc.querySelector('.hero');
-    if (!hero || movimentoReduzido || !window.matchMedia('(hover: hover)').matches) return;
+    if (!hero || !window.matchMedia('(hover: hover)').matches) return;
     var ultimo = null;
     var agendadoLuz = false;
     hero.addEventListener('pointermove', function (ev) {
+      if (movimentoEstudosReduzido()) return;
       ultimo = ev;
       if (agendadoLuz) return;
       agendadoLuz = true;
@@ -437,108 +438,115 @@
     }, { passive: true });
   }
 
-  /* ---------- 4. Jornada presa na tela ----------
-     A seção tem 400vh; o bloco interno é sticky. O progresso da rolagem (0–1)
-     vira 4 etapas: passo = floor(p × 4); "sub" é o avanço dentro da etapa. */
+  /* ---------- 4. Jornada: três alturas estáveis de tela, ou quatro etapas lineares. ---------- */
   function iniciarJornada() {
     var secao = doc.querySelector('.jornada');
     if (!secao) return;
     var fixo = secao.querySelector('.jornada__fixo');
     var grade = secao.querySelector('.j-grade');
+    var mob = secao.querySelector('.jornada__mob');
     var comp = secao.querySelector('.jm-comp');
     var etapas = secao.querySelectorAll('[data-etapa]');
     var botoes = secao.querySelectorAll('[data-ir]');
     var contador = secao.querySelector('[data-contador]');
-    var atual = { passo: -1, sub: -1 };
-    var agendado = false;
+    var atual = -1, agendado = false, sticky = false;
+    var probe = doc.createElement('div');
+    probe.style.cssText = 'position:absolute;width:0;height:100svh;visibility:hidden;pointer-events:none';
+    probe.setAttribute('aria-hidden', 'true');
+    secao.appendChild(probe);
 
     function aplicar(passo, sub) {
-      if (passo !== atual.passo) {
-        secao.setAttribute('data-passo', String(passo));
-        etapas.forEach(function (el) {
-          var k = +el.getAttribute('data-etapa');
-          var ativo = k === passo;
-          el.classList.toggle('is-ativo', ativo);
-          if (el.classList.contains('j-item') || el.classList.contains('jm-aba')) el.classList.toggle('is-feito', k < passo);
-          if (el.classList.contains('jm-texto')) el.setAttribute('aria-hidden', ativo ? 'false' : 'true');
-          if (el.classList.contains('j-item')) {
-            var det = el.querySelector('.j-det');
-            if (det) det.setAttribute('aria-hidden', ativo ? 'false' : 'true');
-          }
-        });
-        botoes.forEach(function (b) {
-          if (+b.getAttribute('data-ir') === passo) b.setAttribute('aria-current', 'step');
-          else b.removeAttribute('aria-current');
-        });
-        if (contador) contador.textContent = '0' + (passo + 1);
-
-        // Só inicia a cópia cuja camada da jornada está ativa e tem exposição significativa.
-        secao.querySelectorAll('[data-estudo]').forEach(sincronizarCopiaEstudo);
-      }
-      if (sub !== atual.sub) {
-        etapas.forEach(function (el) {
-          if (+el.getAttribute('data-etapa') === passo) el.style.setProperty('--sub', sub);
-        });
-      }
-      atual.passo = passo;
-      atual.sub = sub;
-    }
-
-    function escalar() {
-      var alturaFixo = fixo.clientHeight || window.innerHeight;
-      if (grade) {
-        var porAltura = Math.max(0.55, (alturaFixo - 40) / 650);
-        // 648 = metade da grade (620) + cartão flutuante que passa 28 px da borda direita
-        var porLargura = (window.innerWidth / 2 - 12) / 648;
-        var je = Math.min(1, porAltura, porLargura);
-        grade.style.setProperty('--je', je.toFixed(3));
-      }
-      if (comp) {
-        // No tablet (≥700 px de largura) a composição pode crescer até 1,4×
-        var jmMax = window.innerWidth >= 700 ? 1.4 : 1;
-        var reserva = window.innerWidth >= 700 ? 400 : 350;
-        var jm = movimentoReduzido ? jmMax : Math.min(jmMax, Math.max(0.5, (alturaFixo - reserva) / 404));
-        comp.style.setProperty('--jm', jm.toFixed(3));
-      }
+      var mudou = passo !== atual;
+      secao.setAttribute('data-passo', String(passo));
+      etapas.forEach(function (el) {
+        var k = +el.getAttribute('data-etapa'), ativo = k === passo;
+        el.classList.toggle('is-ativo', ativo);
+        el.style.setProperty('--sub', ativo ? sub : 0);
+        if (el.classList.contains('j-item') || el.classList.contains('jm-aba')) el.classList.toggle('is-feito', k < passo);
+        if (el.classList.contains('jm-texto')) el.setAttribute('aria-hidden', !sticky || ativo ? 'false' : 'true');
+        if (el.classList.contains('j-item')) {
+          var det = el.querySelector('.j-det');
+          if (det) det.setAttribute('aria-hidden', ativo ? 'false' : 'true');
+        }
+      });
+      botoes.forEach(function (b) {
+        if (sticky && +b.getAttribute('data-ir') === passo) b.setAttribute('aria-current', 'step');
+        else b.removeAttribute('aria-current');
+      });
+      if (contador) contador.textContent = '0' + (passo + 1);
+      atual = passo;
+      if (mudou) secao.querySelectorAll('[data-estudo]').forEach(sincronizarCopiaEstudo);
     }
 
     function medir() {
       agendado = false;
-      var r = secao.getBoundingClientRect();
+      if (!sticky) return;
       var topo = parseFloat(getComputedStyle(fixo).top) || 0;
-      var faixa = r.height - fixo.offsetHeight;
-      var p = faixa > 0 ? Math.min(1, Math.max(0, (topo - r.top) / faixa)) : 0;
+      var faixa = Math.max(1, secao.offsetHeight - fixo.offsetHeight);
+      var p = Math.min(1, Math.max(0, (topo - secao.getBoundingClientRect().top) / faixa));
+      // Quatro intervalos iguais dentro do percurso disponível das três telas.
       var passo = Math.min(3, Math.floor(p * 4));
-      var sub = Math.round(Math.min(1, Math.max(0, p * 4 - passo)) * 50) / 50;
-      aplicar(passo, sub);
+      aplicar(passo, Math.min(1, Math.max(0, p * 4 - passo)));
     }
-
     function agendar() {
-      if (agendado) return;
+      if (agendado || !sticky) return;
       agendado = true;
       requestAnimationFrame(medir);
     }
 
-    function irPara(k) {
-      if (movimentoReduzido) { aplicar(k, 1); return; }
-      var topoSecao = window.pageYOffset + secao.getBoundingClientRect().top;
-      var topo = parseFloat(getComputedStyle(fixo).top) || 0;
-      var faixa = secao.offsetHeight - fixo.offsetHeight;
-      window.scrollTo({ top: topoSecao - topo + faixa * (k / 4) + faixa * 0.06, behavior: 'smooth' });
+    function adaptar() {
+      var topo = doc.querySelector('.topo__in').offsetHeight;
+      raiz.style.setProperty('--topo', topo + 'px');
+      var tela = probe.offsetHeight || window.innerHeight;
+      var altura = Math.min(tela, window.visualViewport ? window.visualViewport.height : window.innerHeight);
+      var util = altura - topo;
+      secao.style.setProperty('--j-tela', tela + 'px');
+      secao.style.setProperty('--j-util', util + 'px');
+      // Medimos as versões sem escalonar texto para compensar uma tela baixa.
+      secao.classList.add('is-sticky');
+      sticky = true;
+      aplicar(Math.max(0, atual), 1);
+      var cabe = false;
+      if (window.innerWidth >= 1100) {
+        var escala = Math.min(1, (window.innerWidth - 64) / 1296);
+        grade.style.setProperty('--je', escala.toFixed(3));
+        var detalhes = Array.from(secao.querySelectorAll('.j-det'));
+        var extra = Math.max.apply(null, detalhes.map(function (e) { return e.scrollHeight; })) - (detalhes[atual] ? detalhes[atual].scrollHeight : 0);
+        cabe = escala >= 0.88 && (grade.offsetHeight + Math.max(0, extra)) * escala + 48 <= util;
+      } else {
+        var textos = Array.from(secao.querySelectorAll('.jm-texto'));
+        var textoAltura = Math.max.apply(null, textos.map(function (e) { return e.scrollHeight; }));
+        secao.style.setProperty('--j-texto', textoAltura + 'px');
+        comp.style.setProperty('--jm', '1');
+        var semImagem = mob.offsetHeight - comp.offsetHeight;
+        var tamanho = Math.min(1.1, (util - semImagem - 36) / 404, (window.innerWidth - 40) / 350);
+        comp.style.setProperty('--jm', Math.max(0.8, tamanho).toFixed(3));
+        cabe = tamanho >= 0.8 && mob.offsetHeight + 24 <= util;
+      }
+      sticky = cabe && !movimentoEstudosReduzido();
+      secao.classList.toggle('is-sticky', sticky);
+      if (sticky) medir();
+      else aplicar(1, 1); // Uma imagem ilustrativa, com as quatro explicações completas abaixo.
     }
-
     botoes.forEach(function (b) {
-      b.addEventListener('click', function () { irPara(+b.getAttribute('data-ir')); });
+      b.addEventListener('click', function () {
+        if (!sticky) return;
+        var k = +b.getAttribute('data-ir');
+        var topoSecao = window.scrollY + secao.getBoundingClientRect().top;
+        var topo = parseFloat(getComputedStyle(fixo).top) || 0;
+        var faixa = secao.offsetHeight - fixo.offsetHeight;
+        window.scrollTo({ top: topoSecao - topo + faixa * ((k + 0.25) / 4), behavior: movimentoEstudosReduzido() ? 'auto' : 'smooth' });
+      });
     });
-
-    escalar();
-    window.addEventListener('resize', function () { escalar(); if (!movimentoReduzido) agendar(); });
-    if (movimentoReduzido) {
-      aplicar(0, 1);
-    } else {
-      window.addEventListener('scroll', agendar, { passive: true });
-      medir();
+    window.addEventListener('scroll', agendar, { passive: true });
+    window.addEventListener('resize', adaptar);
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', adaptar);
+    if (mqlMovimentoEstudos) {
+      if (mqlMovimentoEstudos.addEventListener) mqlMovimentoEstudos.addEventListener('change', adaptar);
+      else mqlMovimentoEstudos.addListener(adaptar);
     }
+    if (doc.fonts) doc.fonts.ready.then(adaptar);
+    adaptar();
   }
 
   /* ---------- 5. Terminal ---------- */
@@ -580,6 +588,9 @@
     var aviso = doc.getElementById('form-aviso');
     var botao = form.querySelector('button[type="submit"]');
     var textoBotao = botao.textContent;
+    form.closest('.form-cartao').classList.add('is-ready');
+    botao.disabled = false;
+    var recuperacao = form.querySelector('.form-recuperacao');
     var endpoint = form.getAttribute('data-endpoint') || '/api/contato';
     var chaveTurnstile = (form.getAttribute('data-turnstile') || '').trim();
     var tokenTurnstile = '';
@@ -587,8 +598,8 @@
 
     function valor(nome) { var c = form.elements[nome]; return c ? String(c.value || '').trim() : ''; }
     function canalValido(v) {
-      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return true;
-      return v.replace(/\D/g, '').length >= 10;
+      if (/^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v)) return true;
+      return /^[+()\d\s.-]+$/.test(v) && v.replace(/\D/g, '').length >= 10 && v.replace(/\D/g, '').length <= 15;
     }
     var regras = {
       nome: function (v) { return v.length >= 2; },
@@ -604,9 +615,11 @@
       caixa.classList.toggle('tem-erro', !ok);
       campo.setAttribute('aria-invalid', ok ? 'false' : 'true');
     }
-    function mostrarAviso(msg) {
+    function mostrarAviso(msg, carregando) {
       aviso.textContent = msg || '';
-      aviso.classList.toggle('erro', !!msg);
+      aviso.classList.toggle('erro', !!msg && !carregando);
+      aviso.classList.toggle('carregando', !!carregando);
+      if (recuperacao) recuperacao.hidden = !msg || !!carregando;
     }
 
     Object.keys(regras).forEach(function (nome) {
@@ -687,6 +700,8 @@
       enviando = true;
       botao.disabled = true;
       botao.textContent = 'Enviando…';
+      form.setAttribute('aria-busy', 'true');
+      mostrarAviso('Enviando seu contexto. Aguarde a confirmação.', true);
       var controle = 'AbortController' in window ? new AbortController() : null;
       var limite = controle ? setTimeout(function () { controle.abort(); }, 15000) : null;
 
@@ -697,8 +712,11 @@
         signal: controle ? controle.signal : undefined
       }).then(function (res) {
         return res.json().catch(function () { return {}; }).then(function (json) {
-          if (res.ok && json && json.ok === true) return true;
-          throw new Error((json && json.erro) || ('http_' + res.status));
+          if (res.ok && json && json.ok === true && json.encaminhamento === 'smtp_aceito') return true;
+          var erro = new Error((json && json.erro) || ('http_' + res.status));
+          erro.status = res.status;
+          erro.campos = Array.isArray(json.campos) ? json.campos : [];
+          throw erro;
         });
       }).then(function () {
         form.hidden = true;
@@ -706,13 +724,26 @@
         var titulo = sucesso.querySelector('h3');
         sucesso.scrollIntoView({ block: 'center', behavior: movimentoReduzido ? 'auto' : 'smooth' });
         if (titulo) titulo.focus({ preventScroll: true });
-      }).catch(function () {
-        mostrarAviso('Não conseguimos enviar agora. Seus dados continuam aqui: tente de novo em instantes ou fale com a gente por outro canal.');
+      }).catch(function (erro) {
+        if (erro.status === 422 && erro.campos.length) {
+          var primeiro = null;
+          erro.campos.forEach(function (nome) {
+            if (!Object.hasOwn(regras, nome)) return;
+            marcar(nome, false);
+            if (!primeiro) primeiro = form.elements[nome];
+          });
+          mostrarAviso('O envio precisa de uma correção. Revise os campos indicados; seus dados continuam aqui.');
+          if (primeiro) primeiro.focus();
+        } else {
+          var mensagem = erro.status === 503 ? 'O formulário está temporariamente indisponível.' : erro.status === 403 ? 'A verificação de segurança não foi concluída. Tente novamente.' : erro.name === 'AbortError' ? 'A confirmação demorou mais que o esperado. O envio pode ter sido encaminhado; confira com a equipe antes de repetir.' : 'Não foi possível confirmar o envio.';
+          mostrarAviso(mensagem + ' Seus dados continuam aqui. Você pode tentar novamente ou usar um dos canais abaixo.');
+        }
         if (chaveTurnstile && window.turnstile) { try { window.turnstile.reset(form.querySelector('.form__turnstile')); } catch (e) {} tokenTurnstile = ''; }
       }).then(function () {
         if (limite) clearTimeout(limite);
         enviando = false;
         botao.disabled = false;
+        form.setAttribute('aria-busy', 'false');
         botao.textContent = textoBotao;
       });
     });
@@ -721,7 +752,7 @@
     if (reiniciar) {
       reiniciar.addEventListener('click', function () {
         form.reset();
-        form.querySelectorAll('.tem-erro').forEach(function (c) { c.classList.remove('tem-erro'); });
+        Object.keys(regras).forEach(function (nome) { marcar(nome, true); });
         mostrarAviso('');
         sucesso.classList.remove('visivel');
         form.hidden = false;
@@ -731,12 +762,85 @@
     }
   }
 
+  /* Controles reais ficam fora das maquetes ilustrativas e inertes. */
+  function iniciarVisualizador() {
+    var modal = doc.getElementById('visualizador');
+    if (!modal || typeof modal.showModal !== 'function') return;
+    var acionador, estudo, formato;
+    var canvas = modal.querySelector('.visualizador__canvas');
+    function mostrar(tipo) {
+      formato = tipo;
+      var tpl = doc.getElementById('tpl-' + estudo + '-' + tipo);
+      if (!tpl) return;
+      canvas.replaceChildren(tpl.content.cloneNode(true));
+      modal.querySelectorAll('[data-formato]').forEach(function (b) {
+        var selecionado = b.dataset.formato === tipo;
+        b.setAttribute('aria-pressed', String(selecionado));
+        b.classList.toggle('btn--escuro', selecionado);
+        b.classList.toggle('btn--contorno', !selecionado);
+      });
+      modal.querySelector('.visualizador__rolagem').scrollTo(0, 0);
+    }
+    doc.querySelectorAll('[data-ampliar]').forEach(function (b) {
+      b.hidden = false;
+      b.addEventListener('click', function () {
+        acionador = b;
+        estudo = b.dataset.ampliar;
+        var texto = b.closest('.capitulo__texto');
+        modal.querySelector('h2').textContent = texto.querySelector('h3').textContent;
+        modal.querySelector('[data-decisao]').textContent = Array.from(texto.querySelectorAll('dd')).map(function (e) { return e.textContent; }).join(' ');
+        mostrar(window.innerWidth < 700 ? 'mob' : 'desk');
+        modal.showModal();
+        doc.body.style.overflow = 'hidden';
+        modal.querySelector('[data-fechar]').focus();
+      });
+    });
+    modal.querySelector('[data-fechar]').addEventListener('click', function () { modal.close(); });
+    modal.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Tab') return;
+      var controles = Array.from(modal.querySelectorAll('button:not([disabled]), [tabindex="0"]'));
+      var primeiro = controles[0], ultimo = controles[controles.length - 1];
+      if (ev.shiftKey && doc.activeElement === primeiro) { ev.preventDefault(); ultimo.focus(); }
+      else if (!ev.shiftKey && doc.activeElement === ultimo) { ev.preventDefault(); primeiro.focus(); }
+    });
+    modal.querySelectorAll('[data-formato]').forEach(function (b) {
+      b.addEventListener('click', function () { mostrar(b.dataset.formato); });
+    });
+    modal.addEventListener('close', function () {
+      doc.body.style.overflow = '';
+      canvas.replaceChildren();
+      if (acionador) acionador.focus({ preventScroll: true });
+    });
+  }
+
+  function iniciarPreferencias() {
+    function atualizar() {
+      movimentoReduzido = !!(mqlMovimentoEstudos && mqlMovimentoEstudos.matches);
+      raiz.classList.toggle('rm', movimentoReduzido);
+    }
+    atualizar();
+    if (mqlMovimentoEstudos) {
+      if (mqlMovimentoEstudos.addEventListener) mqlMovimentoEstudos.addEventListener('change', atualizar);
+      else mqlMovimentoEstudos.addListener(atualizar);
+    }
+    function visibilidade() { raiz.classList.toggle('page-hidden', doc.hidden); }
+    doc.addEventListener('visibilitychange', visibilidade);
+    visibilidade();
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) { e.target.classList.toggle('motion-paused', !e.isIntersecting); });
+      });
+      doc.querySelectorAll('.hero-palco').forEach(function (e) { io.observe(e); });
+    }
+  }
+
   /* ---------- 8. Ano do rodapé ---------- */
   function iniciarAno() {
     doc.querySelectorAll('[data-ano]').forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
   }
 
   function iniciar() {
+    iniciarPreferencias();
     iniciarEscalas();
     iniciarEstudos();
     iniciarLuz();
@@ -744,6 +848,7 @@
     iniciarTerminal();
     iniciarMenu();
     iniciarFormulario();
+    iniciarVisualizador();
     iniciarAno();
   }
 

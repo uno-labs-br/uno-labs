@@ -1,0 +1,788 @@
+[
+  {
+    "antipattern": "overused-font",
+    "name": "Overused font",
+    "description": "Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\404.html",
+    "line": 0,
+    "snippet": "Primary font: inter"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\404.html",
+    "line": 0,
+    "snippet": "Colored box-shadow glow (#12362d) on dark page"
+  },
+  {
+    "antipattern": "codex-grid-background",
+    "name": "Decorative grid-line background",
+    "description": "A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\404.html",
+    "line": 0,
+    "snippet": "two-axis grid-line gradient background",
+    "advisory": true
+  },
+  {
+    "antipattern": "codex-grid-background",
+    "name": "Decorative grid-line background",
+    "description": "A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\assets\\css\\conceitos.css",
+    "line": 98,
+    "snippet": "two-axis grid-line gradient background",
+    "advisory": true
+  },
+  {
+    "antipattern": "overused-font",
+    "name": "Overused font",
+    "description": "Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\assets\\css\\fonts.css",
+    "line": 4,
+    "snippet": "font-family: 'Inter"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\assets\\css\\site.css",
+    "line": 191,
+    "snippet": "transition: height"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\assets\\css\\site.css",
+    "line": 201,
+    "snippet": "transition: max-height"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\assets\\css\\site.css",
+    "line": 232,
+    "snippet": "transition: width"
+  },
+  {
+    "antipattern": "codex-grid-background",
+    "name": "Decorative grid-line background",
+    "description": "A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\assets\\css\\site.css",
+    "line": 105,
+    "snippet": "two-axis grid-line gradient background",
+    "advisory": true
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": ":hover state 1.1:1 (need 4.5:1) — text #12362d on #0e2b24"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#7dd3a8)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#7dd3a8)"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "transition: max-height"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "transition: max-height"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "transition: max-height"
+  },
+  {
+    "antipattern": "layout-transition",
+    "name": "Layout property animation",
+    "description": "Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "transition: max-height"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-top/left on left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-top/left on left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-top/bottom/left on left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"moldura__barra\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"fone__tela\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"seo / casa-noma\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"Schema.org\" (below 11px floor)"
+  },
+  {
+    "antipattern": "tiny-text",
+    "name": "Tiny body text",
+    "description": "Body text below 12px is hard to read, especially on high-DPI screens. Use at least 14px for body content, 16px is ideal.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "11px body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<section> \"jornada\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"j-tela__barra\": children flush against border-bottom+bg on top/bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"terminal__cab\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "wide-tracking",
+    "name": "Wide letter spacing on body text",
+    "description": "Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "letter-spacing: 0.12em on body text"
+  },
+  {
+    "antipattern": "wide-tracking",
+    "name": "Wide letter spacing on body text",
+    "description": "Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "letter-spacing: 0.12em on body text"
+  },
+  {
+    "antipattern": "wide-tracking",
+    "name": "Wide letter spacing on body text",
+    "description": "Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "letter-spacing: 0.12em on body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"invest-cartao\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"invest-bloco\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<section> \"equipe\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<section> \"blog\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"faq\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<section> \"contato\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"form-cartao\": children flush against border+bg on top/right/left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"c-canvas\": children flush against bg on top/bottom (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 32 chars of body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"c-canvas\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"c-canvas\": children flush against bg on top/bottom (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 36 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 35 chars of body text"
+  },
+  {
+    "antipattern": "tiny-text",
+    "name": "Tiny body text",
+    "description": "Body text below 12px is hard to read, especially on high-DPI screens. Use at least 14px for body content, 16px is ideal.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "11px body text"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"SEG\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"TER\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"QUA\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"QUI\" (below 11px floor)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"SEX\" (below 11px floor)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"c-canvas\": children flush against bg on top/bottom (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 35 chars of body text"
+  },
+  {
+    "antipattern": "tiny-text",
+    "name": "Tiny body text",
+    "description": "Body text below 12px is hard to read, especially on high-DPI screens. Use at least 14px for body content, 16px is ideal.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "11px body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"c-canvas\": children flush against bg on bottom (no inset)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "9px functional text \"ENGENHARIA\" (below 11px floor)"
+  },
+  {
+    "antipattern": "wide-tracking",
+    "name": "Wide letter spacing on body text",
+    "description": "Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "letter-spacing: 0.16em on body text"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"AÇO ESTRUTURAL ASTM A572 gr. 50\" (below 11px floor)"
+  },
+  {
+    "antipattern": "wide-tracking",
+    "name": "Wide letter spacing on body text",
+    "description": "Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "letter-spacing: 0.12em on body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"c-canvas\": children flush against bg on top/bottom (no inset)"
+  },
+  {
+    "antipattern": "undersized-ui-text",
+    "name": "Undersized functional text",
+    "description": "Interactive and content-bearing UI text (links, buttons, nav items, labels, table cells, meta rows, timecodes) below 11px is a legibility failure, not a style choice. WCAG sets no absolute pixel floor, but functional text under 11px is a defensible quality bar: it fails on high-DPI and small viewports and it degrades tap and read targets. The 11px floor holds even inside a footer; only non-interactive legal smallprint gets the softer 10px floor. Being ON the DESIGN.md size ramp does not exempt a value here: adding 8px to the ramp launders the token but not the legibility problem, and that is exactly the escape hatch this rule closes. Exempts sup/sub, visually-hidden (sr-only) text, and code/terminal contexts. Decorative letterspaced micro-labels are still functional and stay in scope.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "10px functional text \"ENGENHARIA INDUSTRIAL · ES\" (below 11px floor)"
+  },
+  {
+    "antipattern": "wide-tracking",
+    "name": "Wide letter spacing on body text",
+    "description": "Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "letter-spacing: 0.16em on body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "<div> \"mod-mob-v1-foto\": children flush against border+bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "clipped-overflow-container",
+    "name": "Positioned child clipped by overflow container",
+    "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "body clips a positioned child"
+  },
+  {
+    "antipattern": "gpt-thin-border-wide-shadow",
+    "name": "Hairline border with wide shadow",
+    "description": "A hairline border paired with a wide, diffuse shadow is a recurring generated-UI signature. Commit to one — a defined edge or a soft elevation — rather than both at once.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "1px border + 60px shadow blur",
+    "advisory": true
+  },
+  {
+    "antipattern": "overused-font",
+    "name": "Overused font",
+    "description": "Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Primary font: inter"
+  },
+  {
+    "antipattern": "kicker-above-heading",
+    "name": "Kicker / eyebrow label above heading",
+    "description": "A tiny tracked uppercase or small-caps label sitting as its own block directly above a heading is banned outright, repeated or not. Generated kickers never earn their place: the heading carries its own weight. Delete the label and let the heading speak; if the words matter, work them into the heading or the body.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "kicker \"Vitória, ES\" above h4 \"Fogo baixo,mesa longa.\""
+  },
+  {
+    "antipattern": "nested-cards",
+    "name": "Nested cards",
+    "description": "Cards inside cards create visual noise and excessive depth. Flatten the hierarchy — use spacing, typography, and dividers instead of nesting containers.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Card inside card (div)"
+  },
+  {
+    "antipattern": "nested-cards",
+    "name": "Nested cards",
+    "description": "Cards inside cards create visual noise and excessive depth. Flatten the hierarchy — use spacing, typography, and dividers instead of nesting containers.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Card inside card (div)"
+  },
+  {
+    "antipattern": "nested-cards",
+    "name": "Nested cards",
+    "description": "Cards inside cards create visual noise and excessive depth. Flatten the hierarchy — use spacing, typography, and dividers instead of nesting containers.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Card inside card (div)"
+  },
+  {
+    "antipattern": "nested-cards",
+    "name": "Nested cards",
+    "description": "Cards inside cards create visual noise and excessive depth. Flatten the hierarchy — use spacing, typography, and dividers instead of nesting containers.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Card inside card (div)"
+  },
+  {
+    "antipattern": "nested-cards",
+    "name": "Nested cards",
+    "description": "Cards inside cards create visual noise and excessive depth. Flatten the hierarchy — use spacing, typography, and dividers instead of nesting containers.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Card inside card (div)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "Colored box-shadow glow (#12362d) on dark page"
+  },
+  {
+    "antipattern": "codex-grid-background",
+    "name": "Decorative grid-line background",
+    "description": "A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\index.html",
+    "line": 0,
+    "snippet": "two-axis grid-line gradient background",
+    "advisory": true
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\politica-de-privacidade\\index.html",
+    "line": 0,
+    "snippet": ":hover state 1.1:1 (need 4.5:1) — text #12362d on #0e2b24"
+  },
+  {
+    "antipattern": "clipped-overflow-container",
+    "name": "Positioned child clipped by overflow container",
+    "description": "A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\politica-de-privacidade\\index.html",
+    "line": 0,
+    "snippet": "body clips a positioned child"
+  },
+  {
+    "antipattern": "overused-font",
+    "name": "Overused font",
+    "description": "Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\politica-de-privacidade\\index.html",
+    "line": 0,
+    "snippet": "Primary font: inter"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\politica-de-privacidade\\index.html",
+    "line": 0,
+    "snippet": "Colored box-shadow glow (#12362d) on dark page"
+  },
+  {
+    "antipattern": "codex-grid-background",
+    "name": "Decorative grid-line background",
+    "description": "A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "D:\\00 - PROJETOS\\01 - UNO LABS - LP\\04 - SITE\\public\\politica-de-privacidade\\index.html",
+    "line": 0,
+    "snippet": "two-axis grid-line gradient background",
+    "advisory": true
+  }
+]

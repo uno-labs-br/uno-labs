@@ -1,0 +1,42 @@
+[
+  {
+    "state": "reduce",
+    "elapsed": 82,
+    "media": true,
+    "rm": true,
+    "linear": true,
+    "complete": true
+  },
+  {
+    "state": "no-preference",
+    "elapsed": 43,
+    "media": false,
+    "rm": false,
+    "linear": false,
+    "complete": false
+  },
+  {
+    "state": "reduce",
+    "elapsed": 45,
+    "media": true,
+    "rm": true,
+    "linear": true,
+    "complete": true
+  },
+  {
+    "state": "no-preference",
+    "elapsed": 34,
+    "media": false,
+    "rm": false,
+    "linear": false,
+    "complete": false
+  },
+  {
+    "state": "reduce",
+    "elapsed": 34,
+    "media": true,
+    "rm": true,
+    "linear": true,
+    "complete": true
+  }
+]
