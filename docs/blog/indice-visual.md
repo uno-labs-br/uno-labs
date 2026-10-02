@@ -6,6 +6,8 @@ Registro da remodelação de `/blog/` em `src/pages/blog/index.astro` e `src/com
 
 O título recuperado é “Um site melhor começa com a pergunta certa.”. Após a correção solicitada pelo usuário, os seis artigos aparecem em uma única grade, sempre com duas colunas acima de 600 px e uma no celular. Não há destaque isolado nem seções temáticas. A ordem vem da coleção editorial, sem separar por assunto.
 
+O botão com contorno e seta “Voltar ao site” aparece acima do título do índice e no topo dos artigos, usando `BackToSite.astro`. Leva diretamente a `/` na mesma aba, sem depender do histórico ou de JavaScript. Nos artigos, “Voltar para o blog” continua disponível separadamente. A inclusão foi conferida no navegador em 1440 e 390 px, incluindo visibilidade inicial e retorno pelo teclado; build aprovado.
+
 Cada artigo apresenta capa, título, resumo, assunto e condição editorial. O componente reutiliza as versões existentes das capas em `srcset`, carrega imediatamente as duas primeiras e adia as demais. No topo, Todos é a seleção inicial; Estratégia e conversão, Design e experiência e Contato e mensuração filtram a mesma grade. Todos restaura a lista e a ordem originais. Botões nativos indicam o estado com `aria-pressed`, preservam o foco e anunciam a quantidade de artigos; itens ocultos saem da navegação por teclado. Sem JavaScript, todos os artigos continuam acessíveis e os filtros ficam ocultos. A prévia continua com `noindex, nofollow` e com “Em revisão editorial”; esta composição não aprova nem publica os textos.
 
 ## Continuidade da identidade e das imagens

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/blog/BlogCard.astro';
+import BackToSite from '../../components/blog/BackToSite.astro';
 import { getVisibleArticles } from '../../lib/blog';
 const articles = await getVisibleArticles();
 const categories = [
@@ -22,6 +23,7 @@ const filters = [...categories, { id: 'mais-leituras', title: 'Mais leituras' }]
   <Header />
   <main id="conteudo" class="blog-index">
     <div class="container">
+      <div class="blog-index__back"><BackToSite /></div>
       <header class="blog-index__intro">
         <h1>Um site melhor começa com a pergunta certa.</h1>
         <p>Guias práticos para entender seu site, melhorar a experiência de quem visita e facilitar o próximo contato.</p>
@@ -68,6 +70,7 @@ const filters = [...categories, { id: 'mais-leituras', title: 'Mais leituras' }]
 </script>
 <style>
   .blog-index { padding-block: clamp(36px, 4vw, 60px) clamp(64px, 8vw, 112px); }
+  .blog-index__back { margin-bottom: 28px; }
   .blog-index__intro { display: grid; grid-template-columns: 1.6fr 1fr; align-items: end; gap: 24px 72px; }
   h1 { max-width: 740px; font-size: clamp(36px, 4.1vw, 58px); line-height: 1.07; letter-spacing: -.035em; font-weight: 600; color: var(--uno-pine); text-wrap: balance; }
   .blog-index__intro > p { max-width: 39ch; font-size: 17px; line-height: 1.65; color: var(--uno-ink-2); padding-bottom: 3px; }

@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import ArticleHeader from '../components/blog/ArticleHeader.astro';
 import ArticleBody from '../components/blog/ArticleBody.astro';
+import BackToSite from '../components/blog/BackToSite.astro';
 import { authors } from '../data/authors.ts';
 import { canonicalURL, site } from '../data/site.ts';
 import { articlePath, type BlogArticle } from '../lib/blog.ts';
@@ -36,7 +37,10 @@ const structuredData = !data.draft && author && data.pubDate ? JSON.stringify({
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
   <nav class="article-navigation container" aria-label="Navegação do artigo">
     <a href="/" aria-label="UNO Labs — página inicial">UNO Labs</a>
-    <a class="link-sublinhado" href="/blog/">Voltar para o blog</a>
+    <div class="article-navigation__actions">
+      <BackToSite />
+      <a class="link-sublinhado" href="/blog/">Voltar para o blog</a>
+    </div>
   </nav>
   <main id="conteudo" class="article-main">
     <article>
@@ -49,6 +53,7 @@ const structuredData = !data.draft && author && data.pubDate ? JSON.stringify({
 <style>
   .article-navigation { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 28px; border-bottom: 1px solid var(--uno-line); }
   .article-navigation > a:first-child { font-size: 24px; font-weight: 600; text-decoration: none; }
+  .article-navigation__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
   .article-main { width: min(800px, calc(100% - 40px)); margin-inline: auto; padding-block: clamp(40px, 6vw, 80px); }
   .article-footer { width: min(800px, calc(100% - 40px)); margin-inline: auto; padding-block: 24px 48px; border-top: 1px solid var(--uno-line); }
 </style>
