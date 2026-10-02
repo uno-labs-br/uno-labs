@@ -2,13 +2,29 @@
   "name": "unolabs-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Site da UNO Labs: HTML estático + Cloudflare Worker para o formulário de contato.",
+  "description": "UNO Labs: frontend estático Astro 7 e TypeScript; backend de contato preservado.",
   "scripts": {
-    "dev": "wrangler dev",
-    "verificar": "wrangler deploy --dry-run",
-    "deploy": "wrangler deploy"
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "test:worker": "node --test tests/contato.test.mjs",
+    "verificar:legado": "wrangler deploy --dry-run",
+    "deploy": "node scripts/bloquear-deploy.mjs"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.19.1",
+    "typescript": "6.0.3",
     "wrangler": "^4.144.0"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "8.0.2",
+    "astro": "7.3.5"
+  },
+  "type": "module",
+  "engines": {
+    "node": "24.x"
   }
 }

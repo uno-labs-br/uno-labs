@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TemplatesEstudos from '../components/estudos/TemplatesEstudos.astro';
+import Hero from '../components/home/Hero.astro';
+import Jornada from '../components/home/Jornada.astro';
+import Servicos from '../components/home/Servicos.astro';
+import PorDentro from '../components/home/PorDentro.astro';
+import Estudos from '../components/home/Estudos.astro';
+import Processo from '../components/home/Processo.astro';
+import Investimento from '../components/home/Investimento.astro';
+import PublicoERegioes from '../components/home/PublicoERegioes.astro';
+import Equipe from '../components/home/Equipe.astro';
+import BlogTeasers from '../components/home/BlogTeasers.astro';
+import Duvidas from '../components/home/Duvidas.astro';
+import Contato from '../components/home/Contato.astro';
+import Visualizador from '../components/home/Visualizador.astro';
+---
+<BaseLayout
+  title="Criação de Sites, SEO e Google Ads em Vitória e Vila Velha | UNO Labs"
+  description="Sites profissionais, SEO local e anúncios no Google e no Meta para empresas da Grande Vitória, de Curitiba e de todo o Brasil. Projetos a partir de R$ 1.490 em até 10x sem juros."
+  path="/" home
+>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <Header />
+  <main id="conteudo">
+    <Hero />
+    <Jornada />
+    <Servicos />
+    <PorDentro />
+    <Estudos />
+    <Processo />
+    <Investimento />
+    <PublicoERegioes />
+    <Equipe />
+    <BlogTeasers />
+    <Duvidas />
+    <Contato />
+    <Visualizador />
+  </main>
+  <Footer />
+  <TemplatesEstudos />
+</BaseLayout>
+<script>
+  import '../scripts/site';
+</script>

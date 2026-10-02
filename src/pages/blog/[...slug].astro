@@ -1,0 +1,18 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getPublishedArticles, type BlogArticle } from '../../lib/blog.ts';
+
+export const prerender = true;
+export async function getStaticPaths() {
+  return (await getPublishedArticles()).map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+interface Props { article: BlogArticle }
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+<ArticleLayout article={article}><Content /></ArticleLayout>

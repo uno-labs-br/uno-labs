@@ -3,7 +3,7 @@ const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 const output = process.env.UNO_ORBIT_QA_OUTPUT || path.join(require('node:os').tmpdir(), 'uno-orbita');
-const url = process.env.UNO_ORBIT_QA_URL || 'http://127.0.0.1:8790/';
+const url = process.env.UNO_ORBIT_QA_URL || process.env.UNO_QA_URL || 'http://127.0.0.1:4321/';
 fs.mkdirSync(output, { recursive: true });
 const report = { checks: [], errors: [], colors: {}, viewports: [] };
 function check(name, ok, details) { report.checks.push({ name, ok: !!ok, details }); }
@@ -43,11 +43,11 @@ async function unchanged(page, name) {
 (async () => {
   const browser = await chromium.launch({ headless: true });
   try {
-    const oldCss = execFileSync('git', ['show', '15cd947:public/assets/css/site.css'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
+    const oldCss = execFileSync('git', ['show', '7d243eb9e40504f1b457f28792273e15645ea8ef:public/assets/css/site.css'], { cwd: path.resolve(__dirname, '..'), encoding: 'utf8' });
     const oldContext = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
     const oldPage = await oldContext.newPage();
-    await oldPage.route('**/assets/css/site.css*', r => r.fulfill({ contentType: 'text/css', body: oldCss }));
     await oldPage.goto(url);
+    await oldPage.addStyleTag({ content: oldCss });
     await oldPage.evaluate(() => document.fonts.ready);
     report.colors.before = await colors(oldPage);
     await oldContext.close();

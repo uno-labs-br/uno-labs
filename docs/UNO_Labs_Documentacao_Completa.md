@@ -1,6 +1,6 @@
 # UNO Labs — Documentação completa de marca, posicionamento e site
 
-**Versão 1.6 · 01 de outubro de 2026. Incorpora a aprovação da equipe e das fotografias. A Parte 0 prevalece sobre o restante.**
+**Versão 1.7 · 02 de outubro de 2026. Incorpora a migração do frontend para Astro 7 + TypeScript. A Parte 0 prevalece sobre o restante.**
 **Destinatários:** direção da UNO Labs, Claude, Codex, profissionais de marca, design e desenvolvimento.
 
 > **Sites sob medida para negócios que precisam ser percebidos à altura do que entregam.**
@@ -11,11 +11,11 @@
 
 Este arquivo reúne integralmente os seis documentos temáticos do pacote. A base da empresa e da identidade foi extraída das fontes consultadas. O foco high ticket e a exigência de um site excepcional vêm do pedido do usuário. O aprofundamento do posicionamento, o conceito de experiência, os recortes de público, a copy e os requisitos de execução são propostas desenvolvidas nesta entrega, não aprovações históricas ou resultados medidos.
 
-A documentação orienta a marca e o site. A implementação vigente está em `public/index.html`, dentro do checkout oficial `04 - SITE`, com seus ativos em `public/assets`. Contatos e outros dados ainda têm pendências: conferir o `LEIA-ME.md` e os critérios de verificação antes da publicação.
+A documentação orienta a marca e o site. A implementação vigente tem fontes Astro em `src/`, dentro do checkout oficial `04 - SITE`, ativos em `public/` e saída estática gerada em `dist/`. O [LEIA-ME](../LEIA-ME.md) é o manual operacional central; o [relatório da migração](verificacoes/migracao-astro7-ts/RELATORIO.md) registra verificações, limitações e estado da integração. Contatos, produção e outros dados continuam com pendências.
 
 ## Conteúdo
 
-0. Decisões vigentes (v1.6), que prevalecem sobre as demais partes.
+0. Decisões vigentes (v1.7), que prevalecem sobre as demais partes.
 1. Marca, posicionamento e geração de valor.
 2. Especificação estratégica, criativa e funcional do site.
 3. Copy proposta para as páginas e interações.
@@ -28,9 +28,9 @@ Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a refer�
 ---
 
 
-# PARTE 0 — Decisões vigentes (v1.6 · 01/10/2026)
+# PARTE 0 — Decisões vigentes (v1.7 · 02/10/2026)
 
-**Esta parte prevalece sobre as Partes I a VI.** Ela reúne as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta oficial e os contatos confirmados em 30/09/2026, além da aprovação da equipe e das fotografias em 01/10/2026. Nas outras partes, os trechos superados estão marcados com **[v1.1]**. Em caso de conflito, valem as decisões mais recentes registradas aqui.
+**Esta parte prevalece sobre as Partes I a VI.** Ela reúne as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta e os contatos de 30/09/2026, a equipe e fotografias aprovadas em 01/10/2026 e a migração Astro autorizada em 02/10/2026. As Partes I a VI conservam propostas e registros históricos; não autorizam reintroduzir HTML sem framework, instalar integrações adiadas ou tratar decisões antigas como implementação comprovada. Em caso de conflito, valem as decisões mais recentes registradas aqui.
 
 ## 0.1 A empresa
 
@@ -110,25 +110,27 @@ A ordem de cada article é retrato, h3 com o nome, cargo e os dois parágrafos a
 
 ## 0.8 Stack técnica de unolabs.com.br
 
-**Implementação vigente:** HTML, CSS e JavaScript em `04 - SITE/public`, com o formulário em `worker/index.js`, conforme D28 abaixo. A tabela descreve a stack planejada para a futura fase Astro; as linhas de formulário e e-mail também registram o fluxo e o contrato esperados para a operação atual. Isso não comprova configuração ou funcionamento. Hospedagem padrão e e-mail seguem as decisões desta seção.
+**Frontend vigente — migração de 02/10/2026:** Astro `7.3.5`, TypeScript estrito e MDX `8.0.2`, com HTML gerado no build em `dist/`. A condição antiga de aguardar os artigos (D28) foi substituída pela decisão de migrar agora. Isso não comprova integração na `main`, publicação no domínio ou homologação do contato: consultar o [relatório da migração](verificacoes/migracao-astro7-ts/RELATORIO.md).
 
-| Camada | Decisão |
+| Camada | Estado e decisão |
 |---|---|
-| Framework | Astro 7 (páginas geradas no build) + TypeScript; JavaScript só nas partes interativas |
-| Blog | MDX em Content Collections, com campos obrigatórios (title, description, pubDate, author, tags, cover); sitemap e RSS |
-| Estilo | CSS nativo com os tokens `--uno-*` do kit; sem Tailwind ou kit de componentes |
-| Hospedagem | **Cloudflare Workers com Static Assets**, plano gratuito. **Não usar Cloudflare Pages** (ver nota abaixo). DNS de unolabs.com.br na Cloudflare |
-| Configuração | Astro com o adaptador `@astrojs/cloudflare`: páginas pré-renderizadas (estáticas) e só a rota do formulário (`/api/contato`, `export const prerender = false`) executando no Worker. `wrangler.jsonc` com `main: "@astrojs/cloudflare/entrypoints/server"`, `compatibility_flags: ["nodejs_compat", "global_fetch_strictly_public"]` e `assets: { binding: "ASSETS", directory: "./dist" }`. Não ativar `run_worker_first` (faria toda página contar na cota do Worker) |
-| Publicação | Local: `npx astro build && npx wrangler deploy`. Contínua: Workers Builds ligado ao repositório GitHub (a cada push na branch principal) |
-| Formulário | Fluxo vigente: formulário → Worker `POST /api/contato` → n8n → SMTP HostGator → `contato@unolabs.com.br`. Para indicar encaminhamento ao SMTP, o n8n deve responder `{"ok":true,"encaminhamento":"smtp_aceito"}`; resposta 2xx genérica não basta e deve ser rejeitada pelo Worker. Isso define o contrato esperado, não comprova configuração ou funcionamento |
-| Métricas | Google Search Console + Cloudflare Web Analytics (sem cookies) + eventos da Parte II, §15 |
-| E-mail | A contratação do plano HostGator M está registrada como confirmada. HostGator é o serviço SMTP previsto. Isso não comprova acesso operacional, conta de e-mail criada, DNS, credenciais, remetente autorizado ou entrega. Na zona DNS da Cloudflare, validar MX, `mail` em **DNS only / nuvem cinza**, SPF, DKIM e DMARC conforme os dados efetivos do cPanel; não ativar Cloudflare Email Routing |
+| Framework | Astro 7, `output: 'static'`, URLs com barra final, `astro/tsconfigs/strict`; sem SSR, SPA, adaptador ou framework de interface adicional |
+| Fontes | Páginas em `src/pages/`, seções em `src/components/home/`, layouts e SEO compartilhados; scripts tipados em `src/scripts/` |
+| Blog | Coleção `.mdx` em `src/content/blog/`, vazia nesta entrega; schema em `src/content.config.ts`, autores aprovados e seleção central em `src/lib/blog.ts` |
+| Contrato editorial | `title`, `description`, `pubDate`, `author`, `tags`, `cover`, `coverAlt` obrigatórios; `draft` padrão `true`; `updatedDate` opcional e coerente. Capa local existente, autor válido e slug derivado do arquivo; publicação somente com `draft === false` e data não futura, comparada por dia UTC |
+| Estilo e ativos | CSS global nativo em `src/styles/`, na ordem fonts → site → conceitos; tokens `--uno-*` e ativos locais preservados em `public/` |
+| Runtime e build | Node `24.14.1`, npm `11.11.0`, lockfile; build obrigatório `astro check && astro build`. Operação centralizada no [LEIA-ME](../LEIA-ME.md) |
+| Prévia | Vercel estática: build `npm run build`, saída `dist/`, target `preview` padrão; HTML com `noindex, nofollow` e cabeçalho de teste incondicional em `vercel.json`. Prévia remota somente é evidência quando versão e respostas forem comprovadas |
+| Canonical | Origem `https://unolabs.com.br` em `src/data/site.ts`; não substituí-la pelo domínio de teste. `production` é capacidade local para conferir diretivas, sem autorização de publicação |
+| Hospedagem oficial | Cloudflare Workers com Static Assets continua planejada. `wrangler.jsonc` preservado ainda serve `./public`, incompatível com as páginas do build; integração com `dist/` adiada |
+| Publicação | Atalho `npm run deploy` bloqueado localmente, sem rede. Dry run `verificar:legado` verifica somente a configuração antiga; não publica nem homologa Astro |
+| Formulário | Cliente mantém `POST /api/contato` e só confirma com `ok === true` e `encaminhamento === 'smtp_aceito'`. Worker → n8n → SMTP HostGator é o fluxo previsto preservado; prévia estática sem receptor deve falhar honestamente e manter os dados |
+| Métricas e proteção | Clarity, analytics, pixels, Search Console e ativação de Turnstile ficam para tarefas próprias; compatibilidade existente preservada |
+| E-mail | Plano HostGator M contratado; operação, conta, DNS, credenciais, remetente e recebimento continuam sem homologação. Não alterar MX, `mail`, SPF, DKIM, DMARC ou Email Routing nesta migração |
 
-**Limites do plano gratuito (documentação oficial da Cloudflare, set/2026):** requisições a arquivos estáticos grátis e ilimitadas; 100.000 execuções de código de servidor por dia, com 10 ms de CPU cada; até 20.000 arquivos por versão publicada, 25 MiB por arquivo; Workers Builds com 3.000 minutos de build por mês, 1 build por vez e 20 minutos por build. Se algum limite for atingido, o plano pago começa em US$ 5/mês.
+**Histórico técnico superado:** a v1.3 lançou uma implementação local de HTML, CSS e JS em `public/`, com Worker próprio e alternativa Apache/PHP. A proposta anterior de adapter `@astrojs/cloudflare`, rota SSR e deploy direto não foi implementada nesta migração e não é receita operacional vigente. A escolha histórica da Cloudflare permanece; conferir a documentação oficial e o ambiente real em uma tarefa específica de produção antes de configurar a integração. Não enviar somente `public/`, que agora contém ativos.
 
-**Por que Workers e não Pages (verificado em 29/09/2026):** a página do Cloudflare Pages traz o aviso “Workers supports most Pages use cases and offers a broader feature set. It is Cloudflare's primary platform for building applications. Start new projects with Workers.” (tradução: o Workers cobre a maioria dos usos do Pages e tem mais recursos; é a plataforma principal da Cloudflare; comece projetos novos no Workers). A documentação do Astro repete a recomendação. O Pages **não** foi descontinuado, mas recursos como Workers Logs, Rate Limiting, Cron Triggers e implantação gradual só existem no Workers — úteis para o formulário (limitar abuso, registrar erros).
-
-**[v1.3] Lançamento em HTML estático (D28):** a implementação local do site está em `04 - SITE/` como HTML, CSS e JS puros, sem etapa de build, destinada ao Cloudflare Workers com Static Assets (`assets.directory: "./public"`, `not_found_handling: "404-page"`, `html_handling: "auto-trailing-slash"`) e um Worker próprio (`worker/index.js`) só para `/api/contato`. Após revisão, integração na `main` e autorização de publicação: `npm install` e `npm run deploy` (Wrangler). Esses comandos não comprovam que já houve deploy. Há também versão para HostGator (`.htaccess` + `api/contato.php`). A migração para Astro 7 acontece quando os 4–6 artigos-pilar do blog estiverem prontos, reaproveitando CSS, JS e o Worker. Como foi construído: `docs/UNO_Labs_Construcao_do_Site.md`; como publicar: `04 - SITE/LEIA-ME.md`.
+A home mantém os cartões “Em breve”, sem artigo fictício ou página vazia `/blog/`. RSS e listagem pública ficam para a etapa editorial. O [LEIA-ME](../LEIA-ME.md) inclui exemplo de frontmatter fora da coleção. Identificadores de autores aprovados não atribuem autoria de artigo por inferência. O schema também valida rascunhos; rotas e sitemap usam a mesma seleção de conteúdo publicável.
 
 ## 0.9 Blog
 
@@ -156,7 +158,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e Wh
 | Pacote inicial a partir de R$ 1.490 | Escopo e entregáveis ainda não definidos; definir antes de vender o preço público | Sim |
 | CNPJ e razão social | Dados empresariais a informar ou confirmar | Sim, para formalizar cobrança e identificação da empresa |
 | Caixa `contato@unolabs.com.br` | Endereço confirmado; existência e recebimento na caixa ainda não homologados | Sim |
-| Política de privacidade | Rascunho em `04 - SITE/public/politica-de-privacidade/`; completar o fluxo real, responsável, contato de privacidade, local do n8n, prazo de guarda e data; fazer revisão jurídica | Sim |
+| Política de privacidade | Rascunho em `src/pages/politica-de-privacidade/index.astro`; completar o fluxo real, responsável, contato de privacidade, local do n8n, prazo de guarda e data; fazer revisão jurídica | Sim |
 | Worker, n8n e SMTP HostGator | Validar configuração real e o contrato de resposta `{"ok":true,"encaminhamento":"smtp_aceito"}`; configuração, credenciais e remetente autorizado não estão comprovados | Sim, para o formulário |
 | Homologação do e-mail | Registrar em separado a aceitação do backend, a aceitação/encaminhamento pelo SMTP e o recebimento observado na caixa de destino | Sim |
 | Equipe | Cargos, textos integrais e fotografias aprovados em 01/10/2026 na Parte 0, §0.5; conferir a aplicação no site antes da publicação | Não |
@@ -186,19 +188,19 @@ Roteiro para registrar evidências de homologação: [docs/CONTATO_HOMOLOGACAO.m
 
 | Operação | Fonte obrigatória |
 |---|---|
-| Análise visual, mensagem, Impeccable e prévia localhost | `public/index.html` e seus arquivos em `public/assets`, dentro de `04 - SITE` |
+| Análise visual, mensagem, Impeccable e prévia localhost | Fontes Astro em `src/` e build correspondente em `dist/`, dentro de `04 - SITE`; ativos em `public/` |
 | Atualizações de conteúdo, código, configuração e documentação | O mesmo checkout `04 - SITE`; documentação em `docs/` |
 | Git e GitHub | Executar Git em `04 - SITE`; remoto `https://github.com/uno-labs-br/uno-labs.git` |
-| Conteúdo enviado ao repositório | Conteúdo interno de `04 - SITE` diretamente na raiz: `public/`, `worker/`, `docs/`, regras e configurações |
-| Hospedagem padrão | Cloudflare Workers; arquivos estáticos em `public/` e formulário em `worker/index.js` |
+| Conteúdo enviado ao repositório | Conteúdo interno de `04 - SITE` diretamente na raiz: `src/`, `public/`, `worker/`, `docs/`, regras e configurações; saída gerada não versionada |
+| Hospedagem oficial planejada | Cloudflare Workers; integração com `dist/` pendente. Worker separado preservado; configuração legada ainda aponta para `public/` |
 
-Para a prévia visual, execute `python -m http.server 8000 --directory public` na raiz oficial. Para site e backend, execute `npm run dev` na mesma raiz. Sempre registrar qual pasta o servidor está servindo; uma porta localhost não identifica a versão sozinha.
+Desenvolvimento: `npm run dev` inicia somente o frontend Astro. Revisão do resultado compilado: `npm run build` e `npm run preview`, servindo `dist/`. Os comandos e runtime ficam no [LEIA-ME](../LEIA-ME.md). Sempre registrar qual pasta e versão o servidor serve; `public/` sozinho já não contém o site completo. O backend não é iniciado pelo desenvolvimento do frontend.
 
 A pasta `03 - ANALISE LP/uno-labs-main` é **a extração ZIP histórica do protótipo** que estava no GitHub (`Main.dc.html`). Ela não é o checkout, não será usada nas próximas análises e não será enviada como site atual. Pode ser excluída pelos responsáveis se não precisarem do arquivo histórico; a implementação não depende dela. Não apagar automaticamente. `01 - IDENTIDADE VISUAL` é acervo de marca, não outra versão do site; `02 - DOCUMENTACAO` conserva apenas avisos para os novos caminhos.
 
 O Git inicial da pasta geral `01 - UNO LABS - LP` é separado e não possui o papel de repositório do site. Não executar push do site por ele. A documentação vigente foi reunida em `04 - SITE/docs`, incluindo as referências visuais, para acompanhar o código no GitHub.
 
-**Fluxo:** fetch do remoto correto → branch baseada na `main` atualizada → alterações e verificações → commit → push somente da branch → PR para `main` → revisão e autorização humana para integrar. Produção deve usar a `main` aprovada. Um PR aberto não significa implementação já integrada ou site publicado. O protótipo anterior permanece recuperável no histórico Git; verificar o remoto antes de descrever o estado da `main`.
+**Fluxo geral:** fetch do remoto correto → branch baseada na `main` atualizada → alterações e verificações → commit → push somente da branch → PR para `main` → revisão e autorização humana para integrar. Somente na migração de 02/10/2026, Urias autorizou antecipadamente commit, push, PR e merge tecnicamente validado, sem nova aprovação humana; proteções reais e checks continuam obrigatórios. A exceção não autoriza publicação oficial nem se aplica a trabalhos futuros. Um PR aberto não comprova integração; integração não comprova publicação. O relatório registra o estado comprovado.
 
 ---
 
@@ -871,7 +873,7 @@ O pacote atual contém documentação, não os ativos visuais, licenças ou logo
 
 Antes de escolher tecnologia, inspecionar repositório, dependências, convenções e infraestrutura. Não reescrever um projeto funcional apenas para usar uma stack preferida. Se não houver base, propor a solução mais simples capaz de cumprir o escopo. **[v1.1]** Stack definida para unolabs.com.br: Astro 7 + Cloudflare (Parte 0, §0.8).
 
-Para este tipo de site, priorizar conteúdo entregue de forma legível e progressivamente enriquecido por interação. Renderização estática ou pré-renderização são opções de projeto, não uma obrigação de framework. Não transformar conteúdo institucional em uma aplicação inteiramente dependente de execução no cliente sem justificativa.
+Para este site, manter Astro 7 + TypeScript e geração estática de HTML no build, conforme a decisão de 02/10/2026. Enriquecer progressivamente o conteúdo com interações; não transformar o frontend em SPA nem ativar SSR ou adaptadores nesta arquitetura sem novo escopo aprovado.
 
 Separar conteúdo, tokens e comportamento. Compartilhar componentes onde há função comum, sem obrigar todas as seções a ter a mesma aparência. Centralizar contatos e dados institucionais em uma configuração verificável.
 
@@ -1509,14 +1511,14 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 | D18 | Presencial na Grande Vitória/ES e em Curitiba/PR; remoto no Brasil | Decisão do usuário (v1.1) | SEO local nas 5 cidades |
 | D19 | Blog desde o lançamento, 2 a 4 artigos por mês, IA com revisão humana | Decisão do usuário (v1.1) | Substitui a restrição anterior ao blog |
 | D20 | Inter mantida; escopos A/B/C em avaliação | Decisão do usuário (v1.1) | Substitui a recomendação de trocar a fonte |
-| D21 | Stack Astro 7 + Cloudflare Workers; fluxo atual do formulário via Worker → n8n → SMTP HostGator → `contato@unolabs.com.br` | Atualizado em 30/09/2026 | Ver Parte 0, §0.8 e §0.11; homologação pendente |
+| D21 | Frontend Astro 7 + TypeScript estático; Worker existente preservado → n8n → SMTP HostGator → `contato@unolabs.com.br` | Atualizado em 02/10/2026 | Integração Cloudflare com o build, backend e e-mail ainda não homologados; ver §0.8 e §0.11 |
 | D22 | Headline “Presença digital que atrai clientes.” | Decisão do usuário (v1.1) | Substitui a headline anterior |
 | D23 | Garantia cobre falhas do entregue; alterações só via manutenção mensal | Decisão do usuário (v1.1), termos comerciais atualizados em 30/09/2026 | Detalhar termos e prazos na proposta; não publicar marcadores ou números provisórios na home |
 | D24 | E-commerce fora do escopo por enquanto | Decisão do usuário (v1.1) | Não anunciar |
-| D25 | Hospedagem em Cloudflare Workers (Static Assets), não em Pages | Verificado na documentação oficial (v1.2) | Seguir a configuração da Parte 0, §0.8 |
+| D25 | Cloudflare Workers com Static Assets permanece a hospedagem oficial planejada | Decisão registrada na v1.2; integração Astro adiada em 02/10/2026 | Não executar configuração antiga como receita de deploy; ver §0.8 e LEIA-ME |
 | D26 | E-mail do domínio na HostGator (Plano M contratado), sem Cloudflare Email Routing | Decisão do usuário (v1.2) | A contratação está confirmada; acesso operacional, conta, DNS e envio não estão verificados. Conferir MX e `mail` sem proxy |
 | D27 | Jornada da home presa na tela durante a rolagem (sticky), com rolagem nativa | Decisão do usuário (v1.2) | Substitui as abas clicáveis; manter alternativa estática para movimento reduzido |
-| D28 | Lançar a v1 como HTML estático (sem build) em Cloudflare Workers; migrar para Astro quando o blog tiver artigos | Proposta do Claude para lançar rápido (v1.3) | Ver Parte 0, §0.8 e `04 - SITE/LEIA-ME.md` |
+| D28 | Migrar agora para Astro 7 + TypeScript, sem aguardar artigos; preparar MDX com coleção vazia | Decisão de Urias em 02/10/2026; substitui o adiamento da v1.3 | Fontes em `src/`, saída `dist/`, artigos e integração oficial em etapas posteriores; evidências no relatório |
 | D29 | `04 - SITE` é a única pasta oficial para análises, Impeccable, localhost, alterações e Git; documentação em `docs/`; `03 - ANALISE LP` é histórico | Padronização solicitada pelo usuário (v1.4) | Ver Parte 0, §0.13 e `AGENTS.md` |
 | D30 | Retratos reais convertidos em derivados WebP locais e apresentados na ordem retrato, nome, cargo e dois parágrafos | Aprovação do usuário em 01/10/2026 | Ver Parte 0, §0.5; preservar originais, sem retoques ou geração, com exibição máxima de 320 px |
 
@@ -1611,7 +1613,9 @@ Defina elementos, conteúdo e comportamentos verificáveis.
 ```text
 Implemente o escopo solicitado do site da UNO Labs a partir desta documentação.
 Primeiro leia a Parte 0 e as Partes II e IV da documentação em docs/UNO_Labs_Documentacao_Completa.md.
-Stack definida: Astro 7 + Cloudflare Workers (Parte 0, §0.8). Não usar Cloudflare Pages.
+Stack vigente: Astro 7 + TypeScript estrito, MDX e build estático em dist/ (Parte 0, §0.8).
+O Worker existente está separado e preservado; a integração da hospedagem oficial
+é futura. Não adicionar SSR, adaptador Cloudflare/Vercel ou novo endpoint por inferência.
 Inspecione o repositório e preserve suas convenções e tecnologias adequadas.
 
 O objetivo é traduzir 'Precisão que se revela' em uma experiência real:
