@@ -60,12 +60,21 @@ export function articlePath(id: string): string {
 
 interface PublicationEntry {
   id: string;
-  data: { draft: boolean; pubDate: Date };
+  data: { draft: boolean; pubDate?: Date; preview?: boolean };
 }
 
 /** A mesma seleção serve a rotas, sitemap e futuras listagens; compara dias UTC. */
 export function selectPublishedArticles<T extends PublicationEntry>(entries: readonly T[], referenceDate: Date): T[] {
   const referenceDay = utcCalendarDay(referenceDate);
-  return entries.filter(({ data }) => data.draft === false && utcCalendarDay(data.pubDate) <= referenceDay)
-    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  return entries.filter(({ data }) => data.draft === false && data.pubDate instanceof Date && utcCalendarDay(data.pubDate) <= referenceDay)
+    .sort((a, b) => (b.data.pubDate?.getTime() ?? 0) - (a.data.pubDate?.getTime() ?? 0) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+}
+
+/** Rascunhos só recebem rota na prévia quando a revisão é explicitamente autorizada. */
+export function selectVisibleArticles<T extends PublicationEntry>(entries: readonly T[], referenceDate: Date, preview: boolean): T[] {
+  const published = selectPublishedArticles(entries, referenceDate);
+  if (!preview) return published;
+  const review = entries.filter(({ data }) => data.draft === true && data.preview === true)
+    .sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  return [...published, ...review];
 }

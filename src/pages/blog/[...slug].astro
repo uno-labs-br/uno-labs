@@ -1,11 +1,11 @@
 ---
 import { render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
-import { getPublishedArticles, type BlogArticle } from '../../lib/blog.ts';
+import { getVisibleArticles, type BlogArticle } from '../../lib/blog.ts';
 
 export const prerender = true;
 export async function getStaticPaths() {
-  return (await getPublishedArticles()).map((article) => ({
+  return (await getVisibleArticles()).map((article) => ({
     params: { slug: article.id },
     props: { article },
   }));

@@ -141,12 +141,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .estado { position: relative; width: 150px; height: 24px; }
 .estado > span { position: absolute; right: 0; top: 0; height: 24px; padding: 0 10px; border-radius: 6px; display: flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
 .estado > span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
-.st1 { background: var(--uno-off-white-2); color: var(--uno-pine); animation: st1 4s linear both; }
+.st1 { background: var(--uno-off-white-2); color: var(--uno-pine); animation: st1 1.6s linear both; }
 .st1::before { background: var(--uno-mint-deep); }
-.st2 { background: var(--uno-pine); color: var(--uno-off-white); opacity: 0; animation: st2 4s linear both; }
+.st2 { background: var(--uno-pine); color: var(--uno-off-white); opacity: 0; animation: st2 1.6s linear both; }
 .st2::before { background: var(--uno-mint); }
-.revela { position: absolute; inset: 0; animation: revela 4s cubic-bezier(.65, 0, .35, 1) both; }
-.varre { position: absolute; left: 0; right: 0; height: 2px; background: var(--uno-mint); box-shadow: 0 0 18px 3px rgba(125, 211, 168, .85); opacity: 0; animation: varre 4s cubic-bezier(.65, 0, .35, 1) both; }
+.revela { position: absolute; inset: 0; animation: revela 1.6s cubic-bezier(.65, 0, .35, 1) both; }
+.varre { position: absolute; left: 0; right: 0; height: 2px; background: var(--uno-mint); box-shadow: 0 0 18px 3px rgba(125, 211, 168, .85); opacity: 0; animation: varre 1.6s cubic-bezier(.65, 0, .35, 1) both; }
 .cartao-codigo { position: absolute; border-radius: 16px; background: var(--uno-pine-deep); color: #E4ECE7; padding: 16px 18px 18px; box-shadow: 0 30px 80px rgba(8, 26, 21, .35); font-family: var(--uno-font-mono); font-size: 12px; line-height: 1.7; }
 .cartao-codigo .cab { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 11px; color: var(--uno-sage); }
 .cartao-codigo .selo { padding: 2px 8px; border: 1px solid rgba(125, 211, 168, .4); border-radius: 999px; color: var(--uno-mint-2); }
@@ -158,10 +158,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .resultado small { font-size: 12px; color: var(--uno-ink-2); }
 .resultado strong { font-size: 16px; font-weight: 500; color: #1A56C4; }
 .resultado span { font-size: 13px; line-height: 1.5; color: var(--uno-ink-2); }
+.campo-busca > svg { flex-shrink: 0; }
+.busca-digitacao { flex: 1; min-width: 0; white-space: nowrap; font-size: 13px; }
+.busca-enter { display: flex; align-items: center; justify-content: center; flex: 0 0 19px; height: 21px; border: 1px solid var(--uno-sage-2); border-radius: 4px; color: var(--uno-ink-2); opacity: 0; }
+[data-busca-estado="digitando"] .busca-digitacao::after { content: ''; display: inline-block; height: 1em; border-right: 1px solid var(--uno-pine); vertical-align: -1px; }
+[data-busca-estado="enter"] .busca-enter { opacity: 1; background: var(--uno-pine); border-color: var(--uno-pine); color: var(--uno-off-white); transform: translateY(1px); }
+[data-busca-estado] .resultado, [data-busca-estado] .busca-encontrado { opacity: var(--busca-resultado, 1); }
 .pulso-ponto { position: relative; width: 8px; height: 8px; flex: none; }
 .pulso-ponto::before, .pulso-ponto::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--uno-mint-deep); }
 .pulso-ponto::after { display: none; }
 .levita { transition: transform .3s ease, box-shadow .3s ease; }
+.hero-palco.entra { animation-duration: .4s; animation-delay: 0s; }
 .levita:hover { transform: translateY(-4px); }
 
 /* ---------- Escala proporcional (maquetes com tamanho-base fixo) ---------- */

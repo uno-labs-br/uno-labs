@@ -116,8 +116,8 @@ A ordem de cada article é retrato, h3 com o nome, cargo e os dois parágrafos a
 |---|---|
 | Framework | Astro 7, `output: 'static'`, URLs com barra final, `astro/tsconfigs/strict`; sem SSR, SPA, adaptador ou framework de interface adicional |
 | Fontes | Páginas em `src/pages/`, seções em `src/components/home/`, layouts e SEO compartilhados; scripts tipados em `src/scripts/` |
-| Blog | Coleção `.mdx` em `src/content/blog/`, vazia nesta entrega; schema em `src/content.config.ts`, autores aprovados e seleção central em `src/lib/blog.ts` |
-| Contrato editorial | `title`, `description`, `pubDate`, `author`, `tags`, `cover`, `coverAlt` obrigatórios; `draft` padrão `true`; `updatedDate` opcional e coerente. Capa local existente, autor válido e slug derivado do arquivo; publicação somente com `draft === false` e data não futura, comparada por dia UTC |
+| Blog | Coleção `.mdx` em `src/content/blog/`, com seis textos do PR #7 em revisão na prévia; schema em `src/content.config.ts`, autores aprovados e seleção central em `src/lib/blog.ts` |
+| Contrato editorial | `title`, `description`, `tags`, `cover`, `coverAlt` obrigatórios; `pubDate` e `author` exigidos para publicar e validados quando fornecidos em rascunhos; `draft` padrão `true`; `updatedDate` opcional e coerente. Capa local existente, autor válido e slug derivado do arquivo; publicação somente com `draft === false` e data não futura, comparada por dia UTC |
 | Estilo e ativos | CSS global nativo em `src/styles/`, na ordem fonts → site → conceitos; tokens `--uno-*` e ativos locais preservados em `public/` |
 | Runtime e build | Node `24.14.1`, npm `11.11.0`, lockfile; build obrigatório `astro check && astro build`. Operação centralizada no [LEIA-ME](../LEIA-ME.md) |
 | Prévia | Vercel estática: build `npm run build`, saída `dist/`, target `preview` padrão; HTML com `noindex, nofollow` e cabeçalho de teste incondicional em `vercel.json`. Prévia remota somente é evidência quando versão e respostas forem comprovadas |
@@ -130,7 +130,7 @@ A ordem de cada article é retrato, h3 com o nome, cargo e os dois parágrafos a
 
 **Histórico técnico superado:** a v1.3 lançou uma implementação local de HTML, CSS e JS em `public/`, com Worker próprio e alternativa Apache/PHP. A proposta anterior de adapter `@astrojs/cloudflare`, rota SSR e deploy direto não foi implementada nesta migração e não é receita operacional vigente. A escolha histórica da Cloudflare permanece; conferir a documentação oficial e o ambiente real em uma tarefa específica de produção antes de configurar a integração. Não enviar somente `public/`, que agora contém ativos.
 
-A home mantém os cartões “Em breve”, sem artigo fictício ou página vazia `/blog/`. RSS e listagem pública ficam para a etapa editorial. O [LEIA-ME](../LEIA-ME.md) inclui exemplo de frontmatter fora da coleção. Identificadores de autores aprovados não atribuem autoria de artigo por inferência. O schema também valida rascunhos; rotas e sitemap usam a mesma seleção de conteúdo publicável.
+O menu Blog abre `/blog/`. Na prévia, a listagem e os cartões da home levam aos seis textos reais importados do PR #7, sinalizados como “Em revisão editorial”. Os artigos usam `draft: true` e `preview: true`; produção exclui rascunhos e RSS permanece adiado. [Origem e créditos da importação](blog/importacao-pr7.md). O [LEIA-ME](../LEIA-ME.md) inclui exemplo de frontmatter fora da coleção. Identificadores de autores aprovados não atribuem autoria de artigo por inferência. O schema também valida rascunhos; a seleção de publicados alimenta o sitemap, e a prévia permite adicionalmente os rascunhos de revisão autorizados pela flag `preview`.
 
 ## 0.9 Blog
 

@@ -4,6 +4,7 @@ import { aoDOMPronto, iniciarAno, iniciarMenu } from './comum';
 function iniciar(): void {
   iniciarMenu();
   iniciarAno();
+  document.documentElement.classList.add('js');
 }
 
 aoDOMPronto(iniciar);

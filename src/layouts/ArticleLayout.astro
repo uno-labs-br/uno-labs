@@ -10,8 +10,8 @@ interface Props { article: BlogArticle }
 const { article } = Astro.props;
 const { data } = article;
 const path = articlePath(article.id);
-const author = authors[data.author];
-const structuredData = JSON.stringify({
+const author = data.author ? authors[data.author] : undefined;
+const structuredData = !data.draft && author && data.pubDate ? JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   '@id': canonicalURL(path),
@@ -23,20 +23,20 @@ const structuredData = JSON.stringify({
   ...(data.updatedDate ? { dateModified: data.updatedDate.toISOString() } : {}),
   author: { '@type': 'Person', name: author.name },
   publisher: { '@type': 'Organization', name: site.name, url: site.origin },
-}).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+}).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029') : undefined;
 ---
-<BaseLayout title={`${data.title} — ${site.name}`} description={data.description} path={path} image={data.cover} imageAlt={data.coverAlt} article={true}>
+<BaseLayout title={`${data.title} — ${site.name}`} description={data.description} path={path} image={data.cover} imageAlt={data.coverAlt} article={!data.draft} noindex={data.draft ? true : undefined}>
   <Fragment slot="head">
-    <meta name="author" content={author.name} />
-    <meta property="article:published_time" content={data.pubDate.toISOString()} />
-    {data.updatedDate && <meta property="article:modified_time" content={data.updatedDate.toISOString()} />}
-    {data.tags.map((tag) => <meta property="article:tag" content={tag} />)}
-    <script type="application/ld+json" is:inline set:html={structuredData} />
+    {!data.draft && author && <meta name="author" content={author.name} />}
+    {!data.draft && data.pubDate && <meta property="article:published_time" content={data.pubDate.toISOString()} />}
+    {!data.draft && data.updatedDate && <meta property="article:modified_time" content={data.updatedDate.toISOString()} />}
+    {!data.draft && data.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    {structuredData && <script type="application/ld+json" is:inline set:html={structuredData} />}
   </Fragment>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
   <nav class="article-navigation container" aria-label="Navegação do artigo">
     <a href="/" aria-label="UNO Labs — página inicial">UNO Labs</a>
-    <a class="link-sublinhado" href="/">Voltar para a home</a>
+    <a class="link-sublinhado" href="/blog/">Voltar para o blog</a>
   </nav>
   <main id="conteudo" class="article-main">
     <article>
@@ -44,7 +44,7 @@ const structuredData = JSON.stringify({
       <ArticleBody><slot /></ArticleBody>
     </article>
   </main>
-  <footer class="article-footer"><a href="/#blog">Voltar para a seção do blog</a></footer>
+  <footer class="article-footer"><a href="/blog/">Voltar para o blog</a></footer>
 </BaseLayout>
 <style>
   .article-navigation { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 28px; border-bottom: 1px solid var(--uno-line); }

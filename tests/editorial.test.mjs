@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
 import { authorIds, authors } from '../src/data/authors.ts';
 import { createEditorialSchema, isLocalEditorialCover } from '../src/lib/editorial-schema.ts';
-import { articlePath, assertUniqueEditorialSlugs, calendarDateUTC, editorialSlug, formatEditorialDate, isISOCalendarDate, selectPublishedArticles } from '../src/lib/editorial.ts';
+import { articlePath, assertUniqueEditorialSlugs, calendarDateUTC, editorialSlug, formatEditorialDate, isISOCalendarDate, selectPublishedArticles, selectVisibleArticles } from '../src/lib/editorial.ts';
 
 export function validEditorialData() {
   return {
@@ -34,8 +35,8 @@ const invalidValues = {
 };
 
 for (const field of requiredFields) {
-  test(`schema rejeita ${field} ausente, inclusive em rascunho`, () => {
-    const data = { ...validEditorialData(), draft: true };
+  test(`schema rejeita ${field} ausente em artigo publicado`, () => {
+    const data = validEditorialData();
     delete data[field];
     const result = schema.safeParse(data);
     assert.equal(result.success, false);
@@ -58,8 +59,26 @@ test('schema normaliza textos e datas; rascunho é o padrão seguro', () => {
   assert.deepEqual(parsed.tags, ['teste']);
   assert.equal(parsed.pubDate.toISOString(), '2026-10-02T00:00:00.000Z');
   assert.equal(parsed.draft, true);
+  assert.equal(parsed.preview, false);
   assert.equal(parsed.updatedDate, undefined);
   for (const invalid of ['false', 0, null]) assert.equal(schema.safeParse({ ...data, draft: invalid }).success, false);
+});
+
+test('rascunho admite autoria e data pendentes; valores fornecidos continuam validados', () => {
+  const data = { ...validEditorialData(), draft: true, preview: true };
+  delete data.author; delete data.pubDate;
+  const parsed = schema.parse(data);
+  assert.equal(parsed.author, undefined);
+  assert.equal(parsed.pubDate, undefined);
+  assert.equal(parsed.preview, true);
+  for (const field of ['title', 'description', 'tags', 'cover', 'coverAlt']) {
+    const missing = { ...data }; delete missing[field];
+    assert.equal(schema.safeParse(missing).success, false, field);
+  }
+  for (const field of ['author', 'pubDate']) {
+    for (const value of invalidValues[field]) assert.equal(schema.safeParse({ ...data, [field]: value }).success, false, field);
+  }
+  for (const value of ['true', 1, null]) assert.equal(schema.safeParse({ ...data, preview: value }).success, false);
 });
 
 test('updatedDate é válida e nunca anterior à publicação; slug de frontmatter é rejeitado', () => {
@@ -144,4 +163,46 @@ test('seleção central funciona vazia e exclui rascunhos e datas futuras em UTC
   assert.deepEqual(selectPublishedArticles(entries, now).map(({ id }) => id), ['hoje-a', 'hoje-z', 'ontem']);
   assert.deepEqual(entries.map(({ id }) => id), ['futuro', 'rascunho', 'ontem', 'hoje-z', 'hoje-a']);
   assert.throws(() => selectPublishedArticles(entries, new Date('invalid')), /referência editorial inválida/);
+});
+
+test('prévia mostra somente rascunhos explicitamente autorizados; produção mantém o filtro publicado', () => {
+  const now = calendarDateUTC('2026-10-02');
+  const entries = [
+    { id: 'privado', data: { draft: true } },
+    { id: 'revisao-z', data: { draft: true, preview: true } },
+    { id: 'revisao-a', data: { draft: true, preview: true } },
+    { id: 'publicado', data: { draft: false, pubDate: now } },
+    { id: 'futuro', data: { draft: false, pubDate: calendarDateUTC('2026-10-03'), preview: true } },
+    { id: 'sem-data', data: { draft: false } },
+  ];
+  assert.deepEqual(selectVisibleArticles(entries, now, true).map(({ id }) => id), ['publicado', 'revisao-a', 'revisao-z']);
+  assert.deepEqual(selectVisibleArticles(entries, now, false).map(({ id }) => id), ['publicado']);
+  assert.deepEqual(selectPublishedArticles(entries, now).map(({ id }) => id), ['publicado']);
+  assert.deepEqual(selectVisibleArticles([], now, true), []);
+});
+
+test('importação dos seis artigos preserva parágrafos/seções e capas do commit de origem', async () => {
+  const articles = JSON.parse(await readFile(new URL('../docs/blog/articles-pr7.json', import.meta.url), 'utf8'));
+  const provenance = JSON.parse(await readFile(new URL('../docs/blog/importacao-assets-pr7.json', import.meta.url), 'utf8'));
+  assert.equal(articles.length, 6);
+  assert.equal(provenance.length, 12);
+  const links = (html) => html.replace(/\.\.\/([a-z0-9-]+)\/index\.html/g, '/blog/$1/').replaceAll('../../index.html#', '/#');
+  for (const article of articles) {
+    const mdx = await readFile(new URL(`../src/content/blog/${article.slug}.mdx`, import.meta.url), 'utf8');
+    const metadata = JSON.parse(mdx.match(/^---\n([\s\S]+?)\n---/)[1]);
+    assert.equal(schema.safeParse(metadata).success, true, article.slug);
+    assert.equal(metadata.draft, true);
+    assert.equal(metadata.preview, true);
+    assert.equal(metadata.author, undefined);
+    assert.equal(metadata.pubDate, undefined);
+    const blocks = [...mdx.matchAll(/<EditorialHTML html={(.+)} \/>/g)].map(match => JSON.parse(match[1]));
+    for (const paragraph of article.lede) assert.ok(blocks.includes(links(`<p>${paragraph}</p>`)), article.slug);
+    for (const section of article.sections) assert.ok(blocks.some(block => block.includes(links(section.html))), `${article.slug}: ${section.id}`);
+  }
+  for (const asset of provenance) {
+    assert.equal(asset.sourceRef, 'a5e80ab356217c55a8f3557be875fab0c1ec8fe1');
+    const bytes = await readFile(new URL(`../${asset.destination}`, import.meta.url));
+    assert.equal(bytes.length, asset.bytes, asset.destination);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256, asset.destination);
+  }
 });

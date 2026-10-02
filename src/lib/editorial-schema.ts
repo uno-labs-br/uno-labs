@@ -33,14 +33,26 @@ export function createEditorialSchema(publicDirectory: string | URL = defaultPub
   return z.object({
     title: text('title'),
     description: text('description'),
-    pubDate: date,
-    author: z.enum(authorIds, { error: 'author deve identificar um autor aprovado em src/data/authors.ts.' }),
+    pubDate: date.optional(),
+    author: z.enum(authorIds, { error: 'author deve identificar um autor aprovado em src/data/authors.ts.' }).optional(),
     tags: z.array(text('tags'), { error: 'tags deve ser uma lista de textos não vazios.' }).min(1, 'tags deve conter pelo menos uma tag.'),
     cover: text('cover').refine((cover) => isLocalEditorialCover(cover, publicDirectory), 'cover deve apontar para uma imagem existente em /assets/.'),
     coverAlt: text('coverAlt'),
     draft: z.boolean({ error: 'draft deve ser true ou false.' }).default(true),
+    preview: z.boolean({ error: 'preview deve ser true ou false.' }).default(false),
     updatedDate: date.optional(),
+    coverCredit: z.object({
+      caption: text('caption'),
+      name: text('name'),
+      url: z.url(),
+      license: text('license'),
+      licenseURL: z.url(),
+    }).strict().optional(),
   }).strict().superRefine((data, context) => {
+    if (!data.draft) {
+      if (!data.pubDate) context.addIssue({ code: 'custom', path: ['pubDate'], message: 'pubDate é obrigatória para um artigo publicado.' });
+      if (!data.author) context.addIssue({ code: 'custom', path: ['author'], message: 'author é obrigatório para um artigo publicado.' });
+    }
     if (data.updatedDate instanceof Date && data.pubDate instanceof Date && data.updatedDate.getTime() < data.pubDate.getTime()) {
       context.addIssue({ code: 'custom', path: ['updatedDate'], message: 'updatedDate deve ser igual ou posterior a pubDate.' });
     }

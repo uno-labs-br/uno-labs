@@ -13,7 +13,8 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
   const home = read('index.html');
   const privacy = read('politica-de-privacidade/index.html');
   const error = read('404.html');
-  for (const html of [home, privacy, error]) {
+  const blog = read('blog/index.html');
+  for (const html of [home, privacy, error, blog]) {
     assert.match(html, /<html lang="pt-BR"/);
     assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1);
     assert.doesNotMatch(html, /astro-island|src="[^" ]+\.ts(?:"|\?)/);
@@ -33,7 +34,7 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
   assert.match(privacy, /Rascunho para revisão/);
 });
 
-test('coleção final vazia e distribuição sem código legado, documentos ou fixtures', () => {
+test('índice do blog e distribuição sem código legado, documentos ou fixtures', () => {
   function files(dir) {
     return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
       const p = join(dir, entry.name);
@@ -44,12 +45,21 @@ test('coleção final vazia e distribuição sem código legado, documentos ou f
   const paths = files(directory).map(file => relative(directory, file).replaceAll('\\', '/'));
   // O inventário é independente de onde o checkout está instalado.
   for (const file of paths) assert.doesNotMatch(file, /(?:^|\/)(?:node_modules|docs|worker|tests|src|\.astro|\.env|AGENTS\.md)|\.(?:md|mdx|ts|php|webp\.json)$/i);
-  assert.equal(existsSync(new URL('blog/', dist)), false);
+  assert.equal(existsSync(new URL('blog/index.html', dist)), true);
+  assert.match(read('blog/index.html'), /href="\/blog\//);
+  const articles = paths.filter(path => /^blog\/.+\/index\.html$/.test(path));
+  assert.equal(articles.length, production ? 0 : 6);
+  for (const path of articles) {
+    assert.match(read(path), /Em revisão editorial/);
+    assert.match(read(path), /name="robots" content="noindex, nofollow"/);
+    assert.doesNotMatch(read(path), /"@type":"BlogPosting"/);
+  }
   assert.equal(existsSync(new URL('assets/js/site.js', dist)), false);
   assert.equal(existsSync(new URL('assets/css/site.css', dist)), false);
   const sitemap = read('sitemap.xml');
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 2);
-  assert.doesNotMatch(sitemap, /\/blog\/|404|api\/|fixture|lastmod/);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 3);
+  assert.match(sitemap, /<loc>https:\/\/unolabs\.com\.br\/blog\/<\/loc>/);
+  assert.doesNotMatch(sitemap, /404|api\/|fixture|lastmod/);
   const robots = read('robots.txt');
   assert.match(robots, /Allow: \//);
   assert.doesNotMatch(robots, /Disallow: \//);

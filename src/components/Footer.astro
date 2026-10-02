@@ -1,3 +1,7 @@
+---
+const homePrefix = Astro.url.pathname === '/' ? '' : '/';
+const homeLink = (section: string) => `${homePrefix}#${section}`;
+---
 <footer class="rodape">
   <div class="container">
     <div class="rodape__grade">
@@ -7,19 +11,19 @@
       </div>
       <nav class="rodape__col" aria-label="Rodapé">
         <span class="tit">Navegação</span>
-        <a href="#servicos">Serviços</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#abordagem">Abordagem</a>
-        <a href="#blog">Blog</a>
-        <a href="#contato">Contato</a>
+        <a href={homeLink('servicos')}>Serviços</a>
+        <a href={homeLink('projetos')}>Projetos</a>
+        <a href={homeLink('abordagem')}>Abordagem</a>
+        <a href="/blog/">Blog</a>
+        <a href={homeLink('contato')}>Contato</a>
       </nav>
       <div class="rodape__col">
         <span class="tit">Serviços</span>
-        <a href="#servicos">Criação de sites</a>
-        <a href="#servicos">SEO local</a>
-        <a href="#servicos">Google Ads</a>
-        <a href="#servicos">Meta Ads</a>
-        <a href="#servicos">Manutenção</a>
+        <a href={homeLink('servicos')}>Criação de sites</a>
+        <a href={homeLink('servicos')}>SEO local</a>
+        <a href={homeLink('servicos')}>Google Ads</a>
+        <a href={homeLink('servicos')}>Meta Ads</a>
+        <a href={homeLink('servicos')}>Manutenção</a>
       </div>
       <div class="rodape__col">
         <span class="tit">Atendimento</span>

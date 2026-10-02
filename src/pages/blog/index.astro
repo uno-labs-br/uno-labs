@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { authors } from '../../data/authors.ts';
+import { articlePath, getVisibleArticles } from '../../lib/blog.ts';
+import { formatEditorialDate, utcCalendarDay } from '../../lib/editorial.ts';
+
+const articles = await getVisibleArticles();
+---
+<BaseLayout title="Blog | UNO Labs" description="Guias práticos sobre sites, SEO local e anúncios." path="/blog/">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <Header />
+  <main id="conteudo" class="blog-index">
+    <div class="container">
+      <header class="blog-index__cab">
+        <h1>Blog</h1>
+        <p class="texto-apoio">Guias práticos sobre sites, SEO local e anúncios.</p>
+      </header>
+      {articles.length > 0 ? (
+        <ul class="blog-index__lista" aria-label="Artigos disponíveis">
+          {articles.map((article) => (
+            <li>
+              <article class="blog-index__artigo">
+                <div class="blog-index__conteudo">
+                  <h2><a href={articlePath(article.id)}>{article.data.title}</a></h2>
+                  <p class="texto-apoio">{article.data.description}</p>
+                  <p class="blog-index__temas">{article.data.tags.join(' · ')}</p>
+                  {article.data.draft ? <p class="blog-index__revisao">Em revisão editorial</p> : article.data.author && article.data.pubDate && <p class="blog-index__autoria">
+                    <span>Por {authors[article.data.author].name}</span>
+                    <span aria-hidden="true">·</span>
+                    <time datetime={utcCalendarDay(article.data.pubDate)}>{formatEditorialDate(article.data.pubDate)}</time>
+                  </p>}
+                </div>
+                <a class="link-sublinhado blog-index__ler" href={articlePath(article.id)} aria-label={`Ler artigo: ${article.data.title}`}>Ler artigo</a>
+              </article>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <section class="blog-index__vazio" aria-labelledby="blog-vazio-titulo">
+          <h2 id="blog-vazio-titulo">Nenhum artigo publicado por enquanto.</h2>
+          <p class="texto-apoio">Você pode voltar à página inicial para conhecer os serviços da UNO Labs.</p>
+          <a class="link-sublinhado" href="/">Voltar para a home</a>
+        </section>
+      )}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+<script>
+  import '../../scripts/interno';
+</script>
+<style>
+  .blog-index { padding-block: clamp(56px, 8vw, 96px) var(--secao); }
+  .blog-index__cab { max-width: 760px; }
+  h1 { font-size: clamp(44px, 6vw, 72px); line-height: 1.05; font-weight: 600; letter-spacing: -.035em; color: var(--uno-pine); }
+  .blog-index__cab > p { margin-top: 24px; }
+  .blog-index__lista { padding: 0; margin-top: clamp(40px, 6vw, 72px); list-style: none; border-bottom: 1px solid var(--uno-line); }
+  .blog-index__artigo { display: flex; align-items: center; justify-content: space-between; gap: 24px 64px; padding-block: clamp(28px, 4vw, 44px); border-top: 1px solid var(--uno-line); }
+  .blog-index__conteudo { max-width: 760px; min-width: 0; }
+  .blog-index__temas { margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--uno-ink-2); }
+  h2 { font-size: clamp(24px, 3vw, 34px); line-height: 1.2; font-weight: 600; letter-spacing: -.025em; color: var(--uno-pine); text-wrap: balance; overflow-wrap: anywhere; }
+  h2 a { text-decoration: none; }
+  h2 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+  .blog-index__conteudo > .texto-apoio { margin-top: 16px; }
+  .blog-index__autoria { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 8px; font-size: 14px; color: var(--uno-ink-2); }
+  .blog-index__revisao { margin-top: 8px; font-size: 14px; color: var(--uno-ink-2); }
+  .blog-index__ler { flex: none; }
+  .blog-index__vazio { max-width: 760px; margin-top: clamp(40px, 6vw, 72px); padding-top: 32px; border-top: 1px solid var(--uno-line); }
+  .blog-index__vazio > p { margin-top: 16px; }
+  .blog-index__vazio > a { margin-top: 24px; }
+  @media (max-width: 767px) {
+    .blog-index__artigo { align-items: flex-start; flex-direction: column; }
+  }
+</style>

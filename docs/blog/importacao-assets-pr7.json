@@ -1,0 +1,86 @@
+[
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/site-recebe-visitas-mas-nao-gera-contatos/imagens/capa.webp",
+    "destination": "public/assets/img/blog/site-recebe-visitas-mas-nao-gera-contatos/capa.webp",
+    "sha256": "26f786a223b04e9bcf79c27579310057122b570a81649d52c25351014466dde7",
+    "bytes": 80986
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/site-recebe-visitas-mas-nao-gera-contatos/imagens/capa-768.webp",
+    "destination": "public/assets/img/blog/site-recebe-visitas-mas-nao-gera-contatos/capa-768.webp",
+    "sha256": "412b605f298fb90756e8b3c0fa9f472b7570e61aa7b383884fcc1e24577925a3",
+    "bytes": 33380
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/animacoes-rolagem-site-atrapalham-conversao/imagens/capa.webp",
+    "destination": "public/assets/img/blog/animacoes-rolagem-site-atrapalham-conversao/capa.webp",
+    "sha256": "57886d6c231bbd2853ea767f157b25687e15790755e90623c790cff775ea2530",
+    "bytes": 110256
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/animacoes-rolagem-site-atrapalham-conversao/imagens/capa-768.webp",
+    "destination": "public/assets/img/blog/animacoes-rolagem-site-atrapalham-conversao/capa-768.webp",
+    "sha256": "e85a16f8f1d5c0ac8c5521037b169f5e5811ce8d81f63419420965348d9bf668",
+    "bytes": 38824
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/cliques-elementos-nao-clicaveis-site/imagens/capa.webp",
+    "destination": "public/assets/img/blog/cliques-elementos-nao-clicaveis-site/capa.webp",
+    "sha256": "2310a10b37c341621081df33602734bb771af09ca6aae98fb3af335f7c4f3a4e",
+    "bytes": 304030
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/cliques-elementos-nao-clicaveis-site/imagens/capa-768.webp",
+    "destination": "public/assets/img/blog/cliques-elementos-nao-clicaveis-site/capa-768.webp",
+    "sha256": "92852b107621a6787bed99b1940e3f4f8c8ecf98c7e3e75000d2f1c04b21e105",
+    "bytes": 57732
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/como-reduzir-abandono-formulario-orcamento/imagens/capa.webp",
+    "destination": "public/assets/img/blog/como-reduzir-abandono-formulario-orcamento/capa.webp",
+    "sha256": "039f118160545985d11cb647f805e3bd9f21cad68e1959a3e7c47e7913c4eede",
+    "bytes": 78692
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/como-reduzir-abandono-formulario-orcamento/imagens/capa-768.webp",
+    "destination": "public/assets/img/blog/como-reduzir-abandono-formulario-orcamento/capa-768.webp",
+    "sha256": "e3415887b3628b922fbea660d3fdd0c1cc3a9db7636403baf10534216bd1e151",
+    "bytes": 33222
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/site-nao-converte-no-celular/imagens/capa.webp",
+    "destination": "public/assets/img/blog/site-nao-converte-no-celular/capa.webp",
+    "sha256": "e4e91b9a348aa744be0500ac720a558858507394fbce7fba54d0ff9ffdd81945",
+    "bytes": 77044
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/site-nao-converte-no-celular/imagens/capa-768.webp",
+    "destination": "public/assets/img/blog/site-nao-converte-no-celular/capa-768.webp",
+    "sha256": "ad6baeee9a92ecb3e67637a7eab451d9a7c65df992cb2bbaa7f954e2bda4aae0",
+    "bytes": 32598
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/como-medir-cliques-whatsapp-site/imagens/capa.webp",
+    "destination": "public/assets/img/blog/como-medir-cliques-whatsapp-site/capa.webp",
+    "sha256": "6c66ae32eba7d03f5ec5c19554a144ce838aa28b5634642fd93e67bf42580fc8",
+    "bytes": 31452
+  },
+  {
+    "sourceRef": "a5e80ab356217c55a8f3557be875fab0c1ec8fe1",
+    "source": "public/blog/como-medir-cliques-whatsapp-site/imagens/capa-768.webp",
+    "destination": "public/assets/img/blog/como-medir-cliques-whatsapp-site/capa-768.webp",
+    "sha256": "4b3a52f94d8f326c3d47c2133aa86c00e5ae1d9a2594cbb5d4ceac11af60474e",
+    "bytes": 11506
+  }
+]
