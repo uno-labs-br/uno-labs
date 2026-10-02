@@ -7,15 +7,15 @@ related_targets: ["src/components/blog/BlogCard.astro"]
 
 ## Direction contract
 
-THESIS: Um índice editorial com fotografias e assuntos reconhecíveis, recuperando o destaque e as imagens da versão anterior indicada pelo usuário. Substitui a lista de texto sem capas que ele rejeitou.
+THESIS: Um índice editorial com fotografias em grade uniforme de duas colunas. Todos os artigos aparecem juntos; categorias só filtram a lista quando escolhidas. A opção Todos restaura a lista completa.
 
 OWN-WORLD: Identidade UNO Labs existente: Inter, verde pinho, menta, branco esverdeado, contêiner de 1240 px e links/botões conhecidos. Fotografias existentes são o conteúdo visual, sem novos ativos, sombras decorativas ou tipografia adicional.
 
-STORY: O leitor procura resolver um problema do site. Primeiro encontra um diagnóstico amplo; em seguida escolhe design/experiência ou contato/mensuração. Seis artigos, cada um com foto, título, resumo e condição editorial honesta. Artigos e home principal permanecem intactos.
+STORY: O leitor percorre os seis artigos na ordem editorial, cada um com foto, título, resumo e condição editorial honesta. Pode limitar a seleção por categoria e retornar a Todos. Não há destaque isolado, cabeçalhos temáticos ou reagrupamento. Artigos e home principal permanecem intactos.
 
-FIRST VIEWPORT: Cabeçalho compartilhado, título da versão anterior à esquerda e introdução curta à direita. Navegação por três assuntos abaixo. Destaque horizontal com foto ocupando pouco mais da metade e texto ao lado. Em 1440×900, foto e ação de leitura aparecem antes da dobra. No celular, ordem título, assuntos, foto e texto, sem corte de título.
+FIRST VIEWPORT: Cabeçalho compartilhado, título à esquerda e introdução curta à direita. Filtros Todos e três categorias abaixo, seguidos pela primeira dupla de capas. Uma coluna até 600 px; títulos completos, sem recorte. O estado selecionado usa sublinhado e aria-pressed; filtros preservam o foco e anunciam a contagem.
 
-FORM: Estrutura editorial solicitada pelo usuário, com navegação por assuntos como Shopify e hierarquia de destaque como HubSpot. Código direto, sem sorteio: pedido delimitado por uma versão anterior, imagens existentes e marca preservada. Seed: não se aplica.
+FORM: Grade de dois em dois explicitamente solicitada pelo usuário em correção à composição anterior. Código direto, sem sorteio; fotografias e marca preservadas. Sem JavaScript, todos os artigos continuam visíveis e os filtros ficam ocultos. Seed: não se aplica.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 

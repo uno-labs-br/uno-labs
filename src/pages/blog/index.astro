@@ -5,18 +5,17 @@ import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/blog/BlogCard.astro';
 import { getVisibleArticles } from '../../lib/blog';
 const articles = await getVisibleArticles();
-const featured = articles.find(article => article.id === 'site-recebe-visitas-mas-nao-gera-contatos') ?? articles[0];
-const remaining = articles.filter(article => article !== featured);
-const experienceTags = new Set(['Navegação e experiência', 'Clareza da interface', 'Experiência no celular']);
-const contactTags = new Set(['Formulários e contato', 'CTAs e mensuração']);
-const experience = remaining.filter(article => article.data.tags.some(tag => experienceTags.has(tag)));
-const contact = remaining.filter(article => !experience.includes(article) && article.data.tags.some(tag => contactTags.has(tag)));
-const other = remaining.filter(article => !experience.includes(article) && !contact.includes(article));
-const groups = [
-  { id: 'design-experiencia', title: 'Design e experiência', description: 'Movimento, navegação e uso no celular: o que ajuda o visitante a seguir em frente.', articles: experience },
-  { id: 'contato-mensuracao', title: 'Contato e mensuração', description: 'Do formulário ao WhatsApp, entenda o caminho entre um clique e uma conversa.', articles: contact },
-  { id: 'mais-leituras', title: 'Mais leituras', description: 'Outras perspectivas para tomar decisões sobre a presença digital da sua empresa.', articles: other },
-].filter(group => group.articles.length > 0);
+const categories = [
+  { id: 'estrategia-conversao', title: 'Estratégia e conversão', tags: ['Estratégia e conversão'] },
+  { id: 'design-experiencia', title: 'Design e experiência', tags: ['Navegação e experiência', 'Clareza da interface', 'Experiência no celular'] },
+  { id: 'contato-mensuracao', title: 'Contato e mensuração', tags: ['Formulários e contato', 'CTAs e mensuração'] },
+];
+const cards = articles.map(article => ({
+  article,
+  category: categories.find(category => article.data.tags.some(tag => category.tags.includes(tag)))?.id ?? 'mais-leituras',
+}));
+const filters = [...categories, { id: 'mais-leituras', title: 'Mais leituras' }]
+  .filter(category => cards.some(card => card.category === category.id));
 ---
 <BaseLayout title="Blog | UNO Labs" description="Guias práticos sobre sites, experiência digital e conversão para empresas de serviços." path="/blog/">
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -27,24 +26,14 @@ const groups = [
         <h1>Um site melhor começa com a pergunta certa.</h1>
         <p>Guias práticos para entender seu site, melhorar a experiência de quem visita e facilitar o próximo contato.</p>
       </header>
-      {featured ? <>
-        <nav class="blog-index__topics" aria-label="Assuntos do blog">
-          <a href="#destaque">{featured.data.tags[0]}</a>
-          {groups.map(group => <a href={`#${group.id}`}>{group.title}</a>)}
-        </nav>
-        <div class="blog-index__lista">
-          <section class="blog-index__featured" id="destaque" aria-label="Artigo em destaque">
-            <BlogCard article={featured} featured />
-          </section>
-          {groups.map(group => <section class="blog-index__section" id={group.id} aria-labelledby={`${group.id}-titulo`}>
-            <header class="blog-index__section-head">
-              <h2 id={`${group.id}-titulo`}>{group.title}</h2>
-              <p>{group.description}</p>
-            </header>
-            <div class:list={['blog-index__grid', { 'blog-index__grid--two': group.articles.length === 2 }]}>
-              {group.articles.map(article => <BlogCard article={article} />)}
-            </div>
-          </section>)}
+      {articles.length > 0 ? <>
+        <div class="blog-index__topics" role="group" aria-label="Filtrar artigos por categoria" data-blog-filters hidden>
+          <button type="button" data-blog-filter="todos" aria-pressed="true" aria-controls="blog-artigos">Todos</button>
+          {filters.map(category => <button type="button" data-blog-filter={category.id} aria-pressed="false" aria-controls="blog-artigos">{category.title}</button>)}
+        </div>
+        <p class="blog-index__status" role="status" data-blog-status></p>
+        <div class="blog-index__grid" id="blog-artigos">
+          {cards.map(({ article, category }, index) => <BlogCard article={article} category={category} priority={index < 2} />)}
         </div>
       </> : <section class="blog-index__empty" aria-labelledby="blog-vazio-titulo">
         <h2 id="blog-vazio-titulo">Nenhum artigo publicado por enquanto.</h2>
@@ -57,6 +46,25 @@ const groups = [
 </BaseLayout>
 <script>
   import '../../scripts/interno';
+
+  const filters = document.querySelector<HTMLElement>('[data-blog-filters]');
+  const buttons = filters?.querySelectorAll<HTMLButtonElement>('[data-blog-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-blog-article]');
+  const status = document.querySelector<HTMLElement>('[data-blog-status]');
+
+  buttons?.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.blogFilter;
+      let count = 0;
+      cards.forEach(card => {
+        card.hidden = category !== 'todos' && card.dataset.blogCategory !== category;
+        if (!card.hidden) count += 1;
+      });
+      buttons.forEach(option => option.setAttribute('aria-pressed', String(option === button)));
+      if (status) status.textContent = `${button.textContent}: ${count} ${count === 1 ? 'artigo disponível' : 'artigos disponíveis'}.`;
+    });
+  });
+  if (filters) filters.hidden = false;
 </script>
 <style>
   .blog-index { padding-block: clamp(36px, 4vw, 60px) clamp(64px, 8vw, 112px); }
@@ -64,31 +72,24 @@ const groups = [
   h1 { max-width: 740px; font-size: clamp(36px, 4.1vw, 58px); line-height: 1.07; letter-spacing: -.035em; font-weight: 600; color: var(--uno-pine); text-wrap: balance; }
   .blog-index__intro > p { max-width: 39ch; font-size: 17px; line-height: 1.65; color: var(--uno-ink-2); padding-bottom: 3px; }
   .blog-index__topics { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-top: 34px; padding-block: 8px; border-block: 1px solid var(--uno-line); }
-  .blog-index__topics a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 600; text-decoration: none; }
-  .blog-index__topics a:hover { text-decoration: underline; text-underline-offset: 6px; }
-  .blog-index__featured { padding-top: 36px; }
-  .blog-index__section { margin-top: clamp(56px, 7vw, 96px); padding-top: 28px; border-top: 1px solid var(--uno-sage-2); }
-  .blog-index__section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px 48px; margin-bottom: 28px; }
-  .blog-index__section-head h2 { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.12; letter-spacing: -.025em; font-weight: 600; color: var(--uno-pine); }
-  .blog-index__section-head > p { max-width: 46ch; font-size: 16px; line-height: 1.6; color: var(--uno-ink-2); }
-  .blog-index__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
-  .blog-index__grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .blog-index__topics button { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 4px; background: transparent; border: 0; border-bottom: 2px solid transparent; font-size: 15px; font-weight: 600; color: var(--uno-ink-2); cursor: pointer; }
+  .blog-index__topics button:hover { color: var(--uno-pine); text-decoration: underline; text-underline-offset: 6px; }
+  .blog-index__topics button[aria-pressed="true"] { border-bottom-color: var(--uno-pine); color: var(--uno-pine); }
+  .blog-index__status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .blog-index__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 32px; margin-top: 36px; }
   .blog-index__empty { max-width: 760px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--uno-line); }
   .blog-index__empty h2 { font-size: 28px; line-height: 1.2; }
   .blog-index__empty > p { margin-block: 16px 24px; }
   @media (max-width: 1000px) {
     .blog-index__intro { gap: 24px 32px; }
-    .blog-index__grid:not(.blog-index__grid--two) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 800px) {
     .blog-index__intro { grid-template-columns: 1fr; gap: 20px; }
     .blog-index__intro > p { max-width: 58ch; }
-    .blog-index__section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
     .blog-index__topics { gap: 0 24px; margin-top: 24px; }
   }
   @media (max-width: 600px) {
-    .blog-index__grid, .blog-index__grid:not(.blog-index__grid--two) { grid-template-columns: 1fr; gap: 40px; }
-    .blog-index__topics a { min-height: 44px; font-size: 14px; }
-    .blog-index__featured { padding-top: 28px; }
+    .blog-index__grid { grid-template-columns: 1fr; gap: 40px; margin-top: 28px; }
+    .blog-index__topics button { font-size: 14px; }
   }
 </style>
