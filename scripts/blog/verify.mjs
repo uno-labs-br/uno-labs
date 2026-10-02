@@ -128,6 +128,24 @@ export const htmlUtils = {
 /**
  * Validador principal do blog.
  */
+
+function checkLocalReferences(html, htmlPath) {
+  const refs = [...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)].map(m => m[1]);
+  for (const match of html.matchAll(/\bsrcset=["']([^"']+)["']/g)) {
+    refs.push(...match[1].split(',').map(item => item.trim().split(/\s+/)[0]));
+  }
+  for (const ref of refs) {
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(ref)) continue;
+    const [relative, fragment] = ref.split('#');
+    const target = relative ? resolve(dirname(htmlPath), decodeURIComponent(relative.split('?')[0])) : htmlPath;
+    assert.ok(existsSync(target), `Referência local ausente em ${htmlPath}: ${ref}`);
+    if (fragment && target.endsWith('.html')) {
+      const ids = htmlUtils.getAllIds(readFileSync(target, 'utf8'));
+      assert.ok(ids.has(decodeURIComponent(fragment)), `Fragmento inexistente: ${ref}`);
+    }
+  }
+}
+
 export async function verifyBlog({ articlesPath, blogDir } = {}) {
   const rootDir = process.cwd();
   const targetArticlesPath = articlesPath ? resolve(rootDir, articlesPath) : resolve(rootDir, 'docs/blog/articles.json');
@@ -247,12 +265,14 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
 
   // JSON-LD do Hub com escape seguro
   const hubJsonLdList = htmlUtils.getJsonLdScripts(hubHtml);
+  checkLocalReferences(hubHtml, hubHtmlPath);
   assert.ok(hubJsonLdList.length >= 1, 'Hub deve conter bloco JSON-LD');
   for (const rawJson of hubJsonLdList) {
     assert.ok(!rawJson.includes('</script>'), 'JSON-LD do Hub não deve conter tag de fechamento </script>');
     const data = JSON.parse(rawJson);
     const graph = data['@graph'] || [data];
     const types = graph.map(item => item['@type']);
+    assert.ok(types.includes('CollectionPage') && types.includes('ItemList'), 'Hub deve conter CollectionPage e ItemList');
     if (types.includes('CollectionPage') && types.includes('ItemList')) {
       const itemList = graph.find(i => i['@type'] === 'ItemList');
       assert.ok(itemList.itemListElement.length > 0, 'ItemList do Hub não deve estar vazio');
@@ -377,12 +397,14 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
 
     // JSON-LD do Artigo seguro
     const artJsonLdList = htmlUtils.getJsonLdScripts(artHtml);
+    checkLocalReferences(artHtml, artHtmlPath);
     assert.ok(artJsonLdList.length >= 1, `Artigo ${art.slug} deve conter JSON-LD`);
     for (const rawJson of artJsonLdList) {
       assert.ok(!rawJson.includes('</script>'), `Artigo ${art.slug}: JSON-LD não deve conter </script>`);
       const data = JSON.parse(rawJson);
       const graph = data['@graph'] || [data];
       const blogPosting = graph.find(i => i['@type'] === 'BlogPosting');
+      assert.ok(blogPosting, `Artigo ${art.slug} deve conter BlogPosting`);
       if (blogPosting) {
         assert.equal(blogPosting.url, `https://unolabs.com.br/blog/${art.slug}/`);
         assert.equal(blogPosting.image, `https://unolabs.com.br/blog/${art.slug}/imagens/capa.webp`);

@@ -66,7 +66,7 @@ export function formatarData(dateIso) {
  * @param {string} html
  * @returns {string}
  */
-export function normalizarHtmlSecao(html) {
+export function normalizarHtmlSecao(html, sectionId = 'secao') {
   if (!html) return '';
 
   // 1. Processa <div class="...table-wrap..."> existente
@@ -96,7 +96,11 @@ export function normalizarHtmlSecao(html) {
     return `<div class="table-wrap" role="region" tabindex="0" aria-label="${escapeHtml(label)}">${tabelaSolta}</div>`;
   });
 
-  return processado;
+  let tabelaIndex = 0;
+  return processado.replace(/<div\b([^>]*\bclass=["'][^"']*\btable-wrap\b[^"']*["'][^>]*)>/gi, (match, attrs) => {
+    const hintId = `tabela-dica-${sectionId}-${++tabelaIndex}`;
+    return `<p class="tabela-dica" id="${escapeHtml(hintId)}">Se necessário, deslize a tabela para ver todas as colunas.</p><div${attrs} aria-describedby="${escapeHtml(hintId)}">`;
+  });
 }
 
 /**
@@ -482,7 +486,7 @@ export function renderArtigoHtml(artigo, allArticles) {
   const secoesHtml = artigo.sections.map(sec => `
         <section id="${sec.id}" class="artigo__secao">
           <h2>${escapeHtml(sec.title)}</h2>
-          ${normalizarHtmlSecao(sec.html)}
+            ${normalizarHtmlSecao(sec.html, sec.id)}
         </section>`
   ).join('\n');
 
@@ -491,7 +495,7 @@ export function renderArtigoHtml(artigo, allArticles) {
   if (artigo.faq && artigo.faq.length > 0) {
     const faqItens = artigo.faq.map(item => `
           <details class="faq__item">
-            <summary class="faq__pergunta">${escapeHtml(item.q)}</summary>
+                <summary class="faq__pergunta">${escapeHtml(item.q)}<svg class="faq__icone" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 10h12"/><path class="faq__vertical" d="M10 4v12"/></svg></summary>
             <div class="faq__resposta">
               <p>${escapeHtml(item.a)}</p>
             </div>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cliques em elementos não clicáveis: como corrigir no site | UNO Labs</title>
+<meta name="description" content="Aprenda a investigar cliques sem resposta em imagens, cards e demonstrações. Corrija a aparência dos controles sem tirar a clareza do site.">
+<link rel="canonical" href="https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#F3F7F3">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="UNO Labs">
+<meta property="og:title" content="Cliques em elementos não clicáveis: como corrigir no site | UNO Labs">
+<meta property="og:description" content="Aprenda a investigar cliques sem resposta em imagens, cards e demonstrações. Corrija a aparência dos controles sem tirar a clareza do site.">
+<meta property="og:url" content="https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/">
+<meta property="og:image" content="https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/imagens/capa.webp">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="Dois círculos planos e um botão em relevo sobre uma placa clara, diante de um ponteiro metálico.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cliques em elementos não clicáveis: como corrigir no site | UNO Labs">
+<meta name="twitter:description" content="Aprenda a investigar cliques sem resposta em imagens, cards e demonstrações. Corrija a aparência dos controles sem tirar a clareza do site.">
+<meta name="twitter:image" content="https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/imagens/capa.webp">
+
+<link rel="stylesheet" href="../assets/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://unolabs.com.br/#organizacao",
+      "name": "UNO Labs",
+      "url": "https://unolabs.com.br/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://unolabs.com.br/assets/icons/android-chrome-512x512.png"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://unolabs.com.br/#site",
+      "url": "https://unolabs.com.br/",
+      "name": "UNO Labs",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@id": "https://unolabs.com.br/#organizacao"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/#artigo",
+      "isPartOf": {
+        "@id": "https://unolabs.com.br/#site"
+      },
+      "headline": "Cliques em elementos não clicáveis: como corrigir no site",
+      "description": "Aprenda a investigar cliques sem resposta em imagens, cards e demonstrações. Corrija a aparência dos controles sem tirar a clareza do site.",
+      "inLanguage": "pt-BR",
+      "mainEntityOfPage": "https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/",
+      "url": "https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/",
+      "dateModified": "2026-10-02",
+      "image": "https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/imagens/capa.webp",
+      "author": {
+        "@type": "Organization",
+        "name": "UNO Labs",
+        "url": "https://unolabs.com.br/#organizacao"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UNO Labs",
+        "url": "https://unolabs.com.br/#organizacao",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://unolabs.com.br/assets/icons/android-chrome-512x512.png"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://unolabs.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://unolabs.com.br/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Visitantes clicam onde não existe link? Como corrigir elementos que confundem",
+          "item": "https://unolabs.com.br/blog/cliques-elementos-nao-clicaveis-site/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo" role="banner">
+  <div class="container topo__in">
+    <a class="topo__marca" href="https://unolabs.com.br/" aria-label="UNO Labs — início">
+      <img src="../assets/logo.svg" alt="UNO Labs" width="187" height="52">
+    </a>
+    <nav class="topo__nav" aria-label="Principal">
+      <a class="topo__link" href="../index.html">Blog</a>
+      <a class="topo__link" href="https://unolabs.com.br/#servicos">Serviços</a>
+      <a class="btn btn--escuro topo__cta" href="https://unolabs.com.br/#contato">Conversar sobre seu projeto <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo" class="artigo-pagina container">
+  <nav class="breadcrumb" aria-label="Você está em">
+    <ol>
+      <li><a href="https://unolabs.com.br/">Início</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li aria-current="page">Visitantes clicam onde não existe link? Como corrigir elementos que confundem</li>
+    </ol>
+  </nav>
+
+  <header class="artigo__cabecalho">
+    <h1 class="artigo__titulo">Visitantes clicam onde não existe link? Como corrigir elementos que confundem</h1>
+    <div class="artigo__meta">
+      <span class="artigo__categoria">Clareza da interface</span>
+      <span aria-hidden="true">·</span>
+      <span class="artigo__autor">Por <strong>UNO Labs</strong></span>
+      <span aria-hidden="true">·</span>
+      <span class="artigo__data">Data da versão: <time datetime="2026-10-02">2 de outubro de 2026</time></span>
+    </div>
+
+    <aside class="artigo__resumo-bloco" aria-label="Resposta direta e resumo">
+      <p class="artigo__pergunta"><strong>Visitantes tentam clicar nos controles ilustrativos?</strong></p>
+      <p class="artigo__resposta">Quando algo parece um botão, o visitante espera uma resposta. Investigue essa expectativa, confirme se há uma falha técnica e escolha entre criar uma ação útil ou retirar a aparência de controle.</p>
+    </aside>
+
+    <figure class="artigo__hero-figura">
+      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="(max-width: 900px) 100vw, 900px" alt="Dois círculos planos e um botão em relevo sobre uma placa clara, diante de um ponteiro metálico." width="1536" height="1024" fetchpriority="high" loading="eager">
+      <figcaption>A aparência de um controle cria uma expectativa de resposta. Ilustração conceitual gerada por IA.</figcaption>
+    </figure>
+  </header>
+
+  <div class="artigo__layout">
+    <aside class="artigo__sumario" aria-label="Índice do artigo">
+      <nav class="sumario__nav">
+        <p class="sumario__titulo">Neste guia</p>
+        <ol>
+          <li><a href="#entenda-sinais">Clique sem resposta e clique repetido não são a mesma coisa</a></li>
+          <li><a href="#aparencia">O que faz uma ilustração parecer interativa?</a></li>
+          <li><a href="#investigue">Investigue em três camadas</a></li>
+          <li><a href="#escolha-correcao">Quatro correções possíveis, conforme a expectativa</a></li>
+          <li><a href="#demonstracao">Como apresentar uma demonstração sem prometer uma função real</a></li>
+          <li><a href="#exemplo">Exemplo: portfólio de arquitetura com cliques nas imagens</a></li>
+          <li><a href="#validacao">Valide a correção com uma tarefa simples</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+          <li><a href="#fontes-referencias">Fontes e referências</a></li>
+          <li><a href="#relacionados-titulo">Próximos guias</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <div class="artigo__corpo">
+<p class="artigo__lead">Uma imagem de celular com um botão desenhado pode parecer uma demonstração. Para quem visita o site, pode parecer um botão de verdade. Se o clique não responde, a dúvida é legítima: o recurso está quebrado ou aquilo era apenas uma imagem?</p>
+<p class="artigo__lead">Esse problema aparece em portfólios, painéis ilustrativos, cards de serviços e capturas de sistemas. A correção começa por entender a tarefa que a pessoa tentou realizar, e não por transformar todo elemento decorativo em link.</p>
+
+        <section id="entenda-sinais" class="artigo__secao">
+          <h2>Clique sem resposta e clique repetido não são a mesma coisa</h2>
+            <p>Ferramentas de comportamento usam classificações para facilitar a investigação. No Microsoft Clarity, <em>dead click</em> indica um clique para o qual não foi detectada resposta. <em>Rage clicks</em> são cliques repetidos rapidamente em uma área próxima. A <a href="https://learn.microsoft.com/en-us/clarity/faq">documentação do Clarity</a> descreve os dois sinais.</p><p>Esses nomes não permitem concluir que toda pessoa estava frustrada. Uma imagem pode ter sido clicada por curiosidade; um duplo clique pode fazer parte de um hábito. Também pode existir uma resposta que a ferramenta não reconheceu corretamente.</p><p>Use os sinais como uma fila de investigação. Veja qual elemento recebeu o clique, o que acontecia antes, qual resposta era esperada e se o comportamento se repete em contextos semelhantes. O diagnóstico precisa de uma explicação, não apenas de uma mancha colorida no mapa.</p>
+        </section>
+
+        <section id="aparencia" class="artigo__secao">
+          <h2>O que faz uma ilustração parecer interativa?</h2>
+            <p>Um retângulo com borda, sombra, texto de ação e mudança ao passar o mouse reúne sinais de botão. Quando essa aparência está dentro de uma imagem de demonstração, o visitante pode interpretar o desenho como uma função disponível.</p><p>Também há ambiguidades mais discretas: títulos sublinhados que não abrem nada, fotos de portfólio que sugerem ampliação, setas sem destino e cards em que só uma pequena palavra recebe o clique. A página parece ensinar um comportamento e depois deixa de cumpri-lo.</p><p>Compare os controles reais com a demonstração. Se ambos usam a mesma cor, relevo e reação ao mouse, um rótulo distante pode não ser suficiente para distinguir suas funções. A diferença deve aparecer perto do elemento e na própria apresentação.</p>
+        </section>
+
+        <section id="investigue" class="artigo__secao">
+          <h2>Investigue em três camadas</h2>
+            <h3>A intenção</h3><p>Pergunte o que a pessoa esperava encontrar: ampliar uma foto, abrir um serviço, testar uma função ou entrar em contato. Em uma observação acompanhada, peça que ela diga o que imaginou depois de concluir a tentativa, sem antecipar a resposta.</p><h3>A implementação</h3><p>Confirme se o elemento deveria funcionar. Um link pode estar coberto por outra camada. Um botão pode depender de JavaScript que falhou. Uma ação pode funcionar com mouse e não com toque. Corrigir o estilo de um botão realmente quebrado não resolve a falha.</p><h3>O contexto</h3><p>Separe páginas, tamanhos de tela e versões da interface. O mesmo desenho pode ser claramente ilustrativo no computador e ficar sem legenda no recorte do celular. Evite comparar mapas de versões diferentes como se representassem a mesma página.</p><p>Gravações de sessão podem ajudar, mas exigem configuração criteriosa. Verifique o mascaramento e não capture conteúdo digitado nem dados pessoais só para entender um clique. Uma observação manual com dados fictícios costuma responder muitas perguntas iniciais.</p>
+        </section>
+
+        <section id="escolha-correcao" class="artigo__secao">
+          <h2>Quatro correções possíveis, conforme a expectativa</h2>
+            <p class="tabela-dica" id="tabela-dica-escolha-correcao-1">Se necessário, deslize a tabela para ver todas as colunas.</p><div class="table-wrap" role="region" tabindex="0" aria-label="Como alinhar aparência e comportamento" aria-describedby="tabela-dica-escolha-correcao-1"><table><caption>Como alinhar aparência e comportamento</caption><thead><tr><th scope="col">Situação</th><th scope="col">Correção possível</th><th scope="col">Cuidado</th></tr></thead><tbody><tr><td>Foto de projeto recebe tentativas de ampliação</td><td>Abrir uma imagem maior com controle para fechar</td><td>Preservar teclado, foco e descrição</td></tr><tr><td>Card de serviço parece um link</td><td>Criar um destino útil e uma área de ação clara</td><td>Evitar links aninhados ou destinos concorrentes</td></tr><tr><td>Painel é apenas uma ilustração</td><td>Identificar a demonstração e retirar sinais de controle real</td><td>Manter a legenda visível também no celular</td></tr><tr><td>Botão verdadeiro não responde</td><td>Corrigir a falha e mostrar o estado da ação</td><td>Não esconder o erro com mudanças cosméticas</td></tr></tbody></table></div><p>Não crie um destino artificial só para eliminar o indicador de clique sem resposta. Um elemento que passa a levar sempre ao contato pode continuar frustrando quem queria entender uma funcionalidade ou ver um projeto.</p>
+        </section>
+
+        <section id="demonstracao" class="artigo__secao">
+          <h2>Como apresentar uma demonstração sem prometer uma função real</h2>
+            <p>Em uma simulação de formulário, coloque uma explicação próxima: “Exemplo visual de formulário; nenhum dado é enviado nesta demonstração”. Se for possível interagir, explique também os limites antes da primeira ação.</p><p>Uma demonstração pode ser útil em um portfólio de criação de sites, desde que o visitante entenda o que está vendo. Diferencie estudo conceitual de trabalho realizado para cliente. Não use nomes, resultados ou logotipos para sugerir relações comerciais inexistentes.</p><p>Se a intenção é apenas mostrar o layout, uma composição estática com legenda pode funcionar melhor do que inputs falsos. Campos que recebem foco, mas não têm propósito, acrescentam etapas para quem navega por teclado e deixam a experiência incoerente.</p><p>Para controles reais, use o elemento adequado: link para navegar, botão para executar uma ação. Um nome acessível e um texto visível coerentes ajudam a comunicar a mesma função para públicos diferentes. A <a href="https://www.w3.org/WAI/ARIA/apg/patterns/button/">referência de botões do W3C</a> detalha o comportamento esperado.</p>
+        </section>
+
+        <section id="exemplo" class="artigo__secao">
+          <h2>Exemplo: portfólio de arquitetura com cliques nas imagens</h2>
+            <p><strong>Cenário hipotético:</strong> um escritório publica três fotos pequenas de um projeto. Os visitantes clicam nas fotos, mas nada abre. O objetivo da página é demonstrar a qualidade do trabalho e incentivar uma conversa sobre projetos semelhantes.</p><p>A primeira pergunta é se uma versão ampliada realmente ajuda a avaliar o projeto. Se há fotos adequadas e autorização de uso, uma galeria acessível pode atender à expectativa. Se as imagens são apenas decorativas, convém rever o enquadramento e a aparência de interação.</p><p>Depois da mudança, observe se as pessoas conseguem examinar o portfólio e retornar ao conteúdo sem dificuldade. Um aumento no número de imagens abertas, sozinho, não demonstra melhora comercial. Acompanhe também a continuidade até a descrição do serviço e o contato.</p>
+        </section>
+
+        <section id="validacao" class="artigo__secao">
+          <h2>Valide a correção com uma tarefa simples</h2>
+            <ol><li>Abra a página no computador e no celular.</li><li>Percorra os links e botões usando apenas o teclado.</li><li>Confira se cada ação oferece uma resposta compreensível.</li><li>Peça que uma pessoa encontre um projeto ou serviço sem instruções adicionais.</li><li>Observe se a tentativa de clicar na ilustração continua ocorrendo.</li></ol><p>A UNO Labs busca uma apresentação em que design e funcionamento se confirmem mutuamente. Uma interface clara facilita a avaliação do negócio e evita que o cliente precise adivinhar como navegar.</p><p>Se as dúvidas aparecem durante uma sequência presa na tela, leia também sobre <a href="../animacoes-rolagem-site-atrapalham-conversao/index.html">animações e rolagem no site</a>. Se o problema se concentra em telas menores, investigue as <a href="../site-nao-converte-no-celular/index.html">barreiras de uso no celular</a>.</p>
+        </section>
+
+        <section id="perguntas-frequentes" class="artigo__faq" aria-labelledby="faq-titulo">
+          <h2 id="faq-titulo">Perguntas frequentes</h2>
+
+          <details class="faq__item">
+                <summary class="faq__pergunta">Um mapa de calor mostra por que o visitante não entrou em contato?<svg class="faq__icone" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 10h12"/><path class="faq__vertical" d="M10 4v12"/></svg></summary>
+            <div class="faq__resposta">
+              <p>Ele mostra padrões de interação que ajudam a formular hipóteses. Não revela sozinho a intenção, a compreensão ou o motivo de uma saída. Cruze os sinais com funcionamento, contexto e observação de tarefas.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+                <summary class="faq__pergunta">Devo transformar todo card em um link?<svg class="faq__icone" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 10h12"/><path class="faq__vertical" d="M10 4v12"/></svg></summary>
+            <div class="faq__resposta">
+              <p>Não. Faça isso quando existir um destino útil e coerente com a expectativa criada. Se houver várias ações dentro do card, organize-as para evitar ambiguidade e conflitos de interação.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+                <summary class="faq__pergunta">É possível investigar sem instalar uma ferramenta de gravação?<svg class="faq__icone" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 10h12"/><path class="faq__vertical" d="M10 4v12"/></svg></summary>
+            <div class="faq__resposta">
+              <p>Sim. Testes manuais, observação de pessoas próximas do público, inspeção dos controles e registros de erro podem revelar problemas. Instalar uma ferramenta só faz sentido quando responde a uma pergunta concreta.</p>
+            </div>
+          </details>
+        </section>
+
+        <section id="fontes-referencias" class="artigo__fontes" aria-labelledby="fontes-titulo">
+          <h2 id="fontes-titulo">Fontes e referências</h2>
+          <ul>
+            <li><a href="https://learn.microsoft.com/en-us/clarity/faq" target="_blank" rel="noopener noreferrer">Microsoft Clarity: definições de cliques sem resposta e repetidos</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/clarity/heatmaps/heatmaps-overview" target="_blank" rel="noopener noreferrer">Microsoft Clarity: visão geral dos mapas de calor</a></li>
+            <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/button/" target="_blank" rel="noopener noreferrer">W3C: comportamento e semântica de botões</a></li>
+          </ul>
+        </section>
+
+      <section class="artigo__cta" aria-labelledby="cta-titulo">
+        <h2 id="cta-titulo">O seu site deixa claro o que pode ser feito?</h2>
+        <p>Apresente seu site à UNO Labs e conte onde os visitantes parecem encontrar dificuldades. Clareza visual e funcionamento precisam caminhar juntos.</p>
+        <a class="btn btn--mint" href="https://unolabs.com.br/#contato">Conversar sobre a navegação <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </section>
+
+
+        <section class="artigo__relacionados" aria-labelledby="relacionados-titulo">
+          <h2 id="relacionados-titulo">Próximos guias recomendados</h2>
+          <div class="relacionados__grade">
+        <article class="card-relacionado">
+          <a class="card-relacionado__link" href="../animacoes-rolagem-site-atrapalham-conversao/index.html">
+            <figure class="card-relacionado__figura">
+              <img src="../animacoes-rolagem-site-atrapalham-conversao/imagens/capa.webp" srcset="../animacoes-rolagem-site-atrapalham-conversao/imagens/capa-768.webp 768w, ../animacoes-rolagem-site-atrapalham-conversao/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="Faixa de papel em curva que se transforma em um caminho plano, com uma esfera verde sobre ela." width="1536" height="1024" loading="lazy" decoding="async">
+            </figure>
+            <div class="card-relacionado__corpo">
+              <h3 class="card-relacionado__titulo">Animações e rolagem no site: quando ajudam e quando atrapalham o contato</h3>
+              <div class="card-relacionado__meta">
+                <span class="card-relacionado__categoria">Navegação e experiência</span>
+              </div>
+              <span class="card-relacionado__chamada">Ler diagnóstico <svg class="seta" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </a>
+        </article>
+        <article class="card-relacionado">
+          <a class="card-relacionado__link" href="../site-nao-converte-no-celular/index.html">
+            <figure class="card-relacionado__figura">
+              <img src="../site-nao-converte-no-celular/imagens/capa.webp" srcset="../site-nao-converte-no-celular/imagens/capa-768.webp 768w, ../site-nao-converte-no-celular/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="Duas molduras, uma larga e outra vertical, atravessadas pela mesma faixa verde." width="1536" height="1024" loading="lazy" decoding="async">
+            </figure>
+            <div class="card-relacionado__corpo">
+              <h3 class="card-relacionado__titulo">Seu site não converte no celular? Um checklist para encontrar as barreiras</h3>
+              <div class="card-relacionado__meta">
+                <span class="card-relacionado__categoria">Experiência no celular</span>
+              </div>
+              <span class="card-relacionado__chamada">Ler diagnóstico <svg class="seta" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </a>
+        </article>
+          </div>
+        </section>
+    </div>
+  </div>
+</main>
+
+<footer class="rodape" role="contentinfo">
+  <div class="container">
+    <div class="rodape__grade">
+      <div class="rodape__marca">
+        <a href="https://unolabs.com.br/" aria-label="UNO Labs — início">
+          <img src="../assets/logo.svg" alt="UNO Labs" width="187" height="52" loading="lazy">
+        </a>
+        <p>Presença digital que gera oportunidades.</p>
+      </div>
+      <div class="rodape__col">
+        <span class="rodape__tit">Navegação</span>
+        <a href="../index.html">Blog editorial</a>
+        <a href="https://unolabs.com.br/#servicos">Criação de sites e serviços</a>
+        <a href="https://unolabs.com.br/#contato">Conversar sobre seu projeto</a>
+      </div>
+      <div class="rodape__col">
+        <span class="rodape__tit">Atendimento</span>
+        <span>Vitória · Vila Velha · Serra · Cariacica (ES)</span>
+        <span>Curitiba (PR)</span>
+        <span>Todo o Brasil, de forma remota</span>
+      </div>
+    </div>
+    <div class="rodape__base">
+      <span>© 2026 UNO Labs · unolabs.com.br</span>
+      <a href="https://unolabs.com.br/politica-de-privacidade/">Política de privacidade</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

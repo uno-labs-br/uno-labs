@@ -604,7 +604,7 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--uno-mint-deep);
+  color: var(--uno-ink-2);
   margin-bottom: 14px;
 }
 
@@ -859,6 +859,24 @@ pre {
 }
 
 /* Tabelas com Overflow Acessível (div.table-wrap e table sem classe) */
+.tabela-dica {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .artigo__corpo .tabela-dica {
+    display: block;
+    margin: 28px 0 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--uno-ink-2);
+  }
+
+  .tabela-dica + .table-wrap {
+    margin-top: 0;
+  }
+}
+
 .table-wrap,
 .tabela-wrapper {
   margin: 32px 0;
@@ -966,19 +984,13 @@ table tr:last-child td {
   display: none;
 }
 
-.faq__pergunta::after {
-  content: '+';
-  font-size: 24px;
-  line-height: 1;
-  font-weight: 400;
-  color: var(--uno-ink-3);
-  transition: transform 0.18s ease;
+.faq__icone {
+  color: var(--uno-ink-2);
   flex-shrink: 0;
 }
 
-.faq__item[open] .faq__pergunta::after {
-  content: '−';
-  color: var(--uno-mint-deep);
+.faq__item[open] .faq__vertical {
+  display: none;
 }
 
 .faq__resposta {
@@ -1270,6 +1282,29 @@ table tr:last-child td {
   align-items: center;
   min-height: 44px;
   color: var(--uno-ink-2);
+}
+
+.artigo__cta :focus-visible {
+  outline-color: var(--uno-mint-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .seta,
+  .seta::before,
+  .seta::after {
+    transform: none !important;
+  }
 }
 
 /* ---------- 9. Print CSS Útil ---------- */

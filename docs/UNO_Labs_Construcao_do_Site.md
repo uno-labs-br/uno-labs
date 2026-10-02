@@ -808,3 +808,9 @@ Extraído do DOM de `public/index.html` em 30/09/2026; seção da equipe atualiz
 - `a`: Manutenção
 - `span`: Atendimento
 - `a`: Política de privacidade
+
+## Blog de diagnóstico — adição proposta em 02/10/2026
+
+A coleção em `public/blog/` entrega seis guias derivados das perguntas sobre serviços, rolagem, controles ilustrativos, formulário, celular e CTAs. A implementação segue a stack estática vigente; não executa a migração futura para Astro. O conteúdo autoral fica em `docs/blog/articles.json`, com gerador e verificador em `scripts/blog/`. Comandos: `npm run blog:build` e `npm run blog:verify`.
+
+A home passa a apresentar três guias existentes e acesso à central; sitemap inclui as sete URLs. Não foram adicionados rastreadores, formulários, dependências nem mudanças no Worker. Estratégia, termos de cauda longa, critérios de autoria, imagens e publicação estão em [blog/estrategia-editorial.md](blog/estrategia-editorial.md). Esta adição está preparada para revisão; não é declaração de deploy ou aprovação editorial.
