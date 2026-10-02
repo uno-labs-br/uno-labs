@@ -1,6 +1,6 @@
 # Validação da migração Astro 7 + TypeScript
 
-Iniciada em 02/10/2026. Este relatório registra o resultado técnico anterior à integração; o estado remoto será complementado após os checks. Nenhum resultado abaixo comprova publicação em `unolabs.com.br` ou entrega real de mensagens.
+Iniciada em 02/10/2026. Este relatório registra a validação técnica e o estado remoto conferido abaixo. Nenhum resultado comprova publicação em `unolabs.com.br` ou entrega real de mensagens.
 
 ## Origem e escopo
 
@@ -35,7 +35,7 @@ Windows, Node `24.14.1`, npm `11.11.0`, Astro `7.3.5`, MDX `8.0.2`, TypeScript `
 
 O hint refere-se a `MediaQueryList.addListener`, mantido somente como fallback para navegadores sem `addEventListener`. Não houve supressão de tipos nem uso de `@ts-nocheck`. As mensagens de coleção vazia do Astro são esperadas: não há artigos aprovados nesta entrega. Elas não impediram o build.
 
-`npm ci` foi executado na montagem da base. A confirmação do lockfile final em ambiente limpo é feita pelo workflow e pela verificação da versão integrada; seus resultados remotos são registrados na seção de integração.
+`npm ci` com o lockfile final passou em Linux no GitHub Actions e em um worktree Windows limpo, destacado no commit `aa59121c92b4e79a62f4bc385dcc93bd0b01775e`. No Windows também passaram build e 35 contratos de distribuição, Worker e schema editorial; `git status --porcelain` permaneceu vazio. O diretório isolado é `00 - ARQUIVOS EXCLUIR/astro-qa/clean-aa59121`. Essa verificação é da branch; a versão integrada ainda deve ser confirmada depois do merge.
 
 ## Layout, conteúdo e interações
 
@@ -129,7 +129,14 @@ Subagentes usados: GPT-6.1 Sol High para documentação; GPT-6.1 Sol xHigh para 
 
 Antes do envio, `origin/main` continuava em `7d243eb9e40504f1b457f28792273e15645ea8ef`. A inspeção das automações remotas mostrou um deployment do bot Vercel para a prévia de teste existente e nenhum workflow de publicação oficial. O novo workflow de CI apenas verifica. O nome `Production` usado pela integração Vercel não transforma esse ambiente de teste em publicação autorizada no domínio oficial.
 
-PR, checks do SHA revisado, cabeçalhos da prévia, merge e build limpo integrado: pendentes de execução remota no momento deste registro. A autorização de Urias para a integração desta migração já foi dada; não será solicitada novamente. Proteções reais do serviço não serão contornadas.
+### Estado remoto comprovado
+
+- [PR #6](https://github.com/uno-labs-br/uno-labs/pull/6), aberto contra `main` e anexado ao chat. Commit de implementação revisado: `aa59121c92b4e79a62f4bc385dcc93bd0b01775e`.
+- [CI da implementação](https://github.com/uno-labs-br/uno-labs/actions/runs/36965042789): sucesso em 57 segundos. Instalação limpa, tipos, build, 35 contratos Worker/schema/distribuição e 20 builds editoriais aprovados em Linux.
+- A integração Vercel criou o deployment de prévia `6801347876` para esse mesmo SHA, mas [o deployment falhou](https://vercel.com/obrunogonzagas-projects/uno-labs/2fwwi9P1JiHLpRUijnkyguckSQYD). O metadado do comentário oficial do bot informa `rootDirectory: public`, incompatível com a nova raiz de fontes/build. O log completo ainda exige sessão no painel; a causa detalhada não foi confirmada nele.
+- O acesso ao painel redirecionou para login; não havia sessão CLI local disponível. É necessário acesso ao projeto Vercel para ajustar **Settings → Build and Deployment → Root Directory** para a raiz do repositório (campo vazio), conferir Astro/Node 24, `npm run build` e `dist`, e refazer a prévia do SHA atual. A [documentação oficial](https://vercel.com/docs/builds/configure-a-build#root-directory) trata essa raiz como configuração do projeto; ela não é um campo de `vercel.json`.
+- Cabeçalhos e versão da prévia remota ainda não foram homologados. O endereço antigo não foi usado como prova do build novo.
+- Merge e verificação do SHA integrado continuam pendentes até resolver o check remoto. Não houve push direto para `main`, bypass ou alteração de proteções. A autorização de Urias já existe; o impedimento é o acesso/configuração do serviço, não uma nova aprovação humana de Git.
 
 Limites: Chromium local e emulação de toque/reflow, sem homologação em dispositivos físicos, Safari ou Firefox; sem avaliação de usuários reais ou teste de entrega de mensagens. Continuam pendentes integração da hospedagem com `dist/`, backend/SMTP, Clarity e publicação no domínio oficial. O `wrangler.jsonc` legado ainda serve `public/`, motivo do bloqueio local de deploy.
 
