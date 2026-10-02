@@ -1,0 +1,35 @@
+---
+import SEO from '../components/SEO.astro';
+// URLs com hash preservam as declarações nativas e a ordem da cascata aprovada.
+import fontsURL from '../styles/fonts.css?url';
+import siteURL from '../styles/site.css?url';
+import conceptsURL from '../styles/conceitos.css?url';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+  noindex?: boolean;
+  social?: boolean;
+  image?: string;
+  imageAlt?: string;
+  article?: boolean;
+  home?: boolean;
+}
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <SEO {...Astro.props} />
+    <link rel="stylesheet" href={fontsURL} />
+    <link rel="stylesheet" href={siteURL} />
+    {Astro.props.home && <link rel="stylesheet" href={conceptsURL} />}
+    <slot name="head" />
+    {Astro.props.home && <script is:inline>
+      // Exceção antecipada: evita flash da jornada antes do módulo processado.
+      document.documentElement.classList.add('js');
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('rm');
+    </script>}
+  </head>
+  <body><slot /></body>
+</html>

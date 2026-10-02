@@ -1,4 +1,10 @@
 node_modules/
+dist/
+.astro/
+.vercel/
+test-results/
+playwright-report/
+.qa/
 .wrangler/
 .dev.vars
 .dev.vars.*

@@ -1,0 +1,57 @@
+---
+import { canonicalURL, isPreview, site } from '../data/site';
+import { homeSchema } from '../data/home-schema';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+  noindex?: boolean;
+  social?: boolean;
+  image?: string;
+  imageAlt?: string;
+  article?: boolean;
+  home?: boolean;
+}
+const { title, description, path, noindex = false, social = false,
+  image = site.shareImage, imageAlt = 'UNO Labs: Presença digital que atrai clientes.',
+  article = false, home = false } = Astro.props;
+const canonical = path ? canonicalURL(path) : undefined;
+const socialTitle = home ? 'Presença digital que atrai clientes | UNO Labs' : title;
+const socialDescription = home
+  ? 'Sites profissionais, SEO local e anúncios no Google e no Meta. Projetos a partir de R$ 1.490 em até 10x sem juros.'
+  : description;
+const robots = isPreview ? 'noindex, nofollow' : noindex ? 'noindex' : home ? 'index, follow, max-image-preview:large' : undefined;
+// JSON-LD permanece dado, inclusive se algum texto futuro contiver HTML.
+const structuredData = JSON.stringify(homeSchema).replace(/</g, '\\u003c');
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+{canonical && <link rel="canonical" href={canonical} />}
+{robots && <meta name="robots" content={robots} />}
+<meta name="theme-color" content="#F3F7F3" />
+{home && <meta name="format-detection" content="telephone=no" />}
+{(home || social || article) && <>
+  <meta property="og:type" content={article ? 'article' : 'website'} />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={socialTitle} />
+  <meta property="og:description" content={socialDescription} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={canonicalURL(image)} />
+  {home && <><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /></>}
+  <meta property="og:image:alt" content={imageAlt} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={socialTitle} />
+  <meta name="twitter:description" content={home ? 'Sites profissionais, SEO local e anúncios no Google e no Meta.' : description} />
+  <meta name="twitter:image" content={canonicalURL(image)} />
+</>}
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preload" href="/assets/fonts/inter-normal-400-700.woff2" as="font" type="font/woff2" crossorigin />
+{home && <script is:inline type="application/ld+json" set:html={structuredData} />}

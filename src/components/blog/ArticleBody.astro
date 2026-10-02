@@ -1,0 +1,19 @@
+<div class="article-body"><slot /></div>
+<style>
+  .article-body { line-height: 1.75; overflow-wrap: anywhere; }
+  .article-body :global(p), .article-body :global(ul), .article-body :global(ol), .article-body :global(figure), .article-body :global(blockquote) { margin-block: 1.3em; }
+  .article-body :global(h2), .article-body :global(h3), .article-body :global(h4) { color: var(--uno-pine); line-height: 1.2; margin-block: 1.8em .6em; text-wrap: balance; }
+  .article-body :global(h2) { font-size: clamp(26px, 3vw, 36px); }
+  .article-body :global(h3) { font-size: 24px; }
+  .article-body :global(h4) { font-size: 21px; }
+  .article-body :global(ul), .article-body :global(ol) { padding-left: 1.5em; }
+  .article-body :global(li + li) { margin-top: .5em; }
+  .article-body :global(a) { text-decoration: underline; text-underline-offset: 4px; }
+  .article-body :global(img) { max-width: 100%; height: auto; border-radius: var(--uno-radius-sm); }
+  .article-body :global(blockquote) { border-left: 1px solid var(--uno-line); padding-left: 24px; color: var(--uno-ink-2); }
+  .article-body :global(pre) { padding: 24px; overflow-x: auto; border-radius: var(--uno-radius-sm); }
+  .article-body :global(code) { font-family: var(--uno-font-mono); font-size: .9em; }
+  .article-body :global(table) { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; margin-block: 24px; }
+  .article-body :global(th), .article-body :global(td) { padding: 12px; border-bottom: 1px solid var(--uno-line); text-align: left; }
+  .article-body :global(hr) { border: 0; border-top: 1px solid var(--uno-line); margin-block: 40px; }
+</style>

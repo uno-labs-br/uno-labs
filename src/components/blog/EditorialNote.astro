@@ -1,0 +1,12 @@
+---
+interface Props { title: string }
+const { title } = Astro.props;
+---
+<aside class="editorial-note">
+  <p class="editorial-note-title"><strong>{title}</strong></p>
+  <slot />
+</aside>
+<style>
+  .editorial-note { margin-block: 32px; padding: 24px; border-block: 1px solid var(--uno-line); background: var(--uno-off-white-2); }
+  .editorial-note-title { color: var(--uno-pine); margin-bottom: 12px; }
+</style>

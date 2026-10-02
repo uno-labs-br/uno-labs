@@ -1,0 +1,32 @@
+---
+import { readFile } from 'node:fs/promises';
+import { publicDir } from 'astro:config/server';
+import { imageMetadata } from 'astro/assets/utils';
+import { authors } from '../../data/authors.ts';
+import { formatEditorialDate, utcCalendarDay } from '../../lib/editorial.ts';
+import type { EditorialData } from '../../lib/editorial-schema.ts';
+
+interface Props { data: EditorialData }
+const { data } = Astro.props;
+const author = authors[data.author];
+const coverDimensions = await imageMetadata(await readFile(new URL(`.${data.cover}`, publicDir)), data.cover);
+---
+<header class="article-header">
+  <h1>{data.title}</h1>
+  <p class="article-description">{data.description}</p>
+  <p class="article-byline">
+    <span>Por {author.name}</span>
+    <span aria-hidden="true">·</span>
+    <time datetime={utcCalendarDay(data.pubDate)}>{formatEditorialDate(data.pubDate)}</time>
+  </p>
+  {data.updatedDate && <p class="article-updated">Atualizado em <time datetime={utcCalendarDay(data.updatedDate)}>{formatEditorialDate(data.updatedDate)}</time></p>}
+  <img class="article-cover" src={data.cover} alt={data.coverAlt} width={coverDimensions.width} height={coverDimensions.height} decoding="async" fetchpriority="high" />
+</header>
+<style>
+  .article-header { margin-bottom: 40px; }
+  h1 { color: var(--uno-pine); font-size: clamp(36px, 5vw, 64px); line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; overflow-wrap: anywhere; }
+  .article-description { margin-top: 24px; font-size: clamp(18px, 2vw, 21px); color: var(--uno-ink-2); text-wrap: pretty; }
+  .article-byline { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; font-size: 16px; color: var(--uno-ink-2); }
+  .article-updated { margin-top: 8px; color: var(--uno-ink-2); font-size: 15px; }
+  .article-cover { width: 100%; height: auto; margin-top: 32px; border-radius: var(--uno-radius-md); }
+</style>

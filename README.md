@@ -1,24 +1,23 @@
 # UNO Labs — projeto oficial do site
 
-Este repositório reúne a implementação da landing page, o backend do formulário, as configurações de hospedagem e a documentação vigente.
+Frontend estático em Astro 7 + TypeScript, base editorial MDX e backend de contato existente preservado. A migração não homologa o formulário nem publica `unolabs.com.br`.
 
-**Pasta oficial no computador de Urias:** `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`.
+**Pasta oficial no computador de Urias:** `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`. Seu conteúdo corresponde diretamente à raiz de [uno-labs-br/uno-labs](https://github.com/uno-labs-br/uno-labs); execute Git e npm nela.
 
-| Uso | Caminho dentro do repositório |
+| Uso | Referência |
 |---|---|
-| Página inicial; análise visual e Impeccable | `public/index.html` |
-| CSS e JavaScript | `public/assets/css/` e `public/assets/js/` |
-| Formulário na Cloudflare | `worker/index.js` |
-| Configuração de hospedagem | `wrangler.jsonc` |
+| Operação, comandos, preview e pendências | [LEIA-ME.md](LEIA-ME.md) — manual central |
+| Fontes da home e páginas auxiliares | `src/pages/` e `src/components/` |
+| Estilos e interações | `src/styles/` e `src/scripts/` |
+| Artigos MDX e validação | `src/content/blog/` e `src/content.config.ts` |
+| Ativos locais | `public/assets/` |
+| Saída compilada; análise visual | `dist/`, servido por `npm run preview` |
+| Backend preservado; integração adiada | `worker/index.js`, `wrangler.jsonc`, `hospedagem-tradicional/` |
 | Marca, mensagem e requisitos | [Documentação completa](docs/UNO_Labs_Documentacao_Completa.md) |
-| Design e implementação | [Construção do site](docs/UNO_Labs_Construcao_do_Site.md) |
-| Testes, pendências e publicação | [LEIA-ME.md](LEIA-ME.md) |
+| Design e arquitetura | [Construção do site](docs/UNO_Labs_Construcao_do_Site.md) |
+| Evidências e estado da integração | [Relatório da migração](docs/verificacoes/migracao-astro7-ts/RELATORIO.md) |
 | Regras de colaboração | [AGENTS.md](AGENTS.md) |
 
-Execute Git e npm na raiz desta pasta. O conteúdo de `04 - SITE` corresponde diretamente à raiz do repositório `uno-labs-br/uno-labs`; não há uma subpasta `04 - SITE` no GitHub.
+O manual central informa runtime, instalação e verificações. `public/` sozinho já não serve o site completo. A configuração Wrangler continua legada, e `npm run deploy` está bloqueado localmente até a integração da hospedagem Astro. A prévia usa `UNO_DEPLOY_TARGET=preview` e `noindex`.
 
-Para testar site e Worker, execute `npm install` e `npm run dev` nesta raiz. Para uma prévia apenas visual, execute `python -m http.server 8000 --directory public` e abra `http://localhost:8000`.
-
-O protótipo exportado anteriormente, com páginas `.dc.html`, `support.js` e `vendor/`, permanece recuperável no histórico anterior à consolidação. A extração local em `03 - ANALISE LP/uno-labs-main` é um arquivo histórico dispensável para executar o site. Todas as próximas análises e alterações usam `public/index.html`.
-
-Mudanças seguem branch → commit → push da branch → PR para `main` → revisão e autorização humana para integrar. Produção usa somente a `main` aprovada. Há dados comerciais e de contato pendentes; consulte o LEIA-ME antes de publicar.
+A extração local `03 - ANALISE LP/uno-labs-main` é histórica. A implementação HTML anterior permanece no histórico Git. Novas análises usam as fontes Astro e seu build correspondente; um PR, um build local ou uma prévia não comprovam publicação oficial.

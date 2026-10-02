@@ -1,17 +1,17 @@
 # UNO Labs — Como o site foi construído
 
-**Versão 1.4 · 01/10/2026 · Referente ao checkout oficial `04 - SITE/`**
+**Versão 1.5 · 02/10/2026 · Frontend Astro 7 + TypeScript no checkout oficial `04 - SITE/`**
 
 Este documento descreve a implementação local e a hospedagem pretendida. Não comprova publicação em `unolabs.com.br`; conferir a integração na `main`, as pendências e o estado real do deploy.
 
-Este documento descreve, com precisão suficiente para ser reproduzido, **o que** foi construído em `unolabs.com.br`, **como** foi construído e **por que** cada decisão foi tomada. Serve para dois usos:
+Este documento descreve **o que** foi construído para o site da UNO Labs, **como** foi construído e **por que** cada decisão foi tomada. A origem canônica `unolabs.com.br` não comprova que esse domínio serve a versão descrita. Serve para dois usos:
 
 1. **Manutenção:** qualquer pessoa (ou IA) que for mexer no site entende a lógica antes de alterar.
 2. **Comparação:** entregar este documento a outros modelos de IA e comparar o que cada um produz. A seção 18 traz um prompt pronto e a seção 16, critérios objetivos para avaliar o resultado.
 
-**Fontes vigentes:** `UNO_Labs_Documentacao_Completa.md`, Parte 0 — decisões do negócio; este documento — intenção de design e implementação; os arquivos em `public/` — comportamento efetivo, a conferir no navegador. Para colaboração, Git e publicação, seguir o `AGENTS.md` da raiz. O Apêndice A e as capturas em `docs/referencias-visuais/` são registros da construção; verificar sua atualidade diante do código. Todos os caminhos de código são relativos à raiz do checkout oficial `04 - SITE`.
+**Fontes vigentes:** `UNO_Labs_Documentacao_Completa.md`, Parte 0 — decisões do negócio; este documento — intenção de design e implementação; fontes em `src/` e build correspondente em `dist/` — comportamento efetivo, a conferir no navegador. O [LEIA-ME](../LEIA-ME.md) centraliza a operação, e o [relatório da migração](verificacoes/migracao-astro7-ts/RELATORIO.md) registra resultados, limitações e integração comprovados. Para colaboração, seguir `AGENTS.md`. O Apêndice A e as capturas anteriores são registros históricos, sem aprovação automática da versão Astro. Caminhos de código são relativos à raiz do checkout oficial `04 - SITE`.
 
-**Regra obrigatória:** análises, Impeccable, localhost e alterações usam `04 - SITE/public/index.html`. Executar Git e npm em `04 - SITE`, com remoto `uno-labs-br/uno-labs`. O conteúdo desta pasta corresponde diretamente à raiz do GitHub. `03 - ANALISE LP/uno-labs-main` é somente a extração ZIP histórica do protótipo, não a implementação vigente. A Parte 0, §0.13 da documentação completa define a padronização.
+**Regra obrigatória:** análises, Impeccable e localhost usam as fontes Astro e o HTML compilado correspondente, servido por `npm run preview` a partir de `dist/`. `public/` sozinho contém ativos e já não serve o frontend completo. Executar Git e npm em `04 - SITE`, com remoto `uno-labs-br/uno-labs`; seu conteúdo corresponde diretamente à raiz do GitHub. `03 - ANALISE LP/uno-labs-main` é somente o ZIP histórico. A Parte 0, §0.13 define a padronização.
 
 ---
 
@@ -22,8 +22,8 @@ Este documento descreve, com precisão suficiente para ser reproduzido, **o que*
 - **Conceito criativo:** *Precisão que se revela* — o site se apresenta como engenharia visível: grade técnica, desenho que vira produto, checklist de entrega em terminal.
 - **Diferencial de experiência:** a seção “Da busca ao contato” fica **presa na tela** enquanto a pessoa rola, avançando por 4 etapas (Encontra → Entende → Confia → Chama) com uma demonstração que muda a cada etapa.
 - **Prova sem cases:** três **estudos conceituais** de negócios fictícios, cada um com identidade própria, rotulados como conceituais.
-- **Tecnologia:** HTML, CSS e JavaScript puros, sem framework e sem etapa de build. Hospedagem em **Cloudflare Workers (Static Assets)**; o formulário envia `POST /api/contato` ao Worker, que encaminha ao n8n para envio via SMTP HostGator à caixa `contato@unolabs.com.br`. Há alternativa técnica em PHP para HostGator, fora do fluxo vigente.
-- **Peso da home (medição histórica, com gzip):** HTML ≈ 23 KB, CSS ≈ 10 KB, JS ≈ 5 KB, Inter ≈ 48 KB. Essa medição antecede a inclusão recente de imagens conceituais e está superada; não foi feita nova medição nesta atualização. Nenhum script de terceiros no carregamento inicial.
+- **Tecnologia:** Astro `7.3.5`, TypeScript estrito, MDX `8.0.2` e build estático em `dist/`; CSS nativo e scripts tipados. Cloudflare Workers permanece a hospedagem oficial planejada, com integração Astro pendente. O cliente mantém `POST /api/contato`, e o Worker separado, n8n e alternativa PHP foram preservados. O fluxo previsto é SMTP HostGator → `contato@unolabs.com.br`, sem homologação presumida.
+- **Peso da home (medição histórica, com gzip):** HTML ≈ 23 KB, CSS ≈ 10 KB, JS ≈ 5 KB, Inter ≈ 48 KB. Essa medição antecede as imagens conceituais e está superada. A comparação local da migração está no [relatório](verificacoes/migracao-astro7-ts/RELATORIO.md); ela não mede desempenho de usuários reais. Nenhum script de terceiros no carregamento inicial.
 
 ---
 
@@ -234,8 +234,8 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 - Três **capítulos de largura total**, cada um com a cor do próprio negócio (não da UNO Labs), alternando o lado da imagem:
   - Texto (4/12): meta em caixa alta com espaçamento largo, nome 52 px, selo “Estudo conceitual”, e dois itens (Objetivo / Decisão em destaque).
   - Composição (8/12; fixa em 820 × 560 e escalada): janela de desktop de 760 px (barra de 30 px + site em 760 × 475) e celular de 196 × 406 sobreposto no canto inferior. No celular (< 600 px), só o celular, maior (236 × 492).
-- Os sites dos estudos combinam HTML, imagens conceituais e geometria técnica em SVG, com fontes e paletas próprias, e **ficam em seis `<template>`**: cada versão desktop/celular contém exclusivamente a composição final aprovada pelo humano (Módulo: Projeto, Atria: Detalhe, Casa Noma: Imersivo; as nove direções anteriores permanecem no histórico do Git). O `site.js` só os copia para a página quando o espaço se aproxima da tela. Os blocos recebem `aria-hidden`, `inert` e `data-nosnippet`; os controles internos são demonstrativos, e o texto fictício fica fora da leitura de tela, do foco do teclado e dos trechos do Google.
-- **Composições finais aprovadas:** as variações foram fixadas sem seletores manuais nos capítulos da home, unificando a direção em todas as instâncias (capítulos desktop e celular, Casa Noma no hero e Atria na jornada). As sequências dos três estudos em ambas as versões (desktop e celular) têm duração calculada de exatamente 4,00 s de tempo visível real, com efeitos contínuos e sem pausa ociosa. O disparo só ocorre quando o visitante atinge exposição significativa da cópia: pelo menos metade do modelo na área útil visível, descontando o cabeçalho fixo no topo, considerando clipping de ancestrais e adaptando para telas baixas onde o modelo excede a altura útil (garantindo que nunca fique impossibilitado de animar). O pré-carregamento 800 px antes apenas monta o DOM sem iniciar o movimento. Ao perder a exposição ou ocultar o documento, a animação pausa e retoma do ponto em que parou sem consumir os 4 s enquanto oculta. Cada capítulo conta com um botão acessível “Rever animação” (≥ 44 px, foco visível e anúncio `aria-live`) que reinicia, sem recriar o DOM, somente cópias com exposição significativa na tela. Na jornada, a cópia também precisa pertencer a uma etapa ativa; cenas futuras aguardam até sua etapa ativa e exposição. A sequência termina quando acabam os efeitos CSS finitos declarados (4,00 s), e a classe de execução sai para revelar o layout estático. Com `prefers-reduced-motion: reduce` ou classe `.rm`, somente o movimento dos estudos é cancelado e o botão informa o estado; quando a preferência do sistema volta ao normal e `.rm` não está ativa, o replay pode ser usado novamente. Sem suporte a `IntersectionObserver` ou à sincronização dos efeitos, os estudos ficam estáticos e o botão informa essa limitação. Os estilos ficam delimitados em `public/assets/css/conceitos.css`.
+- Os sites dos estudos combinam HTML, imagens conceituais e geometria técnica em SVG, com fontes e paletas próprias, e ficam em seis `<template>` em `src/components/estudos/TemplatesEstudos.astro`: cada versão desktop/celular contém a composição aprovada (Módulo: Projeto, Atria: Detalhe, Casa Noma: Imersivo; direções anteriores permanecem no histórico Git). O módulo TypeScript de estudos copia os templates quando o espaço se aproxima da tela. Os blocos recebem `aria-hidden`, `inert` e `data-nosnippet`; controles internos são demonstrativos. As duas primeiras propriedades afastam as maquetes da leitura assistiva e do foco; `data-nosnippet` trata trechos de busca e não garante exclusão do índice.
+- **Composições finais aprovadas:** as variações foram fixadas sem seletores manuais nos capítulos da home, unificando a direção em todas as instâncias (capítulos desktop e celular, Casa Noma no hero e Atria na jornada). As sequências dos três estudos em ambas as versões (desktop e celular) têm duração calculada de exatamente 4,00 s de tempo visível real, com efeitos contínuos e sem pausa ociosa. O disparo só ocorre quando o visitante atinge exposição significativa da cópia: pelo menos metade do modelo na área útil visível, descontando o cabeçalho fixo no topo, considerando clipping de ancestrais e adaptando para telas baixas onde o modelo excede a altura útil (garantindo que nunca fique impossibilitado de animar). O pré-carregamento 800 px antes apenas monta o DOM sem iniciar o movimento. Ao perder a exposição ou ocultar o documento, a animação pausa e retoma do ponto em que parou sem consumir os 4 s enquanto oculta. Cada capítulo conta com um botão acessível “Rever animação” (≥ 44 px, foco visível e anúncio `aria-live`) que reinicia, sem recriar o DOM, somente cópias com exposição significativa na tela. Na jornada, a cópia também precisa pertencer a uma etapa ativa; cenas futuras aguardam até sua etapa ativa e exposição. A sequência termina quando acabam os efeitos CSS finitos declarados (4,00 s), e a classe de execução sai para revelar o layout estático. Com `prefers-reduced-motion: reduce` ou classe `.rm`, somente o movimento dos estudos é cancelado e o botão informa o estado; quando a preferência do sistema volta ao normal e `.rm` não está ativa, o replay pode ser usado novamente. Sem suporte a `IntersectionObserver` ou à sincronização dos efeitos, os estudos ficam estáticos e o botão informa essa limitação. Os estilos ficam delimitados em `src/styles/conceitos.css`.
 
 #### Estudo 01 · Módulo Engenharia (engenharia industrial B2B)
 - **Fundo** `#E8E6E1` na seção; site em `#0E1114` com grade técnica, laranja de sinalização `#F2552C`, cinzas `#9AA3AB` e `#ECEAE4`.
@@ -255,7 +255,7 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
 - **Composição aprovada (Imersivo):** imagem ocupando a atmosfera de fundo com gradiente sutil, tipografia Bodoni e reserva em faixa na base. No celular, foto de topo com gradiente vertical e cartão de reserva integrado. “Fogo baixo, mesa longa.” e os pratos do estudo continuam sendo conteúdo conceitual. É o mesmo estudo usado no palco do hero.
 - **Decisão em destaque:** atmosfera + reserva sem sair da primeira tela. É o mesmo estudo usado no palco do hero.
 
-**Imagens — refinamento de 30/09/2026:** geradas pelo ImageGen integrado, usadas exclusivamente como material dos estudos fictícios. Não documentam pessoas, clientes, pratos ou obras reais. Arquivos em `public/assets/img/conceitos/{modulo,atria,casanoma}.webp`, 1536 × 1024 px, cerca de 571 KB no total. Os prompts completos estão nos respectivos arquivos `.webp.json`. A otimização para WebP preserva dimensões e composição; cada `img` declara dimensões e `decoding="async"`.
+**Imagens — refinamento de 30/09/2026:** geradas pelo ImageGen integrado, usadas exclusivamente nos estudos fictícios. Não documentam pessoas, clientes, pratos ou obras reais. Arquivos em `public/assets/img/conceitos/{modulo,atria,casanoma}.webp`, 1536 × 1024 px, cerca de 571 KB no total na medição histórica. Os metadados e prompts `.webp.json` foram movidos para `docs/referencias-visuais/conceitos/` na migração, fora dos ativos copiados para o build. A otimização preserva dimensões e composição; cada `img` declara dimensões e `decoding="async"`.
 
 Referências técnicas: [padrão de botão básico, W3C](https://www.w3.org/WAI/ARIA/apg/patterns/button/), [guia de animações, web.dev](https://web.dev/articles/animations-guide), [Element.getAnimations(), MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations), [prefers-reduced-motion, MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion) e [dimensões e decodificação de imagens, MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img).
 
@@ -338,7 +338,7 @@ No layout, usar três colunas a partir de 1100 px, duas colunas entre 700 e 1099
 | 600–767 | Cabeçalho de 64 px; colunas empilhadas |
 | < 600 | Fatos do hero em linhas; botões de largura total; estudos só com celular; órbita de 280 px; segmentos sem descrição |
 
-**Sistema de escala (`.escala`):** toda maquete com posicionamento absoluto é desenhada num tamanho-base fixo (`--bw` × `--bh`) e reduzida/ampliada com `transform: scale(--s)`, onde `--s = largura disponível / --bw` (calculado por `ResizeObserver`). O contêiner reserva a altura com `aspect-ratio`, então **não há salto de layout (CLS)**. Assim a composição fica idêntica em qualquer largura, sem refazer posições por breakpoint.
+**Sistema de escala (`.escala`):** a maquete usa tamanho-base (`--bw` × `--bh`) e `transform: scale(--s)`, com `--s = largura disponível / --bw` calculado por `ResizeObserver`. O contêiner reserva altura com `aspect-ratio` para reduzir deslocamentos. Esse mecanismo não comprova CLS zero; estabilidade e possíveis cortes precisam de verificação nas dimensões do relatório.
 
 ---
 
@@ -356,37 +356,41 @@ No layout, usar três colunas a partir de 1100 px, duas colunas entre 700 e 1099
 - **Title:** “Criação de Sites, SEO e Google Ads em Vitória e Vila Velha | UNO Labs”. **Description** com serviços, região e preço.
 - `canonical`, `robots`, Open Graph e Twitter Card com imagem 1200 × 630 (`og-unolabs.png`).
 - **JSON-LD** (`@graph`): `Organization` (fundadores, `areaServed` com as 5 cidades + Brasil, `OfferCatalog` com os 5 serviços e preço mínimo), `WebSite`, `WebPage` e `FAQPage`. Endereço e telefone só entram quando existirem (sem dados inventados). Observação: o Google restringiu o resultado avançado de FAQ a sites de governo e saúde desde 2023; o `FAQPage` fica pela clareza semântica, não por promessa de destaque.
-- HTML semântico, cidades citadas em texto real (não só em imagem), textos das maquetes fora do índice (`<template>` + `data-nosnippet`).
+- HTML semântico, cidades citadas em texto real e maquetes conceituais identificadas. `data-nosnippet` restringe uso em trechos de busca; não garante exclusão do índice.
 - `robots.txt`, `sitemap.xml`, URLs limpas com barra final (`/politica-de-privacidade/`), página 404 com `noindex` e status 404 real.
 - Blog: cartões sem link até existirem artigos (evita páginas finas).
 
 ---
 
 ## 11. Performance (metas: LCP ≤ 2,5 s · INP ≤ 200 ms · CLS ≤ 0,1)
-- Zero framework, zero dependência no navegador, zero script de terceiros no carregamento (o Turnstile, se ligado, só carrega perto do formulário).
+- Astro gera HTML estático; a interface não hidrata um framework visual. Scripts de interação são TypeScript processado, sem nova dependência de animação ou script de medição. Turnstile não foi ativado nesta migração.
 - Fontes auto-hospedadas; só a Inter é pré-carregada (`preload`). As fontes dos estudos só baixam quando os estudos são desenhados.
 - Estudos clonados sob demanda (`IntersectionObserver`, margem de 800 px) e **nunca** quando o espaço está oculto (`display: none`) — o celular não carrega as maquetes do desktop.
 - Capítulos dos estudos com `content-visibility: auto`.
 - Escuta de rolagem passiva + `requestAnimationFrame`; o DOM só é alterado quando a etapa muda.
-- Cache: fontes por 1 ano (`immutable`), imagens e ícones por 30 dias, CSS/JS por 1 dia com `stale-while-revalidate` e versão na URL (`?v=1`).
+- Cache descrito em `_headers` é da configuração legada Cloudflare; não comprova cabeçalhos Vercel. CSS e scripts processados usam nomes gerados pelo build; não editar `?v=1` manualmente como mecanismo de publicação Astro.
 
 ---
 
 ## 12. Arquitetura técnica
 
-### 12.1 Por que HTML estático agora (e Astro depois)
-A stack aprovada é **Astro 7 + Cloudflare Workers**. Para lançar rápido, a v1 foi entregue como HTML estático puro — o resultado publicado é o mesmo que o Astro geraria para uma página única, sem exigir build nem Node para editar texto. Quando houver 4–6 artigos prontos, migra-se para Astro (componentes, coleções de conteúdo para o blog, RSS), reaproveitando `site.css`, `site.js` e o Worker praticamente sem mudanças (decisão D28).
+### 12.1 Por que migrar agora para Astro
+A decisão de Urias em 02/10/2026 substituiu o adiamento D28: migrar o frontend sem aguardar os artigos. Astro separa páginas, layouts e seções reais, gera HTML estático e prepara MDX validado. TypeScript estrito verifica os contratos de DOM e de resposta do formulário. CSS global, conteúdo aprovado e ativos são reaproveitados. O build verifica tipos antes de compilar. Não há SSR, adaptador, SPA ou framework de interface adicional; a integração de produção permanece futura.
 
 ### 12.2 Arquivos
-Ver árvore completa no `LEIA-ME.md` da pasta `04 - SITE`. Pontos-chave:
-- `public/index.html` — todo o conteúdo; ao final, 6 `<template>` (`tpl-casanoma-desk/mob`, `tpl-atria-desk/mob`, `tpl-modulo-desk/mob`).
-- `public/assets/css/site.css` — um só arquivo, organizado por seção, com tokens no `:root`. Nomes de classes em português (`.topo`, `.jornada`, `.capitulo`, `.invest-cartao`…).
-- `public/assets/js/site.js` — 8 módulos: escala proporcional, estudos sob demanda, luz do hero, jornada, terminal, menu, formulário e ano do rodapé.
-- `worker/index.js` + `wrangler.jsonc` — Worker e configuração.
-- `hospedagem-tradicional/` — `.htaccess` e `api/contato.php` equivalentes para Apache/PHP.
+Ver estrutura e comandos no [LEIA-ME](../LEIA-ME.md), sem manter outro manual operacional. Pontos-chave:
+- `src/pages/index.astro` compõe as seções de `src/components/home/`; privacidade e 404 têm fontes próprias.
+- `src/layouts/BaseLayout.astro` e `src/components/SEO.astro` compartilham estrutura e metadados; origem canônica e contatos em `src/data/site.ts`.
+- `src/components/estudos/TemplatesEstudos.astro` preserva os seis IDs `tpl-casanoma-desk/mob`, `tpl-atria-desk/mob`, `tpl-modulo-desk/mob`.
+- `src/styles/` contém CSS global na ordem `fonts.css`, `site.css`, `conceitos.css`, preservando os seletores usados no DOM clonado.
+- `src/scripts/` contém inicializadores tipados e módulos das interações; páginas auxiliares carregam somente o necessário. A marcação antecipada curta `js`/`rm` mantém o estado visual de carregamento; o restante é processado pelo Astro.
+- `src/content.config.ts`, `src/content/blog/`, `src/data/authors.ts`, `src/lib/blog.ts`, layout e rota dinâmica preparam a coleção MDX vazia. Regras e exemplo documental estão no LEIA-ME; não há artigo fictício, RSS ou `/blog/` vazio.
+- `robots.txt` e `sitemap.xml` são gerados no build; rotas e sitemap compartilham a seleção de artigos `draft === false` e data não futura em UTC. `UNO_DEPLOY_TARGET=preview` é padrão e aplica `noindex`.
+- `public/` conserva ativos estáticos; `dist/` é saída gerada, ignorada pelo Git. HTML e JavaScript antigos do frontend deixam de concorrer com as fontes Astro.
+- `worker/index.js`, `wrangler.jsonc` e `hospedagem-tradicional/` permanecem como backend e alternativa legados, sem migração ou homologação nesta etapa.
 
 ### 12.3 Clonagem dos estudos
-Cada espaço reservado é `<div class="estudo estudo--desk|mob" data-estudo="atria-desk" style="--e:0.55625">`. O `site.js` copia o `<template>` correspondente, **renomeia todos os `id` internos com um sufixo único** e corrige as referências `url(#…)` (gradientes e filtros SVG), porque o mesmo estudo aparece várias vezes na página. O fator `--e` é a razão entre a janela e o tamanho-base do estudo (ex.: 712/1280 = 0,55625). O pré-carregamento 800 px antes monta o DOM sem iniciar o movimento. A animação só dispara quando o visitante atinge exposição significativa (≥50% do modelo na área útil sem cabeçalho fixo, adaptado para telas baixas), executando 4,00 s reais nas seis maquetes e pausando/retomando com a rolagem.
+Cada espaço reservado é `<div class="estudo estudo--desk|mob" data-estudo="atria-desk" style="--e:0.55625">`. O módulo `src/scripts/estudos.ts` copia o `<template>` correspondente, **renomeia todos os `id` internos com um sufixo único** e corrige as referências `url(#…)` (gradientes e filtros SVG), porque o mesmo estudo aparece várias vezes na página. O fator `--e` é a razão entre a janela e o tamanho-base do estudo (ex.: 712/1280 = 0,55625). O pré-carregamento 800 px antes monta o DOM sem iniciar o movimento. A animação só dispara quando o visitante atinge exposição significativa (≥50% do modelo na área útil sem cabeçalho fixo, adaptado para telas baixas), executando 4,00 s reais nas seis maquetes e pausando/retomando com a rolagem.
 
 ### 12.4 Estado da jornada no DOM
 `section.jornada[data-passo]`; elementos com `data-etapa="0–3"` recebem `.is-ativo` / `.is-feito`; `--sub` fica no elemento ativo; `--je` na grade do desktop e `--jm` na composição do celular. Toda a aparência sai do CSS.
@@ -400,15 +404,17 @@ Validação no servidor: origem permitida (cabeçalho `Origin`), `Content-Type` 
 
 Contrato vigente esperado: depois de o nó de e-mail confirmar aceitação pelo SMTP, o n8n responde `{"ok":true,"encaminhamento":"smtp_aceito"}`. O Worker deve rejeitar resposta 2xx genérica; `200` com esse corpo comprova a aceitação reportada pelo fluxo backend/SMTP, mas não o recebimento na caixa. A aceitação do backend, o encaminhamento aceito pelo SMTP e a mensagem observada na caixa são evidências distintas. Os demais códigos documentados são `422` (campos), `403` (origem/Turnstile), `400/413/415` (malformado), `502` (n8n falhou) e `503` (não configurado). Configuração real, credenciais e remetente autorizado não estão comprovados.
 
-Testes locais documentados: 11 cenários do Worker (rotas, 404, redirecionamento de barra, origem, validação, armadilha, método, cabeçalhos) e 4 do PHP, com um n8n simulado; ponta a ponta no navegador (erros de validação, sucesso, falha com dados preservados). Isso não é homologação de SMTP real nem prova de recebimento na caixa. O roteiro de evidências fica em [CONTATO_HOMOLOGACAO.md](CONTATO_HOMOLOGACAO.md).
+Registro histórico anterior à migração: 11 cenários do Worker (rotas, 404, redirecionamento de barra, origem, validação, armadilha, método, cabeçalhos) e 4 do PHP, com um n8n simulado; ponta a ponta no navegador (erros de validação, sucesso, falha com dados preservados). Isso não é homologação de SMTP real nem prova de recebimento na caixa. O roteiro de evidências fica em [CONTATO_HOMOLOGACAO.md](CONTATO_HOMOLOGACAO.md).
 
 ---
 
-## 14. Hospedagem
-- **Cloudflare Workers com Static Assets** (não Pages, que a própria Cloudflare hoje orienta a trocar por Workers em projetos novos). `assets.directory = ./public`, `not_found_handling = "404-page"`, `html_handling = "auto-trailing-slash"`. Os arquivos estáticos são servidos antes do Worker e não consomem a cota de requisições; só o formulário passa pelo Worker.
-- Domínios `unolabs.com.br` e `www` como *custom domains*; `www` redireciona para o domínio principal por Redirect Rule.
-- E-mail na HostGator com DNS na Cloudflare (MX para a HostGator, `mail` sem proxy, SPF/DKIM/DMARC; sem Email Routing).
-- Passo a passo completo no `LEIA-ME.md`.
+## 14. Prévia e integração de hospedagem pendente
+
+A entrega usa Astro estático e `dist/`. A configuração Vercel de teste tem framework Astro, build `npm run build`, saída `dist/`, target `preview` e `X-Robots-Tag: noindex, nofollow` incondicional. A prévia remota informada só é evidência após conferir commit, respostas e cabeçalhos. A capacidade `production` é conferível localmente; não muda o ambiente remoto de teste nem autoriza publicação.
+
+Cloudflare Workers com Static Assets continua a hospedagem oficial planejada. `wrangler.jsonc` preservado ainda aponta `assets.directory` para `./public`; publicar com essa configuração não serviria as páginas completas Astro. O atalho `npm run deploy` está bloqueado localmente sem rede, e o dry run legado não homologa essa integração. A alternativa Apache/PHP também permanece sem homologação para o novo build.
+
+Custom domains, redirects, DNS, SMTP HostGator, credenciais e secrets dependem de tarefa própria. Clarity, analytics e ativação de Turnstile não foram incorporados. Procedimentos e pendências estão no [LEIA-ME](../LEIA-ME.md); estado comprovado no [relatório](verificacoes/migracao-astro7-ts/RELATORIO.md).
 
 ---
 
@@ -423,11 +429,14 @@ Testes locais documentados: 11 cenários do Worker (rotas, 404, redirecionamento
 | Rodada 3 | Estudos refeitos com conceito próprio e animação (desenho que se traça, pérola, mesa girando) | “Achei extremamente simples… seja disruptivo” |
 | Rodada 3 | Hospedagem: Cloudflare **Workers**, não Pages | Verificado na documentação oficial |
 | Rodada 4 | Jornada redesenhada | A versão anterior parecia “mal feita”: caixas e etiquetas de depuração sobre o site, faixas de 12 colunas turvas, trilho de progresso cruzando nós translúcidos, texto duplicado e conteúdo cortado em telas baixas. Solução: lista de etapas com nós opacos e preenchimento por trecho, cenas limpas com anéis de destaque e cartões explicativos, grade fina a 38% de opacidade, coluna esquerda com altura fixa e escala por altura da tela |
-| Rodada 5 | Versão publicável | HTML estático + Worker + PHP; fontes auto-hospedadas; política de privacidade específica; testes em 360, 390, 834, 1100 e 1440 px, sem JS e com movimento reduzido |
+| Rodada 5 (histórico) | Implementação local em HTML estático + Worker + PHP | Fontes auto-hospedadas e política específica ainda com pendências; registros locais de testes não comprovam publicação ou homologação real |
+| 02/10/2026 | Migração do frontend para Astro 7 + TypeScript, com coleção MDX vazia | Substitui D28 sem esperar artigos; preserva visual, conteúdo, ativos e backend. Resultados e integração consultáveis no relatório |
 
 ---
 
 ## 16. Critérios de aceite (para avaliar esta ou outra versão)
+
+A lista orienta revisão; caixas vazias não representam falhas comprovadas nem aprovação. Os resultados da migração ficam no [relatório permanente](verificacoes/migracao-astro7-ts/RELATORIO.md), incluindo testes executados, diferenças justificadas, PR e estado da integração. Registros de 30/09 e 01/10 não substituem a verificação do build Astro.
 
 **Mensagem e conteúdo**
 - [ ] H1 exato: “Presença digital que atrai clientes.”
@@ -444,14 +453,17 @@ Testes locais documentados: 11 cenários do Worker (rotas, 404, redirecionamento
 - [ ] Nenhum item da lista “não usar” da seção 3.3.
 
 **Interação**
-- [ ] Jornada fica presa na tela e avança 4 etapas com a rolagem nativa, sem pular conteúdo em telas de 620 px de altura.
-- [ ] Clique na etapa leva até ela; movimento reduzido transforma em abas.
+- [ ] Jornada avança pelas 4 etapas com rolagem nativa quando cabe; usa sequência linear em telas baixas sem corte de conteúdo.
+- [ ] Clique na etapa leva até ela; movimento reduzido mantém as quatro explicações em sequência estática.
 - [ ] Formulário só mostra sucesso com confirmação do servidor e preserva os dados em caso de falha.
 
 **Técnico**
 - [ ] Sem rolagem horizontal de 320 a 1920 px.
 - [ ] Um H1; H2 por seção; foco visível; navegação completa por teclado.
 - [ ] JSON-LD válido; `canonical`, OG, `sitemap.xml`, `robots.txt`, 404 com status 404.
+- [ ] Astro e TypeScript estrito sem erros de check/build; scripts processados sem duplicação ou TS cru.
+- [ ] Coleção vazia compilável, metadados inválidos rejeitados e rascunhos/datas futuras ausentes das rotas e sitemap.
+- [ ] Prévia com noindex e 404 real; backend preservado e cenários de contato simulados sem envio externo.
 - [ ] Nenhuma requisição a terceiros no carregamento inicial.
 - [ ] PageSpeed (celular) com LCP ≤ 2,5 s, CLS ≤ 0,1.
 - [ ] Funciona e mostra todo o texto sem JavaScript.
@@ -474,7 +486,8 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links foram conferid
 - Verba de mídia paga diretamente às plataformas: confirmar.
 - Instagram e LinkedIn (`sameAs`).
 - Cases reais com autorização (ex.: La Bella Mesa) substituindo ou somando-se aos estudos.
-- 4–6 artigos pilares do blog e migração para Astro (D28).
+- Produzir e revisar 4–6 artigos-pilar. A migração Astro de D28 não depende mais deles; coleção vazia e teasers preservados.
+- Integrar o build `dist/` com a hospedagem oficial e homologar o fluxo; Wrangler ainda aponta para `public/`.
 - Cloudflare Web Analytics (sem cookies), previsto na §0.8: ao ativar, atualizar a política de privacidade.
 
 ---
@@ -486,7 +499,9 @@ Copie o texto abaixo e anexe: este documento, `UNO_Labs_Documentacao_Completa.md
 ```text
 Você é um web designer e desenvolvedor front-end sênior, com 20 anos de experiência em sites que vendem serviços B2B.
 
-Tarefa: construir a home de vendas da UNO Labs (unolabs.com.br), pronta para publicar.
+Tarefa: implementar o escopo solicitado no frontend Astro existente da UNO Labs.
+Leia o AGENTS.md e o LEIA-ME antes de editar; não interpretar este prompt genérico
+como autorização de publicação, redesenho, backend ou mudança de infraestrutura.
 
 Leia primeiro os documentos anexados, nesta ordem:
 1. UNO_Labs_Documentacao_Completa.md — a Parte 0 prevalece sobre o resto.
@@ -496,8 +511,8 @@ Regras:
 - Use exatamente as decisões de negócio (preço, garantia, cidades, serviços, equipe, headline). Não invente depoimentos, números, clientes, endereço ou telefone.
 - Mantenha a identidade visual (tokens da seção 4). Você pode propor outra direção criativa, mas ela precisa transmitir autoridade, capacidade e profissionalismo e não pode ter “cara de IA” (ver seção 3.3).
 - Obrigatório: seção “Da busca ao contato” presa na tela durante a rolagem, com 4 etapas; estudos conceituais claramente rotulados; formulário honesto (sucesso só com confirmação do servidor).
-- Entregue HTML, CSS e JS sem framework (ou Astro, se preferir), responsivo de 320 a 1920 px, com meta WCAG 2.2 AA, SEO técnico completo (title, description, canonical, Open Graph, JSON-LD, sitemap, robots) e metas Core Web Vitals (LCP ≤ 2,5 s, INP ≤ 200 ms, CLS ≤ 0,1).
-- Hospedagem-alvo: Cloudflare Workers com Static Assets; o formulário faz POST JSON para /api/contato, que repassa a um webhook do n8n.
+- Mantenha Astro 7 + TypeScript estrito, MDX e build estático em dist/, CSS nativo e ativos locais. Não retornar a HTML sem framework, adicionar SSR, adaptador, SPA ou framework de interface por preferência. Preserve responsividade, acessibilidade, SEO e as metas técnicas; registre resultados reais.
+- Cloudflare Workers é a hospedagem oficial planejada, com integração Astro pendente. Preserve o cliente POST JSON para /api/contato e o backend existente; não configurar hospedagem, n8n, SMTP, Turnstile ou medição sem escopo próprio. Prévia de teste mantém noindex.
 - Escreva todo o texto em português do Brasil, no tom descrito na seção 2.
 
 Ao final, avalie a sua própria entrega item a item contra a seção 16 e liste o que ficou de fora e por quê.
@@ -506,7 +521,7 @@ Ao final, avalie a sua própria entrega item a item contra a seção 16 e liste 
 ---
 
 ## 19. Referências visuais
-Pasta `docs/referencias-visuais/` (capturas da versão publicada, 1440 × 900 e 390 × 844):
+Pasta `docs/referencias-visuais/` (capturas históricas da implementação anterior, 1440 × 900 e 390 × 844; não comprovam publicação nem validação Astro):
 
 - `desktop-01-hero.png` · `desktop-01a…01d-jornada-etapa-1…4.png`
 - `desktop-02-servicos.png` · `desktop-03-por-baixo-do-capo.png`
@@ -518,7 +533,7 @@ Pasta `docs/referencias-visuais/` (capturas da versão publicada, 1440 × 900 e 
 
 ## Apêndice A — Texto exato de cada seção
 
-Extraído do DOM de `public/index.html` em 30/09/2026; seção da equipe atualizada em 01/10/2026. Formato: `tag` _(contexto)_: texto. As alternativas responsivas e os textos visíveis das ilustrações fora de templates aparecem separados; mensagens condicionais do formulário são mantidas. As demonstrações são conceituais e não representam resultados reais. O apêndice exclui o conteúdo das maquetes em `<template>`, do `<dialog>` fechado por padrão e de elementos com o atributo `hidden`.
+**Registro histórico de conteúdo:** extraído do DOM do antigo `public/index.html` em 30/09/2026; equipe atualizada em 01/10/2026. Preservado como referência dos textos aprovados, sem transformar a página antiga em fonte operacional vigente. O conteúdo efetivo deve ser conferido nas fontes Astro e no build. Formato: `tag` _(contexto)_: texto. Alternativas responsivas e textos das ilustrações fora de templates aparecem separados; mensagens condicionais são mantidas. As demonstrações são conceituais e não representam resultados reais. Exclui maquetes em `<template>`, `<dialog>` fechado e elementos `hidden`.
 
 ### Acesso rápido
 - `a`: Pular para o conteúdo

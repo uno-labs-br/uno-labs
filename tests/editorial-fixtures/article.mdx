@@ -1,0 +1,23 @@
+---
+title: 'Fixture editorial de teste'
+description: 'Entrada controlada para comprovar a renderização MDX; não é um artigo publicado.'
+pubDate: '2000-01-01'
+updatedDate: '2000-01-02'
+author: 'milena-dias'
+tags:
+  - testes
+  - MDX
+cover: '/assets/img/og-unolabs.png'
+coverAlt: 'Capa de teste para validação editorial'
+draft: false
+---
+
+import EditorialNote from '../../components/blog/EditorialNote.astro';
+
+## Renderização controlada
+
+Este **texto forte** comprova o corpo Markdown.
+
+<EditorialNote title="Componente Astro no MDX">
+  <p data-editorial-fixture="render">HTML do componente sem hidratação.</p>
+</EditorialNote>

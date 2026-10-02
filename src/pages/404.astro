@@ -1,17 +1,7 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Página não encontrada | UNO Labs</title>
-<meta name="robots" content="noindex">
-<meta name="theme-color" content="#F3F7F3">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
-<link rel="stylesheet" href="/assets/css/fonts.css?v=1">
-<link rel="stylesheet" href="/assets/css/site.css?v=6">
-</head>
-<body>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Página não encontrada | UNO Labs" noindex>
 <header class="topo">
   <div class="container topo__in">
     <a class="topo__marca" href="/"><img src="/assets/img/uno-labs-horizontal-principal.svg" alt="UNO Labs, início" width="187" height="52"></a>
@@ -24,11 +14,10 @@
       <h1>Esta página não existe ou mudou de lugar.</h1>
       <p>O endereço pode ter sido digitado errado ou o conteúdo foi movido.</p>
       <p style="margin-top:32px;display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center">
-        <a class="btn btn--escuro" href="/">Ir para o início</a>
+        <a class="btn btn--escuro" href="/">Ir para o início</a>{' '}
         <a class="link-sublinhado" href="/#contato">Falar com a gente</a>
       </p>
     </div>
   </div>
 </main>
-</body>
-</html>
+</BaseLayout>
