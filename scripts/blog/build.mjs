@@ -11,6 +11,9 @@ import { parseArgs } from 'node:util';
    Compatível com Node.js nativo (sem dependências externas) e funcional via file://.
    ========================================================================== */
 
+const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const DATA_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
 /**
  * Escapa caracteres especiais de HTML para prevenir injeções em campos não autorais.
  * @param {string|number} str
@@ -24,6 +27,16 @@ export function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+/**
+ * Serializa objeto para bloco JSON-LD com caractere < escapado como \u003c
+ * para segurança total contra quebra de script no HTML.
+ * @param {object} obj
+ * @returns {string}
+ */
+export function serializarJsonLd(obj) {
+  return JSON.stringify(obj, null, 2).replace(/</g, '\\u003c');
 }
 
 /**
@@ -48,17 +61,72 @@ export function formatarData(dateIso) {
 }
 
 /**
- * Valida os campos obrigatórios do schema do artigo.
+ * Normaliza o HTML das seções para garantir que qualquer tabela ou div.table-wrap
+ * seja focável por teclado (tabindex="0"), tenha role="region" e aria-label obtido do caption.
+ * @param {string} html
+ * @returns {string}
+ */
+export function normalizarHtmlSecao(html) {
+  if (!html) return '';
+
+  // 1. Processa <div class="...table-wrap..."> existente
+  let processado = html.replace(/<div\b([^>]*\bclass=["'][^"']*\btable-wrap\b[^"']*["'][^>]*)>([\s\S]*?)<\/div>/gi, (match, attrs, content) => {
+    const captionMatch = content.match(/<caption\b[^>]*>([\s\S]*?)<\/caption>/i);
+    let label = 'Tabela de dados';
+    if (captionMatch) {
+      label = captionMatch[1].replace(/<[^>]+>/g, '').trim();
+    }
+
+    let novosAttrs = attrs;
+    if (!/\brole=/i.test(novosAttrs)) novosAttrs += ' role="region"';
+    if (!/\btabindex=/i.test(novosAttrs)) novosAttrs += ' tabindex="0"';
+    if (!/\baria-label=/i.test(novosAttrs)) novosAttrs += ` aria-label="${escapeHtml(label)}"`;
+
+    return `<div${novosAttrs}>${content}</div>`;
+  });
+
+  // 2. Se houver <table> que não esteja contida em div.table-wrap, envolve de forma acessível
+  processado = processado.replace(/(<div\b[^>]*\btable-wrap\b[^>]*>[\s\S]*?<\/div>)|(<table\b[\s\S]*?<\/table>)/gi, (match, jaEnvolvido, tabelaSolta) => {
+    if (jaEnvolvido) return jaEnvolvido;
+    const captionMatch = tabelaSolta.match(/<caption\b[^>]*>([\s\S]*?)<\/caption>/i);
+    let label = 'Tabela de dados';
+    if (captionMatch) {
+      label = captionMatch[1].replace(/<[^>]+>/g, '').trim();
+    }
+    return `<div class="table-wrap" role="region" tabindex="0" aria-label="${escapeHtml(label)}">${tabelaSolta}</div>`;
+  });
+
+  return processado;
+}
+
+/**
+ * Valida os campos obrigatórios do schema do artigo, unicidade e regras estritas.
  * @param {object} art
  * @param {number} idx
+ * @param {Set<string>} slugsVistos
  */
-export function validarArtigo(art, idx) {
+export function validarArtigo(art, idx, slugsVistos) {
   const prefixo = `Artigo #${idx + 1} (${art?.slug || 'sem slug'})`;
   if (!art || typeof art !== 'object') {
     throw new Error(`${prefixo}: Dados inválidos.`);
   }
+
+  // Validação estrita de slug
+  if (!art.slug || typeof art.slug !== 'string' || !SLUG_REGEX.test(art.slug)) {
+    throw new Error(`${prefixo}: 'slug' inválido: '${art.slug}'. Deve conter apenas caracteres minúsculos, números e hífens.`);
+  }
+  if (slugsVistos.has(art.slug)) {
+    throw new Error(`${prefixo}: 'slug' duplicado detectado: '${art.slug}'.`);
+  }
+  slugsVistos.add(art.slug);
+
+  // Validação estrita de dateModified (sem fallback silencioso)
+  if (!art.dateModified || typeof art.dateModified !== 'string' || !DATA_REGEX.test(art.dateModified)) {
+    throw new Error(`${prefixo}: 'dateModified' ausente ou inválida: '${art.dateModified}'. Esperado formato AAAA-MM-DD.`);
+  }
+
   const obrigatorios = [
-    'slug', 'title', 'seoTitle', 'description', 'category',
+    'title', 'seoTitle', 'description', 'category',
     'question', 'summary', 'lede', 'sections'
   ];
   for (const campo of obrigatorios) {
@@ -66,16 +134,31 @@ export function validarArtigo(art, idx) {
       throw new Error(`${prefixo}: Campo obrigatório ausente: '${campo}'.`);
     }
   }
+
   if (!Array.isArray(art.lede) || art.lede.length === 0) {
     throw new Error(`${prefixo}: 'lede' deve ser um array não vazio de parágrafos HTML.`);
   }
   if (!Array.isArray(art.sections) || art.sections.length === 0) {
     throw new Error(`${prefixo}: 'sections' deve ser um array não vazio.`);
   }
+
+  const idsSecoes = new Set();
+  const idsReservados = new Set([
+    'conteudo', 'topo', 'perguntas-frequentes', 'faq-titulo',
+    'fontes-referencias', 'fontes-titulo', 'cta-titulo', 'relacionados-titulo'
+  ]);
+
   for (const [sIdx, sec] of art.sections.entries()) {
     if (!sec.id || !sec.title || sec.html === undefined) {
       throw new Error(`${prefixo}: Seção #${sIdx + 1} deve conter 'id', 'title' e 'html'.`);
     }
+    if (idsSecoes.has(sec.id)) {
+      throw new Error(`${prefixo}: ID de seção duplicado: '${sec.id}'.`);
+    }
+    if (idsReservados.has(sec.id)) {
+      throw new Error(`${prefixo}: ID de seção colide com ID reservado: '${sec.id}'.`);
+    }
+    idsSecoes.add(sec.id);
   }
 }
 
@@ -163,15 +246,15 @@ export function renderHubHtml(articles) {
     return `        <article class="linha-editorial">
           <a class="linha-editorial__link" href="./${art.slug}/index.html">
             <figure class="linha-editorial__figura">
-              <img src="./${art.slug}/imagens/capa.webp" alt="${escapeHtml(art.image?.alt || art.title)}" width="${thumbWidth}" height="${thumbHeight}" loading="lazy" decoding="async">
+              <img src="./${art.slug}/imagens/capa.webp" srcset="./${art.slug}/imagens/capa-768.webp 768w, ./${art.slug}/imagens/capa.webp 1536w" sizes="(max-width: 768px) 100vw, 280px" alt="${escapeHtml(art.image?.alt || art.title)}" width="${thumbWidth}" height="${thumbHeight}" loading="lazy" decoding="async">
             </figure>
             <div class="linha-editorial__corpo">
+              <h3 class="linha-editorial__titulo">${escapeHtml(art.title)}</h3>
               <div class="linha-editorial__meta">
                 <span class="linha-editorial__categoria">${escapeHtml(art.category)}</span>
                 <span aria-hidden="true">·</span>
-                <time datetime="${escapeHtml(art.dateModified || '2026-10-02')}">${formatarData(art.dateModified || '2026-10-02')}</time>
+                <time datetime="${escapeHtml(art.dateModified)}">${formatarData(art.dateModified)}</time>
               </div>
-              <h3 class="linha-editorial__titulo">${escapeHtml(art.title)}</h3>
               <p class="linha-editorial__resumo">${escapeHtml(art.summary || art.description)}</p>
               <span class="linha-editorial__chamada">Ler diagnóstico completo <svg class="seta" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </div>
@@ -209,7 +292,7 @@ export function renderHubHtml(articles) {
 <link rel="stylesheet" href="./assets/blog.css">
 
 <script type="application/ld+json">
-${JSON.stringify(jsonLd, null, 2)}
+${serializarJsonLd(jsonLd)}
 </script>
 </head>
 <body>
@@ -217,7 +300,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 
 <header class="topo" role="banner">
   <div class="container topo__in">
-    <a class="topo__marca" href="../" aria-label="UNO Labs — início">
+    <a class="topo__marca" href="https://unolabs.com.br/" aria-label="UNO Labs — início">
       <img src="./assets/logo.svg" alt="UNO Labs" width="187" height="52">
     </a>
     <nav class="topo__nav" aria-label="Principal">
@@ -230,7 +313,6 @@ ${JSON.stringify(jsonLd, null, 2)}
 
 <main id="conteudo" class="hub container">
   <header class="hub__cabecalho">
-    <p class="hub__rotulo">Visão editorial</p>
     <h1 class="hub__titulo">Um site melhor começa com a pergunta certa.</h1>
     <p class="hub__intro">Artigos aprofundados sobre estrutura técnica, clareza editorial e conversão real para empresas de serviços. Decisões pensadas para transformar confiança em contatos qualificados.</p>
   </header>
@@ -238,17 +320,17 @@ ${JSON.stringify(jsonLd, null, 2)}
   <section class="hub__destaque" aria-label="Artigo em destaque">
     <a class="destaque__link" href="./${primeiroArtigo.slug}/index.html">
       <div class="destaque__corpo">
+        <h2 class="destaque__titulo">${escapeHtml(primeiroArtigo.title)}</h2>
         <div class="destaque__meta">
           <span class="destaque__categoria">${escapeHtml(primeiroArtigo.category)}</span>
           <span aria-hidden="true">·</span>
-          <time datetime="${escapeHtml(primeiroArtigo.dateModified || '2026-10-02')}">${formatarData(primeiroArtigo.dateModified || '2026-10-02')}</time>
+          <time datetime="${escapeHtml(primeiroArtigo.dateModified)}">${formatarData(primeiroArtigo.dateModified)}</time>
         </div>
-        <h2 class="destaque__titulo">${escapeHtml(primeiroArtigo.title)}</h2>
         <p class="destaque__resumo">${escapeHtml(primeiroArtigo.summary || primeiroArtigo.description)}</p>
         <span class="destaque__chamada">Ler diagnóstico em destaque <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
       <figure class="destaque__figura">
-        <img src="./${primeiroArtigo.slug}/imagens/capa.webp" alt="${escapeHtml(primeiroArtigo.image?.alt || primeiroArtigo.title)}" width="${primeiroArtigo.image?.width || 1536}" height="${primeiroArtigo.image?.height || 1024}" fetchpriority="high" loading="eager">
+        <img src="./${primeiroArtigo.slug}/imagens/capa.webp" srcset="./${primeiroArtigo.slug}/imagens/capa-768.webp 768w, ./${primeiroArtigo.slug}/imagens/capa.webp 1536w" sizes="(max-width: 900px) 100vw, 560px" alt="${escapeHtml(primeiroArtigo.image?.alt || primeiroArtigo.title)}" width="${primeiroArtigo.image?.width || 1536}" height="${primeiroArtigo.image?.height || 1024}" fetchpriority="high" loading="eager">
       </figure>
     </a>
   </section>
@@ -265,8 +347,10 @@ ${outrosArtigosHtml}
   <div class="container">
     <div class="rodape__grade">
       <div class="rodape__marca">
-        <img src="./assets/logo.svg" alt="UNO Labs" width="187" height="52" loading="lazy">
-        <p>Presença digital que transforma visitantes qualificados em clientes de alto valor.</p>
+        <a href="https://unolabs.com.br/" aria-label="UNO Labs — início">
+          <img src="./assets/logo.svg" alt="UNO Labs" width="187" height="52" loading="lazy">
+        </a>
+        <p>Presença digital que gera oportunidades.</p>
       </div>
       <div class="rodape__col">
         <span class="rodape__tit">Navegação</span>
@@ -275,10 +359,10 @@ ${outrosArtigosHtml}
         <a href="https://unolabs.com.br/#contato">Conversar sobre seu projeto</a>
       </div>
       <div class="rodape__col">
-        <span class="rodape__tit">Transparência</span>
-        <a href="https://unolabs.com.br/politica-de-privacidade/">Política de privacidade</a>
-        <span>Vitória e Vila Velha, ES</span>
-        <span>Curitiba, PR</span>
+        <span class="rodape__tit">Atendimento</span>
+        <span>Vitória · Vila Velha · Serra · Cariacica (ES)</span>
+        <span>Curitiba (PR)</span>
+        <span>Todo o Brasil, de forma remota</span>
       </div>
     </div>
     <div class="rodape__base">
@@ -331,7 +415,7 @@ export function renderArtigoHtml(artigo, allArticles) {
         'inLanguage': 'pt-BR',
         'mainEntityOfPage': `https://unolabs.com.br/blog/${artigo.slug}/`,
         'url': `https://unolabs.com.br/blog/${artigo.slug}/`,
-        'dateModified': artigo.dateModified || '2026-10-02',
+        'dateModified': artigo.dateModified,
         'image': `https://unolabs.com.br/blog/${artigo.slug}/imagens/capa.webp`,
         'author': {
           '@type': 'Organization',
@@ -394,11 +478,11 @@ export function renderArtigoHtml(artigo, allArticles) {
     `<p class="artigo__lead">${paragrafo}</p>`
   )).join('\n');
 
-  // Seções (html confiável)
+  // Seções (normaliza table-wrap acessível e preserva html autoral)
   const secoesHtml = artigo.sections.map(sec => `
         <section id="${sec.id}" class="artigo__secao">
           <h2>${escapeHtml(sec.title)}</h2>
-          ${sec.html}
+          ${normalizarHtmlSecao(sec.html)}
         </section>`
   ).join('\n');
 
@@ -437,9 +521,9 @@ ${fontesItens}
         </section>`;
   }
 
-  // CTA
-  const ctaTitle = artigo.cta?.title || 'Precisa de clareza para o site da sua empresa?';
-  const ctaText = artigo.cta?.text || 'Converse diretamente com os fundadores da UNO Labs e receba um diagnóstico objetivo do seu projeto.';
+  // CTA institucional sem promessas inventadas
+  const ctaTitle = artigo.cta?.title || 'Quer conversar sobre o próximo passo do seu site?';
+  const ctaText = artigo.cta?.text || 'Converse sobre seu projeto com a UNO Labs e conheça nossas soluções em sites, SEO e anúncios.';
   const ctaLabel = artigo.cta?.label || 'Conversar sobre meu projeto';
 
   // Artigos Relacionados
@@ -451,11 +535,13 @@ ${fontesItens}
       return `        <article class="card-relacionado">
           <a class="card-relacionado__link" href="../${relSlug}/index.html">
             <figure class="card-relacionado__figura">
-              <img src="../${relSlug}/imagens/capa.webp" alt="${escapeHtml(relArt.image?.alt || relArt.title)}" width="${relArt.image?.width || 1536}" height="${relArt.image?.height || 1024}" loading="lazy" decoding="async">
+              <img src="../${relSlug}/imagens/capa.webp" srcset="../${relSlug}/imagens/capa-768.webp 768w, ../${relSlug}/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="${escapeHtml(relArt.image?.alt || relArt.title)}" width="${relArt.image?.width || 1536}" height="${relArt.image?.height || 1024}" loading="lazy" decoding="async">
             </figure>
             <div class="card-relacionado__corpo">
-              <span class="card-relacionado__categoria">${escapeHtml(relArt.category)}</span>
               <h3 class="card-relacionado__titulo">${escapeHtml(relArt.title)}</h3>
+              <div class="card-relacionado__meta">
+                <span class="card-relacionado__categoria">${escapeHtml(relArt.category)}</span>
+              </div>
               <span class="card-relacionado__chamada">Ler diagnóstico <svg class="seta" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </div>
           </a>
@@ -476,9 +562,16 @@ ${cardsRel}
   const imgWidth = artigo.image?.width || 1536;
   const imgHeight = artigo.image?.height || 1024;
   const imgAlt = escapeHtml(artigo.image?.alt || artigo.title);
-  const imgCaption = escapeHtml(artigo.image?.caption || 'Ilustração do artigo');
+
+  // Evita duplicar menção a IA se a legenda já contiver
+  const rawCaption = artigo.image?.caption || '';
+  const jaTemIa = /ilustra[cç][aã]o conceitual gerada por ia/i.test(rawCaption);
+  const imgCaption = jaTemIa
+    ? escapeHtml(rawCaption)
+    : (rawCaption ? `${escapeHtml(rawCaption)} · Ilustração conceitual gerada por IA` : 'Ilustração conceitual gerada por IA');
+
   const autorNome = escapeHtml(artigo.author || 'UNO Labs');
-  const dataModificada = escapeHtml(artigo.dateModified || '2026-10-02');
+  const dataModificada = escapeHtml(artigo.dateModified);
   const dataFormatada = formatarData(dataModificada);
 
   return `<!doctype html>
@@ -511,7 +604,7 @@ ${cardsRel}
 <link rel="stylesheet" href="../assets/blog.css">
 
 <script type="application/ld+json">
-${JSON.stringify(jsonLd, null, 2)}
+${serializarJsonLd(jsonLd)}
 </script>
 </head>
 <body>
@@ -519,7 +612,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 
 <header class="topo" role="banner">
   <div class="container topo__in">
-    <a class="topo__marca" href="../../" aria-label="UNO Labs — início">
+    <a class="topo__marca" href="https://unolabs.com.br/" aria-label="UNO Labs — início">
       <img src="../assets/logo.svg" alt="UNO Labs" width="187" height="52">
     </a>
     <nav class="topo__nav" aria-label="Principal">
@@ -540,9 +633,10 @@ ${JSON.stringify(jsonLd, null, 2)}
   </nav>
 
   <header class="artigo__cabecalho">
-    <span class="artigo__categoria">${escapeHtml(artigo.category)}</span>
     <h1 class="artigo__titulo">${escapeHtml(artigo.title)}</h1>
     <div class="artigo__meta">
+      <span class="artigo__categoria">${escapeHtml(artigo.category)}</span>
+      <span aria-hidden="true">·</span>
       <span class="artigo__autor">Por <strong>${autorNome}</strong></span>
       <span aria-hidden="true">·</span>
       <span class="artigo__data">Data da versão: <time datetime="${dataModificada}">${dataFormatada}</time></span>
@@ -554,8 +648,8 @@ ${JSON.stringify(jsonLd, null, 2)}
     </aside>
 
     <figure class="artigo__hero-figura">
-      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="(max-width: 768px) 100vw, 1200px" alt="${imgAlt}" width="${imgWidth}" height="${imgHeight}" fetchpriority="high" loading="eager">
-      <figcaption>${imgCaption} · Ilustração conceitual gerada por IA</figcaption>
+      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="(max-width: 900px) 100vw, 900px" alt="${imgAlt}" width="${imgWidth}" height="${imgHeight}" fetchpriority="high" loading="eager">
+      <figcaption>${imgCaption}</figcaption>
     </figure>
   </header>
 
@@ -590,8 +684,10 @@ ${relacionadosHtml}
   <div class="container">
     <div class="rodape__grade">
       <div class="rodape__marca">
-        <img src="../assets/logo.svg" alt="UNO Labs" width="187" height="52" loading="lazy">
-        <p>Presença digital que transforma visitantes qualificados em clientes de alto valor.</p>
+        <a href="https://unolabs.com.br/" aria-label="UNO Labs — início">
+          <img src="../assets/logo.svg" alt="UNO Labs" width="187" height="52" loading="lazy">
+        </a>
+        <p>Presença digital que gera oportunidades.</p>
       </div>
       <div class="rodape__col">
         <span class="rodape__tit">Navegação</span>
@@ -600,10 +696,10 @@ ${relacionadosHtml}
         <a href="https://unolabs.com.br/#contato">Conversar sobre seu projeto</a>
       </div>
       <div class="rodape__col">
-        <span class="rodape__tit">Transparência</span>
-        <a href="https://unolabs.com.br/politica-de-privacidade/">Política de privacidade</a>
-        <span>Vitória e Vila Velha, ES</span>
-        <span>Curitiba, PR</span>
+        <span class="rodape__tit">Atendimento</span>
+        <span>Vitória · Vila Velha · Serra · Cariacica (ES)</span>
+        <span>Curitiba (PR)</span>
+        <span>Todo o Brasil, de forma remota</span>
       </div>
     </div>
     <div class="rodape__base">
@@ -649,9 +745,10 @@ export async function buildBlog({ articlesPath, outputDir, dryRun = false } = {}
     throw new Error(`[blog:build] O arquivo '${jsonPath}' deve conter um array não vazio de artigos.`);
   }
 
-  // Validação do schema de cada artigo
+  // Validação estrita do schema de cada artigo
+  const slugsVistos = new Set();
   for (const [idx, art] of articles.entries()) {
-    validarArtigo(art, idx);
+    validarArtigo(art, idx, slugsVistos);
   }
 
   if (dryRun) {

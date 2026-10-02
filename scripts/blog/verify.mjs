@@ -13,6 +13,9 @@ import assert from 'node:assert/strict';
    Compatível com Node.js nativo sem dependências externas.
    ========================================================================== */
 
+const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const DATA_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
 /**
  * Utilitários de extração e parsing leve de HTML via regex restrito.
  */
@@ -93,9 +96,10 @@ export const htmlUtils = {
       const width = attrs.match(/\bwidth=["']([^"']+)["']/i)?.[1];
       const height = attrs.match(/\bheight=["']([^"']+)["']/i)?.[1];
       const srcset = attrs.match(/\bsrcset=["']([^"']+)["']/i)?.[1];
+      const sizes = attrs.match(/\bsizes=["']([^"']+)["']/i)?.[1];
       const loading = attrs.match(/\bloading=["']([^"']+)["']/i)?.[1];
       const fetchpriority = attrs.match(/\bfetchpriority=["']([^"']+)["']/i)?.[1];
-      images.push({ tag, src, alt, width, height, srcset, loading, fetchpriority });
+      images.push({ tag, src, alt, width, height, srcset, sizes, loading, fetchpriority });
     }
     return images;
   },
@@ -118,20 +122,6 @@ export const htmlUtils = {
       hrefs.push(match[1]);
     }
     return hrefs;
-  },
-
-  getAllRelativeResourceLinks(html) {
-    const hrefRegex = /<(?:link|a)\b[^>]*\bhref=["'](\.[^"']+)["']/gi;
-    const srcRegex = /<(?:img|script|source)\b[^>]*\bsrc=["'](\.[^"']+)["']/gi;
-    const resources = [];
-    let match;
-    while ((match = hrefRegex.exec(html)) !== null) {
-      resources.push(match[1]);
-    }
-    while ((match = srcRegex.exec(html)) !== null) {
-      resources.push(match[1]);
-    }
-    return resources;
   }
 };
 
@@ -146,22 +136,21 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
   console.log(`[blog:verify] Verificando dados em: ${targetArticlesPath}`);
   console.log(`[blog:verify] Verificando HTML em: ${targetBlogDir}`);
 
-  // 1. Verificação de dados ausentes
+  // 1. Verificação de dados ausentes -> Deve dar exit 1 conforme especificado
   const articlesExist = existsSync(targetArticlesPath);
   const hubHtmlPath = join(targetBlogDir, 'index.html');
   const hubExists = existsSync(hubHtmlPath);
 
   if (!articlesExist || !hubExists) {
-    console.log('[blog:verify] Dados ausentes detectados:');
+    console.error('[blog:verify] Erro: Dados ausentes detectados.');
     if (!articlesExist) {
-      console.log(`  - Arquivo de artigos não encontrado: ${targetArticlesPath}`);
+      console.error(`  - Arquivo de artigos não encontrado: ${targetArticlesPath}`);
     }
     if (!hubExists) {
-      console.log(`  - Hub gerado não encontrado: ${hubHtmlPath}`);
+      console.error(`  - Hub gerado não encontrado: ${hubHtmlPath}`);
     }
-    console.log('[blog:verify] Aguardando o fornecimento de docs/blog/articles.json pelo orquestrador.');
-    console.log('[blog:verify] Conclusão do worker preservada com sucesso (saída limpa).');
-    return { success: true, reason: 'missing_data', verified: 0 };
+    console.error('[blog:verify] Execute scripts/blog/build.mjs após o fornecimento de docs/blog/articles.json pelo orquestrador.');
+    return { success: false, reason: 'missing_data', verified: 0 };
   }
 
   // 2. Carrega artigos
@@ -173,7 +162,24 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
     console.warn(`[blog:verify] Aviso: artigos fornecidos: ${articles.length} (esperado 6 em produção)`);
   }
 
-  const validSlugs = new Set(articles.map(a => a.slug));
+  // Validação estrita dos artigos no JSON
+  const validSlugs = new Set();
+  for (const [idx, art] of articles.entries()) {
+    assert.ok(art.slug && SLUG_REGEX.test(art.slug), `Artigo #${idx + 1}: slug '${art.slug}' inválido. Deve ser minúsculo com hífens.`);
+    assert.ok(!validSlugs.has(art.slug), `Artigo #${idx + 1}: slug '${art.slug}' duplicado.`);
+    validSlugs.add(art.slug);
+
+    assert.ok(art.dateModified && DATA_REGEX.test(art.dateModified), `Artigo #${idx + 1} (${art.slug}): dateModified ausente ou inválida (formato AAAA-MM-DD exigido).`);
+
+    assert.ok(Array.isArray(art.sections) && art.sections.length > 0, `Artigo #${idx + 1} (${art.slug}): sections deve ser array não vazio.`);
+    const secIds = new Set();
+    for (const sec of art.sections) {
+      assert.ok(sec.id && typeof sec.id === 'string', `Artigo #${idx + 1} (${art.slug}): seção sem id válido.`);
+      assert.ok(!secIds.has(sec.id), `Artigo #${idx + 1} (${art.slug}): id de seção duplicado '${sec.id}'.`);
+      secIds.add(sec.id);
+    }
+  }
+
   const titlesSeen = new Map();
   const canonicalsSeen = new Map();
   const descriptionsSeen = new Map();
@@ -192,11 +198,22 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
   assert.equal(hubH1s.length, 1, `Hub deve ter exatamente um <h1>. Encontrados: ${hubH1s.length}`);
   assert.match(hubH1s[0], /Um site melhor começa com a pergunta certa/i, 'H1 do Hub deve ter o título editorial');
 
+  // Kicker decorativo não permitido no hub
+  assert.doesNotMatch(hubHtml, /<p[^>]*class=["'][^"']*hub__rotulo[^"']*["']/i, 'Hub não deve conter kicker decorativo (.hub__rotulo)');
+  assert.doesNotMatch(hubHtml, /Visão editorial/i, 'Hub não deve conter kicker "Visão editorial"');
+
   // Skip-link
   const hubIds = htmlUtils.getAllIds(hubHtml);
   assert.ok(hubIds.has('conteudo'), 'Hub deve conter elemento com id="conteudo" para o skip-link');
   const hubHrefs = htmlUtils.getAllAnchorHrefs(hubHtml);
   assert.ok(hubHrefs.includes('#conteudo'), 'Hub deve conter link para #conteudo');
+
+  // Logo aponta para https://unolabs.com.br/
+  assert.match(hubHtml, /<a[^>]*class=["'][^"']*topo__marca[^"']*["'][^>]*href=["']https:\/\/unolabs\.com\.br\/["']/i, 'Logo do Hub deve apontar para https://unolabs.com.br/');
+
+  // Assinatura e atendimento no rodapé
+  assert.match(hubHtml, /Presença digital que gera oportunidades\./i, 'Hub deve usar assinatura confirmada no rodapé');
+  assert.match(hubHtml, /Vitória · Vila Velha · Serra · Cariacica \(ES\)/i, 'Hub deve conter atendimento no rodapé');
 
   // Sem JS não autorizado
   const hubNonJsonScripts = htmlUtils.getAllScriptsNonJsonLd(hubHtml);
@@ -228,24 +245,21 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
   assert.equal(hubOgUrl, 'https://unolabs.com.br/blog/', 'Hub og:url incorreto');
   ogUrlsSeen.set(hubOgUrl, 'hub');
 
-  // JSON-LD do Hub
+  // JSON-LD do Hub com escape seguro
   const hubJsonLdList = htmlUtils.getJsonLdScripts(hubHtml);
   assert.ok(hubJsonLdList.length >= 1, 'Hub deve conter bloco JSON-LD');
-  let hubJsonLdParsed = false;
   for (const rawJson of hubJsonLdList) {
+    assert.ok(!rawJson.includes('</script>'), 'JSON-LD do Hub não deve conter tag de fechamento </script>');
     const data = JSON.parse(rawJson);
     const graph = data['@graph'] || [data];
     const types = graph.map(item => item['@type']);
     if (types.includes('CollectionPage') && types.includes('ItemList')) {
-      hubJsonLdParsed = true;
       const itemList = graph.find(i => i['@type'] === 'ItemList');
       assert.ok(itemList.itemListElement.length > 0, 'ItemList do Hub não deve estar vazio');
       const org = graph.find(i => i['@type'] === 'Organization');
       assert.equal(org?.name, 'UNO Labs', 'Organization name deve ser UNO Labs');
-      break;
     }
   }
-  assert.ok(hubJsonLdParsed, 'Hub deve conter CollectionPage e ItemList válidos no JSON-LD');
 
   // Âncoras do Hub
   for (const href of hubHrefs) {
@@ -264,15 +278,21 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
     );
   }
 
-  // Imagens do Hub
+  // Imagens do Hub (largura, altura, alt, srcset)
   const hubImages = htmlUtils.getAllImages(hubHtml);
   for (const img of hubImages) {
     assert.ok(img.width && !isNaN(Number(img.width)), `Imagem no Hub sem largura válida: ${img.tag}`);
     assert.ok(img.height && !isNaN(Number(img.height)), `Imagem no Hub sem altura válida: ${img.tag}`);
     assert.ok(img.alt !== undefined && img.alt !== null, `Imagem no Hub sem alt: ${img.tag}`);
+    if (img.src && img.src.includes('/imagens/capa.webp')) {
+      assert.ok(img.srcset, `Imagem de artigo no Hub deve ter srcset: ${img.tag}`);
+      assert.match(img.srcset, /capa-768\.webp\s+768w/, 'srcset da imagem no Hub deve incluir capa-768.webp 768w');
+      assert.match(img.srcset, /capa\.webp\s+1536w/, 'srcset da imagem no Hub deve incluir capa.webp 1536w');
+      assert.ok(img.sizes, `Imagem com srcset no Hub deve possuir sizes: ${img.tag}`);
+    }
   }
 
-  // 4. Validação de cada artigo
+  // 4. Validação de cada artigo individual
   console.log(`[blog:verify] Validando ${articles.length} artigos individuais...`);
   for (const [idx, art] of articles.entries()) {
     const artDir = join(targetBlogDir, art.slug);
@@ -288,11 +308,23 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
     const artH1s = htmlUtils.getAllH1s(artHtml);
     assert.equal(artH1s.length, 1, `Artigo ${art.slug} deve ter exatamente um <h1>. Encontrados: ${artH1s.length}`);
 
+    // Categoria não pode estar como sobrancelha acima do h1
+    const idxH1 = artHtml.indexOf('<h1');
+    const idxCat = artHtml.indexOf('artigo__categoria');
+    assert.ok(idxCat > idxH1, `Artigo ${art.slug}: categoria deve estar posicionada abaixo do <h1> nos metadados.`);
+
     // Skip-link
     const artIds = htmlUtils.getAllIds(artHtml);
     assert.ok(artIds.has('conteudo'), `Artigo ${art.slug} deve conter id="conteudo"`);
     const artHrefs = htmlUtils.getAllAnchorHrefs(artHtml);
     assert.ok(artHrefs.includes('#conteudo'), `Artigo ${art.slug} deve ter link para #conteudo`);
+
+    // Logo aponta para https://unolabs.com.br/
+    assert.match(artHtml, /<a[^>]*class=["'][^"']*topo__marca[^"']*["'][^>]*href=["']https:\/\/unolabs\.com\.br\/["']/i, `Artigo ${art.slug}: logo deve apontar para https://unolabs.com.br/`);
+
+    // Assinatura e atendimento no rodapé
+    assert.match(artHtml, /Presença digital que gera oportunidades\./i, `Artigo ${art.slug} deve usar assinatura confirmada no rodapé`);
+    assert.match(artHtml, /Vitória · Vila Velha · Serra · Cariacica \(ES\)/i, `Artigo ${art.slug} deve conter atendimento no rodapé`);
 
     // Sem JS não autorizado
     const artNonJsonScripts = htmlUtils.getAllScriptsNonJsonLd(artHtml);
@@ -339,20 +371,19 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
       `Artigo ${art.slug} deve exibir textualmente "Data da versão"`
     );
     assert.ok(
-      artHtml.includes(art.dateModified || '2026-10-02'),
+      artHtml.includes(art.dateModified),
       `Artigo ${art.slug} deve exibir a data dateModified no HTML`
     );
 
-    // JSON-LD do Artigo
+    // JSON-LD do Artigo seguro
     const artJsonLdList = htmlUtils.getJsonLdScripts(artHtml);
     assert.ok(artJsonLdList.length >= 1, `Artigo ${art.slug} deve conter JSON-LD`);
-    let artJsonLdParsed = false;
     for (const rawJson of artJsonLdList) {
+      assert.ok(!rawJson.includes('</script>'), `Artigo ${art.slug}: JSON-LD não deve conter </script>`);
       const data = JSON.parse(rawJson);
       const graph = data['@graph'] || [data];
       const blogPosting = graph.find(i => i['@type'] === 'BlogPosting');
       if (blogPosting) {
-        artJsonLdParsed = true;
         assert.equal(blogPosting.url, `https://unolabs.com.br/blog/${art.slug}/`);
         assert.equal(blogPosting.image, `https://unolabs.com.br/blog/${art.slug}/imagens/capa.webp`);
         assert.equal(blogPosting.author?.name, 'UNO Labs', 'BlogPosting author name deve ser UNO Labs');
@@ -363,10 +394,8 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
         const breadcrumbs = graph.find(i => i['@type'] === 'BreadcrumbList');
         assert.ok(breadcrumbs, `Artigo ${art.slug} deve conter BreadcrumbList no JSON-LD`);
         assert.equal(breadcrumbs.itemListElement.length, 3, 'BreadcrumbList deve ter 3 níveis (Início, Blog, Artigo)');
-        break;
       }
     }
-    assert.ok(artJsonLdParsed, `Artigo ${art.slug} deve ter BlogPosting e BreadcrumbList válidos no JSON-LD`);
 
     // Imagens e srcset do Artigo
     const artImages = htmlUtils.getAllImages(artHtml);
@@ -378,6 +407,7 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
     assert.match(heroImg.srcset, /capa\.webp\s+1536w/, 'srcset deve conter capa.webp 1536w');
     assert.equal(heroImg.loading, 'eager', 'Imagem hero deve ter loading="eager"');
     assert.equal(heroImg.fetchpriority, 'high', 'Imagem hero deve ter fetchpriority="high"');
+    assert.match(heroImg.sizes || '', /900px/, `Hero detalhe em ${art.slug} deve ter sizes com max 900px`);
 
     for (const img of artImages) {
       assert.ok(img.width && !isNaN(Number(img.width)), `Imagem no artigo ${art.slug} sem largura válida`);
@@ -385,11 +415,16 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
       assert.ok(img.alt !== undefined && img.alt !== null, `Imagem no artigo ${art.slug} sem alt`);
     }
 
-    // Legenda da imagem explicita IA
+    // Legenda da imagem explicita IA sem duplicar
     assert.match(
       artHtml,
       /Ilustra[cç][aã]o conceitual gerada por IA/i,
       `Artigo ${art.slug} deve explicitar na legenda "Ilustração conceitual gerada por IA"`
+    );
+    assert.doesNotMatch(
+      artHtml,
+      /Ilustra[cç][aã]o conceitual gerada por IA[\s\S]*?Ilustra[cç][aã]o conceitual gerada por IA/i,
+      `Artigo ${art.slug}: legenda duplicou menção a IA!`
     );
 
     // Âncoras internas do artigo
@@ -422,6 +457,13 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
       assert.match(artHtml, /<details\b/i, `Artigo ${art.slug} com FAQ deve usar tag <details> nativa`);
       assert.match(artHtml, /<summary\b/i, `Artigo ${art.slug} com FAQ deve usar tag <summary> nativa`);
     }
+
+    // Tabelas: verificar wrapper acessível se houver table-wrap
+    if (artHtml.includes('table-wrap')) {
+      assert.match(artHtml, /<div[^>]*\btable-wrap\b[^>]*\brole=["']region["']/i, `Artigo ${art.slug}: table-wrap deve ter role="region"`);
+      assert.match(artHtml, /<div[^>]*\btable-wrap\b[^>]*\btabindex=["']0["']/i, `Artigo ${art.slug}: table-wrap deve ter tabindex="0"`);
+      assert.match(artHtml, /<div[^>]*\btable-wrap\b[^>]*\baria-label=/i, `Artigo ${art.slug}: table-wrap deve ter aria-label`);
+    }
   }
 
   console.log(`[blog:verify] Validação concluída com sucesso: Hub e ${articles.length} artigos íntegros e em conformidade!`);
@@ -444,8 +486,8 @@ if (isDirectCall) {
       articlesPath: values.articles,
       blogDir: values.blogDir
     });
-    if (res.reason === 'missing_data') {
-      process.exit(0);
+    if (!res.success) {
+      process.exit(1);
     }
   } catch (err) {
     console.error(`[blog:verify] Falha na validação: ${err.message}`);

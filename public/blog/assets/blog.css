@@ -63,7 +63,6 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
 
 img, svg {
@@ -81,7 +80,8 @@ a {
 }
 
 a:hover {
-  color: var(--uno-mint-deep);
+  color: var(--uno-pine-2);
+  text-decoration-thickness: 2px;
 }
 
 h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
@@ -195,9 +195,7 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   position: sticky;
   top: 0;
   z-index: 90;
-  background-color: rgba(243, 247, 243, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--uno-off-white);
   border-bottom: 1px solid var(--uno-line);
 }
 
@@ -354,18 +352,9 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 
 /* Destaque Assimétrico do Artigo Principal */
 .hub__destaque {
-  margin-bottom: 64px;
-  background-color: var(--uno-white);
-  border: 1px solid var(--uno-line);
-  border-radius: var(--uno-radius-lg);
-  overflow: hidden;
-  box-shadow: var(--uno-shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hub__destaque:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--uno-shadow-hover);
+  margin-bottom: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--uno-line);
 }
 
 .destaque__link {
@@ -373,17 +362,19 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   grid-template-columns: 1fr;
   text-decoration: none;
   color: inherit;
+  gap: 32px;
 }
 
 @media (min-width: 900px) {
   .destaque__link {
-    grid-template-columns: 1.15fr 0.85fr;
-    align-items: stretch;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 48px;
   }
 }
 
 .destaque__corpo {
-  padding: clamp(32px, 4vw, 56px);
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -417,7 +408,9 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 }
 
 .destaque__link:hover .destaque__titulo {
-  color: var(--uno-mint-deep);
+  color: var(--uno-pine-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .destaque__resumo {
@@ -448,6 +441,7 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 .destaque__figura {
   margin: 0;
   overflow: hidden;
+  border-radius: var(--uno-radius-md);
   background-color: var(--uno-off-white-2);
 }
 
@@ -477,20 +471,17 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 .hub__linhas {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 36px;
 }
 
 .linha-editorial {
-  background-color: var(--uno-white);
-  border: 1px solid var(--uno-line);
-  border-radius: var(--uno-radius-md);
-  overflow: hidden;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--uno-line);
 }
 
-.linha-editorial:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--uno-shadow);
+.linha-editorial:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .linha-editorial__link {
@@ -498,36 +489,39 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   grid-template-columns: 1fr;
   text-decoration: none;
   color: inherit;
+  gap: 24px;
 }
 
 @media (min-width: 768px) {
   .linha-editorial__link {
     grid-template-columns: 280px 1fr;
-    align-items: stretch;
+    align-items: center;
+    gap: 36px;
   }
 }
 
 .linha-editorial__figura {
   margin: 0;
   overflow: hidden;
+  border-radius: var(--uno-radius-sm);
   background-color: var(--uno-off-white-2);
 }
 
 .linha-editorial__figura img {
   width: 100%;
   height: 100%;
-  min-height: 200px;
-  max-height: 240px;
+  min-height: 180px;
+  max-height: 220px;
   object-fit: cover;
-  transition: transform 0.24s ease;
+  transition: opacity 0.2s ease;
 }
 
 .linha-editorial:hover .linha-editorial__figura img {
-  transform: scale(1.02);
+  opacity: 0.92;
 }
 
 .linha-editorial__corpo {
-  padding: 24px 28px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -560,7 +554,9 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 }
 
 .linha-editorial:hover .linha-editorial__titulo {
-  color: var(--uno-mint-deep);
+  color: var(--uno-pine-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .linha-editorial__resumo {
@@ -645,7 +641,6 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 .artigo__resumo-bloco {
   background-color: var(--uno-off-white-2);
   border: 1px solid var(--uno-line);
-  border-left: 4px solid var(--uno-mint-deep);
   border-radius: var(--uno-radius-sm);
   padding: 24px 28px;
   margin: 32px 0 40px;
@@ -688,14 +683,15 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 /* Layout Editorial com Índice Lateral */
 .artigo__layout {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 48px;
   align-items: start;
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .artigo__layout {
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 280px minmax(0, 1fr);
     gap: 64px;
   }
 }
@@ -750,13 +746,14 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
 }
 
 .sumario__nav a:hover {
-  color: var(--uno-mint-deep);
+  color: var(--uno-pine-2);
   text-decoration: underline;
 }
 
 /* Corpo Editorial do Artigo */
 .artigo__corpo {
   max-width: var(--uno-reading-max);
+  min-width: 0;
 }
 
 .artigo__lead {
@@ -839,7 +836,30 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   font-weight: 700;
 }
 
-/* Tabelas com Overflow Acessível */
+/* Código e Texto Pré-formatado Quebrável */
+code, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  background-color: var(--uno-off-white-2);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background-color: var(--uno-off-white-2);
+  border: 1px solid var(--uno-line);
+  border-radius: var(--uno-radius-sm);
+  padding: 18px;
+  margin: 24px 0;
+}
+
+/* Tabelas com Overflow Acessível (div.table-wrap e table sem classe) */
+.table-wrap,
 .tabela-wrapper {
   margin: 32px 0;
   overflow-x: auto;
@@ -849,11 +869,15 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   background-color: var(--uno-white);
 }
 
+.table-wrap:focus-visible,
 .tabela-wrapper:focus-visible {
   outline: 3px solid var(--uno-pine);
+  outline-offset: 2px;
 }
 
-.tabela-editorial {
+.table-wrap table,
+.tabela-editorial,
+table {
   width: 100%;
   border-collapse: collapse;
   font-size: 15px;
@@ -861,20 +885,39 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   text-align: left;
 }
 
+.table-wrap caption,
+table caption {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--uno-pine);
+  text-align: left;
+  background-color: var(--uno-off-white-2);
+  border-bottom: 1px solid var(--uno-line);
+}
+
+.table-wrap th,
+.table-wrap td,
 .tabela-editorial th,
-.tabela-editorial td {
+.tabela-editorial td,
+table th,
+table td {
   padding: 14px 18px;
   border-bottom: 1px solid var(--uno-line-subtle);
 }
 
-.tabela-editorial th {
+.table-wrap th,
+.tabela-editorial th,
+table th {
   background-color: var(--uno-off-white-2);
   color: var(--uno-pine);
   font-weight: 600;
   border-bottom: 1px solid var(--uno-line);
 }
 
-.tabela-editorial tr:last-child td {
+.table-wrap tr:last-child td,
+.tabela-editorial tr:last-child td,
+table tr:last-child td {
   border-bottom: 0;
 }
 
@@ -1062,12 +1105,11 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color 0.18s ease;
 }
 
 .card-relacionado:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--uno-shadow);
+  border-color: var(--uno-pine);
 }
 
 .card-relacionado__link {
@@ -1089,11 +1131,11 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .card-relacionado:hover .card-relacionado__figura img {
-  transform: scale(1.02);
+  opacity: 0.92;
 }
 
 .card-relacionado__corpo {
@@ -1108,8 +1150,7 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--uno-mint-deep);
-  margin-bottom: 8px;
+  color: var(--uno-pine);
 }
 
 .card-relacionado__titulo {
@@ -1117,13 +1158,19 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
   line-height: 1.35;
   font-weight: 700;
   color: var(--uno-pine);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   flex-grow: 1;
   transition: color 0.18s ease;
 }
 
 .card-relacionado:hover .card-relacionado__titulo {
-  color: var(--uno-mint-deep);
+  color: var(--uno-pine-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.card-relacionado__meta {
+  margin-bottom: 12px;
 }
 
 .card-relacionado__chamada {
@@ -1272,6 +1319,7 @@ h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote {
     page-break-inside: avoid;
   }
 
+  .table-wrap,
   .tabela-wrapper {
     overflow: visible !important;
     border: 1px solid #cccccc !important;
