@@ -152,7 +152,7 @@ A ordem segue a lógica de decisão de um comprador desconfiado: **o que é → 
 | 8 | Investimento | Preço de entrada, o que muda o valor, garantia e mensais |
 | 9 | Para quem / Onde | Qualifica o lead e reforça SEO local |
 | 10 | Equipe | Retratos, cargos e textos aprovados que apresentam as pessoas responsáveis pelo trabalho |
-| 11 | Blog (`#blog`) | Sinaliza autoridade futura; cartões “Em breve” |
+| 11 | Blog (`#blog`) | Apresenta artigos disponíveis e abre o índice `/blog/` |
 | 12 | Dúvidas (`#duvidas`) | Quebra objeções; honestidade sobre garantias |
 | 13 | Contato (`#contato`) | Formulário qualificador + canais diretos |
 | 14 | Rodapé | Navegação, serviços, área atendida, privacidade |
@@ -235,7 +235,7 @@ CTAs: “Conversar sobre meu projeto” (cabeçalho, hero, menu), “Pedir minha
   - Texto (4/12): meta em caixa alta com espaçamento largo, nome 52 px, selo “Estudo conceitual”, e dois itens (Objetivo / Decisão em destaque).
   - Composição (8/12; fixa em 820 × 560 e escalada): janela de desktop de 760 px (barra de 30 px + site em 760 × 475) e celular de 196 × 406 sobreposto no canto inferior. No celular (< 600 px), só o celular, maior (236 × 492).
 - Os sites dos estudos combinam HTML, imagens conceituais e geometria técnica em SVG, com fontes e paletas próprias, e ficam em seis `<template>` em `src/components/estudos/TemplatesEstudos.astro`: cada versão desktop/celular contém a composição aprovada (Módulo: Projeto, Atria: Detalhe, Casa Noma: Imersivo; direções anteriores permanecem no histórico Git). O módulo TypeScript de estudos copia os templates quando o espaço se aproxima da tela. Os blocos recebem `aria-hidden`, `inert` e `data-nosnippet`; controles internos são demonstrativos. As duas primeiras propriedades afastam as maquetes da leitura assistiva e do foco; `data-nosnippet` trata trechos de busca e não garante exclusão do índice.
-- **Composições finais aprovadas:** as variações foram fixadas sem seletores manuais nos capítulos da home, unificando a direção em todas as instâncias (capítulos desktop e celular, Casa Noma no hero e Atria na jornada). As sequências dos três estudos em ambas as versões (desktop e celular) têm duração calculada de exatamente 4,00 s de tempo visível real, com efeitos contínuos e sem pausa ociosa. O disparo só ocorre quando o visitante atinge exposição significativa da cópia: pelo menos metade do modelo na área útil visível, descontando o cabeçalho fixo no topo, considerando clipping de ancestrais e adaptando para telas baixas onde o modelo excede a altura útil (garantindo que nunca fique impossibilitado de animar). O pré-carregamento 800 px antes apenas monta o DOM sem iniciar o movimento. Ao perder a exposição ou ocultar o documento, a animação pausa e retoma do ponto em que parou sem consumir os 4 s enquanto oculta. Cada capítulo conta com um botão acessível “Rever animação” (≥ 44 px, foco visível e anúncio `aria-live`) que reinicia, sem recriar o DOM, somente cópias com exposição significativa na tela. Na jornada, a cópia também precisa pertencer a uma etapa ativa; cenas futuras aguardam até sua etapa ativa e exposição. A sequência termina quando acabam os efeitos CSS finitos declarados (4,00 s), e a classe de execução sai para revelar o layout estático. Com `prefers-reduced-motion: reduce` ou classe `.rm`, somente o movimento dos estudos é cancelado e o botão informa o estado; quando a preferência do sistema volta ao normal e `.rm` não está ativa, o replay pode ser usado novamente. Sem suporte a `IntersectionObserver` ou à sincronização dos efeitos, os estudos ficam estáticos e o botão informa essa limitação. Os estilos ficam delimitados em `src/styles/conceitos.css`.
+- **Composições finais aprovadas:** as variações foram fixadas sem seletores manuais nos capítulos da home, unificando a direção em todas as instâncias (capítulos desktop e celular, Casa Noma no hero e Atria na jornada). As sequências dos três estudos em ambas as versões (desktop e celular) têm duração calculada de cerca de 2,2 s de tempo visível real, com efeitos contínuos e sem pausa ociosa. O disparo só ocorre quando o visitante atinge exposição significativa da cópia: pelo menos metade do modelo na área útil visível, descontando o cabeçalho fixo no topo, considerando clipping de ancestrais e adaptando para telas baixas onde o modelo excede a altura útil (garantindo que nunca fique impossibilitado de animar). O pré-carregamento 800 px antes apenas monta o DOM sem iniciar o movimento. Ao perder a exposição ou ocultar o documento, a animação pausa e retoma do ponto em que parou sem consumir a duração enquanto oculta. Cada capítulo conta com um botão acessível “Rever animação” (≥ 44 px, foco visível e anúncio `aria-live`) que reinicia, sem recriar o DOM, somente cópias com exposição significativa na tela. Na jornada, a cópia também precisa pertencer a uma etapa ativa; cenas futuras aguardam até sua etapa ativa e exposição. A sequência termina quando acabam os efeitos CSS finitos declarados (cerca de 2,2 s), e a classe de execução sai para revelar o layout estático. Com `prefers-reduced-motion: reduce` ou classe `.rm`, somente o movimento dos estudos é cancelado e o botão informa o estado; quando a preferência do sistema volta ao normal e `.rm` não está ativa, o replay pode ser usado novamente. Sem suporte a `IntersectionObserver` ou à sincronização dos efeitos, os estudos ficam estáticos e o botão informa essa limitação. Os estilos ficam delimitados em `src/styles/conceitos.css`.
 
 #### Estudo 01 · Módulo Engenharia (engenharia industrial B2B)
 - **Fundo** `#E8E6E1` na seção; site em `#0E1114` com grade técnica, laranja de sinalização `#F2552C`, cinzas `#9AA3AB` e `#ECEAE4`.
@@ -286,7 +286,7 @@ No layout, usar três colunas a partir de 1100 px, duas colunas entre 700 e 1099
 
 ### 6.11 Blog
 - Fundo `--uno-off-white-2`. Cabeçalho com texto à direita: “Os primeiros artigos estão em produção.”
-- Grade 7 / 5: um cartão grande (guia de preço) e dois menores (comparativo e SEO local). Todos com selo **“Em breve”** e **sem link** — nenhum link quebrado ou página vazia indexada.
+- Grade 7 / 5: um artigo em destaque e dois menores, com links para as rotas Astro. Na prévia, os seis textos do PR #7 aparecem como **“Em revisão editorial”**. O menu e “Acessar o blog” abrem `/blog/`; sem artigos publicáveis, permanecem os temas planejados. Origem e créditos em [importação do blog](blog/importacao-pr7.md).
 
 ### 6.12 Dúvidas
 - Grade 4 / 1 / 7; a coluna do título fica presa (`sticky`) enquanto as perguntas rolam.
@@ -322,7 +322,7 @@ No layout, usar três colunas a partir de 1100 px, duas colunas entre 700 e 1099
 | Jornada | Cenas, detalhes, cartões | .6 s / .5 s / .45 s | Crossfade e expansão controlados pela rolagem |
 | Terminal | Itens ✓ | .5 s cada, cascata até 1,15 s | Entram uma vez, quando visíveis |
 | `levita` | Cartões e maquetes | .3 s | Sobem 4 px no hover |
-| Movimento autoral dos estudos | Módulo, Atria, Noma | Finita (~4 s reais; exatamente 4,00 s calculados nas 6 versões desk/mob) | Inspeção estrutural em Módulo (cotas, marcas e cascata de serviços no desktop; traçado técnico contínuo no celular com CTA sempre legível), abertura editorial em Atria (máscara de faixa, respiração da foto e confirmação de agenda), acomodação cinematográfica e luz âmbar em Casa Noma; disparo somente sob exposição significativa (≥50% na área útil sem header), pausa fora da tela e conclusão sem pausa ociosa |
+| Movimento autoral dos estudos | Módulo, Atria, Noma | Finita (~2,2 s nas 6 versões desk/mob) | Inspeção estrutural em Módulo (cotas, marcas e cascata de serviços no desktop; traçado técnico contínuo no celular com CTA sempre legível), abertura editorial em Atria (máscara de faixa, respiração da foto e confirmação de agenda), acomodação cinematográfica e luz âmbar em Casa Noma; disparo somente sob exposição significativa (≥50% na área útil sem header), pausa fora da tela e conclusão sem pausa ociosa |
 
 **Regras:** nada se move sem explicar algo; nenhum movimento automático bloqueia a leitura; com `prefers-reduced-motion: reduce`, todas as animações e transições são desligadas, o palco mostra direto o estado final da apresentação visual e a jornada deixa de ficar presa.
 
@@ -384,13 +384,13 @@ Ver estrutura e comandos no [LEIA-ME](../LEIA-ME.md), sem manter outro manual op
 - `src/components/estudos/TemplatesEstudos.astro` preserva os seis IDs `tpl-casanoma-desk/mob`, `tpl-atria-desk/mob`, `tpl-modulo-desk/mob`.
 - `src/styles/` contém CSS global na ordem `fonts.css`, `site.css`, `conceitos.css`, preservando os seletores usados no DOM clonado.
 - `src/scripts/` contém inicializadores tipados e módulos das interações; páginas auxiliares carregam somente o necessário. A marcação antecipada curta `js`/`rm` mantém o estado visual de carregamento; o restante é processado pelo Astro.
-- `src/content.config.ts`, `src/content/blog/`, `src/data/authors.ts`, `src/lib/blog.ts`, layout e rota dinâmica preparam a coleção MDX vazia. Regras e exemplo documental estão no LEIA-ME; não há artigo fictício, RSS ou `/blog/` vazio.
+- `src/content.config.ts`, `src/content/blog/`, `src/data/authors.ts`, `src/lib/blog.ts`, layout e rota dinâmica mantêm a coleção MDX com seis textos reais disponíveis para revisão na prévia. Regras e exemplo documental estão no LEIA-ME. O índice `/blog/`, em `src/pages/blog/index.astro` com `BlogCard.astro`, recupera o título “Um site melhor começa com a pergunta certa.” e as seis capas existentes: uma grade única de duas colunas (uma no celular), sem seções por assunto, com filtros no topo e a opção Todos para restaurar a lista completa. Mantém a identidade UNO e a condição “Em revisão editorial”; sem JavaScript, todos os artigos continuam acessíveis e os filtros ficam ocultos; rascunhos não entram no build de produção nem no sitemap. Direção, referências e alcance da verificação em [índice visual](blog/indice-visual.md).
 - `robots.txt` e `sitemap.xml` são gerados no build; rotas e sitemap compartilham a seleção de artigos `draft === false` e data não futura em UTC. `UNO_DEPLOY_TARGET=preview` é padrão e aplica `noindex`.
 - `public/` conserva ativos estáticos; `dist/` é saída gerada, ignorada pelo Git. HTML e JavaScript antigos do frontend deixam de concorrer com as fontes Astro.
 - `worker/index.js`, `wrangler.jsonc` e `hospedagem-tradicional/` permanecem como backend e alternativa legados, sem migração ou homologação nesta etapa.
 
 ### 12.3 Clonagem dos estudos
-Cada espaço reservado é `<div class="estudo estudo--desk|mob" data-estudo="atria-desk" style="--e:0.55625">`. O módulo `src/scripts/estudos.ts` copia o `<template>` correspondente, **renomeia todos os `id` internos com um sufixo único** e corrige as referências `url(#…)` (gradientes e filtros SVG), porque o mesmo estudo aparece várias vezes na página. O fator `--e` é a razão entre a janela e o tamanho-base do estudo (ex.: 712/1280 = 0,55625). O pré-carregamento 800 px antes monta o DOM sem iniciar o movimento. A animação só dispara quando o visitante atinge exposição significativa (≥50% do modelo na área útil sem cabeçalho fixo, adaptado para telas baixas), executando 4,00 s reais nas seis maquetes e pausando/retomando com a rolagem.
+Cada espaço reservado é `<div class="estudo estudo--desk|mob" data-estudo="atria-desk" style="--e:0.55625">`. O módulo `src/scripts/estudos.ts` copia o `<template>` correspondente, **renomeia todos os `id` internos com um sufixo único** e corrige as referências `url(#…)` (gradientes e filtros SVG), porque o mesmo estudo aparece várias vezes na página. O fator `--e` é a razão entre a janela e o tamanho-base do estudo (ex.: 712/1280 = 0,55625). O pré-carregamento 800 px antes monta o DOM sem iniciar o movimento. A animação só dispara quando o visitante atinge exposição significativa (≥50% do modelo na área útil sem cabeçalho fixo, adaptado para telas baixas), executando cerca de 2,2 s nas seis maquetes e pausando/retomando com a rolagem.
 
 ### 12.4 Estado da jornada no DOM
 `section.jornada[data-passo]`; elementos com `data-etapa="0–3"` recebem `.is-ativo` / `.is-feito`; `--sub` fica no elemento ativo; `--je` na grade do desktop e `--jm` na composição do celular. Toda a aparência sai do CSS.
@@ -462,7 +462,7 @@ A lista orienta revisão; caixas vazias não representam falhas comprovadas nem 
 - [ ] Um H1; H2 por seção; foco visível; navegação completa por teclado.
 - [ ] JSON-LD válido; `canonical`, OG, `sitemap.xml`, `robots.txt`, 404 com status 404.
 - [ ] Astro e TypeScript estrito sem erros de check/build; scripts processados sem duplicação ou TS cru.
-- [ ] Coleção vazia compilável, metadados inválidos rejeitados e rascunhos/datas futuras ausentes das rotas e sitemap.
+- [ ] Coleção vazia compilável, metadados inválidos rejeitados e rascunhos/datas futuras ausentes da produção e sitemap; revisão explícita (`preview: true`) disponível apenas na prévia.
 - [ ] Prévia com noindex e 404 real; backend preservado e cenários de contato simulados sem envio externo.
 - [ ] Nenhuma requisição a terceiros no carregamento inicial.
 - [ ] PageSpeed (celular) com LCP ≤ 2,5 s, CLS ≤ 0,1.
@@ -486,7 +486,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links foram conferid
 - Verba de mídia paga diretamente às plataformas: confirmar.
 - Instagram e LinkedIn (`sameAs`).
 - Cases reais com autorização (ex.: La Bella Mesa) substituindo ou somando-se aos estudos.
-- Produzir e revisar 4–6 artigos-pilar. A migração Astro de D28 não depende mais deles; coleção vazia e teasers preservados.
+- Revisar os seis artigos importados do PR #7 e aprovar autoria/data antes de publicar. Eles já podem ser lidos na prévia; a migração Astro de D28 não depende dessa aprovação.
 - Integrar o build `dist/` com a hospedagem oficial e homologar o fluxo; Wrangler ainda aponta para `public/`.
 - Cloudflare Web Analytics (sem cookies), previsto na §0.8: ao ativar, atualizar a política de privacidade.
 
@@ -823,3 +823,7 @@ Pasta `docs/referencias-visuais/` (capturas históricas da implementação anter
 - `a`: Manutenção
 - `span`: Atendimento
 - `a`: Política de privacidade
+
+### Ajuste solicitado em 02/10/2026 — busca e ritmo
+
+A abertura da maquete do hero dura 1,6 s. Nos estudos, a reserva da Casa Noma se assenta entre 0,2 e 0,9 s; a agenda da Atria, entre 0,2 e 1,0 s. As composições finais permanecem visíveis. O cartão de busca do hero desktop começa vazio, digita a frase em passos de 42 ms, sinaliza Enter por 240 ms e revela o resultado em mais 240 ms. A sequência roda uma vez, pausa fora da área visível ou com a aba oculta e mostra o resultado completo com movimento reduzido. Não faz pesquisas reais nem chamadas de rede.

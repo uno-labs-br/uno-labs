@@ -13,6 +13,7 @@ export const GET: APIRoute = async () => {
   const pages: { path: string; modified?: Date }[] = [
     { path: '/' },
     { path: '/politica-de-privacidade/' },
+    { path: '/blog/' },
     ...(await getPublishedArticles()).map((article) => ({
       path: articlePath(article.id),
       modified: article.data.updatedDate ?? article.data.pubDate,

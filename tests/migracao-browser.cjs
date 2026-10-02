@@ -19,6 +19,9 @@ async function compareDOM(page, before, after) {
     const parser = new DOMParser();
     const a = parser.parseFromString(before, 'text/html');
     const b = parser.parseFromString(after, 'text/html');
+    // A migração foi integrada antes de o usuário pedir artigos reais na home.
+    // Esse bloco tem seu próprio teste de navegação e conteúdo do blog.
+    for (const doc of [a, b]) doc.querySelector('#blog')?.remove();
     const normalize = s => s.replace(/\s+/g, ' ').trim();
     const texts = doc => [...doc.querySelectorAll('h1,h2,h3,p,label,option,summary')].map(e => [e.tagName, normalize(e.textContent)]);
     const ids = doc => [...doc.querySelectorAll('[id]')].map(e => e.id).sort();
@@ -97,7 +100,7 @@ async function compareDOM(page, before, after) {
     const robots = await (await fetch(new URL('robots.txt', url))).text();
     check('robots permite leitura do noindex', robots.includes('Allow: /') && !robots.includes('Disallow: /'));
     const sitemap = await (await fetch(new URL('sitemap.xml', url))).text();
-    check('sitemap duas URLs reais, sem blog vazio', (sitemap.match(/<loc>/g) || []).length === 2 && sitemap.includes('https://unolabs.com.br/politica-de-privacidade/') && !sitemap.includes('/blog/'));
+    check('sitemap inclui índice sem publicar rascunhos', (sitemap.match(/<loc>/g) || []).length === 3 && sitemap.includes('https://unolabs.com.br/politica-de-privacidade/') && sitemap.includes('<loc>https://unolabs.com.br/blog/</loc>'));
     check('sem erros de recursos', report.resources.length === 0, report.resources);
     check('sem erros de execução', report.errors.length === 0, report.errors);
   } finally {

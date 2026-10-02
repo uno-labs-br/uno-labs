@@ -1,0 +1,152 @@
+<section class="motion-demo" id="comparacao-animada" aria-labelledby="motion-title">
+  <div class="motion-demo__intro">
+    <div>
+      <h2 id="motion-title">Veja a diferença em movimento.</h2>
+      <p>O mesmo objetivo: sair da apresentação do serviço e chegar ao contato. Compare uma transição direta com uma sequência que exige espera.</p>
+      <p class="motion-demo__nota">Demonstração didática da UNO Labs. Os tempos são definidos para este exemplo; não são resultados de um teste de conversão.</p>
+    </div>
+    <figure class="artigo__hero-figura motion-demo__foto">
+      <img src="/assets/img/blog/animacoes-rolagem-site-atrapalham-conversao/capa.webp" srcset="/assets/img/blog/animacoes-rolagem-site-atrapalham-conversao/capa-768.webp 768w, /assets/img/blog/animacoes-rolagem-site-atrapalham-conversao/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 240px" alt="Notebook com um site aberto, ao lado de uma caneca e materiais de trabalho." width="1536" height="1024" loading="lazy">
+      <figcaption>Foto de arquivo de um site em uso. Foto: <a href="https://unsplash.com/photos/turned-on-macbook-pro-beside-gray-mug-Px3iBXV-4TU" target="_blank" rel="noopener noreferrer">Igor Miske</a> · <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Licença Unsplash</a>.</figcaption>
+    </figure>
+  </div>
+  <fieldset class="motion-demo__seletor" data-variant-controls hidden>
+    <legend>Escolha a versão para reproduzir</legend>
+    <label><input type="radio" name="versao-animacao" value="curta" checked>Transição direta</label>
+    <label><input type="radio" name="versao-animacao" value="longa">Sequência demorada</label>
+  </fieldset>
+  <div class="motion-demo__comparacao">
+    <div class="motion-demo__painel" data-panel="curta">
+      <div class="motion-demo__rotulo"><h3>Transição direta</h3><span>350 ms de movimento</span></div>
+      <div class="motion-demo__janela">
+        <div class="motion-demo__barra">Página de serviços · Exemplo</div>
+        <div class="motion-demo__viewport" role="img" aria-label="A apresentação do serviço dá lugar rapidamente à área de contato.">
+          <div class="motion-demo__trilha" data-track="curta">
+            <div class="motion-demo__tela">
+              <span class="motion-demo__local">Serviços</span>
+              <h4>Seu próximo projeto<br>começa aqui.</h4>
+              <p>Escopo claro. Informações úteis.<br>Um caminho até a conversa.</p>
+              <span class="motion-demo__intencao">Próximo passo: contato</span>
+            </div>
+            <div class="motion-demo__tela motion-demo__contato">
+              <span class="motion-demo__local">Contato</span>
+              <h4>Vamos conversar<br>sobre o projeto?</h4>
+              <p>O destino já está à vista.<br>O visitante pode seguir.</p>
+              <span class="motion-demo__destino"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Chegou ao contato</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="motion-demo__leitura">O movimento explica a mudança e libera o próximo passo.</p>
+    </div>
+    <div class="motion-demo__painel" data-panel="longa">
+      <div class="motion-demo__rotulo"><h3>Sequência demorada</h3><span>4,7 s até o destino</span></div>
+      <div class="motion-demo__janela">
+        <div class="motion-demo__barra">Página de serviços · Exemplo</div>
+        <div class="motion-demo__viewport" role="img" aria-label="Uma apresentação intermediária prolonga a espera antes de mostrar a mesma área de contato.">
+          <div class="motion-demo__trilha" data-track="longa">
+            <div class="motion-demo__tela">
+              <span class="motion-demo__local">Serviços</span>
+              <h4>Seu próximo projeto<br>começa aqui.</h4>
+              <p>Escopo claro. Informações úteis.<br>Um caminho até a conversa.</p>
+              <span class="motion-demo__intencao">Próximo passo: contato</span>
+            </div>
+            <div class="motion-demo__tela motion-demo__espera">
+              <span class="motion-demo__local">Apresentação intermediária</span>
+              <h4>Mais uma etapa.<br>Ainda não chegou.</h4>
+              <p>O visitante já escolheu o destino,<br>mas a sequência continua.</p>
+              <span class="motion-demo__intencao">Aguardando a apresentação</span>
+            </div>
+            <div class="motion-demo__tela motion-demo__contato">
+              <span class="motion-demo__local">Contato</span>
+              <h4>Vamos conversar<br>sobre o projeto?</h4>
+              <p>O mesmo destino.<br>Mais tempo para chegar.</p>
+              <span class="motion-demo__destino"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Chegou ao contato</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="motion-demo__leitura">A espera ganha espaço, mesmo sem acrescentar informação necessária.</p>
+    </div>
+  </div>
+  <div class="motion-demo__controles" data-controls hidden>
+    <div class="motion-demo__botoes">
+      <button type="button" class="motion-demo__play" data-action="play">Reproduzir comparação</button>
+      <button type="button" data-action="restart">Repetir do início</button>
+      <button type="button" data-action="finish">Ver estado final</button>
+    </div>
+    <div class="motion-demo__tempo"><progress max="6000" value="0" aria-label="Progresso da demonstração"></progress><output aria-label="Tempo decorrido">0,0 s / 6,0 s</output></div>
+    <p class="motion-demo__status" role="status" data-status>A demonstração está pronta.</p>
+  </div>
+  <noscript><p class="motion-demo__nota">As duas versões chegam ao mesmo contato. A curta usa 350 ms de movimento; a longa leva 4,7 segundos até o destino. Ative JavaScript para reproduzir a comparação.</p></noscript>
+</section>
+<script>
+  import './motion-demo';
+</script>
+<style>
+/* Demonstração editorial; independente da stack e sem biblioteca de animação. */
+.motion-demo { --demo-height: 284px; margin: 40px 0 0; padding: clamp(20px, 3.2vw, 40px); border: 1px solid var(--uno-line); border-radius: 16px; background: #fff; }
+.motion-demo__intro { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 32px; align-items: start; margin-bottom: 32px; }
+.motion-demo h2 { font-size: clamp(26px, 2.5vw, 36px); line-height: 1.15; letter-spacing: -.025em; color: var(--uno-pine); margin: 0 0 16px; }
+.motion-demo p { font-size: 17px; line-height: 1.55; margin: 0 0 16px; color: var(--uno-ink-2); }
+.motion-demo .motion-demo__nota { font-size: 13px; margin-bottom: 0; }
+.motion-demo .motion-demo__foto { margin: 0; }
+.motion-demo__foto img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; box-shadow: none; }
+.motion-demo__foto figcaption { font-size: 11px; line-height: 1.45; padding: 8px 0 0; }
+.motion-demo__comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.motion-demo__seletor { display: none; }
+.motion-demo__painel { min-width: 0; }
+.motion-demo__rotulo { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin-bottom: 12px; }
+.motion-demo__rotulo h3 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.4; }
+.motion-demo__rotulo span { font-size: 12px; color: var(--uno-ink-2); font-variant-numeric: tabular-nums; }
+.motion-demo__janela { border: 1px solid var(--uno-line); border-radius: 12px; overflow: hidden; }
+.motion-demo__barra { padding: 10px 18px; border-bottom: 1px solid var(--uno-line); font-size: 11px; line-height: 1.4; color: var(--uno-ink-2); background: var(--uno-off-white-2); }
+.motion-demo__viewport { height: var(--demo-height); overflow: hidden; contain: paint; }
+.motion-demo__trilha[data-track="curta"] { transform: translateY(-50%); }
+.motion-demo__trilha[data-track="longa"] { transform: translateY(-66.666667%); }
+.motion-demo__tela { height: var(--demo-height); padding: 24px; display: flex; flex-direction: column; align-items: flex-start; background: #f5f7f5; }
+.motion-demo__local { font-size: 12px; line-height: 1.4; color: var(--uno-ink-2); }
+.motion-demo h4 { font-size: clamp(24px, 2vw, 29px); line-height: 1.12; letter-spacing: -.025em; margin: 14px 0; font-weight: 650; color: var(--uno-pine); }
+.motion-demo__tela p { font-size: 14px; line-height: 1.5; margin: 0; }
+.motion-demo__intencao, .motion-demo__destino { margin-top: auto; padding-top: 16px; font-size: 12px; line-height: 1.4; color: var(--uno-ink-2); }
+.motion-demo__contato { background: var(--uno-pine); }
+.motion-demo__contato h4 { color: var(--uno-off-white); }
+.motion-demo__contato p, .motion-demo__contato .motion-demo__local, .motion-demo__destino { color: var(--uno-mint-2); }
+.motion-demo__destino { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.motion-demo__espera { background: #e7eee8; }
+.motion-demo .motion-demo__leitura { margin: 12px 0 0; font-size: 14px; line-height: 1.5; }
+.motion-demo__controles { padding-top: 24px; margin-top: 24px; border-top: 1px solid var(--uno-line); }
+.motion-demo__botoes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.motion-demo button { font: inherit; font-size: 14px; font-weight: 600; line-height: 1.4; min-height: 44px; padding: 10px 18px; border: 1px solid var(--uno-line); border-radius: 6px; background: #fff; color: var(--uno-pine); cursor: pointer; }
+.motion-demo button:hover { background: var(--uno-off-white-2); }
+.motion-demo .motion-demo__play { color: var(--uno-off-white); background: var(--uno-pine); border-color: var(--uno-pine); }
+.motion-demo .motion-demo__play:hover { background: var(--uno-pine-2); }
+.motion-demo__tempo { display: flex; align-items: center; gap: 16px; margin: 20px 0 10px; }
+.motion-demo progress { flex: 1; min-width: 40px; width: 100%; height: 6px; border: 0; border-radius: 3px; overflow: hidden; appearance: none; background: var(--uno-off-white-2); color: var(--uno-pine); }
+.motion-demo progress::-webkit-progress-bar { background: var(--uno-off-white-2); }
+.motion-demo progress::-webkit-progress-value { background: var(--uno-pine); }
+.motion-demo progress::-moz-progress-bar { background: var(--uno-pine); }
+.motion-demo output { font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--uno-ink-2); }
+.motion-demo .motion-demo__status { margin: 0; font-size: 13px; min-height: 2.9em; }
+.motion-demo [hidden] { display: none; }
+@media (max-width: 700px) {
+  .motion-demo { --demo-height: 260px; padding: 20px 16px; }
+  .motion-demo__intro { grid-template-columns: 1fr; gap: 20px; }
+  .motion-demo .motion-demo__foto { display: grid; grid-template-columns: 100px 1fr; gap: 12px; align-items: center; }
+  .motion-demo__foto figcaption { padding: 0; }
+  .motion-demo__comparacao { grid-template-columns: 1fr; gap: 28px; }
+  .motion-demo__seletor { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 20px; border: 0; }
+  .motion-demo__seletor legend { margin-bottom: 10px; font-size: 14px; font-weight: 600; }
+  .motion-demo__seletor label { display: flex; flex: 1 1 auto; align-items: center; gap: 8px; padding: 10px; min-height: 44px; border: 1px solid var(--uno-line); border-radius: 6px; font-size: 13px; cursor: pointer; }
+  .motion-demo__seletor input { accent-color: var(--uno-pine); width: 16px; height: 16px; margin: 0; }
+  .motion-demo__seletor label:has(input:checked) { background: var(--uno-off-white-2); border-color: var(--uno-pine); }
+  .motion-demo[data-variant="curta"] [data-panel="longa"],
+  .motion-demo[data-variant="longa"] [data-panel="curta"] { display: none; }
+  .motion-demo__tela { padding: 22px; }
+  .motion-demo__botoes { align-items: stretch; }
+  .motion-demo__botoes button { flex: 1 1 auto; }
+  .motion-demo__botoes .motion-demo__play { flex-basis: 100%; }
+}
+@media print { .motion-demo__controles { display: none; } .motion-demo { break-inside: avoid; } }
+
+</style>

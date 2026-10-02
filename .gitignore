@@ -5,6 +5,7 @@ dist/
 test-results/
 playwright-report/
 .qa/
+.impeccable/review/
 .wrangler/
 .dev.vars
 .dev.vars.*

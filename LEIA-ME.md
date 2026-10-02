@@ -14,7 +14,7 @@ As interações estão em TypeScript processado pelo Astro, com verificação es
 
 Os três estilos são emitidos como ativos com hash e links explícitos no layout. A minificação CSS está desativada para preservar declarações como `backdrop-filter` e a ordem da cascata; a primeira tentativa de processamento alterava o desfoque aprovado. A comparação visual posterior confirmou a preservação.
 
-A base editorial usa MDX e Content Collections. Ela permite validar e gerar artigos futuros sem aguardar sua produção para migrar o frontend. A coleção entregue permanece vazia; os cartões da home continuam “Em breve”, sem links para artigos inexistentes. Não há uma página vazia `/blog/`, RSS público ou artigo fictício.
+A base editorial usa MDX e Content Collections. Ela permite validar e gerar artigos futuros sem aguardar sua produção para migrar o frontend. A página `/blog/` lista os artigos disponíveis. Seis textos reais do PR #7 estão em MDX, com imagens e créditos preservados, marcados `draft: true` e `preview: true`: aparecem somente na prévia, como “Em revisão editorial”. Não há RSS público. Origem e limites em [importação do blog](docs/blog/importacao-pr7.md).
 
 A stack é Astro `7.3.5`, `@astrojs/mdx` `8.0.2`, TypeScript `6.0.3` com `astro/tsconfigs/strict`, npm e lockfile. A saída é estática: sem adaptador de servidor, SSR, SPA ou framework de interface adicional. A origem canônica continua `https://unolabs.com.br`; isso não afirma que esse domínio já serve o build Astro.
 
@@ -29,7 +29,7 @@ O Worker, `wrangler.jsonc`, PHP alternativo e workflow n8n foram preservados. A 
 │   │   ├── index.astro
 │   │   ├── politica-de-privacidade/index.astro
 │   │   ├── 404.astro
-│   │   ├── blog/[...slug].astro
+│   │   ├── blog/index.astro e [...slug].astro
 │   │   ├── robots.txt.ts
 │   │   └── sitemap.xml.ts
 │   ├── components/
@@ -41,7 +41,7 @@ O Worker, `wrangler.jsonc`, PHP alternativo e workflow n8n foram preservados. A 
 │   ├── styles/                     # fonts.css, site.css, conceitos.css
 │   ├── data/                       # site, autores e dados compartilhados
 │   ├── lib/blog.ts                 # seleção editorial centralizada
-│   ├── content/blog/               # arquivos .mdx; coleção vazia nesta entrega
+│   ├── content/blog/               # seis arquivos .mdx para revisão na prévia
 │   └── content.config.ts           # schema editorial
 ├── public/
 │   ├── assets/                     # fontes, imagens, ícones e licenças
@@ -128,9 +128,9 @@ O último build restaura a saída de prévia. A configuração Vercel entregue c
 
 ## 5. Contrato editorial MDX
 
-A coleção valida também rascunhos. Campos obrigatórios: `title`, `description`, `pubDate`, `author`, `tags`, `cover` e `coverAlt`. Textos não podem estar vazios; tags devem conter ao menos um valor não vazio; o autor deve existir na lista aprovada; a capa precisa ser um arquivo local existente e acessível no build. `updatedDate` é opcional e não pode anteceder `pubDate`.
+A coleção valida também rascunhos. Campos obrigatórios em todos os artigos: `title`, `description`, `tags`, `cover` e `coverAlt`. `pubDate` e `author` são obrigatórios para publicar (`draft: false`); podem estar ausentes em rascunhos, mas são validados quando fornecidos. Textos não podem estar vazios; tags devem conter ao menos um valor não vazio; o autor deve existir na lista aprovada; a capa precisa ser um arquivo local existente e acessível no build. `updatedDate` é opcional e não pode anteceder `pubDate`.
 
-`draft` assume `true` quando omitido. A seleção central em `src/lib/blog.ts` só permite `draft === false` e data de publicação não futura. A comparação usa o dia de calendário em UTC, sem depender do fuso da máquina. Rotas e sitemap usam a mesma seleção. O slug vem do nome do arquivo, em formato validado; IDs inválidos e colisões precisam ser rejeitados. Não criar um segundo campo de slug.
+`draft` assume `true` quando omitido. A seleção central em `src/lib/blog.ts` só permite `draft === false` e data de publicação não futura. A comparação usa o dia de calendário em UTC, sem depender do fuso da máquina. O sitemap usa essa seleção de publicados. Rotas e listagens da prévia também admitem rascunhos com `preview: true`; o padrão dessa flag é `false`. Builds de produção nunca geram rascunhos. A prévia de revisão omite autoria, data de publicação e dados estruturados de artigo publicado. O slug vem do nome do arquivo, em formato validado; IDs inválidos e colisões precisam ser rejeitados. Não criar um segundo campo de slug.
 
 Exemplo documental de frontmatter, sem artigo publicável:
 

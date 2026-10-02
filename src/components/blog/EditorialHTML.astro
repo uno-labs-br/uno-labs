@@ -1,0 +1,6 @@
+---
+/** HTML editorial local; conteúdo preservado do PR #7, sem scripts ou fontes externas executáveis. */
+interface Props { html: string }
+const { html } = Astro.props;
+---
+<Fragment set:html={html} />

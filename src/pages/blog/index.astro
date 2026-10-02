@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import BackToSite from '../../components/blog/BackToSite.astro';
+import { getVisibleArticles } from '../../lib/blog';
+const articles = await getVisibleArticles();
+const categories = [
+  { id: 'estrategia-conversao', title: 'Estratégia e conversão', tags: ['Estratégia e conversão'] },
+  { id: 'design-experiencia', title: 'Design e experiência', tags: ['Navegação e experiência', 'Clareza da interface', 'Experiência no celular'] },
+  { id: 'contato-mensuracao', title: 'Contato e mensuração', tags: ['Formulários e contato', 'CTAs e mensuração'] },
+];
+const cards = articles.map(article => ({
+  article,
+  category: categories.find(category => article.data.tags.some(tag => category.tags.includes(tag)))?.id ?? 'mais-leituras',
+}));
+const filters = [...categories, { id: 'mais-leituras', title: 'Mais leituras' }]
+  .filter(category => cards.some(card => card.category === category.id));
+---
+<BaseLayout title="Blog | UNO Labs" description="Guias práticos sobre sites, experiência digital e conversão para empresas de serviços." path="/blog/">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <Header />
+  <main id="conteudo" class="blog-index">
+    <div class="container">
+      <div class="blog-index__back"><BackToSite /></div>
+      <header class="blog-index__intro">
+        <h1>Um site melhor começa com a pergunta certa.</h1>
+        <p>Guias práticos para entender seu site, melhorar a experiência de quem visita e facilitar o próximo contato.</p>
+      </header>
+      {articles.length > 0 ? <>
+        <div class="blog-index__topics" role="group" aria-label="Filtrar artigos por categoria" data-blog-filters hidden>
+          <button type="button" data-blog-filter="todos" aria-pressed="true" aria-controls="blog-artigos">Todos</button>
+          {filters.map(category => <button type="button" data-blog-filter={category.id} aria-pressed="false" aria-controls="blog-artigos">{category.title}</button>)}
+        </div>
+        <p class="blog-index__status" role="status" data-blog-status></p>
+        <div class="blog-index__grid" id="blog-artigos">
+          {cards.map(({ article, category }, index) => <BlogCard article={article} category={category} priority={index < 2} />)}
+        </div>
+      </> : <section class="blog-index__empty" aria-labelledby="blog-vazio-titulo">
+        <h2 id="blog-vazio-titulo">Nenhum artigo publicado por enquanto.</h2>
+        <p>Você pode voltar à página inicial para conhecer os serviços da UNO Labs.</p>
+        <a class="link-sublinhado" href="/">Voltar para a home</a>
+      </section>}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+<script>
+  import '../../scripts/interno';
+
+  const filters = document.querySelector<HTMLElement>('[data-blog-filters]');
+  const buttons = filters?.querySelectorAll<HTMLButtonElement>('[data-blog-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-blog-article]');
+  const status = document.querySelector<HTMLElement>('[data-blog-status]');
+
+  buttons?.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.blogFilter;
+      let count = 0;
+      cards.forEach(card => {
+        card.hidden = category !== 'todos' && card.dataset.blogCategory !== category;
+        if (!card.hidden) count += 1;
+      });
+      buttons.forEach(option => option.setAttribute('aria-pressed', String(option === button)));
+      if (status) status.textContent = `${button.textContent}: ${count} ${count === 1 ? 'artigo disponível' : 'artigos disponíveis'}.`;
+    });
+  });
+  if (filters) filters.hidden = false;
+</script>
+<style>
+  .blog-index { padding-block: clamp(36px, 4vw, 60px) clamp(64px, 8vw, 112px); }
+  .blog-index__back { margin-bottom: 28px; }
+  .blog-index__intro { display: grid; grid-template-columns: 1.6fr 1fr; align-items: end; gap: 24px 72px; }
+  h1 { max-width: 740px; font-size: clamp(36px, 4.1vw, 58px); line-height: 1.07; letter-spacing: -.035em; font-weight: 600; color: var(--uno-pine); text-wrap: balance; }
+  .blog-index__intro > p { max-width: 39ch; font-size: 17px; line-height: 1.65; color: var(--uno-ink-2); padding-bottom: 3px; }
+  .blog-index__topics { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-top: 34px; padding-block: 8px; border-block: 1px solid var(--uno-line); }
+  .blog-index__topics button { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 4px; background: transparent; border: 0; border-bottom: 2px solid transparent; font-size: 15px; font-weight: 600; color: var(--uno-ink-2); cursor: pointer; }
+  .blog-index__topics button:hover { color: var(--uno-pine); text-decoration: underline; text-underline-offset: 6px; }
+  .blog-index__topics button[aria-pressed="true"] { border-bottom-color: var(--uno-pine); color: var(--uno-pine); }
+  .blog-index__status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .blog-index__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 32px; margin-top: 36px; }
+  .blog-index__empty { max-width: 760px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--uno-line); }
+  .blog-index__empty h2 { font-size: 28px; line-height: 1.2; }
+  .blog-index__empty > p { margin-block: 16px 24px; }
+  @media (max-width: 1000px) {
+    .blog-index__intro { gap: 24px 32px; }
+  }
+  @media (max-width: 800px) {
+    .blog-index__intro { grid-template-columns: 1fr; gap: 20px; }
+    .blog-index__intro > p { max-width: 58ch; }
+    .blog-index__topics { gap: 0 24px; margin-top: 24px; }
+  }
+  @media (max-width: 600px) {
+    .blog-index__grid { grid-template-columns: 1fr; gap: 40px; margin-top: 28px; }
+    .blog-index__topics button { font-size: 14px; }
+  }
+</style>
