@@ -204,3 +204,11 @@ Os campos enviados incluem `nome`, `empresa`, `canal`, `site`, `servicos` (lista
 - Sem JavaScript, o site funciona e todo o texto aparece; a jornada vira uma lista estática e os estudos conceituais não são desenhados.
 - Com “reduzir movimento” ligado no sistema, a jornada deixa de ficar presa na tela e vira abas clicáveis.
 - As fontes cobrem português (subconjunto latin). Símbolos como ✓ e ≤ usam a fonte do sistema.
+
+## Blog editorial — versão para revisão (02/10/2026)
+
+O blog está em `public/blog/`, com uma central e seis guias sobre a passagem de visitas a contatos. A fonte editorial é `docs/blog/articles.json`; a estratégia e as limitações estão em [docs/blog/estrategia-editorial.md](docs/blog/estrategia-editorial.md).
+
+Após editar os artigos, executar `npm run blog:build` e `npm run blog:verify`. O texto continua legível sem JavaScript; somente o guia de animações usa um script local para sua comparação interativa. Não há dependência adicional. O gerador reescreve somente as páginas do blog; mantenha o sitemap alinhado ao adicionar ou remover URLs. As imagens e fontes são locais. Fotografias e licenças: `docs/blog/fontes-imagens.json`.
+
+Esta versão exige revisão e edição humana antes da publicação, confirmação da autoria nominal da equipe e data real de publicação. O PR não comprova integração à main nem deploy. A pasta externa `05 - BLOG` é uma cópia para leitura e revisão; mudanças definitivas devem entrar na fonte versionada pelo fluxo do AGENTS.md.

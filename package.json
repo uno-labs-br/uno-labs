@@ -4,6 +4,8 @@
   "private": true,
   "description": "Site da UNO Labs: HTML estático + Cloudflare Worker para o formulário de contato.",
   "scripts": {
+    "blog:build": "node scripts/blog/build.mjs",
+    "blog:verify": "node scripts/blog/verify.mjs",
     "dev": "wrangler dev",
     "verificar": "wrangler deploy --dry-run",
     "deploy": "wrangler deploy"
