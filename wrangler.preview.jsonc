@@ -1,0 +1,18 @@
+// Prévia Astro na Cloudflare: usar somente após build com UNO_DEPLOY_TARGET=preview.
+// Sem rotas de domínio próprio nem secrets do receptor de produção.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "unolabs-site-preview",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "routes": [],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true }
+}

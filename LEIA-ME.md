@@ -164,6 +164,30 @@ Contatos comerciais: `contato@unolabs.com.br`, WhatsApp `(27) 93618-5141`, inter
 
 ## 7. Produção e integrações adiadas
 
+### Prévia Cloudflare Workers
+
+`wrangler.preview.jsonc` serve o build Astro de `dist/` no Worker separado `unolabs-site-preview`, em `workers.dev`. Não configura domínios próprios, DNS, secrets ou SMTP. As páginas e os seis artigos em revisão continuam em prévia com `noindex, nofollow`; os rascunhos não foram aprovados para produção. O Worker de contato é preservado: `/api/*` passa pelo código antes dos ativos, e a ausência dos secrets retorna indisponibilidade sem encaminhar mensagens.
+
+Após revisão e integração desta configuração na `main`, configurar o aplicativo no painel Cloudflare:
+
+| Campo | Valor |
+|---|---|
+| Repositório | `uno-labs-br/uno-labs` |
+| Branch de publicação deste Worker de prévia | `main` |
+| Nome do Worker | `unolabs-site-preview` |
+| Diretório raiz | Raiz do repositório (`/`); não usar `04 - SITE` no GitHub |
+| Comando de build | `npm run build` |
+| Comando de deploy | `npx wrangler deploy --config wrangler.preview.jsonc` |
+| Comando de prévia de branches, se habilitado | `npx wrangler preview --config wrangler.preview.jsonc` |
+| Variável de build | `UNO_DEPLOY_TARGET=preview` |
+| Versão do Node | Node 24, conforme `.nvmrc` e `package.json` |
+
+Verificação local sem publicar: `npm run build`, seguido de `npx wrangler deploy --config wrangler.preview.jsonc --dry-run`. Para servir com o runtime de assets e Worker, usar `npx wrangler dev --config wrangler.preview.jsonc`. Conferir home, blog, artigos, 404 real, cabeçalhos e `noindex` também na URL remota depois da implantação. O Worker de prévia é público para quem tiver a URL; `noindex` não substitui controle de acesso.
+
+Resultados locais e limites: [verificação da prévia Cloudflare](docs/verificacoes/cloudflare-workers-preview.md).
+
+### Publicação no domínio oficial
+
 A configuração Cloudflare preservada ainda usa `assets.directory = ./public`. Depois da migração, publicar essa pasta enviaria ativos sem o frontend completo. O dry run legado não corrige essa incompatibilidade; `npm run deploy` encerra localmente com a orientação de integração futura. Não usar `npx wrangler deploy` para contornar o bloqueio.
 
 A futura tarefa de hospedagem deve definir como servir `dist/`, manter o contrato de contato, conferir 404 e cabeçalhos, homologar o fluxo e autorizar a publicação da versão integrada na `main`. Não aplicar automaticamente a antiga proposta de adapter Cloudflare ou rota SSR: esta entrega é estática e preserva o Worker separado. A alternativa Apache/PHP continua no repositório, sem homologação para o build Astro. Enviar somente `public/` ou copiar as antigas instruções HostGator já não publica o site completo.

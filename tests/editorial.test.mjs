@@ -189,7 +189,7 @@ test('importação dos seis artigos preserva parágrafos/seções e capas do com
   const links = (html) => html.replace(/\.\.\/([a-z0-9-]+)\/index\.html/g, '/blog/$1/').replaceAll('../../index.html#', '/#');
   for (const article of articles) {
     const mdx = await readFile(new URL(`../src/content/blog/${article.slug}.mdx`, import.meta.url), 'utf8');
-    const metadata = JSON.parse(mdx.match(/^---\n([\s\S]+?)\n---/)[1]);
+    const metadata = JSON.parse(mdx.match(/^---\r?\n([\s\S]+?)\r?\n---/)[1]);
     assert.equal(schema.safeParse(metadata).success, true, article.slug);
     assert.equal(metadata.draft, true);
     assert.equal(metadata.preview, true);
