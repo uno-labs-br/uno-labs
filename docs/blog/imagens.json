@@ -1,44 +1,50 @@
 [
   {
     "slug": "site-recebe-visitas-mas-nao-gera-contatos",
+    "kind": "photograph",
     "width": 1536,
     "height": 1024,
-    "fullBytes": 90088,
-    "smallBytes": 25116
+    "fullBytes": 80986,
+    "smallBytes": 33380
   },
   {
     "slug": "animacoes-rolagem-site-atrapalham-conversao",
+    "kind": "photograph",
     "width": 1536,
     "height": 1024,
-    "fullBytes": 66932,
-    "smallBytes": 13916
+    "fullBytes": 110256,
+    "smallBytes": 38824
   },
   {
     "slug": "cliques-elementos-nao-clicaveis-site",
+    "kind": "photograph",
     "width": 1536,
     "height": 1024,
-    "fullBytes": 125544,
-    "smallBytes": 33224
+    "fullBytes": 304030,
+    "smallBytes": 57732
   },
   {
     "slug": "como-reduzir-abandono-formulario-orcamento",
+    "kind": "photograph",
     "width": 1536,
     "height": 1024,
-    "fullBytes": 127126,
-    "smallBytes": 38584
+    "fullBytes": 78692,
+    "smallBytes": 33222
   },
   {
     "slug": "site-nao-converte-no-celular",
+    "kind": "photograph",
     "width": 1536,
     "height": 1024,
-    "fullBytes": 99242,
-    "smallBytes": 27956
+    "fullBytes": 77044,
+    "smallBytes": 32598
   },
   {
     "slug": "como-medir-cliques-whatsapp-site",
+    "kind": "photograph",
     "width": 1536,
     "height": 1024,
-    "fullBytes": 130568,
-    "smallBytes": 42582
+    "fullBytes": 31452,
+    "smallBytes": 11506
   }
 ]

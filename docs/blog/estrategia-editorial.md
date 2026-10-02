@@ -52,11 +52,13 @@ Concorrentes serviram apenas à leitura de intenção. As recomendações técni
 - Exemplos numéricos explicitamente hipotéticos. Sem taxas de mercado, faturamento, ganhos ou casos não demonstrados.
 - Público brasileiro de empresas de serviços: arquitetura, engenharia, contabilidade e consultoria, com referências geográficas pontuais e coerentes com a atuação.
 - Sem garantias de posição, resultado, prazo de atendimento ou diagnóstico gratuito.
-- Imagens são conceituais e identificadas como geradas por IA. Não representam clientes, projetos construídos ou métricas reais.
+- Após a revisão visual solicitada em 02/10/2026, as seis capas usam fotografias reais licenciadas, com autoria e fonte visíveis. Não representam clientes, projetos construídos ou métricas da UNO Labs. Origem e licença em fontes-imagens.json; pesquisa internacional em referencias-visuais-2026-10-02.md.
 - Títulos e linguagem priorizam clareza. Sem densidade artificial de palavras-chave, anos decorativos ou páginas duplicadas por variação da busca.
 
 ## Estrutura técnica preparada
 Sete páginas HTML, conteúdo legível sem JavaScript, navegação e índices ancorados, perguntas em details nativos, fontes e links relacionados. CSS e Inter locais, marca oficial e imagens WebP em duas larguras. Canonical e metadados sociais apontam para a URL futura no domínio confirmado.
+
+O guia de animação inclui comparação funcional em HTML/CSS e Web Animations API, com pausa, repetição e alternativa sem movimento. O script local não faz requisições nem coleta dados; sem JavaScript permanece uma comparação estática explicada. A adaptação ao Astro em outra branch ainda precisa ser reconciliada antes de integrar este PR, conforme o registro de referências visuais desta revisão.
 
 Dados estruturados: BlogPosting e BreadcrumbList nos artigos; CollectionPage, ItemList e BreadcrumbList na central. Não há FAQPage usado como promessa de resultado destacado. A documentação de [artigos do Google](https://developers.google.com/search/docs/appearance/structured-data/article?hl=pt-br) não garante exibição especial.
 

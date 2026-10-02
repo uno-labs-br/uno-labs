@@ -1,6 +1,14 @@
 {
-  "generator": "image_gen built-in",
-  "generatedAt": "2026-10-02",
-  "prompt": "Use case: stylized-concept. Beautiful premium editorial still life for UNO Labs blog about websites that work on mobile. Landscape 1536x1024. Two freestanding elegant sculptural frames made of pale warm ceramic: one landscape wide frame at left, one narrow portrait phone-shaped rounded rectangular frame at right, a continuous mint-green paper ribbon passes freely through both, with a deep pine green ceramic sphere visible inside the portrait frame. Warm Brazilian modernist study of scale and access, fine matte mineral texture, restrained pine #0E2B24 and mint #7DD3A8 on off-white #F3F7F3 background, soft afternoon window light, tactile highly detailed photography-style rendering, subtle architectural shadows, calm uncluttered asymmetric composition. No smartphone brand, no screen graphics, no letters, numbers, logos, people, neon, charts.",
-  "transform": "WebP; 1536x1024 e 768x512; sem recorte ou alteração criativa"
+  "slug": "site-nao-converte-no-celular",
+  "local": "celular.jpg",
+  "creditName": "Benjamin Dada",
+  "creditUrl": "https://unsplash.com/photos/person-using-a-laptop-and-smartphone-BLxjjscm7ho",
+  "downloadUrl": "https://images.unsplash.com/photo-1532653495815-10005f43eee9?fm=jpg&q=90&w=2000",
+  "alt": "Pessoa consultando o celular enquanto usa um notebook, com interfaces diferentes em cada tela.",
+  "caption": "Foto de arquivo: usar duas telas ajuda a perceber diferenças de navegação.",
+  "kind": "photograph",
+  "licenseName": "Licença Unsplash",
+  "licenseUrl": "https://unsplash.com/license",
+  "retrievedAt": "2026-10-02",
+  "transform": "Recorte central 3:2 e conversão WebP em 1536×1024 e 768×512. Sem síntese generativa, retoque ou substituição de tela."
 }

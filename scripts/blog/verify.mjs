@@ -346,9 +346,16 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
     assert.match(artHtml, /Presença digital que gera oportunidades\./i, `Artigo ${art.slug} deve usar assinatura confirmada no rodapé`);
     assert.match(artHtml, /Vitória · Vila Velha · Serra · Cariacica \(ES\)/i, `Artigo ${art.slug} deve conter atendimento no rodapé`);
 
-    // Sem JS não autorizado
+    // Só o artigo de animação carrega a demonstração local solicitada.
     const artNonJsonScripts = htmlUtils.getAllScriptsNonJsonLd(artHtml);
-    assert.equal(artNonJsonScripts.length, 0, `Artigo ${art.slug} não deve conter tags <script> de JavaScript`);
+    if (art.slug === 'animacoes-rolagem-site-atrapalham-conversao') {
+      assert.equal(artNonJsonScripts.length, 1, 'A demonstração deve usar somente um script local');
+      assert.match(artNonJsonScripts[0], /^<script src="\.\.\/assets\/motion-demo\.js" defer><\/script>$/);
+      assert.ok(artIds.has('comparacao-animada'), 'Comparação animada deve ter âncora acessível');
+      assert.match(artHtml, /<noscript>/, 'Demonstração deve explicar o exemplo sem JavaScript');
+    } else {
+      assert.equal(artNonJsonScripts.length, 0, `Artigo ${art.slug} não deve conter JavaScript`);
+    }
 
     // Ausência de placeholders
     assert.doesNotMatch(artHtml, /lorem\s+ipsum/i, `Artigo ${art.slug} contém lorem ipsum`);
@@ -429,7 +436,7 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
     assert.match(heroImg.srcset, /capa\.webp\s+1536w/, 'srcset deve conter capa.webp 1536w');
     assert.equal(heroImg.loading, 'eager', 'Imagem hero deve ter loading="eager"');
     assert.equal(heroImg.fetchpriority, 'high', 'Imagem hero deve ter fetchpriority="high"');
-    assert.match(heroImg.sizes || '', /900px/, `Hero detalhe em ${art.slug} deve ter sizes com max 900px`);
+    assert.match(heroImg.sizes || '', art.slug === 'animacoes-rolagem-site-atrapalham-conversao' ? /240px/ : /900px/, `Imagem de ${art.slug} deve declarar o tamanho apropriado ao layout`);
 
     for (const img of artImages) {
       assert.ok(img.width && !isNaN(Number(img.width)), `Imagem no artigo ${art.slug} sem largura válida`);
@@ -437,17 +444,14 @@ export async function verifyBlog({ articlesPath, blogDir } = {}) {
       assert.ok(img.alt !== undefined && img.alt !== null, `Imagem no artigo ${art.slug} sem alt`);
     }
 
-    // Legenda da imagem explicita IA sem duplicar
-    assert.match(
-      artHtml,
-      /Ilustra[cç][aã]o conceitual gerada por IA/i,
-      `Artigo ${art.slug} deve explicitar na legenda "Ilustração conceitual gerada por IA"`
-    );
-    assert.doesNotMatch(
-      artHtml,
-      /Ilustra[cç][aã]o conceitual gerada por IA[\s\S]*?Ilustra[cç][aã]o conceitual gerada por IA/i,
-      `Artigo ${art.slug}: legenda duplicou menção a IA!`
-    );
+    // Fotografia real exige autoria, origem e licença visíveis.
+    assert.equal(art.image.kind, 'photograph', `Capa de ${art.slug} deve ser fotografia`);
+    for (const field of ['creditName', 'creditUrl', 'licenseName', 'licenseUrl']) {
+      assert.ok(art.image[field], `Fotografia de ${art.slug} sem ${field}`);
+    }
+    assert.ok(artHrefs.includes(art.image.creditUrl), `Crédito da fotografia ausente em ${art.slug}`);
+    assert.ok(artHrefs.includes(art.image.licenseUrl), `Licença da fotografia ausente em ${art.slug}`);
+    assert.doesNotMatch(artHtml, /Ilustra[cç][aã]o conceitual gerada por IA/i, 'Crédito antigo de IA não deve permanecer');
 
     // Âncoras internas do artigo
     for (const href of artHrefs) {

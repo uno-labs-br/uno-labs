@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://unolabs.com.br/blog/animacoes-rolagem-site-atrapalham-conversao/imagens/capa.webp">
 <meta property="og:image:width" content="1536">
 <meta property="og:image:height" content="1024">
-<meta property="og:image:alt" content="Faixa de papel em curva que se transforma em um caminho plano, com uma esfera verde sobre ela.">
+<meta property="og:image:alt" content="Notebook com um site aberto, ao lado de uma caneca e materiais de trabalho.">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Animações e rolagem no site atrapalham a conversão? | UNO Labs">
@@ -26,6 +26,8 @@
 <meta name="twitter:image" content="https://unolabs.com.br/blog/animacoes-rolagem-site-atrapalham-conversao/imagens/capa.webp">
 
 <link rel="stylesheet" href="../assets/blog.css">
+<link rel="stylesheet" href="../assets/motion-demo.css">
+<script src="../assets/motion-demo.js" defer></script>
 
 <script type="application/ld+json">
 {
@@ -147,10 +149,89 @@
       <p class="artigo__resposta">Uma animação útil esclarece algo e permite continuar. Se o visitante precisa insistir na rolagem, procurar a saída ou esperar para acessar o contato, o efeito pode estar cobrando mais atenção do que entrega.</p>
     </aside>
 
-    <figure class="artigo__hero-figura">
-      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="(max-width: 900px) 100vw, 900px" alt="Faixa de papel em curva que se transforma em um caminho plano, com uma esfera verde sobre ela." width="1536" height="1024" fetchpriority="high" loading="eager">
-      <figcaption>Movimento com direção: uma experiência deve permitir que a pessoa avance. Ilustração conceitual gerada por IA.</figcaption>
+    <section class="motion-demo" id="comparacao-animada" aria-labelledby="motion-title">
+  <div class="motion-demo__intro">
+    <div>
+      <h2 id="motion-title">Veja a diferença em movimento.</h2>
+      <p>O mesmo objetivo: sair da apresentação do serviço e chegar ao contato. Compare uma transição direta com uma sequência que exige espera.</p>
+      <p class="motion-demo__nota">Demonstração didática da UNO Labs. Os tempos são definidos para este exemplo; não são resultados de um teste de conversão.</p>
+    </div>
+    <figure class="artigo__hero-figura motion-demo__foto">
+      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 240px" alt="Notebook com um site aberto, ao lado de uma caneca e materiais de trabalho." width="1536" height="1024" fetchpriority="high" loading="eager">
+      <figcaption>Foto de arquivo de um site em uso. Foto: <a href="https://unsplash.com/photos/turned-on-macbook-pro-beside-gray-mug-Px3iBXV-4TU" target="_blank" rel="noopener noreferrer">Igor Miske</a> · <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Licença Unsplash</a>.</figcaption>
     </figure>
+  </div>
+  <fieldset class="motion-demo__seletor" data-variant-controls hidden>
+    <legend>Escolha a versão para reproduzir</legend>
+    <label><input type="radio" name="versao-animacao" value="curta" checked>Transição direta</label>
+    <label><input type="radio" name="versao-animacao" value="longa">Sequência demorada</label>
+  </fieldset>
+  <div class="motion-demo__comparacao">
+    <div class="motion-demo__painel" data-panel="curta">
+      <div class="motion-demo__rotulo"><h3>Transição direta</h3><span>350 ms de movimento</span></div>
+      <div class="motion-demo__janela">
+        <div class="motion-demo__barra">Página de serviços · Exemplo</div>
+        <div class="motion-demo__viewport" role="img" aria-label="A apresentação do serviço dá lugar rapidamente à área de contato.">
+          <div class="motion-demo__trilha" data-track="curta">
+            <div class="motion-demo__tela">
+              <span class="motion-demo__local">Serviços</span>
+              <h4>Seu próximo projeto<br>começa aqui.</h4>
+              <p>Escopo claro. Informações úteis.<br>Um caminho até a conversa.</p>
+              <span class="motion-demo__intencao">Próximo passo: contato</span>
+            </div>
+            <div class="motion-demo__tela motion-demo__contato">
+              <span class="motion-demo__local">Contato</span>
+              <h4>Vamos conversar<br>sobre o projeto?</h4>
+              <p>O destino já está à vista.<br>O visitante pode seguir.</p>
+              <span class="motion-demo__destino"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Chegou ao contato</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="motion-demo__leitura">O movimento explica a mudança e libera o próximo passo.</p>
+    </div>
+    <div class="motion-demo__painel" data-panel="longa">
+      <div class="motion-demo__rotulo"><h3>Sequência demorada</h3><span>4,7 s até o destino</span></div>
+      <div class="motion-demo__janela">
+        <div class="motion-demo__barra">Página de serviços · Exemplo</div>
+        <div class="motion-demo__viewport" role="img" aria-label="Uma apresentação intermediária prolonga a espera antes de mostrar a mesma área de contato.">
+          <div class="motion-demo__trilha" data-track="longa">
+            <div class="motion-demo__tela">
+              <span class="motion-demo__local">Serviços</span>
+              <h4>Seu próximo projeto<br>começa aqui.</h4>
+              <p>Escopo claro. Informações úteis.<br>Um caminho até a conversa.</p>
+              <span class="motion-demo__intencao">Próximo passo: contato</span>
+            </div>
+            <div class="motion-demo__tela motion-demo__espera">
+              <span class="motion-demo__local">Apresentação intermediária</span>
+              <h4>Mais uma etapa.<br>Ainda não chegou.</h4>
+              <p>O visitante já escolheu o destino,<br>mas a sequência continua.</p>
+              <span class="motion-demo__intencao">Aguardando a apresentação</span>
+            </div>
+            <div class="motion-demo__tela motion-demo__contato">
+              <span class="motion-demo__local">Contato</span>
+              <h4>Vamos conversar<br>sobre o projeto?</h4>
+              <p>O mesmo destino.<br>Mais tempo para chegar.</p>
+              <span class="motion-demo__destino"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m4 10 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Chegou ao contato</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="motion-demo__leitura">A espera ganha espaço, mesmo sem acrescentar informação necessária.</p>
+    </div>
+  </div>
+  <div class="motion-demo__controles" data-controls hidden>
+    <div class="motion-demo__botoes">
+      <button type="button" class="motion-demo__play" data-action="play">Reproduzir comparação</button>
+      <button type="button" data-action="restart">Repetir do início</button>
+      <button type="button" data-action="finish">Ver estado final</button>
+    </div>
+    <div class="motion-demo__tempo"><progress max="6000" value="0" aria-label="Progresso da demonstração"></progress><output aria-label="Tempo decorrido">0,0 s / 6,0 s</output></div>
+    <p class="motion-demo__status" role="status" data-status>A demonstração está pronta.</p>
+  </div>
+  <noscript><p class="motion-demo__nota">As duas versões chegam ao mesmo contato. A curta usa 350 ms de movimento; a longa leva 4,7 segundos até o destino. Ative JavaScript para reproduzir a comparação.</p></noscript>
+</section>
+
   </header>
 
   <div class="artigo__layout">
@@ -173,6 +254,7 @@
     </aside>
 
     <div class="artigo__corpo">
+<p class="artigo__lead">Na <a href="#comparacao-animada">comparação animada acima</a>, as duas versões chegam ao mesmo destino. Use os controles para pausar, repetir e observar o que acontece enquanto o contato ainda não apareceu. A sequência é didática: ela ajuda a discutir o custo da espera, sem medir a conversão de uma empresa.</p>
 <p class="artigo__lead">Um site pode prender o olhar e, ao mesmo tempo, dificultar uma tarefa simples. A diferença aparece quando a pessoa tenta chegar ao serviço, entender o investimento ou pedir uma proposta.</p>
 <p class="artigo__lead">Em sites de arquitetura, engenharia e consultoria, o movimento pode explicar uma transformação ou revelar etapas de um projeto. Mas <strong>permanecer mais tempo diante de uma animação não comprova interesse comercial</strong>. Este guia propõe critérios para decidir se o recurso merece continuar.</p>
 
@@ -242,6 +324,7 @@
             <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media/prefers-reduced-motion" target="_blank" rel="noopener noreferrer">MDN: preferência por movimento reduzido</a></li>
             <li><a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing?hl=pt-br" target="_blank" rel="noopener noreferrer">Google: práticas recomendadas para indexação móvel</a></li>
             <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html" target="_blank" rel="noopener noreferrer">W3C: animação resultante de interações</a></li>
+            <li><a href="https://www.nngroup.com/articles/animation-purpose-ux/" target="_blank" rel="noopener noreferrer">Nielsen Norman Group — o papel da animação e do movimento na experiência de uso</a></li>
           </ul>
         </section>
 
@@ -258,7 +341,7 @@
         <article class="card-relacionado">
           <a class="card-relacionado__link" href="../site-nao-converte-no-celular/index.html">
             <figure class="card-relacionado__figura">
-              <img src="../site-nao-converte-no-celular/imagens/capa.webp" srcset="../site-nao-converte-no-celular/imagens/capa-768.webp 768w, ../site-nao-converte-no-celular/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="Duas molduras, uma larga e outra vertical, atravessadas pela mesma faixa verde." width="1536" height="1024" loading="lazy" decoding="async">
+              <img src="../site-nao-converte-no-celular/imagens/capa.webp" srcset="../site-nao-converte-no-celular/imagens/capa-768.webp 768w, ../site-nao-converte-no-celular/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="Pessoa consultando o celular enquanto usa um notebook, com interfaces diferentes em cada tela." width="1536" height="1024" loading="lazy" decoding="async">
             </figure>
             <div class="card-relacionado__corpo">
               <h3 class="card-relacionado__titulo">Seu site não converte no celular? Um checklist para encontrar as barreiras</h3>
@@ -272,7 +355,7 @@
         <article class="card-relacionado">
           <a class="card-relacionado__link" href="../cliques-elementos-nao-clicaveis-site/index.html">
             <figure class="card-relacionado__figura">
-              <img src="../cliques-elementos-nao-clicaveis-site/imagens/capa.webp" srcset="../cliques-elementos-nao-clicaveis-site/imagens/capa-768.webp 768w, ../cliques-elementos-nao-clicaveis-site/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="Dois círculos planos e um botão em relevo sobre uma placa clara, diante de um ponteiro metálico." width="1536" height="1024" loading="lazy" decoding="async">
+              <img src="../cliques-elementos-nao-clicaveis-site/imagens/capa.webp" srcset="../cliques-elementos-nao-clicaveis-site/imagens/capa-768.webp 768w, ../cliques-elementos-nao-clicaveis-site/imagens/capa.webp 1536w" sizes="(max-width: 640px) 100vw, 420px" alt="Mão usando um mouse em frente a um notebook em uma mesa de trabalho." width="1536" height="1024" loading="lazy" decoding="async">
             </figure>
             <div class="card-relacionado__corpo">
               <h3 class="card-relacionado__titulo">Visitantes clicam onde não existe link? Como corrigir elementos que confundem</h3>

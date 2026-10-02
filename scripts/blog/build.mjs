@@ -567,12 +567,15 @@ ${cardsRel}
   const imgHeight = artigo.image?.height || 1024;
   const imgAlt = escapeHtml(artigo.image?.alt || artigo.title);
 
-  // Evita duplicar menção a IA se a legenda já contiver
-  const rawCaption = artigo.image?.caption || '';
-  const jaTemIa = /ilustra[cç][aã]o conceitual gerada por ia/i.test(rawCaption);
-  const imgCaption = jaTemIa
-    ? escapeHtml(rawCaption)
-    : (rawCaption ? `${escapeHtml(rawCaption)} · Ilustração conceitual gerada por IA` : 'Ilustração conceitual gerada por IA');
+  const imgCaption = `${escapeHtml(artigo.image.caption)} Foto: <a href="${escapeHtml(artigo.image.creditUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(artigo.image.creditName)}</a> · <a href="${escapeHtml(artigo.image.licenseUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(artigo.image.licenseName)}</a>.`;
+  const isMotionArticle = artigo.slug === 'animacoes-rolagem-site-atrapalham-conversao';
+  const heroFigure = `<figure class="artigo__hero-figura${isMotionArticle ? ' motion-demo__foto' : ''}">
+      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="${isMotionArticle ? '(max-width: 640px) 100vw, 240px' : '(max-width: 900px) 100vw, 900px'}" alt="${imgAlt}" width="${imgWidth}" height="${imgHeight}" fetchpriority="high" loading="eager">
+      <figcaption>${imgCaption}</figcaption>
+    </figure>`;
+  const hero = isMotionArticle
+    ? readFileSync(new URL('./motion-demo.html', import.meta.url), 'utf8').replace('{{PHOTO}}', heroFigure)
+    : heroFigure;
 
   const autorNome = escapeHtml(artigo.author || 'UNO Labs');
   const dataModificada = escapeHtml(artigo.dateModified);
@@ -606,6 +609,7 @@ ${cardsRel}
 <meta name="twitter:image" content="https://unolabs.com.br/blog/${artigo.slug}/imagens/capa.webp">
 
 <link rel="stylesheet" href="../assets/blog.css">
+${isMotionArticle ? '<link rel="stylesheet" href="../assets/motion-demo.css">\n<script src="../assets/motion-demo.js" defer></script>' : ''}
 
 <script type="application/ld+json">
 ${serializarJsonLd(jsonLd)}
@@ -651,10 +655,7 @@ ${serializarJsonLd(jsonLd)}
       <p class="artigo__resposta">${escapeHtml(artigo.summary)}</p>
     </aside>
 
-    <figure class="artigo__hero-figura">
-      <img src="./imagens/capa.webp" srcset="./imagens/capa-768.webp 768w, ./imagens/capa.webp 1536w" sizes="(max-width: 900px) 100vw, 900px" alt="${imgAlt}" width="${imgWidth}" height="${imgHeight}" fetchpriority="high" loading="eager">
-      <figcaption>${imgCaption}</figcaption>
-    </figure>
+    ${hero}
   </header>
 
   <div class="artigo__layout">

@@ -1,6 +1,14 @@
 {
-  "generator": "image_gen built-in",
-  "generatedAt": "2026-10-02",
-  "prompt": "Use case: stylized-concept. Create a beautiful premium editorial photograph-like 3D still life for Brazilian UNO Labs business blog about a website journey leading to a conversation. Landscape 1536x1024. A meticulously crafted architectural paper model: three generous off-white doorway frames aligned along a pine-green straight path, the far doorway opens onto warm daylight. Small mint ceramic sphere midway through the path, a subtle interruption in the path visible near the last doorway. Quiet elegant modern Brazilian design sensibility, matte paper, ceramic and translucent frosted mint glass, warm off-white tabletop, long soft natural side-light shadows, tonal pine #0E2B24 and pale green #7DD3A8 accents, cinematic close perspective, sophisticated still life art direction, beautifully tactile, visually clear, plenty of breathing space. No humans, no lettering, no text, no numbers, no logos, no fake dashboards or charts, no neon, no glossy sci-fi. A conceptual illustration, not a screenshot. Refined editorial composition with one clear focal point.",
-  "transform": "WebP; 1536x1024 e 768x512; sem recorte ou alteração criativa"
+  "slug": "site-recebe-visitas-mas-nao-gera-contatos",
+  "local": "visitas.jpg",
+  "creditName": "Carlos Muza",
+  "creditUrl": "https://commons.wikimedia.org/wiki/File:Statistics_on_a_laptop_(Unsplash).jpg",
+  "licenseName": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "downloadUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fm=jpg&q=90&w=2000",
+  "alt": "Notebook sobre uma mesa exibindo um painel de análise de dados.",
+  "caption": "Foto de arquivo: os dados na tela não são da UNO Labs.",
+  "kind": "photograph",
+  "retrievedAt": "2026-10-02",
+  "transform": "Recorte central 3:2 e conversão WebP em 1536×1024 e 768×512. Sem síntese generativa, retoque ou substituição de tela."
 }

@@ -9,7 +9,7 @@ Data: 02/10/2026. Estado: preparado para revisão humana em PR; sem deploy.
 - `wrangler deploy --dry-run` com a configuração da branch: 96 arquivos estáticos reconhecidos, Worker empacotado; nenhuma publicação.
 - `git diff --check`.
 - Trecho do blog na home conferido em 1440px e 390px, com os quatro destinos locais e sem overflow do documento.
-- Imagens: 1536×1024 e 768×512, sem recorte ou alteração criativa na otimização. Arquivos maiores entre 66.932 e 130.568 bytes.
+- Imagens da versão inicial: 1536×1024 e 768×512. As fotografias atuais e seus tamanhos estão em imagens.json; substituem os antigos arquivos de IA.
 
 ## Evidência visual
 Capturas em `05 - BLOG/_producao/revisao/final/`: central, artigo de visitas e artigo de formulário, em desktop e celular, além de recortes das tabelas. Todas as imagens foram decodificadas antes das capturas finais. As capturas iniciais em `revisao/` tiveram áreas lazy não carregadas e não devem fundamentar aprovação visual.
@@ -20,6 +20,13 @@ O detector estático foi executado uma vez. Reportou valores inconsistentes com 
 O revisor retornou `pass` para os quatro achados corrigidos em lote: foco visível no CTA escuro, orientação de rolagem móvel associada à tabela, respeito a movimento reduzido e ícones SVG decorativos no FAQ. Essa conclusão abrange esses estados; não representa aprovação integral de acessibilidade.
 
 Capturas e estilos computados em `05 - BLOG/_producao/revisao/correcoes/`: desktop de 1440px e celular de 390px. O teclado deslocou a tabela horizontalmente; Enter abriu o FAQ; Tab mostrou contorno Mint no CTA. Com movimento reduzido, a rolagem computada é `auto`, as transições duram `0s` e as setas não se deslocam. O gerador e o verificador passaram novamente após o lote. A navegação por arquivo local também foi verificada com imagem e fonte carregadas.
+
+## Revisão fotográfica e animação — 02/10/2026
+Teste Chromium sobre a entrega local por file://: sete páginas em 1440px, 390px e 360px, imagens decodificadas, sem overflow do documento ou legendas antigas de IA. A demonstração foi exercitada em 1440px e 390px: deslocamentos distintos durante a execução, pausa mantendo o tempo, retomar e pausar por Space, repetir, finalizar, pausar ao sair da área visível, trocar para movimento reduzido e concluir naturalmente sem loop. Uma execução com JavaScript desativado confirmou o texto alternativo e controles ocultos. O teste adicional em 390×844 confirmou a escolha de cada versão, ausência de reprodução automática no celular e palco e botões visíveis juntos. Total de 25 registros, sem falhas, em `05 - BLOG/_producao/revisao-fotografias/qa.json`.
+
+As fotografias foram inspecionadas antes da conversão e têm crédito e licença visíveis. O scan de proveniência reconheceu 12 rasters, sem origem faltante; o formato WebP usa sidecars emitidos pelo Impeccable. Não foi feito novo dry-run da hospedagem legada: ele não validaria a integração com Astro, que está em outra branch.
+
+A revisão independente considerou as fotografias, recortes e composição desktop coerentes e identificou um problema material na demonstração móvel: painéis empilhados com controles distantes e início antes de o movimento estar visível. A correção usa escolha de versão e um palco no celular, sem início automático; o desktop observa 75% da região dos painéis. O revisor confirmou a resolução e não encontrou regressão material ligada ao ajuste (`ship`). Capturas de confirmação: `demo-mobile-curta-corrigida.png` e `demo-mobile-longa-corrigida.png`, em 390×844, além do desktop atualizado. Essa confirmação cobre o achado revisto, não uma auditoria integral de acessibilidade.
 
 ## Limitações
 Não são testes de produção, homologação de envio de contato, auditoria completa de acessibilidade ou medição de Core Web Vitals em usuários reais. Nenhum dado de Search Console ou histórico de conversão foi usado. O Teste de pesquisa aprimorada e a inspeção das URLs públicas ficam para depois da publicação autorizada.
