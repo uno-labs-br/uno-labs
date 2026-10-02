@@ -93,7 +93,7 @@ async function screenshot(page, name) {
     check('Blog do menu abre índice próprio', new URL(page.url()).pathname === '/blog/');
     await page.waitForFunction(() => document.documentElement.classList.contains('js'));
     check('índice oculta menu móvel no desktop', await page.locator('#menu-movel').isHidden());
-    const articles = [...new Set(await page.locator('.blog-index__lista h2 a').evaluateAll(links => links.map(a => a.getAttribute('href'))))];
+    const articles = [...new Set(await page.locator('[data-blog-article] > a').evaluateAll(links => links.map(a => a.getAttribute('href'))))];
     check('índice apresenta seis artigos', articles.length === 6, articles);
     await screenshot(page, 'blog-desktop');
     for (const article of articles) {
@@ -105,7 +105,7 @@ async function screenshot(page, name) {
       const internal = await page.locator('main a[href^="/blog/"]').evaluateAll(links => links.map(a => a.getAttribute('href')));
       check(`links relacionados válidos: ${article}`, internal.every(href => href === '/blog/' || articles.includes(href.split('#')[0])), internal);
     }
-    await page.goto(new URL(articles[0], url).href);
+    await page.goto(new URL(articles.find(path => path.includes('animacoes-rolagem')), url).href);
     await screenshot(page, 'artigo-desktop');
     const demo = page.locator('.motion-demo');
     check('demo editorial respeita movimento reduzido', await demo.getAttribute('data-state') === 'finished');
@@ -137,7 +137,7 @@ async function screenshot(page, name) {
     await screenshot(page, 'artigo-mobile');
     const noJS = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     await noJS.goto(new URL('blog/', url).href);
-    check('blog acessível sem JavaScript', await noJS.locator('.blog-index__lista h2 a').count() === 6);
+    check('blog acessível sem JavaScript', await noJS.locator('[data-blog-article] > a').count() === 6);
     await noJS.goto(new URL(articles[0], url).href);
     check('artigo completo sem JavaScript', (await noJS.textContent('main')).length > 3000);
     check('sem erros no navegador ou recursos', report.errors.length === 0, report.errors);
