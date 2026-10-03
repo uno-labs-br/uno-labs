@@ -5,7 +5,7 @@
 **Identificador da SPEC:** `ga4-20261003`
 
 **Measurement ID:** `G-ZKM57KG6V9`
-**Status da Implementação:** Concluída e testada localmente em ambiente isolado.
+**Status da Implementação:** Integrada e publicada no Cloudflare; recebimento inicial confirmado no GA4.
 
 ---
 
@@ -53,24 +53,24 @@ A integração do Google Analytics 4 (GA4) foi realizada no frontend estático A
 
 ---
 
-## 3. Passos Dependentes do Painel GA4 (Pendências Externas)
+## 3. Configuração do painel GA4
 
-As seguintes etapas dependem de configuração e homologação humana na interface do Google Analytics:
+Conferências e alterações realizadas diretamente na propriedade `UNO Labs - Site` (`557236356`) em 03/10/2026:
 
 1. **Propriedade e Fluxo de Dados:**
-   - Conferir se o fluxo de dados da web na propriedade correspondente ao ID `G-ZKM57KG6V9` está configurado para o stream `https://unolabs.com.br`.
+   - A propriedade exibe o ID `G-ZKM57KG6V9`; o fluxo informado é `UNO Labs - Web`, URL `https://unolabs.com.br`. Fuso São Paulo, moeda BRL e retenção de usuários/eventos de 14 meses já estavam configurados e foram preservados.
 2. **Definições Personalizadas (Dimensões de Evento):**
-   - Cadastrar no painel GA4 (*Administrador > Exibição de dados > Definições personalizadas > Criar dimensões personalizadas*):
+   - Cadastradas seis dimensões com escopo de evento em *Administrador > Exibição de dados > Definições personalizadas*, com parâmetros:
      - `contact_channel` (escopo do evento)
      - `cta_id` (escopo do evento)
      - `cta_position` (escopo do evento)
      - `lead_channel` (escopo do evento)
      - `form_id` (escopo do evento)
      - `form_name` (escopo do evento)
-3. **DebugView e Validação em Tempo Real:**
-   - Validar a recepção dos eventos no *DebugView* do GA4 a partir de uma navegação em ambiente oficial de produção.
-4. **Marcação de Conversões:**
-   - Marcar o evento `generate_lead` como evento principal / conversão para relatórios de aquisição.
+3. **Validação em tempo real:**
+   - O relatório da propriedade mostrou um usuário ativo e os eventos `first_visit`, `page_view`, `session_start`, `scroll` e `form_start`, com uma visualização da home, após a navegação de verificação no domínio publicado. O início de formulário foi testado com texto fictício removido em seguida, sem enviar contato. DebugView não foi utilizado.
+4. **Evento principal:**
+   - `generate_lead` cadastrado como evento principal pela opção "Criar com código", sem regra baseada em visualização de URL, sem valor monetário padrão e contando uma vez por evento. O código existente só envia a confirmação `smtp_aceito`; cliques e tentativas não são declarados como leads ou vendas.
 
 ## 4. Verificação técnica e visual
 
@@ -83,4 +83,11 @@ As seguintes etapas dependem de configuração e homologação humana na interfa
 
 Referências oficiais: [Consent Mode básico](https://developers.google.com/tag-platform/security/guides/consent?consentmode=basic) e [desativação de coleta e controles de publicidade](https://developers.google.com/tag-platform/security/guides/privacy).
 
-*Limitação:* o backend de contato é simulado nos testes. A inspeção do painel Cloudflare não mostrou secrets de integração. Não foi homologada entrega SMTP, recebimento na caixa nem recepção dos eventos na propriedade GA4. O SDK real é verificado com coleta interceptada; a interface do Google precisa confirmar os dados após a publicação.
+## 5. Integração e produção
+
+- [PR #12](https://github.com/uno-labs-br/uno-labs/pull/12) integrado com autorização expressa de Urias para mudanças necessárias e publicação nesta tarefa, após os checks aprovados, sem bypass. Commit de integração: `30b2ac1b9e8674966555d7f8dfe8a9eec737a7a0`.
+- Cloudflare `unolabs-site`: build `bbb121f5-8da2-41ff-a7b9-f6c0b614305e` da `main` concluído com sucesso. Comandos: `UNO_DEPLOY_TARGET=production npm run build` e `npx wrangler deploy --config wrangler.production.jsonc`.
+- Domínio raiz responde HTTP 200 pelo Cloudflare, com aviso de consentimento, target `production` e módulos compilados esperados. `www.unolabs.com.br` redireciona para a raiz. No navegador real, zero scripts Google antes do aceite e um `gtag.js?id=G-ZKM57KG6V9` depois dele; o relatório em tempo real confirmou a coleta.
+- A integração da Vercel com GitHub permanece ativa para a cópia/prévias e o repositório mantém `vercel.json` e seu script de build. Isso não alterou a hospedagem dos domínios oficiais. A medição está bloqueada em `vercel.app`.
+
+*Limitação:* o backend de contato é simulado nos testes. A inspeção do painel Cloudflare não mostrou secrets de integração. Não foi homologada entrega SMTP ou recebimento na caixa, e nenhum formulário real foi enviado. A recepção inicial do GA4 foi comprovada; o recebimento de `generate_lead` real depende de contato aceito pelo backend. A política existente ainda possui dados empresariais/operacionais pendentes, sem certificação jurídica.
