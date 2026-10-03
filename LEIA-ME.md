@@ -196,7 +196,27 @@ A configuração Cloudflare preservada ainda usa `assets.directory = ./public`. 
 
 A futura tarefa de hospedagem deve definir como servir `dist/`, manter o contrato de contato, conferir 404 e cabeçalhos, homologar o fluxo e autorizar a publicação da versão integrada na `main`. Não aplicar automaticamente a antiga proposta de adapter Cloudflare ou rota SSR: esta entrega é estática e preserva o Worker separado. A alternativa Apache/PHP continua no repositório, sem homologação para o build Astro. Enviar somente `public/` ou copiar as antigas instruções HostGator já não publica o site completo.
 
-Cloudflare permanece a hospedagem oficial planejada; HostGator, o serviço SMTP previsto. DNS, custom domains, redirects, secrets, SMTP e contas não foram configurados por esta migração. Clarity, analytics, pixels, Search Console e ativação do Turnstile ficam para etapas posteriores. Configurações futuras devem usar dados reais e atualizar a política quando modificarem o tratamento de dados.
+Cloudflare permanece a hospedagem oficial planejada; HostGator, o serviço SMTP previsto. DNS, custom domains, redirects, secrets, SMTP e contas não foram configurados por esta migração. Clarity, pixels, Search Console e ativação do Turnstile ficam para etapas posteriores.
+
+### Medição de audiência (Google Analytics 4 e Consentimento)
+
+A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend Astro com as seguintes premissas de privacidade e segurança:
+
+- **Modo de consentimento (Consent Mode v2):** padrão estrito com `analytics_storage: 'denied'`, `ad_storage: 'denied'`, `ad_user_data: 'denied'` e `ad_personalization: 'denied'`. Sinais de publicidade e remarketing permanecem permanentemente desativados (`allow_google_signals: false`, `allow_ad_personalization_signals: false`, `restricted_data_processing: true`).
+- **Condições estritas de execução:** o script `gtag.js` só é injetado dinamicamente após consentimento concedido em ambiente de produção oficial (`UNO_DEPLOY_TARGET=production`, HTTPS e hostname `unolabs.com.br` ou `www.unolabs.com.br`). Ambientes de teste, localhost, Vercel e workers.dev não executam chamadas à API do Google, mesmo com HTML de produção.
+- **Preferência local e revogação:** escolha versionada em `localStorage` com validade de 180 dias. O botão permanente "Preferências de cookies" no rodapé permite rever ou revogar a escolha a qualquer momento, aplicando a diretiva técnica `window['ga-disable-G-ZKM57KG6V9'] = true`, update `denied` e remoção imediata dos cookies `_ga` e `_ga_*`, com sincronização entre abas sem recarregar a página.
+- **Sanitização de URLs:** `page_location` omite fragmentos (`#`) e descarta parâmetros desconhecidos ou pessoais, preservando estritamente UTMs e identificadores de anúncio homologados (`utm_*`, `gclid`, `fbclid`, etc.); `page_referrer` transmite apenas origem e caminho.
+- **Taxonomia de eventos:**
+  - `page_view`: disparo único por carga de página quando consentido.
+  - `form_start`: disparo no primeiro preenchimento real de campo do formulário (`form_id: 'form-contato'`, `form_name: 'contato'`), sem reter dados do usuário ou disparar em foco vazio.
+  - `generate_lead`: disparo estritamente no ramo que valida HTTP 200 e confirmação de encaminhamento (`ok === true` e `encaminhamento === 'smtp_aceito'`). Não dispara em tentativas, validações locais, erros ou falhas de rede.
+  - `contact_click`: cliques comerciais nos links de WhatsApp e e-mail com atributos `data-contact-channel`, `data-cta-id` e `data-cta-position`.
+- **Passos dependentes do painel GA4:**
+  1. Criação/conferência do fluxo de dados para a propriedade `G-ZKM57KG6V9`.
+  2. Cadastro das dimensões personalizadas com escopo de evento no console: `contact_channel`, `cta_id`, `cta_position`, `lead_channel`, `form_id`, `form_name`.
+  3. Verificação no DebugView durante navegação de teste.
+  4. Marcação de `generate_lead` como evento chave/conversão, se desejado.
+  *Aviso:* o código implementado e os testes locais simulados não comprovam coleta em servidores reais do Google nem homologação em produção antes da publicação.
 
 ## 8. Pendências comerciais e de homologação
 
@@ -210,7 +230,7 @@ Cloudflare permanece a hospedagem oficial planejada; HostGator, o serviço SMTP 
 | Hospedagem Astro | Integrar `dist/` com a infraestrutura oficial; homologar antes de publicar |
 | Artigos | Produzir e revisar 4 a 6 artigos-pilar; depois seguir a frequência aprovada |
 | Mídia paga | Confirmar pagamento da verba diretamente às plataformas |
-| Medição e proteção contra spam | Decidir e homologar em tarefas próprias |
+| Configuração do painel GA4 | Cadastrar dimensões personalizadas no console, validar DebugView e marcar conversão |
 
 Garantia e prazo seguem a proposta de cada escopo; nenhum número provisório entra na home. Cargos, biografias e fotografias da equipe foram aprovados em 01/10/2026: Urias Loures e Bruno Gonzaga, cofundadores; Milena Dias, Comunicação e Conteúdo. Preservar os textos integrais registrados na documentação completa. Não confundir aprovação da apresentação da equipe com autoria editorial.
 

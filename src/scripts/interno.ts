@@ -1,4 +1,5 @@
 import { aoDOMPronto, iniciarAno, iniciarMenu } from './comum';
+import './analytics';
 
 /** Entrada opcional de páginas internas que tenham menu ou [data-ano]. */
 function iniciar(): void {

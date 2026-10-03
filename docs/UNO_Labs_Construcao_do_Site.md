@@ -414,7 +414,7 @@ A entrega usa Astro estático e `dist/`. A configuração Vercel de teste tem fr
 
 Cloudflare Workers com Static Assets continua a hospedagem oficial planejada. `wrangler.jsonc` preservado ainda aponta `assets.directory` para `./public`; publicar com essa configuração não serviria as páginas completas Astro. O atalho `npm run deploy` está bloqueado localmente sem rede, e o dry run legado não homologa essa integração. A alternativa Apache/PHP também permanece sem homologação para o novo build.
 
-Custom domains, redirects, DNS, SMTP HostGator, credenciais e secrets dependem de tarefa própria. Clarity, analytics e ativação de Turnstile não foram incorporados. Procedimentos e pendências estão no [LEIA-ME](../LEIA-ME.md); estado comprovado no [relatório](verificacoes/migracao-astro7-ts/RELATORIO.md).
+Custom domains, redirects, DNS, SMTP HostGator, credenciais e secrets dependem de tarefa própria. GA4 foi integrado ao frontend sob consentimento estrito v2; Clarity, pixels e ativação de Turnstile não foram incorporados. Procedimentos e pendências estão no [LEIA-ME](../LEIA-ME.md); estado comprovado no [relatório](verificacoes/migracao-astro7-ts/RELATORIO.md).
 
 ---
 

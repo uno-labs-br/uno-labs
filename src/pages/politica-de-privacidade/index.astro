@@ -13,17 +13,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <main id="conteudo" class="pagina">
   <div class="container">
     <article class="texto">
-      <p class="politica-rascunho" role="note"><strong>Rascunho para revisão.</strong> Responsável legal, contato de privacidade, infraestrutura e retenção ainda precisam ser definidos antes da publicação.</p>
+      <p class="politica-rascunho" role="note"><strong>Rascunho para revisão.</strong> Responsável legal, infraestrutura e retenção ainda precisam ser definidos antes da publicação.</p>
       <!-- RASCUNHO: revise os trechos marcados em amarelo (classe "pendente") e, de preferência, valide o texto com assessoria jurídica antes de publicar. -->
-      <p class="rotulo">Última atualização: <span class="pendente">[DD/MM/AAAA]</span></p>
+      <p class="rotulo">Última atualização: 03/10/2026</p>
       <h1>Política de privacidade</h1>
-      <p>Esta página explica, de forma direta, o que acontece com os dados que você envia pelo formulário de contato de <strong>unolabs.com.br</strong>. Ela segue a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018).</p>
+      <p>Esta página explica, de forma direta, o que acontece com os dados tratados em <strong>unolabs.com.br</strong>. Ela descreve as práticas adotadas em conformidade com as diretrizes da Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018).</p>
 
       <h2>Quem é o responsável pelos dados</h2>
-      <p>UNO Labs. <span class="pendente">[razão social e CNPJ, quando houver]</span>. Contato para assuntos de privacidade: <span class="pendente">[e-mail do domínio, ex.: privacidade@unolabs.com.br]</span>.</p>
+      <p>UNO Labs. <span class="pendente">[razão social e CNPJ, quando houver]</span>. Contato para assuntos de privacidade: contato@unolabs.com.br.</p>
 
       <h2>Quais dados coletamos</h2>
-      <p>Somente o que você digita no formulário:</p>
+      <p>Dados enviados por você no formulário de contato:</p>
       <ul>
         <li>nome e nome da empresa;</li>
         <li>WhatsApp ou e-mail para retorno;</li>
@@ -31,7 +31,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <li>serviços de interesse, descrição do projeto e faixa de investimento prevista.</li>
       </ul>
       <p>Como qualquer site, o servidor de hospedagem registra dados técnicos da conexão (como endereço IP, data e hora e tipo de navegador) para funcionar e se proteger de abusos.</p>
-      <p>Na versão atual, o site <strong>não usa cookies de publicidade nem ferramentas de análise de audiência</strong>. As fontes tipográficas são servidas pelo próprio site, sem conexão com serviços de terceiros. <span class="pendente">[Se um dia forem instaladas ferramentas como Google Analytics ou Meta Pixel, atualizar esta seção e incluir um aviso de cookies.]</span></p>
+      <p>O site pode utilizar ferramentas de medição sob critérios estritos de privacidade e consentimento:</p>
+      <ul>
+        <li><strong>Cloudflare Web Analytics</strong>: medição agregada de tráfego e desempenho técnico provida pela infraestrutura de borda da Cloudflare, que funciona sem cookies e sem rastrear visitantes individualmente.</li>
+        <li><strong>Google Analytics 4 (GA4)</strong>: medição estatística de uso e navegação (como páginas visitadas, canais comerciais acionados e inícios ou confirmações do formulário). O carregamento da ferramenta e a gravação de cookies primários de análise (como <code>_ga</code> e <code>_ga_ZKM57KG6V9</code>) são <strong>estritamente condicionados ao seu consentimento prévio</strong>. O padrão do site mantém a medição bloqueada até a sua escolha. Recursos de publicidade, personalização de anúncios e sinais do Google (<em>Google signals</em>) permanecem permanentemente desativados. Nenhum dado digitado no formulário de contato é enviado ao Google Analytics. Sua preferência é armazenada localmente por até 180 dias. Veja como o Google utiliza informações acessando a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade do Google</a> e as regras em <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Como o Google usa dados de sites de parceiros</a>.</li>
+      </ul>
+      <p>Você pode rever ou revogar sua decisão a qualquer momento clicando em <button type="button" class="btn-preferencias-cookies" data-abrir-cookies>Preferências de cookies</button> ou no botão disponível no rodapé. A revogação interrompe imediatamente novas medições, aplica a diretiva técnica de desativação (<em>ga-disable</em>) e remove os cookies de análise do seu navegador, sem recarregar a página nem apagar campos já preenchidos.</p>
+      <p>As fontes tipográficas são servidas diretamente pela infraestrutura do próprio site, sem conexão com bibliotecas externas de terceiros.</p>
 
       <h2>Para que usamos</h2>
       <ul>
@@ -42,7 +48,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>Não vendemos seus dados e não os usamos para enviar newsletters ou ofertas que você não pediu.</p>
 
       <h2>Base legal</h2>
-      <p>Tratamos os dados para atender ao seu pedido de contato e de proposta (procedimentos preliminares a um contrato, art. 7º, V, da LGPD) e, no caso dos dados técnicos e da proteção contra spam, com base no legítimo interesse de manter o site seguro (art. 7º, IX). <span class="pendente">[Revisar com assessoria jurídica.]</span></p>
+      <p>Tratamos os dados para atender ao seu pedido de contato e de proposta (procedimentos preliminares a um contrato, art. 7º, V, da LGPD); para a medição estatística de navegação pelo Google Analytics quando houver seu consentimento prévio e revogável (art. 7º, I); e, no caso dos dados técnicos e da proteção contra spam, com base no legítimo interesse de manter o site seguro (art. 7º, IX). <span class="pendente">[Revisar com assessoria jurídica.]</span></p>
 
       <h2>Como o formulário funciona</h2>
       <p>Quando você clica em enviar, os dados vão do seu navegador, por conexão segura (HTTPS), para o servidor do site, que confere se os campos estão corretos e se o envio não é automatizado. Em seguida, os dados são encaminhados para nossa ferramenta de automação (n8n), que avisa a equipe por e-mail e por um bot privado do Telegram, usado só internamente.</p>
@@ -51,6 +57,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p>Apenas com os serviços que fazem esse fluxo funcionar, na condição de operadores:</p>
       <ul>
         <li><strong>Cloudflare</strong>: hospedagem do site, segurança e verificação anti-spam (Turnstile);</li>
+        <li><strong>Google LLC</strong>: serviço de análise de audiência (Google Analytics), somente mediante consentimento prévio e com publicidade desativada. Os servidores podem estar localizados nos Estados Unidos ou em outras jurisdições fora do Brasil (transferência internacional conforme hipóteses do art. 33 da LGPD);</li>
         <li><strong>n8n</strong>: automação que recebe o formulário e dispara os avisos, hospedada em <span class="pendente">[provedor/servidor do n8n]</span>;</li>
         <li><strong>Telegram</strong>: aviso interno para a equipe;</li>
         <li><strong>HostGator</strong>: e-mail do domínio.</li>
@@ -61,7 +68,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p><span class="pendente">[Definir. Sugestão: até 12 meses após o último contato, se não houver contratação. Se você se tornar cliente, pelo prazo do contrato e das obrigações legais.]</span> Depois disso, os dados são apagados ou anonimizados.</p>
 
       <h2>Seus direitos</h2>
-      <p>Você pode pedir, a qualquer momento: confirmação de que tratamos seus dados, acesso a eles, correção, anonimização ou eliminação, portabilidade, informações sobre com quem foram compartilhados e revogação do consentimento, quando for o caso (art. 18 da LGPD). Basta escrever para <span class="pendente">[e-mail de privacidade]</span>. Respondemos nos prazos previstos na LGPD.</p>
+      <p>Você pode pedir, a qualquer momento: confirmação de que tratamos seus dados, acesso a eles, correção, anonimização ou eliminação, portabilidade, informações sobre com quem foram compartilhados e revogação do consentimento, quando for o caso (art. 18 da LGPD). Basta escrever para contato@unolabs.com.br. Respondemos nos prazos previstos na LGPD.</p>
       <p>Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
 
       <h2>Segurança</h2>
@@ -77,6 +84,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="container">
     <div class="rodape__base" style="margin-top:0">
       <span>© 2026 UNO Labs · unolabs.com.br</span>
+      <button type="button" class="btn-preferencias-cookies" data-abrir-cookies>Preferências de cookies</button>
       <a href="/">Voltar ao início</a>
     </div>
   </div>

@@ -5,11 +5,11 @@
       <h2 class="titulo-medio" id="contato-titulo">Sua empresa já tem valor. Vamos fazer o digital mostrar isso.</h2>
       <p class="texto-apoio" style="margin-top:24px">Conte o momento da sua empresa e o que você quer construir. A conversa começa pelo contexto para chegar a uma proposta coerente.</p>
       <div class="canais">
-        <a class="canal" href="https://wa.me/5527936185141" target="_blank" rel="noopener">
+        <a class="canal" href="https://wa.me/5527936185141" target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_contato" data-cta-position="contato">
           <span><small>Prefere conversar agora?</small><b>WhatsApp · (27) 93618-5141</b></span>
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="#0E2B24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a class="canal" href="mailto:contato@unolabs.com.br">
+        <a class="canal" href="mailto:contato@unolabs.com.br" data-contact-channel="email" data-cta-id="email_contato" data-cta-position="contato">
           <span><small>E-mail</small><b>contato@unolabs.com.br</b></span>
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="#0E2B24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-cartao">
-      <p class="form-requer-js">Para enviar o formulário, ative o JavaScript. Você também pode escrever para <a href="mailto:contato@unolabs.com.br">contato@unolabs.com.br</a> ou conversar pelo <a href="https://wa.me/5527936185141">WhatsApp: (27) 93618-5141</a>.</p>
+      <p class="form-requer-js">Para enviar o formulário, ative o JavaScript. Você também pode escrever para <a href="mailto:contato@unolabs.com.br" data-contact-channel="email" data-cta-id="email_nojs" data-cta-position="form_nojs">contato@unolabs.com.br</a> ou conversar pelo <a href="https://wa.me/5527936185141" data-contact-channel="whatsapp" data-cta-id="whatsapp_nojs" data-cta-position="form_nojs">WhatsApp: (27) 93618-5141</a>.</p>
       <!-- data-endpoint: rota que recebe o formulário (Worker na Cloudflare ou api/contato.php na hospedagem tradicional).
            data-turnstile: chave PÚBLICA do Cloudflare Turnstile (deixe vazio para desligar). -->
       <form class="form" id="form-contato" action="/api/contato" method="post" novalidate data-endpoint="/api/contato" data-turnstile="">
@@ -75,7 +75,7 @@
         </div>
         <div class="form__turnstile" hidden></div>
         <p class="aviso-form" id="form-aviso" role="status" aria-live="polite" aria-atomic="true"></p>
-        <p class="form-recuperacao" hidden>Se preferir, <a href="https://wa.me/5527936185141">fale pelo WhatsApp</a> ou <a href="mailto:contato@unolabs.com.br">escreva para contato@unolabs.com.br</a>.</p>
+        <p class="form-recuperacao" hidden>Se preferir, <a href="https://wa.me/5527936185141" data-contact-channel="whatsapp" data-cta-id="whatsapp_recuperacao" data-cta-position="form_recuperacao">fale pelo WhatsApp</a> ou <a href="mailto:contato@unolabs.com.br" data-contact-channel="email" data-cta-id="email_recuperacao" data-cta-position="form_recuperacao">escreva para contato@unolabs.com.br</a>.</p>
         <div class="form__rodape">
           <p>Seus dados são usados para avaliar o projeto e responder ao contato. <a href="/politica-de-privacidade/">Política de privacidade</a>.</p>
           <button class="btn btn--escuro" type="submit" disabled>Enviar contexto do projeto</button>

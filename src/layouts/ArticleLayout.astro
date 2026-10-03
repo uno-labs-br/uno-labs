@@ -48,7 +48,12 @@ const structuredData = !data.draft && author && data.pubDate ? JSON.stringify({
       <ArticleBody><slot /></ArticleBody>
     </article>
   </main>
-  <footer class="article-footer"><a href="/blog/">Voltar para o blog</a></footer>
+  <footer class="article-footer">
+    <div class="article-footer__in">
+      <a href="/blog/">Voltar para o blog</a>
+      <button type="button" class="btn-preferencias-cookies" data-abrir-cookies>Preferências de cookies</button>
+    </div>
+  </footer>
 </BaseLayout>
 <style>
   .article-navigation { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 28px; border-bottom: 1px solid var(--uno-line); }
@@ -56,4 +61,5 @@ const structuredData = !data.draft && author && data.pubDate ? JSON.stringify({
   .article-navigation__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
   .article-main { width: min(800px, calc(100% - 40px)); margin-inline: auto; padding-block: clamp(40px, 6vw, 80px); }
   .article-footer { width: min(800px, calc(100% - 40px)); margin-inline: auto; padding-block: 24px 48px; border-top: 1px solid var(--uno-line); }
+  .article-footer__in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
 </style>
