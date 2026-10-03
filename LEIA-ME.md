@@ -186,6 +186,8 @@ Verificação local sem publicar: `npm run build`, seguido de `npx wrangler depl
 
 Resultados locais e limites: [verificação da prévia Cloudflare](docs/verificacoes/cloudflare-workers-preview.md).
 
+A configuração separada do Worker de produção, os domínios oficiais e os requisitos para a troca estão em [migração do domínio para Workers](docs/cloudflare-dominio-producao.md). Sua presença no repositório não comprova publicação: usar somente a versão aprovada da `main`, com build `production` e artigos aprovados.
+
 ### Publicação no domínio oficial
 
 A configuração Cloudflare preservada ainda usa `assets.directory = ./public`. Depois da migração, publicar essa pasta enviaria ativos sem o frontend completo. O dry run legado não corrige essa incompatibilidade; `npm run deploy` encerra localmente com a orientação de integração futura. Não usar `npx wrangler deploy` para contornar o bloqueio.
