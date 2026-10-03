@@ -1,0 +1,41 @@
+---
+const deployTarget = import.meta.env.UNO_DEPLOY_TARGET ?? 'preview';
+---
+<aside
+  id="banner-consentimento"
+  class="banner-consentimento"
+  role="region"
+  aria-label="Preferências de privacidade e cookies"
+  data-deploy-target={deployTarget}
+  hidden
+>
+  <div class="container banner-consentimento__grade">
+    <div class="banner-consentimento__conteudo">
+      <div class="banner-consentimento__cab">
+        <p class="banner-consentimento__titulo" id="banner-consentimento-titulo"><strong>Estatísticas de uso e privacidade</strong></p>
+        <button
+          type="button"
+          class="banner-consentimento__fechar"
+          data-consentimento="fechar"
+          aria-label="Fechar aviso de cookies sem salvar escolha"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="banner-consentimento__texto">
+        Coletamos estatísticas de uso para entender a navegação. Publicidade desativada e sem dados do formulário.{' '}
+        <a href="/politica-de-privacidade/">Política de privacidade</a>.
+      </p>
+    </div>
+    <div class="banner-consentimento__acoes" role="group" aria-label="Opções de consentimento">
+      <button type="button" class="btn btn--consentimento" data-consentimento="recusar">Recusar análise</button>
+      <button type="button" class="btn btn--consentimento" data-consentimento="aceitar">Aceitar análise</button>
+    </div>
+  </div>
+</aside>
+<p class="sr" role="status" aria-live="polite" id="banner-consentimento-status"></p>
+<script>
+  import '../scripts/analytics';
+</script>

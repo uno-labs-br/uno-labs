@@ -1,4 +1,5 @@
 import { movimentoReduzido } from './movimento';
+import { registrarInicioFormulario, redefinirInicioFormulario, registrarLead } from './analytics';
 
 const camposObrigatorios = ['nome', 'empresa', 'canal', 'contexto'] as const;
 type CampoValidado = typeof camposObrigatorios[number];
@@ -137,6 +138,29 @@ export function iniciarFormulario(): void {
     });
   });
 
+  const ehCampoValidoParaInicio = (el: unknown): boolean => {
+    if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return false;
+    if (el.type === 'hidden' || el.disabled || ('readOnly' in el && el.readOnly)) return false;
+    if (el.name === 'website' || el.closest('.armadilha')) return false;
+    return true;
+  };
+
+  form.addEventListener('input', (evento) => {
+    const alvo = evento.target;
+    if (ehCampoValidoParaInicio(alvo) && (alvo as HTMLInputElement).value.trim().length > 0) {
+      try { registrarInicioFormulario(); } catch {}
+    }
+  });
+  form.addEventListener('change', (evento) => {
+    const alvo = evento.target;
+    if (ehCampoValidoParaInicio(alvo)) {
+      const input = alvo as HTMLInputElement;
+      if (input.value.trim().length > 0 || input.checked) {
+        try { registrarInicioFormulario(); } catch {}
+      }
+    }
+  });
+
   // Compatibilidade existente: sem chave pública, nenhum script é carregado.
   if (chaveTurnstile) {
     const alvo = form.querySelector<HTMLElement>('.form__turnstile');
@@ -227,6 +251,11 @@ export function iniciarFormulario(): void {
         json = null;
       }
       if (!resposta.ok || !envioConfirmado(json)) throw new ErroContato(resposta.status, json);
+      try {
+        registrarLead();
+      } catch {
+        // Ausência/erro do tracker nunca transforma sucesso em falha ou bloqueia contatos.
+      }
       form.hidden = true;
       sucesso.classList.add('visivel');
       sucesso.scrollIntoView({ block: 'center', behavior: movimentoReduzido() ? 'auto' : 'smooth' });
@@ -264,6 +293,11 @@ export function iniciarFormulario(): void {
 
   sucesso.querySelector<HTMLButtonElement>('[data-reiniciar]')?.addEventListener('click', () => {
     form.reset();
+    try {
+      redefinirInicioFormulario();
+    } catch {
+      // Falha silenciosa
+    }
     camposObrigatorios.forEach((nome) => marcar(nome, true));
     mostrarAviso();
     sucesso.classList.remove('visivel');

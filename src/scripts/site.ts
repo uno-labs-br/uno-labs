@@ -5,6 +5,7 @@ import { iniciarFormulario } from './formulario';
 import { iniciarOrbita, iniciarPreferencias } from './movimento';
 import { iniciarVisualizador } from './visualizador';
 import { iniciarBuscaDemonstrativa } from './busca-demonstrativa';
+import './analytics';
 
 /** Entrada exclusiva da home, processada como módulo pelo Astro. */
 function iniciar(): void {

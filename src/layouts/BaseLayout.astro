@@ -1,5 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 // URLs com hash preservam as declarações nativas e a ordem da cascata aprovada.
 import fontsURL from '../styles/fonts.css?url';
 import siteURL from '../styles/site.css?url';
@@ -31,5 +32,8 @@ interface Props {
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('rm');
     </script>}
   </head>
-  <body><slot /></body>
+  <body>
+    <slot />
+    <ConsentBanner />
+  </body>
 </html>

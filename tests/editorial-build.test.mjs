@@ -128,8 +128,10 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
       assert.match(html, /href="\/blog\/"/);
       const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)];
       assert.ok(scripts.length > 0);
-      assert.ok(scripts.every((match) => match[1].includes('type="application/ld+json"')), 'Artigo não deve receber JavaScript executável.');
-      const json = scripts.map((match) => JSON.parse(match[2])).find((value) => value['@type'] === 'BlogPosting');
+      assert.ok(scripts.every((match) => match[1].includes('type="application/ld+json"') || match[1].includes('type="module"')), 'Somente metadados e módulo global de consentimento.');
+      assert.equal(scripts.filter((match) => match[1].includes('type="module"')).length, 1);
+      assert.match(html, /id="banner-consentimento"/);
+      const json = scripts.filter((match) => match[1].includes('type="application/ld+json"')).map((match) => JSON.parse(match[2])).find((value) => value['@type'] === 'BlogPosting');
       assert.equal(json.author.name, 'Milena Dias');
       assert.equal(json.datePublished, '2000-01-01T00:00:00.000Z');
       assert.equal(json.dateModified, '2000-01-02T00:00:00.000Z');
@@ -217,7 +219,7 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
           assert.match(html, /id="comparacao-animada"/);
           assert.match(html, /data-action="play"/);
           assert.match(html, /<script[^>]*type="module"/);
-        } else assert.doesNotMatch(html, /<script[^>]*type="module"/);
+        } else assert.equal((html.match(/<script[^>]*type="module"/g) || []).length, 1, 'Módulo global de consentimento presente no artigo.');
       }
       const sitemap = await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8');
       assert.equal(sitemapLocations(sitemap).length, 9);

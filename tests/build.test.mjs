@@ -27,8 +27,13 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
   }
   assert.match(home, /rel="canonical" href="https:\/\/unolabs\.com\.br\/"/);
   assert.match(privacy, /rel="canonical" href="https:\/\/unolabs\.com\.br\/politica-de-privacidade\/"/);
-  assert.equal((home.match(/<script[^>]+type="module"/g) || []).length, 1);
-  assert.doesNotMatch(privacy + error, /<script/);
+  // Consentimento é global; o módulo adicional da home cuida de sua interface.
+  assert.equal((home.match(/<script[^>]+type="module"/g) || []).length, 2);
+  for (const html of [privacy, error]) {
+    assert.equal((html.match(/<script[^>]+type="module"/g) || []).length, 1);
+    assert.match(html, /id="banner-consentimento"/);
+    assert.doesNotMatch(html, /<script[^>]+src="https:\/\/www\.googletagmanager\.com/);
+  }
   assert.equal((home.match(/<template /g) || []).length, 6);
   assert.match(home, /encaminhado/);
   assert.match(privacy, /Rascunho para revisão/);

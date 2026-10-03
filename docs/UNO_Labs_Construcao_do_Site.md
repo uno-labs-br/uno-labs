@@ -304,7 +304,7 @@ No layout, usar três colunas a partir de 1100 px, duas colunas entre 700 e 1099
 - Grade 4 / 1 / 2 / 2 / 3: logo 60 px + assinatura “Presença digital que gera oportunidades.”; Navegação; Serviços; Atendimento (cidades). Linha final com © (ano automático) e link da política. No celular, duas colunas.
 
 ### 6.15 Páginas auxiliares
-- `/politica-de-privacidade/`: texto específico do fluxo previsto (formulário → Worker `/api/contato` → n8n → SMTP HostGator → `contato@unolabs.com.br`), operadores, base legal LGPD, direitos e guarda. Responsável, contato de privacidade, local do n8n, prazo de guarda e revisão jurídica continuam pendentes; não presumir que o contato comercial seja o contato de privacidade.
+- `/politica-de-privacidade/`: texto específico do fluxo previsto (formulário → Worker `/api/contato` → n8n → SMTP HostGator → `contato@unolabs.com.br`), operadores, base legal LGPD, direitos e guarda. Urias confirmou `contato@unolabs.com.br` como contato público de privacidade em 03/10/2026. Identificação legal, local do n8n, prazo de guarda e revisão do texto continuam pendentes.
 - `/404.html`: título “Esta página não existe — ou mudou de lugar.”, botões para o início e o contato, `noindex`.
 
 ---
@@ -414,7 +414,7 @@ A entrega usa Astro estático e `dist/`. A configuração Vercel de teste tem fr
 
 Cloudflare Workers com Static Assets continua a hospedagem oficial planejada. `wrangler.jsonc` preservado ainda aponta `assets.directory` para `./public`; publicar com essa configuração não serviria as páginas completas Astro. O atalho `npm run deploy` está bloqueado localmente sem rede, e o dry run legado não homologa essa integração. A alternativa Apache/PHP também permanece sem homologação para o novo build.
 
-Custom domains, redirects, DNS, SMTP HostGator, credenciais e secrets dependem de tarefa própria. Clarity, analytics e ativação de Turnstile não foram incorporados. Procedimentos e pendências estão no [LEIA-ME](../LEIA-ME.md); estado comprovado no [relatório](verificacoes/migracao-astro7-ts/RELATORIO.md).
+Custom domains, redirects, DNS, SMTP HostGator, credenciais e secrets dependem de tarefa própria. GA4 foi integrado ao frontend sob consentimento estrito v2; Clarity, pixels e ativação de Turnstile não foram incorporados. Procedimentos e pendências estão no [LEIA-ME](../LEIA-ME.md); estado comprovado no [relatório](verificacoes/migracao-astro7-ts/RELATORIO.md).
 
 ---
 
