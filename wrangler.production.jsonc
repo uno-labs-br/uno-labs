@@ -1,0 +1,23 @@
+// Publicação do domínio oficial: somente com a main aprovada e build de production.
+// Esta configuração cria/atualiza os domínios próprios; não usar para revisar PRs.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "unolabs-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "unolabs.com.br", "custom_domain": true },
+    { "pattern": "www.unolabs.com.br", "custom_domain": true }
+  ],
+  "previews": {},
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": { "enabled": true }
+}
