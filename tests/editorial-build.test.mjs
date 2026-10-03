@@ -186,7 +186,7 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
       await unlink(join(contentDirectory, 'editorial-draft.mdx'));
     });
 
-    await context.test('seis artigos reais do PR #7 preservam textos, links e fotos; saem somente na prévia', async () => {
+    await context.test('seis artigos reais do PR #7 preservam textos, links e fotos; publicados aparecem na prévia e produção', async () => {
       for (const filename of await readdir(contentDirectory)) if (filename.endsWith('.mdx')) await unlink(join(contentDirectory, filename));
       const sourceArticles = JSON.parse(await readFile(join(projectRoot, 'docs', 'blog', 'articles-pr7.json'), 'utf8'));
       assert.equal(sourceArticles.length, 6);
@@ -200,8 +200,11 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
         const html = await readFile(join(root, 'dist', 'blog', article.slug, 'index.html'), 'utf8');
         assert.ok(index.includes(`/blog/${article.slug}/`), article.slug);
         assert.ok(html.includes(article.title), article.slug);
-        assert.match(html, /Em revisão editorial/);
-        assert.doesNotMatch(html, /BlogPosting|name="author"|article:published_time|article:modified_time|class="article-byline"|datetime=/);
+        assert.doesNotMatch(html, /Em revisão editorial/);
+        assert.match(html, /name="robots" content="noindex, nofollow"/);
+        assert.match(html, /BlogPosting/);
+        assert.match(html, /name="author" content="Urias Loures"/);
+        assert.match(html, /datetime="2026-10-03"/);
         assert.ok(html.includes(`/assets/img/blog/${article.slug}/capa.webp`));
         assert.ok(html.includes(article.image.creditUrl));
         assert.ok(html.includes(article.image.licenseUrl));
@@ -217,13 +220,19 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
         } else assert.doesNotMatch(html, /<script[^>]*type="module"/);
       }
       const sitemap = await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8');
-      assert.deepEqual(sitemapLocations(sitemap), ['https://unolabs.com.br/', 'https://unolabs.com.br/politica-de-privacidade/', 'https://unolabs.com.br/blog/']);
+      assert.equal(sitemapLocations(sitemap).length, 9);
+      for (const article of sourceArticles) assert.ok(sitemapLocations(sitemap).includes(`https://unolabs.com.br/blog/${article.slug}/`));
       const production = await runAstro(root, 'build', 'production');
       assert.equal(production.status, 0, production.output);
-      assert.deepEqual((await outputFiles(join(root, 'dist'))).filter((path) => path.startsWith('blog/')), ['blog/index.html']);
+      assert.equal((await outputFiles(join(root, 'dist'))).filter((path) => path.startsWith('blog/')).length, 7);
       const productionIndex = await readFile(join(root, 'dist', 'blog', 'index.html'), 'utf8');
-      assert.match(productionIndex, /Nenhum artigo publicado por enquanto/);
-      for (const article of sourceArticles) assert.ok(!productionIndex.includes(`/blog/${article.slug}/`));
+      assert.doesNotMatch(productionIndex, /Nenhum artigo publicado por enquanto|noindex/);
+      for (const article of sourceArticles) {
+        assert.ok(productionIndex.includes(`/blog/${article.slug}/`));
+        const html = await readFile(join(root, 'dist', 'blog', article.slug, 'index.html'), 'utf8');
+        assert.doesNotMatch(html, /noindex|Em revisão editorial/);
+        assert.match(html, /BlogPosting/);
+      }
     });
   } finally {
     // Desvincular antes de remover a raiz garante que a junction não alcance dependências compartilhadas.
