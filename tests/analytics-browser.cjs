@@ -365,10 +365,9 @@ function compilar(target) {
     await page2.locator('[data-consentimento="aceitar"]').click();
     await page2.waitForFunction(() => document.getElementById('banner-consentimento').hidden);
 
-    // Na page 1, executar clear no localStorage simulando outra aba limpando
+    // Evento storage real do navegador entre duas abas da mesma origem.
     await page.evaluate(() => localStorage.clear());
-    // Disparar storage event manualmente na page 2 como ocorre entre abas reais
-    await page2.evaluate(() => window.dispatchEvent(new StorageEvent('storage', { key: null })));
+    await page2.waitForFunction(() => window['ga-disable-G-ZKM57KG6V9'] === true);
 
     const optOutAba2 = await page2.evaluate(() => window['ga-disable-G-ZKM57KG6V9']);
     check('storage clear em outra aba revoga imediatamente aba ativa', optOutAba2 === true);
@@ -379,24 +378,22 @@ function compilar(target) {
     await page.locator('[data-consentimento="aceitar"]').click();
     await page.waitForFunction(() => document.getElementById('banner-consentimento').hidden);
 
-    // Simular consentimento gravado preste a expirar em 250ms
+    // Recarregar uma decisão curta: somente o timer do aplicativo deve revogá-la.
     await page.evaluate(() => {
-      const expiraEm = Date.now() + 250;
+      const expiraEm = Date.now() + 1200;
       localStorage.setItem('uno_consent_v1', JSON.stringify({
         v: 1,
         status: 'granted',
         timestamp: Date.now(),
         expiresAt: expiraEm,
       }));
-      // Simular timer
-      setTimeout(() => {
-        document.dispatchEvent(new Event('visibilitychange'));
-        window.dispatchEvent(new Event('focus'));
-      }, 350);
     });
-    await page.waitForTimeout(450);
+    await page.reload();
+    await page.waitForFunction(() => (window.dataLayer || []).some(e => e[0] === 'config'));
+    await page.waitForFunction(() => window['ga-disable-G-ZKM57KG6V9'] === true);
     const optOutExpirou = await page.evaluate(() => window['ga-disable-G-ZKM57KG6V9']);
     check('expiracao em aba aberta aciona desativacao', optOutExpirou === true);
+    check('expiracao remove registro vencido', await page.evaluate(() => localStorage.getItem('uno_consent_v1') === null));
 
     // Reativar consentimento para testes subsequentes
     await page.locator('[data-abrir-cookies]').first().click();
@@ -423,7 +420,7 @@ function compilar(target) {
 
     // --- Teste K: Contact Metadata para WhatsApp e E-mail ---
     await page.goto('https://unolabs.com.br/');
-    await page.waitForLoadState('domcontentloaded');
+    await page.waitForFunction(() => (window.dataLayer || []).some(e => e[0] === 'event' && e[1] === 'page_view'));
     const lenAntesZap = await page.evaluate(() => window.dataLayer.length);
     await page.locator('a[data-contact-channel="whatsapp"]').first().click();
     const evZap = await page.evaluate((len) => (window.dataLayer || []).slice(len).find(e => e[0] === 'event' && e[1] === 'contact_click'), lenAntesZap);
@@ -514,20 +511,56 @@ function compilar(target) {
     check('erro no tracker nao interrompe sucesso do usuario', await page.locator('#form-sucesso').isVisible());
 
     // --- Teste P: Navegação Home / Blog / Artigo / Privacy / 404 ---
-    await page.goto('https://unolabs.com.br/blog/');
-    check('botao cookies no blog', await page.locator('[data-abrir-cookies]').count() > 0);
+    for (const caminho of ['/blog/', '/blog/site-recebe-visitas-mas-nao-gera-contatos/', '/politica-de-privacidade/']) {
+      await page.goto('https://unolabs.com.br' + caminho);
+      await page.waitForFunction(() => (window.dataLayer || []).some(e => e[0] === 'event' && e[1] === 'page_view'));
+      check(`page_view unico em ${caminho}`, await page.evaluate(() => (window.dataLayer || []).filter(e => e[0] === 'event' && e[1] === 'page_view').length === 1));
+      await page.locator('[data-abrir-cookies]').first().click();
+      await page.locator('[data-consentimento="recusar"]').click();
+      check(`revogacao funcional em ${caminho}`, await page.evaluate(() => window['ga-disable-G-ZKM57KG6V9'] === true));
+      await page.locator('[data-abrir-cookies]').first().click();
+      await page.locator('[data-consentimento="aceitar"]').click();
+      check(`reaceite sem duplicar page_view em ${caminho}`, await page.evaluate(() => (window.dataLayer || []).filter(e => e[0] === 'event' && e[1] === 'page_view').length === 1));
+    }
 
-    await page.goto('https://unolabs.com.br/blog/site-recebe-visitas-mas-nao-gera-contatos/');
-    check('botao cookies no artigo', await page.locator('[data-abrir-cookies]').count() > 0);
-    const scriptsArtigo = await page.locator('script[type="module"]').count();
-    check('artigo MDX nao possui script module executavel', scriptsArtigo === 0);
-
-    await page.goto('https://unolabs.com.br/politica-de-privacidade/');
-    check('botao cookies na politica', await page.locator('[data-abrir-cookies]').count() > 0);
-    check('politica de privacidade nao possui script executavel', await page.locator('script[type="module"]').count() === 0);
-
-    await page.goto('https://unolabs.com.br/rota-inexistente-404');
+    await page.goto('https://unolabs.com.br/cliente@exemplo.com/27999999999');
+    await page.waitForFunction(() => (window.dataLayer || []).some(e => e[0] === 'event' && e[1] === 'page_view'));
     check('404 exibe pagina propria', await page.locator('h1').textContent().then(t => t.includes('não existe')));
+    check('404 nao envia dados pessoais do caminho', await page.evaluate(() => (window.dataLayer || []).find(e => e[0] === 'event' && e[1] === 'page_view')[2].page_location === 'https://unolabs.com.br/404'));
+    await page.locator('[data-abrir-cookies]').click();
+    await page.locator('[data-consentimento="recusar"]').click();
+    check('404 permite revogar consentimento', await page.evaluate(() => window['ga-disable-G-ZKM57KG6V9'] === true));
+
+    // Revogação durante o download: nenhuma configuração ou page_view fica na fila.
+    await page.evaluate(() => localStorage.clear());
+    await page.goto('https://unolabs.com.br/');
+    respostaGtagHold = new Promise(resolve => { liberarGtag = resolve; });
+    await page.locator('[data-consentimento="aceitar"]').click();
+    await page.waitForSelector('script[src*="googletagmanager.com"]', { state: 'attached' });
+    await page.locator('[data-abrir-cookies]').first().click();
+    await page.locator('[data-consentimento="recusar"]').click();
+    liberarGtag();
+    respostaGtagHold = null;
+    await page.waitForFunction(() => window.__gtagScriptCarregado === true);
+    check('revogacao durante download nao configura nem envia page_view', await page.evaluate(() => !(window.dataLayer || []).some(e => e[0] === 'config' || e[0] === 'event')));
+    await page.locator('[data-abrir-cookies]').first().click();
+    await page.locator('[data-consentimento="aceitar"]').click();
+    await page.waitForFunction(() => (window.dataLayer || []).some(e => e[0] === 'config'));
+    check('aceite posterior ao download configura uma vez', await page.evaluate(() => (window.dataLayer || []).filter(e => e[0] === 'config').length === 1 && (window.dataLayer || []).filter(e => e[0] === 'event' && e[1] === 'page_view').length === 1));
+
+    // Limite de timer de 32 bits: reprogramação até os 180 dias, sem retorno à aba.
+    const pageClock = await context.newPage();
+    await pageClock.clock.install();
+    await pageClock.goto('https://unolabs.com.br/');
+    await pageClock.waitForFunction(() => (window.dataLayer || []).some(e => e[0] === 'config'));
+    // Avançar em blocos também verifica a reprogramação de timers longos.
+    for (let i = 0; i < 7; i++) {
+      await pageClock.clock.fastForward(2147483647);
+      check(`consentimento continua valido apos bloco de timer ${i + 1}`, await pageClock.evaluate(() => window['ga-disable-G-ZKM57KG6V9'] !== true));
+    }
+    await pageClock.clock.fastForward(180 * 24 * 60 * 60 * 1000 - 7 * 2147483647 + 1000);
+    check('timer de 180 dias revoga sem evento de foco', await pageClock.evaluate(() => window['ga-disable-G-ZKM57KG6V9'] === true && localStorage.getItem('uno_consent_v1') === null));
+    await pageClock.close();
 
     // --- Teste Q: Produção HTML servido em localhost / Vercel / workers.dev bloqueia GA ---
     await page.goto(`http://127.0.0.1:${port}/`);
@@ -549,6 +582,61 @@ function compilar(target) {
     check('producao servida em workers.dev bloqueia GA', await page.locator('script[src*="googletagmanager.com"]').count() === 0);
 
     await context.close();
+
+    // Biblioteca real do Google, com TODOS os envios de coleta interceptados.
+    // Isso valida o transporte gerado pelo SDK sem registrar visitas de teste no GA4.
+    console.log('5. Validando SDK real com coleta interceptada...');
+    const sdkResponse = await fetch('https://www.googletagmanager.com/gtag/js?id=G-ZKM57KG6V9');
+    assert.equal(sdkResponse.status, 200, 'biblioteca oficial do Google indisponivel');
+    const sdkSource = await sdkResponse.text();
+    const realContext = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const transporte = [];
+    await realContext.route('**/*', async route => {
+      const req = route.request();
+      const u = new URL(req.url());
+      if (u.hostname === 'www.googletagmanager.com' && u.pathname === '/gtag/js') {
+        return route.fulfill({ status: 200, contentType: 'application/javascript', body: sdkSource });
+      }
+      if (u.pathname.endsWith('/collect')) {
+        const params = new URLSearchParams(u.search);
+        const corpo = req.postData() || '';
+        const linhas = corpo ? corpo.split('\n') : [''];
+        for (const linha of linhas) {
+          const evento = new URLSearchParams(params);
+          new URLSearchParams(linha).forEach((v, k) => evento.set(k, v));
+          transporte.push(evento);
+        }
+        return route.fulfill({ status: 204, body: '' });
+      }
+      if (u.hostname === 'unolabs.com.br') {
+        const res = await fetch(`http://127.0.0.1:${port}${u.pathname}${u.search}`);
+        return route.fulfill({ status: res.status, headers: Object.fromEntries(res.headers), body: Buffer.from(await res.arrayBuffer()) });
+      }
+      return route.abort('blockedbyclient');
+    });
+    const realPage = await realContext.newPage();
+    realPage.on('pageerror', err => { report.erros.push(err.message); process.exitCode = 1; });
+    await realPage.goto('https://unolabs.com.br/?utm_source=teste&utm_medium=cpc&gclid=Campanha123456789Teste&email=pessoa@exemplo.com#contato');
+    check('SDK real nao gera coleta antes do aceite', transporte.length === 0);
+    await realPage.locator('[data-consentimento="aceitar"]').click();
+    await realPage.waitForFunction(() => document.cookie.includes('_ga='));
+    await realPage.waitForTimeout(1500);
+    const pvReal = transporte.filter(p => p.get('en') === 'page_view');
+    check('SDK real gera exatamente um page_view', pvReal.length === 1);
+    check('SDK real usa URL limpa e preserva campanha valida', pvReal[0].get('dl') === 'https://unolabs.com.br/?utm_source=teste&utm_medium=cpc&gclid=Campanha123456789Teste');
+    await realPage.locator('a[data-contact-channel="whatsapp"]').first().click();
+    await realPage.waitForTimeout(1500);
+    check('SDK real transporta contact_click com canal constante', transporte.some(p => p.get('en') === 'contact_click' && p.get('ep.contact_channel') === 'whatsapp'));
+    await realPage.locator('[data-abrir-cookies]').first().click();
+    await realPage.locator('[data-consentimento="recusar"]').click();
+    await realPage.waitForTimeout(300);
+    const countRevogado = transporte.length;
+    await realPage.evaluate(() => window.gtag('event', 'contact_click', { contact_channel: 'whatsapp' }));
+    await realPage.mouse.wheel(0, 900);
+    await realPage.waitForTimeout(1500);
+    check('opt-out nativo impede transporte do SDK apos revogacao', transporte.length === countRevogado);
+    check('cookies criados pelo SDK real removidos ao revogar', await realPage.evaluate(() => !document.cookie.split(';').some(c => c.trim().startsWith('_ga'))));
+    await realContext.close();
     prodServidor.server.close();
     serverInstance = null;
 
@@ -560,7 +648,7 @@ function compilar(target) {
 
     // Restaura dist para preview apenas uma vez se estiver em production
     if (targetAtual === 'production') {
-      console.log('\n5. Restaurando build de dist para o target padrao preview...');
+      console.log('\n6. Restaurando build de dist para o target padrao preview...');
       try {
         compilar('preview');
         console.log('dist restaurado com sucesso.');

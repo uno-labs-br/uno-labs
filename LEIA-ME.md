@@ -204,6 +204,7 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
 
 - **Modo de consentimento (Consent Mode v2):** padrão estrito com `analytics_storage: 'denied'`, `ad_storage: 'denied'`, `ad_user_data: 'denied'` e `ad_personalization: 'denied'`. Sinais de publicidade e remarketing permanecem permanentemente desativados (`allow_google_signals: false`, `allow_ad_personalization_signals: false`, `restricted_data_processing: true`).
 - **Condições estritas de execução:** o script `gtag.js` só é injetado dinamicamente após consentimento concedido em ambiente de produção oficial (`UNO_DEPLOY_TARGET=production`, HTTPS e hostname `unolabs.com.br` ou `www.unolabs.com.br`). Ambientes de teste, localhost, Vercel e workers.dev não executam chamadas à API do Google, mesmo com HTML de produção.
+- **Cobertura global:** home, índice do blog, artigos, política de privacidade e 404 carregam o módulo de consentimento. A configuração do SDK e o primeiro `page_view` aguardam seu carregamento e uma nova validação da permissão.
 - **Preferência local e revogação:** escolha versionada em `localStorage` com validade de 180 dias. O botão permanente "Preferências de cookies" no rodapé permite rever ou revogar a escolha a qualquer momento, aplicando a diretiva técnica `window['ga-disable-G-ZKM57KG6V9'] = true`, update `denied` e remoção imediata dos cookies `_ga` e `_ga_*`, com sincronização entre abas sem recarregar a página.
 - **Sanitização de URLs:** `page_location` omite fragmentos (`#`) e descarta parâmetros desconhecidos ou pessoais, preservando estritamente UTMs e identificadores de anúncio homologados (`utm_*`, `gclid`, `fbclid`, etc.); `page_referrer` transmite apenas origem e caminho.
 - **Taxonomia de eventos:**
@@ -216,7 +217,9 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
   2. Cadastro das dimensões personalizadas com escopo de evento no console: `contact_channel`, `cta_id`, `cta_position`, `lead_channel`, `form_id`, `form_name`.
   3. Verificação no DebugView durante navegação de teste.
   4. Marcação de `generate_lead` como evento chave/conversão, se desejado.
-  *Aviso:* o código implementado e os testes locais simulados não comprovam coleta em servidores reais do Google nem homologação em produção antes da publicação.
+  *Verificação:* `node tests/analytics-browser.cjs` validou 73 condições, inclusive transporte do SDK oficial com todos os envios interceptados. O teste não registra visitas de teste no GA4 nem comprova recebimento na propriedade. Evidências e limites no [relatório GA4](docs/verificacoes/ga4/RELATORIO.md).
+
+**Cloudflare confirmado em 03/10/2026:** o Worker `unolabs-site` acompanha `main`, compila com `UNO_DEPLOY_TARGET=production npm run build` e publica com `npx wrangler deploy --config wrangler.production.jsonc`. Usar essa configuração com assets em `dist/`; o arquivo Wrangler legado e o atalho bloqueado não são o fluxo de produção. As referências anteriores à integração Astro pendente descrevem o estado da migração, antes desta conferência.
 
 ## 8. Pendências comerciais e de homologação
 
@@ -224,10 +227,10 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
 |---|---|
 | Pacote inicial a partir de R$ 1.490 | Definir escopo e entregáveis; não inventar quantidades |
 | CNPJ e razão social | Informar ou confirmar dados empresariais |
-| Privacidade | Completar responsável, contato de privacidade, local do n8n, guarda e data; revisar juridicamente |
+| Privacidade | Contato público confirmado: `contato@unolabs.com.br`; completar identificação legal, infraestrutura e guarda; revisar o texto |
 | Worker, n8n e SMTP | Configuração real, credenciais, remetente e contrato de confirmação |
 | Recebimento real | Evidências separadas do backend, SMTP e caixa `contato@unolabs.com.br` |
-| Hospedagem Astro | Integrar `dist/` com a infraestrutura oficial; homologar antes de publicar |
+| Hospedagem Astro | Integração `dist/` e deploy automático da `main` confirmados no Cloudflare; verificar cada publicação no domínio |
 | Artigos | Produzir e revisar 4 a 6 artigos-pilar; depois seguir a frequência aprovada |
 | Mídia paga | Confirmar pagamento da verba diretamente às plataformas |
 | Configuração do painel GA4 | Cadastrar dimensões personalizadas no console, validar DebugView e marcar conversão |

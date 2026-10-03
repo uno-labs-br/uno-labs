@@ -1,8 +1,10 @@
 # Relatório de Verificação — GA4 com Consentimento e Eventos de Contato
 
-**Data:** 03/10/2026  
-**Identificador da SPEC:** `ga4-20261003`  
-**Measurement ID:** `G-ZKM57KG6V9`  
+**Data:** 03/10/2026
+
+**Identificador da SPEC:** `ga4-20261003`
+
+**Measurement ID:** `G-ZKM57KG6V9`
 **Status da Implementação:** Concluída e testada localmente em ambiente isolado.
 
 ---
@@ -29,12 +31,12 @@ A integração do Google Analytics 4 (GA4) foi realizada no frontend estático A
    - Preferência versionada no `localStorage` com chave `uno_consent_v1` e expiração explícita de 180 dias com validação estrita de integridade.
    - Caso o armazenamento esteja indisponível (ex.: restrições de storage), o comportamento é fail-closed: o site opera normalmente sem quebras, sem salvar preferência fictícia e mantendo a medição bloqueada.
    - Expiração em aba aberta é monitorada por timer e revalidada no retorno à aba (`visibilitychange`/`focus`).
-   - Botão permanente "Preferências de cookies" no rodapé de todas as páginas permite reabrir o diálogo não modal e revogar a decisão a qualquer momento.
+   - Botão permanente "Preferências de cookies" no rodapé das páginas e na área de ações do 404 permite reabrir o diálogo não modal e revogar a decisão a qualquer momento.
    - Ao revogar: define imediatamente `window['ga-disable-G-ZKM57KG6V9'] = true`, envia `gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' })`, remove cookies de análise primários (`_ga` e `_ga_ZKM57KG6V9`) e sincroniza abas abertas pelo evento `storage`, sem recarregar a página nem apagar dados digitados no formulário.
 5. **Sanitização estrita de dados:**
    - `page_location` descarta fragmentos (`#...`), credenciais de URL e parâmetros desconhecidos ou privados, preservando estritamente UTMs e IDs de campanha homologados (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `utm_id`, `gclid`, `gclsrc`, `dclid`, `fbclid`, `msclkid`, `ttclid`) desde que não contenham padrões de e-mail ou telefone.
    - Páginas de erro 404 utilizam canonical estático (`/404`) para impedir que URLs arbitrárias com dados pessoais sejam transmitidas.
-   - `page_referrer` transmite exclusivamente a origem (externo) ou o caminho limpo (interno).
+   - `page_referrer` transmite exclusivamente a origem (externo) ou caminhos públicos permitidos (interno); outros caminhos voltam à origem.
    - Nenhum dado pessoal digitado no formulário de contato é transmitido ao GA.
    - Referências de políticas do Google: [Política de Privacidade do Google](https://policies.google.com/privacy) e [Como o Google usa dados de sites de parceiros](https://policies.google.com/technologies/partner-sites).
 
@@ -70,4 +72,15 @@ As seguintes etapas dependem de configuração e homologação humana na interfa
 4. **Marcação de Conversões:**
    - Marcar o evento `generate_lead` como evento principal / conversão para relatórios de aquisição.
 
-*Nota de limitação:* os testes locais utilizam interceptação de rede no Playwright para simular o comportamento da API e validar as condições estritas do código. Não constituem prova de recebimento em tempo real nos servidores da Google LLC nem aprovação jurídica final da política de privacidade.
+## 4. Verificação técnica e visual
+
+- `npm run build`: Astro/TypeScript sem erros; permanece o aviso pré-existente de API antiga de movimento e avisos de diretiva MDX do bundler.
+- `node --test tests/contato.test.mjs tests/build.test.mjs tests/editorial.test.mjs tests/editorial-build.test.mjs`: 60 testes aprovados. Os contratos de build passaram a exigir o módulo global de consentimento sem modificar conteúdo editorial.
+- `node tests/analytics-browser.cjs`: 73 verificações aprovadas. Cobrem recusa, armazenamento indisponível, aceite/reaceite sem duplicação, cookies, evento `storage` real entre abas, timer curto e reprogramação durante 180 dias, URLs/404, eventos comerciais, confirmações/erros de formulário simulados, cobertura de artigos/política e bloqueio de ambientes de teste.
+- Biblioteca real `gtag.js` obtida do domínio oficial, com todos os endpoints de coleta interceptados: um `page_view`, URL limpa com campanha preservada, transporte de `contact_click`, cookies criados pelo SDK e remoção/opt-out efetivo após revogação. Nenhuma requisição de coleta de teste chegou ao Google.
+- Revisão visual em 1440, 390 e 320px: aviso de 198px em 320px, opções equivalentes, fechamento sem conceder permissão e acesso permanente às preferências. Revisão independente aprovou as quatro correções identificadas. Detector apontou somente padrões anteriores, fora do escopo. Tokens e tipografia existentes preservados.
+- Contato público de privacidade confirmado pelo usuário: `contato@unolabs.com.br`. Razão social/CNPJ, infraestrutura e guarda comercial continuam pendentes no texto existente; testes técnicos não completam esses dados.
+
+Referências oficiais: [Consent Mode básico](https://developers.google.com/tag-platform/security/guides/consent?consentmode=basic) e [desativação de coleta e controles de publicidade](https://developers.google.com/tag-platform/security/guides/privacy).
+
+*Limitação:* o backend de contato é simulado nos testes. A inspeção do painel Cloudflare não mostrou secrets de integração. Não foi homologada entrega SMTP, recebimento na caixa nem recepção dos eventos na propriedade GA4. O SDK real é verificado com coleta interceptada; a interface do Google precisa confirmar os dados após a publicação.

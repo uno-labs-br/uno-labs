@@ -23,6 +23,7 @@ declare global {
 
 let dataLayerIniciada = false;
 let scriptInjetado = false;
+let sdkCarregado = false;
 let configEnviado = false;
 let pageviewEnviada = false;
 let listenersContatoIniciados = false;
@@ -72,9 +73,7 @@ export function isAmbientePermitido(): boolean {
 /** Verifica se um valor de parâmetro parece conter e-mail ou telefone. */
 function contemDadosPessoais(valor: string): boolean {
   if (valor.includes('@')) return true;
-  const digitos = valor.replace(/\D/g, '');
-  if (digitos.length >= 8 && digitos.length <= 15) return true;
-  return false;
+  return /(?:^|[^a-z0-9])\+?\d[\d\s().-]{7,}\d(?:$|[^a-z0-9])/i.test(valor);
 }
 
 function ehPagina404(): boolean {
@@ -94,13 +93,15 @@ export function sanitizarPageLocation(urlBruta = window.location.href): string {
       return new URL('/404', window.location.origin).href;
     }
 
-    const parsed = new URL(urlBruta, window.location.origin);
+    const entrada = new URL(urlBruta, window.location.origin);
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
+    const parsed = new URL(canonical || window.location.origin);
     parsed.username = '';
     parsed.password = '';
     parsed.hash = '';
 
     const novosParams = new URLSearchParams();
-    parsed.searchParams.forEach((valor, chave) => {
+    entrada.searchParams.forEach((valor, chave) => {
       const chaveLower = chave.toLowerCase();
       if (PARAMETROS_PERMITIDOS.has(chaveLower) && !contemDadosPessoais(valor)) {
         novosParams.set(chaveLower, valor);
@@ -126,7 +127,10 @@ export function sanitizarPageReferrer(referrerBruto = document.referrer): string
     if (parsed.origin !== window.location.origin) {
       return `${parsed.origin}/`;
     }
-    return `${parsed.origin}${parsed.pathname}`;
+    const caminhosPublicos = new Set(['/', '/blog/', '/politica-de-privacidade/']);
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
+    if (canonical) caminhosPublicos.add(new URL(canonical).pathname);
+    return caminhosPublicos.has(parsed.pathname) ? `${parsed.origin}${parsed.pathname}` : `${parsed.origin}/`;
   } catch {
     return '';
   }
@@ -153,8 +157,11 @@ export function obterConsentimentoArmazenado(): ConsentStatus | null {
       Number.isFinite(record.expiresAt) &&
       record.timestamp <= agora + 60000 &&
       record.expiresAt > agora &&
-      record.expiresAt - record.timestamp <= CONSENT_VALIDITY_MS + 60000
+      record.timestamp >= 0 &&
+      record.expiresAt > record.timestamp &&
+      record.expiresAt - record.timestamp <= CONSENT_VALIDITY_MS
     ) {
+      programarTimerExpiracao(record.expiresAt);
       return record.status;
     }
 
@@ -198,16 +205,12 @@ function programarTimerExpiracao(expiresAt: number): void {
     desativarMedicaoGA();
     return;
   }
-  if (restante <= MAX_TIMEOUT_MS) {
-    timerExpiracao = setTimeout(() => {
+  timerExpiracao = setTimeout(() => {
+    timerExpiracao = null;
+    if (obterConsentimentoArmazenado() !== 'granted') {
       desativarMedicaoGA();
-      try {
-        window.localStorage?.removeItem(STORAGE_KEY);
-      } catch {
-        // Ignora erro
-      }
-    }, restante);
-  }
+    }
+  }, Math.min(restante, MAX_TIMEOUT_MS));
 }
 
 /** Define a flag nativa do Google para opt-out / desativação do GA4. */
@@ -296,6 +299,10 @@ function carregarScriptGtag(): void {
   const script = document.createElement('script');
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  script.addEventListener('load', () => {
+    sdkCarregado = true;
+    configurarMedicaoGA();
+  }, { once: true });
   document.head.appendChild(script);
 }
 
@@ -313,7 +320,13 @@ function ativarMedicaoGA(): void {
   });
 
   carregarScriptGtag();
+  configurarMedicaoGA();
+}
 
+/** Só configura a biblioteca pronta, com a decisão revalidada após o download. */
+function configurarMedicaoGA(): void {
+  if (!sdkCarregado || !isAmbientePermitido()) return;
+  if (window[`ga-disable-${GA_MEASUREMENT_ID}`] || obterConsentimentoArmazenado() !== 'granted') return;
   if (!configEnviado) {
     window.gtag?.('config', GA_MEASUREMENT_ID, {
       send_page_view: false,
@@ -354,21 +367,38 @@ function desativarMedicaoGA(): void {
 }
 
 /** Envia um evento de tracking com verificação estrita de taxonomia e consentimento. */
-export function trackEvento(nomeEvento: string, parametros: Record<string, string | number | boolean> = {}): void {
-  if (!isAmbientePermitido()) return;
-  if (!TAXONOMIA_PERMITIDA.has(nomeEvento)) return;
-  if (obterConsentimentoArmazenado() !== 'granted') return;
-  if (window[`ga-disable-${GA_MEASUREMENT_ID}`]) return;
+export function trackEvento(nomeEvento: string, parametros: Record<string, string | number | boolean> = {}): boolean {
+  if (!sdkCarregado || !configEnviado || !isAmbientePermitido()) return false;
+  if (!TAXONOMIA_PERMITIDA.has(nomeEvento)) return false;
+  if (obterConsentimentoArmazenado() !== 'granted') { desativarMedicaoGA(); return false; }
+  if (window[`ga-disable-${GA_MEASUREMENT_ID}`]) return false;
+
+  const metadados: Record<string, string> = {};
+  if (nomeEvento === 'form_start') {
+    if (parametros.form_id !== 'form-contato' || parametros.form_name !== 'contato') return false;
+    metadados.form_id = 'form-contato'; metadados.form_name = 'contato';
+  } else if (nomeEvento === 'generate_lead') {
+    if (parametros.lead_channel !== 'form_contato') return false;
+    metadados.lead_channel = 'form_contato';
+  } else if (nomeEvento === 'contact_click') {
+    if (typeof parametros.contact_channel !== 'string' || !CANAIS_PERMITIDOS.has(parametros.contact_channel) ||
+        typeof parametros.cta_id !== 'string' || !CTAS_PERMITIDOS.has(parametros.cta_id) ||
+        typeof parametros.cta_position !== 'string' || !POSICOES_PERMITIDAS.has(parametros.cta_position)) return false;
+    metadados.contact_channel = parametros.contact_channel;
+    metadados.cta_id = parametros.cta_id; metadados.cta_position = parametros.cta_position;
+  }
 
   try {
     const payload = {
       page_location: sanitizarPageLocation(),
       page_referrer: sanitizarPageReferrer(),
-      ...parametros,
+      ...metadados,
     };
     window.gtag?.('event', nomeEvento, payload);
+    return true;
   } catch {
     // Falha do tracker nunca quebra interações
+    return false;
   }
 }
 
@@ -377,8 +407,7 @@ let formStartEnviado = false;
 export function registrarInicioFormulario(): void {
   if (formStartEnviado) return;
   if (obterConsentimentoArmazenado() !== 'granted') return;
-  formStartEnviado = true;
-  trackEvento('form_start', {
+  formStartEnviado = trackEvento('form_start', {
     form_id: 'form-contato',
     form_name: 'contato',
   });
