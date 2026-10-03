@@ -217,7 +217,7 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
   2. Cadastro das dimensões personalizadas com escopo de evento no console: `contact_channel`, `cta_id`, `cta_position`, `lead_channel`, `form_id`, `form_name`.
   3. Verificação no DebugView durante navegação de teste.
   4. Marcação de `generate_lead` como evento chave/conversão, se desejado.
-  *Verificação:* `node tests/analytics-browser.cjs` validou 73 condições, inclusive transporte do SDK oficial com todos os envios interceptados. O teste não registra visitas de teste no GA4 nem comprova recebimento na propriedade. Evidências e limites no [relatório GA4](docs/verificacoes/ga4/RELATORIO.md).
+  *Verificação:* `node tests/analytics-browser.cjs` validou 73 condições, inclusive transporte do SDK oficial com os envios de teste interceptados. Após o PR #12, a publicação no Cloudflare e a recepção inicial de `page_view`, `first_visit` e `session_start` foram confirmadas na propriedade. Seis dimensões foram cadastradas e `generate_lead` marcado como evento principal sem valor fictício. Fuso São Paulo, BRL e retenção de 14 meses conferidos. Evidências e limites no [relatório GA4](docs/verificacoes/ga4/RELATORIO.md).
 
 **Cloudflare confirmado em 03/10/2026:** o Worker `unolabs-site` acompanha `main`, compila com `UNO_DEPLOY_TARGET=production npm run build` e publica com `npx wrangler deploy --config wrangler.production.jsonc`. Usar essa configuração com assets em `dist/`; o arquivo Wrangler legado e o atalho bloqueado não são o fluxo de produção. As referências anteriores à integração Astro pendente descrevem o estado da migração, antes desta conferência.
 
@@ -233,7 +233,7 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
 | Hospedagem Astro | Integração `dist/` e deploy automático da `main` confirmados no Cloudflare; verificar cada publicação no domínio |
 | Artigos | Produzir e revisar 4 a 6 artigos-pilar; depois seguir a frequência aprovada |
 | Mídia paga | Confirmar pagamento da verba diretamente às plataformas |
-| Configuração do painel GA4 | Cadastrar dimensões personalizadas no console, validar DebugView e marcar conversão |
+| Configuração do painel GA4 | Dimensões e evento principal configurados; recepção inicial confirmada em tempo real. Recepção de lead real depende da homologação do backend |
 
 Garantia e prazo seguem a proposta de cada escopo; nenhum número provisório entra na home. Cargos, biografias e fotografias da equipe foram aprovados em 01/10/2026: Urias Loures e Bruno Gonzaga, cofundadores; Milena Dias, Comunicação e Conteúdo. Preservar os textos integrais registrados na documentação completa. Não confundir aprovação da apresentação da equipe com autoria editorial.
 
