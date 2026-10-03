@@ -1,3 +1,5 @@
+> Atualização de 03/10/2026: a publicação dos seis artigos e a hospedagem Vercel do domínio oficial são descritas em [docs/blog/publicacao-2026-10-03.md](docs/blog/publicacao-2026-10-03.md). As descrições abaixo de artigos em revisão e de proteção global Vercel registram o estado anterior. A produção Vercel passa a usar o build de produção; somente o blog é liberado do cabeçalho fixo noindex.
+
 # UNO Labs — instruções do site
 
 **Atualização: 02/10/2026 — migração do frontend para Astro 7 + TypeScript.**

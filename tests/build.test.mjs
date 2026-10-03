@@ -48,18 +48,24 @@ test('índice do blog e distribuição sem código legado, documentos ou fixture
   assert.equal(existsSync(new URL('blog/index.html', dist)), true);
   assert.match(read('blog/index.html'), /href="\/blog\//);
   const articles = paths.filter(path => /^blog\/.+\/index\.html$/.test(path));
-  assert.equal(articles.length, production ? 0 : 6);
+  assert.equal(articles.length, 6);
   for (const path of articles) {
-    assert.match(read(path), /Em revisão editorial/);
-    assert.match(read(path), /name="robots" content="noindex, nofollow"/);
-    assert.doesNotMatch(read(path), /"@type":"BlogPosting"/);
+    assert.doesNotMatch(read(path), /Em revisão editorial/);
+    if (production) assert.doesNotMatch(read(path), /noindex/);
+    else assert.match(read(path), /name="robots" content="noindex, nofollow"/);
+    assert.match(read(path), /"@type":"BlogPosting"/);
+    assert.match(read(path), /"name":"Urias Loures"/);
+    assert.match(read(path), /"datePublished":"2026-10-03T00:00:00.000Z"/);
+    const slug = path.split("/")[1];
+    assert.ok(read("blog/index.html").includes(`/blog/${slug}/`));
+    assert.ok(read("sitemap.xml").includes(`/blog/${slug}/`));
   }
   assert.equal(existsSync(new URL('assets/js/site.js', dist)), false);
   assert.equal(existsSync(new URL('assets/css/site.css', dist)), false);
   const sitemap = read('sitemap.xml');
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 3);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 9);
   assert.match(sitemap, /<loc>https:\/\/unolabs\.com\.br\/blog\/<\/loc>/);
-  assert.doesNotMatch(sitemap, /404|api\/|fixture|lastmod/);
+  assert.doesNotMatch(sitemap, /404|api\/|fixture/);
   const robots = read('robots.txt');
   assert.match(robots, /Allow: \//);
   assert.doesNotMatch(robots, /Disallow: \//);
@@ -75,6 +81,8 @@ test('atalho de publicação bloqueado e backend fora do build Astro', () => {
   assert.doesNotMatch(config, /adapter:|@astrojs\/(?:cloudflare|vercel)/);
   const vercel = JSON.parse(readFileSync(new URL('vercel.json', root), 'utf8'));
   assert.equal(vercel.outputDirectory, 'dist');
+  assert.equal(vercel.buildCommand, 'node scripts/build-vercel.mjs');
+  assert.equal(vercel.headers[0].source, '/:path((?!blog(?:/|$)).*)');
   assert.equal(vercel.rewrites, undefined);
   assert.equal(vercel.headers[0].headers[0].value, 'noindex, nofollow');
 });

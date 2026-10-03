@@ -191,10 +191,10 @@ test('importação dos seis artigos preserva parágrafos/seções e capas do com
     const mdx = await readFile(new URL(`../src/content/blog/${article.slug}.mdx`, import.meta.url), 'utf8');
     const metadata = JSON.parse(mdx.match(/^---\r?\n([\s\S]+?)\r?\n---/)[1]);
     assert.equal(schema.safeParse(metadata).success, true, article.slug);
-    assert.equal(metadata.draft, true);
-    assert.equal(metadata.preview, true);
-    assert.equal(metadata.author, undefined);
-    assert.equal(metadata.pubDate, undefined);
+    assert.equal(metadata.draft, false);
+    assert.equal(metadata.preview, undefined);
+    assert.equal(metadata.author, 'urias-loures');
+    assert.equal(metadata.pubDate, '2026-10-03');
     const blocks = [...mdx.matchAll(/<EditorialHTML html={(.+)} \/>/g)].map(match => JSON.parse(match[1]));
     for (const paragraph of article.lede) assert.ok(blocks.includes(links(`<p>${paragraph}</p>`)), article.slug);
     for (const section of article.sections) assert.ok(blocks.some(block => block.includes(links(section.html))), `${article.slug}: ${section.id}`);
