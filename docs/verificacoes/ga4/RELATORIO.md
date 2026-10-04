@@ -19,7 +19,7 @@ A integração do Google Analytics 4 (GA4) foi realizada no frontend estático A
    - Recursos publicitários, Google signals e personalização de anúncios são permanentemente desabilitados via flags (`allow_google_signals: false`, `allow_ad_personalization_signals: false`, `restricted_data_processing: true`).
 2. **Carregamento condicional e dinâmico de `gtag.js`:**
    - A biblioteca de script do Google (`gtag.js?id=G-ZKM57KG6V9`) **não** é embutida no HTML estático nem baixada no carregamento inicial.
-   - Ela só é inserida no DOM uma única vez, de forma assíncrona, se o usuário clicar explicitamente em "Aceitar análise" ou se possuir consentimento prévio válido no dispositivo.
+   - Ela só é inserida no DOM uma única vez, de forma assíncrona, se o usuário clicar explicitamente em "Aceitar" ou se possuir consentimento prévio válido no dispositivo.
    - A configuração `gtag('config')` e o envio de `page_view` só ocorrem quando o download do SDK terminar e o consentimento ainda permanecer válido.
 3. **Ambiente estrito de produção:**
    - A execução do GA é bloqueada automaticamente fora de produção:

@@ -12,7 +12,7 @@ const deployTarget = import.meta.env.UNO_DEPLOY_TARGET ?? 'preview';
   <div class="container banner-consentimento__grade">
     <div class="banner-consentimento__conteudo">
       <div class="banner-consentimento__cab">
-        <p class="banner-consentimento__titulo" id="banner-consentimento-titulo"><strong>Estatísticas de uso e privacidade</strong></p>
+        <p class="banner-consentimento__titulo" id="banner-consentimento-titulo"><strong>Preferências.</strong></p>
         <button
           type="button"
           class="banner-consentimento__fechar"
@@ -25,13 +25,13 @@ const deployTarget = import.meta.env.UNO_DEPLOY_TARGET ?? 'preview';
         </button>
       </div>
       <p class="banner-consentimento__texto">
-        Coletamos estatísticas de uso para entender a navegação. Publicidade desativada e sem dados do formulário.{' '}
+        Usamos cookies de análise para entender a navegação e melhorar o site para você. Você pode aceitar ou continuar sem cookies.{' '}
         <a href="/politica-de-privacidade/">Política de privacidade</a>.
       </p>
     </div>
     <div class="banner-consentimento__acoes" role="group" aria-label="Opções de consentimento">
-      <button type="button" class="btn btn--consentimento" data-consentimento="recusar">Recusar análise</button>
-      <button type="button" class="btn btn--consentimento" data-consentimento="aceitar">Aceitar análise</button>
+      <button type="button" class="btn btn--consentimento" data-consentimento="aceitar">Aceitar</button>
+      <button type="button" class="btn btn--consentimento" data-consentimento="recusar">Recusar</button>
     </div>
   </div>
 </aside>
