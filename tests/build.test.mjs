@@ -32,6 +32,7 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
   assert.match(whatsapp, /rel="canonical" href="https:\/\/unolabs\.com\.br\/whatsapp\/"/);
   assert.match(whatsapp, /Canal WhatsApp gerenciado/);
   assert.equal((whatsapp.match(/<h1(?:\s|>)/g) || []).length, 1);
+  assert.doesNotMatch(whatsapp, /<main[^>]+class="(?:[^"]*\s)?canal(?:\s[^"]*)?"/);
   // Consentimento é global; o módulo adicional da home cuida de sua interface.
   assert.equal((home.match(/<script[^>]+type="module"/g) || []).length, 2);
   for (const html of [privacy, error]) {
