@@ -82,7 +82,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .topo__in { height: var(--topo); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .topo__marca { display: flex; align-items: center; margin-left: -9px; }
 .topo__marca img { height: 52px; width: auto; }
-.topo__nav { display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500; }
+.topo__nav { display: flex; align-items: center; gap: 22px; font-size: 15px; font-weight: 500; }
+@media (min-width: 1280px) { .topo__nav { gap: 28px; } }
 .topo__nav a { color: var(--uno-ink); text-decoration: none; }
 .topo__nav a:hover { color: var(--uno-pine); text-decoration: underline; text-underline-offset: 6px; }
 .topo__cta { min-height: 48px; font-size: 15px; padding: 0 22px; }
@@ -107,6 +108,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero__in { position: relative; }
 .hero__sobre { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 500; color: var(--uno-ink-2); }
 .hero__sobre::before { content: ''; width: 32px; height: 2px; background: var(--uno-mint); flex: none; }
+.hero__sobre a { color: inherit; font-weight: 600; text-underline-offset: 4px; }
 .hero__titulo { margin-top: 26px; font-size: clamp(46px, 7.4vw, 104px); line-height: .96; font-weight: 600; letter-spacing: -0.04em; color: var(--uno-pine); }
 .linha { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
 .linha > span { display: inline-block; animation: sobe 1s cubic-bezier(.16, .84, .2, 1) both; }
@@ -278,6 +280,8 @@ html:not(.js) .jm-texto { position: static; opacity: 1; visibility: visible; tra
 .servico:last-child { border-bottom: 1px solid var(--uno-line); }
 .servico h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
 .servico .modelo { font-size: 14px; font-weight: 500; color: var(--uno-ink-2); text-align: right; }
+.servico h3 a { color: inherit; text-decoration: none; }
+.servico h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .servico p { grid-column: 1 / -1; max-width: 520px; font-size: 16px; line-height: 1.6; color: var(--uno-ink-2); }
 @media (max-width: 599px) { .servico { grid-template-columns: 1fr; } .servico .modelo { text-align: left; } }
 
@@ -362,6 +366,7 @@ html:not(.js) .jm-texto { position: static; opacity: 1; visibility: visible; tra
 .invest-bloco:last-child { border-bottom: 0; padding-bottom: 0; }
 .invest-bloco h3 { font-size: 18px; font-weight: 600; }
 .invest-bloco p { margin-top: 12px; font-size: 16px; line-height: 1.6; color: var(--uno-sage-2); }
+.invest-bloco a { color: var(--uno-mint); font-weight: 600; }
 .invest-bloco ul { margin: 16px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 16px; color: var(--uno-sage-2); }
 .invest-bloco li { display: flex; gap: 12px; align-items: baseline; }
 .invest-bloco li::before { content: ''; flex: none; width: 12px; height: 2px; background: var(--uno-mint); transform: translateY(-4px); }

@@ -127,7 +127,7 @@ export function sanitizarPageReferrer(referrerBruto = document.referrer): string
     if (parsed.origin !== window.location.origin) {
       return `${parsed.origin}/`;
     }
-    const caminhosPublicos = new Set(['/', '/blog/', '/politica-de-privacidade/']);
+    const caminhosPublicos = new Set(['/', '/blog/', '/politica-de-privacidade/', '/whatsapp/']);
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
     if (canonical) caminhosPublicos.add(new URL(canonical).pathname);
     return caminhosPublicos.has(parsed.pathname) ? `${parsed.origin}${parsed.pathname}` : `${parsed.origin}/`;

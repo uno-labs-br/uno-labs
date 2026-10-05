@@ -101,6 +101,21 @@ export const homeSchema = {
               "name": "Manutenção e evolução de sites",
               "description": "Atualizações, segurança, ajustes de conteúdo e melhorias contínuas."
             }
+          },
+          {
+            "@type": "Offer",
+            "url": "https://unolabs.com.br/whatsapp/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Canal WhatsApp gerenciado",
+              "description": "Número dedicado, perfil comercial, histórico e respostas básicas de horário para empresas de Curitiba."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 97,
+              "maxPrice": 197,
+              "priceCurrency": "BRL"
+            }
           }
         ]
       }

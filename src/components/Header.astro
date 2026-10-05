@@ -2,12 +2,14 @@
 const homePrefix = Astro.url.pathname === '/' ? '' : '/';
 const homeLink = (section: string) => `${homePrefix}#${section}`;
 const isBlog = Astro.url.pathname.startsWith('/blog/');
+const isWhatsapp = Astro.url.pathname.startsWith('/whatsapp');
 ---
 <header class="topo">
   <div class="container topo__in">
     <a class="topo__marca" href={homeLink('topo')}><img src="/assets/img/uno-labs-horizontal-principal.svg" alt="UNO Labs, início" width="187" height="52"></a>
     <nav class="topo__nav" aria-label="Principal">
       <a href={homeLink('servicos')}>Serviços</a>
+      <a href="/whatsapp/" aria-current={isWhatsapp ? 'page' : undefined}>WhatsApp</a>
       <a href={homeLink('projetos')}>Projetos</a>
       <a href={homeLink('abordagem')}>Abordagem</a>
       <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
@@ -21,6 +23,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog/');
   </div>
   <nav class="menu-movel" id="menu-movel" aria-label="Menu">
     <a href={homeLink('servicos')}>Serviços</a>
+    <a href="/whatsapp/" aria-current={isWhatsapp ? 'page' : undefined}>WhatsApp</a>
     <a href={homeLink('projetos')}>Projetos</a>
     <a href={homeLink('abordagem')}>Abordagem</a>
     <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
