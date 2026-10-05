@@ -93,7 +93,10 @@ export function iniciarFormulario(): void {
       : null;
   };
   if (camposObrigatorios.some((nome) => !obterCampo(nome))) return;
-  if (new URLSearchParams(window.location.search).get('servico') === 'whatsapp') {
+  if (
+    new URLSearchParams(window.location.search).get('servico') === 'whatsapp' ||
+    window.location.pathname.startsWith('/whatsapp')
+  ) {
     const opcao = form.querySelector<HTMLInputElement>('input[name="servicos"][value="whatsapp"]');
     if (opcao) opcao.checked = true;
   }

@@ -2,14 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Contato from '../../components/home/Contato.astro';
 import { canonicalURL } from '../../data/site';
 
-const description = 'Número dedicado e perfil comercial no WhatsApp para escritórios e imobiliárias em Curitiba. Implantação a partir de R$ 297. Mensalidade a partir de R$ 97.';
+const description = 'Número virtual dedicado com DDD 41 e perfil comercial no WhatsApp para escritórios, imobiliárias e clínicas em Curitiba. Implantação a partir de R$ 297. Mensalidade a partir de R$ 97.';
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Canal WhatsApp gerenciado',
-  serviceType: 'Canal de WhatsApp Business com número dedicado',
+  serviceType: 'Canal de WhatsApp Business com número dedicado DDD 41',
   url: canonicalURL('/whatsapp/'),
   description,
   provider: {
@@ -54,7 +55,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   description={description}
   path="/whatsapp/"
   social
-  imageAlt="UNO Labs: Canal WhatsApp gerenciado para empresas de Curitiba."
+  imageAlt="UNO Labs: Canal WhatsApp gerenciado com DDD 41 para empresas de Curitiba."
 >
   <script slot="head" is:inline type="application/ld+json" set:html={structuredData} />
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -64,13 +65,13 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       <div class="container">
         <p class="rotulo">Serviço · Curitiba</p>
         <h1 id="canal-titulo">Canal WhatsApp gerenciado</h1>
-        <p class="canal-lead">Um número só do seu negócio, com perfil comercial, histórico e respostas de horário. Você fala com quem já chegou. A Uno cuida da estrutura.</p>
+        <p class="canal-lead">Um número virtual com DDD 41 de Curitiba, perfil comercial, histórico no CRM e respostas de horário. Você fala com quem já chegou. A Uno cuida da estrutura técnica.</p>
         <div class="canal-acoes">
-          <a class="btn btn--escuro" href="/?servico=whatsapp#contato">Conversar sobre o canal <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn--escuro" href="#contato">Pedir proposta do canal <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="link-sublinhado" href="#entrega">O que entra no serviço</a>
         </div>
         <dl class="canal-fatos">
-          <div><dt>Número dedicado</dt><dd>incluso na mensalidade</dd></div>
+          <div><dt>Número dedicado</dt><dd>DDD 41, na nuvem, sem chip</dd></div>
           <div><dt>Implantação</dt><dd>a partir de R$ 297</dd></div>
           <div><dt>Mensalidade</dt><dd>a partir de R$ 97</dd></div>
         </dl>
@@ -83,30 +84,92 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
         <h2 id="entrega-titulo">O que a Uno entrega</h2>
         <ul class="canal-lista">
           <li>
-            <h3>Número virtual dedicado</h3>
-            <p>Linha móvel só do seu negócio. O custo do número entra na mensalidade.</p>
+            <h3>Número virtual dedicado (DDD 41)</h3>
+            <p>Linha móvel na nuvem com DDD de Curitiba, sem precisar de chip físico ou aparelho exclusivo. O custo do número entra na mensalidade.</p>
           </li>
           <li>
             <h3>Perfil do WhatsApp Business</h3>
-            <p>Foto, descrição, site e horário de atendimento.</p>
+            <p>Foto oficial, descrição da atividade, site e horário de atendimento configurados.</p>
           </li>
           <li>
             <h3>CRM com histórico</h3>
-            <p>Conversas ligadas ao cadastro, com etiquetas para retomar o contexto.</p>
+            <p>Conversas ligadas ao cadastro do contato, com etiquetas para retomar o contexto rapidamente.</p>
           </li>
           <li>
-            <h3>Respostas básicas</h3>
-            <p>Saudação, horário e quem responde. Sem fluxo complicado.</p>
+            <h3>Respostas de horário e ausência</h3>
+            <p>Saudação educada fora do expediente e orientação clara sobre quem responde. Sem robô engessado.</p>
           </li>
           <li>
             <h3>Relatório semanal</h3>
-            <p>Contatos novos, origem e conversas que esquentaram.</p>
+            <p>Resumo com contatos novos, canal de origem e conversas que esquentaram na semana.</p>
           </li>
         </ul>
+
+        <div class="canal-mockup" aria-label="Simulação da experiência do Canal WhatsApp gerenciado">
+          <div class="canal-mockup__telefone">
+            <div class="canal-mockup__topo">
+              <div class="canal-mockup__avatar" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
+              </div>
+              <div>
+                <strong class="canal-mockup__nome">Sua Empresa · Atendimento</strong>
+                <span class="canal-mockup__status">Conta comercial oficial · (41) 9XXXX-XXXX</span>
+              </div>
+            </div>
+            <div class="canal-mockup__mensagens">
+              <div class="canal-balao canal-balao--cliente">
+                <p>Olá! Gostaria de entender como funciona a consultoria e os horários disponíveis.</p>
+                <time>19:42</time>
+              </div>
+              <div class="canal-balao canal-balao--bot">
+                <span class="canal-balao__autor">Resposta de horário automática</span>
+                <p>Olá! Agradecemos a mensagem. Nosso expediente é de segunda a sexta, das 9h às 18h. Seu contato já está registrado e nossa equipe retornará amanhã logo no início do dia.</p>
+                <time>19:42 <svg width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1 5.5l3.5 3.5L11 1M5.5 9l3.5 1.5L15 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></time>
+              </div>
+            </div>
+          </div>
+          <div class="canal-mockup__crm">
+            <div class="canal-mockup__crm-cab">
+              <span class="canal-mockup__crm-badge">CRM Integrado</span>
+              <span class="canal-mockup__crm-hora">Registro automático</span>
+            </div>
+            <ul class="canal-mockup__tags">
+              <li><strong>Contato:</strong> Novo lead qualificado</li>
+              <li><strong>Origem:</strong> Busca local (Curitiba)</li>
+              <li><strong>Status:</strong> Aguardando retorno da equipe humana</li>
+              <li><strong>Histórico:</strong> Centralizado no painel</li>
+            </ul>
+            <p class="canal-mockup__dica">Sua equipe abre o WhatsApp já sabendo a origem do contato e o contexto da conversa, sem perder oportunidades por falta de resposta fora do horário.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="canal-bloco canal-bloco--linha" aria-labelledby="divisao-titulo">
+    <section class="canal-bloco canal-bloco--linha" aria-labelledby="passos-titulo">
+      <div class="container">
+        <p class="rotulo">Como funciona</p>
+        <h2 id="passos-titulo">Da contratação ao canal funcionando em 3 passos.</h2>
+        <div class="canal-passos">
+          <div class="canal-passo">
+            <span class="canal-passo__num" aria-hidden="true">01</span>
+            <h3>Alinhamento e regras</h3>
+            <p>Mapeamos o perfil da sua empresa, horários de expediente e o tom das mensagens automáticas de saudação e ausência.</p>
+          </div>
+          <div class="canal-passo">
+            <span class="canal-passo__num" aria-hidden="true">02</span>
+            <h3>Ativação técnica pela Uno</h3>
+            <p>Configuramos a linha virtual com DDD 41, ativamos o perfil comercial no WhatsApp Business e conectamos o histórico do CRM.</p>
+          </div>
+          <div class="canal-passo">
+            <span class="canal-passo__num" aria-hidden="true">03</span>
+            <h3>Operação sem dor de cabeça</h3>
+            <p>Sua equipe assume o atendimento humano pelo WhatsApp Web ou celular. A Uno cuida da estabilidade, relatórios e infraestrutura.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="canal-bloco" aria-labelledby="divisao-titulo">
       <div class="container canal-duas">
         <div>
           <p class="rotulo">Sua parte</p>
@@ -129,11 +192,11 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       </div>
     </section>
 
-    <section class="canal-bloco" aria-labelledby="publico-titulo">
+    <section class="canal-bloco canal-bloco--linha" aria-labelledby="publico-titulo">
       <div class="container">
         <p class="rotulo">Para quem</p>
-        <h2 id="publico-titulo">Pequenas empresas em Curitiba, com cuidado extra para advocacia e imóveis.</h2>
-        <div class="canal-duas canal-duas--notas">
+        <h2 id="publico-titulo">Pequenas empresas em Curitiba que valorizam atendimento profissional.</h2>
+        <div class="canal-tres">
           <article>
             <h3>Advocacia</h3>
             <p>O perfil e as respostas informam área, horário e como falar com o escritório. Sem promessa de resultado, sem garantia de causa e sem linguagem de urgência para captar cliente. O texto segue o que a OAB permite.</p>
@@ -141,6 +204,10 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           <article>
             <h3>Imobiliárias e corretores</h3>
             <p>O canal recebe interesse sobre imóveis, visitas e retorno. O relatório mostra a origem e quais conversas pedem uma pessoa. Sem promessa de venda fechada.</p>
+          </article>
+          <article>
+            <h3>Clínicas e consultórios</h3>
+            <p>Canal centralizado para confirmação de consultas, localização e orientações iniciais. Protege o número particular dos profissionais e evita mensagens fora de hora no celular pessoal.</p>
           </article>
         </div>
       </div>
@@ -158,17 +225,43 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           </div>
           <div>
             <p>A referência desta página fica entre R$ 297 e R$ 497 na implantação e entre R$ 97 e R$ 197 por mês. O valor fecha na proposta, conforme perfil, horário e volume de conversas.</p>
-            <p>O custo do número dedicado está na mensalidade. A proposta fecha o valor dentro dessa referência.</p>
-            <a class="btn btn--uno-mint" href="/?servico=whatsapp#contato">Pedir uma proposta <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <p>O custo do número dedicado com DDD 41 está na mensalidade. A proposta fecha o valor dentro dessa referência.</p>
+            <a class="btn btn--uno-mint" href="#contato">Pedir uma proposta <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <p class="canal-preco__seguranca">Sem fidelidade contratual · Ativação em até 3 dias úteis · Linha própria do seu negócio.</p>
           </div>
         </div>
       </div>
     </section>
+
+    <section class="duvidas" id="duvidas" aria-labelledby="duvidas-titulo">
+      <div class="container duvidas__grade">
+        <div class="duvidas__cab">
+          <p class="rotulo">Dúvidas</p>
+          <h2 class="titulo-medio" id="duvidas-titulo">Perguntas sobre o canal.</h2>
+          <p class="texto-apoio" style="margin-top:24px">Tem outra dúvida específica? <a href="#contato">Fale com a gente logo abaixo</a>.</p>
+        </div>
+        <div class="faq">
+          <details open><summary>Preciso de um celular exclusivo ou chip físico?</summary><p>Não. A linha funciona na nuvem e pode ser acessada pelo WhatsApp Web, aplicativo no computador ou celular da sua equipe. Você não precisa comprar chip nem aparelho novo.</p></details>
+          <details><summary>O número é de Curitiba (DDD 41)?</summary><p>Sim. Ativamos uma linha virtual móvel com DDD 41, transmitindo proximidade e confiança para os clientes locais.</p></details>
+          <details><summary>Eu perco meu WhatsApp pessoal?</summary><p>Não. O canal empresarial é uma conta e um número separados. Sua vida pessoal e sua empresa não se misturam.</p></details>
+          <details><summary>Mais de uma pessoa pode atender ao mesmo tempo?</summary><p>Sim. A estrutura permite múltiplos acessos simultâneos para que sua equipe atenda sem filas nem conflitos de conexão.</p></details>
+          <details><summary>Existe fidelidade ou multa de cancelamento?</summary><p>Não há fidelidade forçada. Você mantém o serviço enquanto fizer sentido para o seu negócio.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <Contato
+      titulo="Vamos estruturar o WhatsApp da sua empresa."
+      subtitulo="Envie os dados do seu negócio para receber uma proposta com número DDD 41 e operação gerenciada."
+      servicoPadrao="whatsapp"
+    />
   </main>
   <Footer />
 </BaseLayout>
 <script>
   import '../../scripts/interno';
+  import { iniciarFormulario } from '../../scripts/formulario';
+  iniciarFormulario();
 </script>
 <style>
   .canal-hero {
@@ -221,7 +314,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-bloco { padding: clamp(56px, 8vw, 96px) 0; }
   .canal-bloco--linha { border-block: 1px solid var(--uno-line); }
   .canal-bloco h2 {
-    max-width: 22ch;
+    max-width: 26ch;
     font-size: clamp(28px, 3.2vw, 44px);
     line-height: 1.08;
     font-weight: 600;
@@ -229,7 +322,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     color: var(--uno-pine);
     text-wrap: balance;
   }
-  #publico-titulo { max-width: 22ch; }
+  #publico-titulo { max-width: 26ch; }
   .canal-lista {
     display: grid;
     gap: 0;
@@ -254,6 +347,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-lista p,
   .canal-itens li,
   .canal-duas article p,
+  .canal-tres article p,
   .canal-preco__cartao p {
     margin-top: 8px;
     font-size: 16px;
@@ -265,14 +359,27 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     gap: 40px;
   }
   @media (min-width: 800px) { .canal-duas { grid-template-columns: 1fr 1fr; gap: 64px; } }
-  .canal-duas--notas { margin-top: 36px; }
   .canal-duas article {
     padding: 28px;
     border-radius: var(--uno-radius-md);
     background: var(--uno-white);
     box-shadow: inset 0 0 0 1px var(--uno-line);
   }
-  .canal-duas article h3 {
+  .canal-tres {
+    display: grid;
+    gap: 24px;
+    margin-top: 36px;
+  }
+  @media (min-width: 900px) {
+    .canal-tres { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  }
+  .canal-tres article {
+    padding: 28px;
+    border-radius: var(--uno-radius-md);
+    background: var(--uno-white);
+    box-shadow: inset 0 0 0 1px var(--uno-line);
+  }
+  .canal-tres article h3 {
     font-size: 22px;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -298,6 +405,192 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     height: 2px;
     background: var(--uno-mint-deep);
     transform: translateY(-4px);
+  }
+  .canal-passos {
+    display: grid;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (min-width: 800px) {
+    .canal-passos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  }
+  .canal-passo {
+    padding: 28px;
+    border-radius: var(--uno-radius-md);
+    background: var(--uno-white);
+    border: 1px solid var(--uno-line);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .canal-passo__num {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--uno-mint-deep);
+    font-family: var(--uno-font-mono);
+  }
+  .canal-passo h3 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--uno-pine);
+  }
+  .canal-passo p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--uno-ink-2);
+  }
+  .canal-mockup {
+    margin-top: 48px;
+    padding: clamp(20px, 3.5vw, 36px);
+    border-radius: var(--uno-radius-lg);
+    background: var(--uno-white);
+    border: 1px solid var(--uno-line);
+    display: grid;
+    gap: 32px;
+  }
+  @media (min-width: 900px) {
+    .canal-mockup { grid-template-columns: 1.25fr 1fr; align-items: center; gap: 48px; }
+  }
+  .canal-mockup__telefone {
+    background: #EBF2EC;
+    border-radius: var(--uno-radius-md);
+    padding: 16px;
+    border: 1px solid rgba(16, 32, 28, .08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .canal-mockup__topo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(16, 32, 28, .08);
+  }
+  .canal-mockup__avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--uno-pine);
+    color: var(--uno-mint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+  .canal-mockup__nome {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--uno-pine);
+    line-height: 1.2;
+  }
+  .canal-mockup__status {
+    display: block;
+    font-size: 12px;
+    color: var(--uno-ink-2);
+    margin-top: 2px;
+  }
+  .canal-mockup__mensagens {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .canal-balao {
+    max-width: 90%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .canal-balao p { margin: 0; font-size: 13.5px; }
+  .canal-balao time {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 11px;
+    margin-top: 4px;
+    color: var(--uno-ink-2);
+    opacity: .75;
+  }
+  .canal-balao--cliente {
+    align-self: flex-start;
+    background: var(--uno-white);
+    color: var(--uno-ink);
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .canal-balao--bot {
+    align-self: flex-end;
+    background: #DCF8C6;
+    color: var(--uno-ink);
+    border-bottom-right-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .canal-balao__autor {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--uno-pine-2);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+  }
+  .canal-mockup__crm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .canal-mockup__crm-cab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .canal-mockup__crm-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(14, 43, 36, .08);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--uno-pine);
+    letter-spacing: .02em;
+  }
+  .canal-mockup__crm-hora {
+    font-size: 12px;
+    color: var(--uno-ink-2);
+  }
+  .canal-mockup__tags {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .canal-mockup__tags li {
+    font-size: 14px;
+    color: var(--uno-ink);
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--uno-off-white-2);
+    border: 1px solid rgba(16, 32, 28, .06);
+  }
+  .canal-mockup__tags strong {
+    color: var(--uno-pine);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .canal-mockup__dica {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--uno-ink-2);
+    margin-top: 4px;
   }
   .canal-preco { padding: 0 0 clamp(72px, 10vw, 120px); }
   .canal-preco__cartao {
@@ -329,6 +622,12 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-preco__cartao p { color: var(--uno-sage-2); max-width: 46ch; }
   .canal-preco__cartao p + p { margin-top: 14px; }
   .canal-preco__cartao .btn { margin-top: 28px; }
+  .canal-preco__seguranca {
+    margin-top: 18px !important;
+    font-size: 13px !important;
+    color: var(--uno-sage) !important;
+    letter-spacing: .01em;
+  }
   @media (max-width: 599px) {
     .canal-fatos { grid-template-columns: 1fr; gap: 18px; }
     .canal-fatos > div { padding: 0; border-left: 0; }
