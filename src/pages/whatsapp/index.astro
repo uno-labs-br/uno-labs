@@ -77,7 +77,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           </dl>
         </div>
 
-        <figure class="canal-mockup" aria-labelledby="canal-mockup-legenda">
+        <figure class="canal-mockup" id="canal-mockup" aria-labelledby="canal-mockup-legenda">
           <div class="canal-mockup__telefone">
             <div class="canal-mockup__topo">
               <div class="canal-mockup__avatar" aria-hidden="true">
@@ -89,27 +89,48 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
               </div>
             </div>
             <div class="canal-mockup__mensagens">
-              <div class="canal-balao canal-balao--cliente">
-                <p>Olá! Gostaria de entender como funciona a consultoria e os horários disponíveis.</p>
+              <div class="canal-balao canal-balao--cliente" data-passo="1">
+                <p>Olá! Queria saber como funciona a consultoria e os horários.</p>
                 <time>19:42</time>
               </div>
-              <div class="canal-balao canal-balao--bot">
-                <span class="canal-balao__autor">Resposta de horário automática</span>
-                <p>Olá! Agradecemos a mensagem. Nosso expediente é de segunda a sexta, das 9h às 18h. Seu contato já está registrado e nossa equipe retorna amanhã logo no início do dia.</p>
-                <time>19:42 <svg width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1 5.5l3.5 3.5L11 1M5.5 9l3.5 1.5L15 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></time>
+              <div class="canal-balao-vaga">
+                <span class="canal-digitando" data-passo="2" data-ate="2" aria-hidden="true"><span></span><span></span><span></span></span>
+                <div class="canal-balao canal-balao--bot" data-passo="3">
+                  <span class="canal-balao__autor">Resposta de horário automática</span>
+                  <p>Olá! Atendemos de segunda a sexta, das 9h às 18h. Seu contato está registrado e retornamos amanhã cedo.</p>
+                  <time>19:42 <svg width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1 5.5l3.5 3.5L11 1M5.5 9l3.5 1.5L15 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></time>
+                </div>
+              </div>
+              <p class="canal-mockup__dia" data-passo="5">Dia seguinte</p>
+              <div class="canal-balao canal-balao--bot" data-passo="5">
+                <span class="canal-balao__autor">Ana · recepção</span>
+                <p>Bom dia! Temos horário na quinta, às 10h ou às 15h. Qual prefere?</p>
+                <time>09:03 <svg width="14" height="10" viewBox="0 0 16 11" fill="none" aria-hidden="true"><path d="M1 5.5l3.5 3.5L11 1M5.5 9l3.5 1.5L15 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></time>
               </div>
             </div>
           </div>
           <div class="canal-mockup__crm">
             <span class="canal-mockup__crm-badge">CRM · registro automático</span>
             <ul class="canal-mockup__tags">
-              <li><strong>Contato:</strong> Novo lead</li>
-              <li><strong>Origem:</strong> Site (botão de WhatsApp)</li>
-              <li><strong>Status:</strong> Aguardando a equipe</li>
+              <li data-passo="4"><strong>Origem:</strong> Site (botão de WhatsApp)</li>
+              <li data-passo="4"><strong>Status:</strong> <span class="canal-mockup__troca"><span data-passo="4" data-ate="4" aria-hidden="true">Aguardando a equipe</span><span data-passo="5">Em atendimento · Ana</span></span></li>
             </ul>
           </div>
-          <figcaption id="canal-mockup-legenda">Simulação: o cliente recebe resposta fora do horário, e sua equipe abre a conversa já sabendo a origem e o contexto.</figcaption>
+          <figcaption>
+            <span id="canal-mockup-legenda">Simulação: fora do horário, o cliente recebe resposta na hora. No dia seguinte, sua equipe continua a conversa já sabendo a origem e o contexto.</span>
+            <button class="canal-mockup__controle" type="button" hidden>Pular animação</button>
+          </figcaption>
         </figure>
+        <script is:inline>
+          (function () {
+            // Prepara a animação antes da primeira pintura; sem o módulo, volta ao estado final.
+            var fig = document.getElementById('canal-mockup');
+            var raiz = document.documentElement;
+            if (!fig || raiz.classList.contains('rm') || !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            fig.classList.add('is-animando');
+            setTimeout(function () { if (!fig.dataset.pronto) fig.classList.remove('is-animando'); }, 4000);
+          })();
+        </script>
       </div>
     </section>
 
@@ -307,17 +328,19 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
 <script>
   import '../../scripts/interno';
   import { iniciarFormulario } from '../../scripts/formulario';
+  import { iniciarMockupCanal } from '../../scripts/canal-mockup';
   iniciarFormulario();
+  iniciarMockupCanal();
 </script>
 <style>
   .canal-hero {
-    padding: clamp(40px, 6vw, 80px) 0 clamp(48px, 6vw, 80px);
+    padding: clamp(32px, 4vw, 56px) 0 clamp(48px, 6vw, 80px);
     background-image:
       linear-gradient(rgba(16, 32, 28, .045) 1px, transparent 1px),
       linear-gradient(90deg, rgba(16, 32, 28, .045) 1px, transparent 1px);
     background-size: 80px 80px;
   }
-  .canal-hero__grade { display: grid; gap: 48px; align-items: center; }
+  .canal-hero__grade { display: grid; gap: 48px; align-items: start; }
   @media (min-width: 1000px) {
     .canal-hero__grade { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 64px; }
   }
@@ -363,17 +386,17 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-mockup__telefone {
     background: #EBF2EC;
     border-radius: var(--uno-radius-lg);
-    padding: 18px;
+    padding: 14px 16px;
     border: 1px solid rgba(16, 32, 28, .08);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
   .canal-mockup__topo {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid rgba(16, 32, 28, .08);
   }
   .canal-mockup__avatar {
@@ -389,10 +412,10 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   }
   .canal-mockup__nome { display: block; font-size: 14px; font-weight: 600; color: var(--uno-pine); line-height: 1.2; }
   .canal-mockup__status { display: block; font-size: 12px; color: var(--uno-ink-2); margin-top: 2px; }
-  .canal-mockup__mensagens { display: flex; flex-direction: column; gap: 12px; padding-bottom: 36px; }
+  .canal-mockup__mensagens { display: flex; flex-direction: column; gap: 8px; padding-bottom: 40px; }
   .canal-balao {
     max-width: 88%;
-    padding: 12px 14px;
+    padding: 9px 12px;
     border-radius: 12px;
     font-size: 14px;
     line-height: 1.45;
@@ -405,7 +428,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     justify-content: flex-end;
     gap: 4px;
     font-size: 11px;
-    margin-top: 4px;
+    margin-top: 2px;
     color: var(--uno-ink-2);
   }
   .canal-balao--cliente { align-self: flex-start; background: var(--uno-white); color: var(--uno-ink); border-bottom-left-radius: 2px; }
@@ -422,8 +445,8 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-mockup__crm {
     position: relative;
     width: min(100% - 24px, 340px);
-    margin: -40px 12px 0 auto;
-    padding: 16px;
+    margin: -44px 12px 0 auto;
+    padding: 12px 14px;
     border-radius: var(--uno-radius-md);
     background: var(--uno-white);
     border: 1px solid var(--uno-line);
@@ -438,16 +461,99 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     font-weight: 600;
     color: var(--uno-pine);
   }
-  .canal-mockup__tags { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .canal-mockup__tags { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .canal-mockup__tags li {
     font-size: 13.5px;
     color: var(--uno-ink);
-    padding: 7px 10px;
+    padding: 6px 10px;
     border-radius: 8px;
     background: var(--uno-off-white-2);
   }
   .canal-mockup__tags strong { color: var(--uno-pine); font-weight: 600; margin-right: 4px; }
-  .canal-mockup figcaption { margin-top: 16px; font-size: 14px; line-height: 1.5; color: var(--uno-ink-2); }
+  .canal-mockup figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--uno-ink-2);
+  }
+  .canal-mockup figcaption > span { flex: 1 1 280px; }
+  .canal-mockup__controle {
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--uno-pine);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+  .canal-balao-vaga {
+    position: relative;
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    max-width: 88%;
+  }
+  .canal-balao-vaga .canal-balao { max-width: 100%; }
+  .canal-digitando {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    gap: 4px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-bottom-right-radius: 2px;
+    background: #DCF8C6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+  }
+  .canal-digitando span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--uno-pine-2);
+    animation: canal-ponto 1s ease-in-out infinite;
+  }
+  .canal-digitando span:nth-child(2) { animation-delay: .15s; }
+  .canal-digitando span:nth-child(3) { animation-delay: .3s; }
+  @keyframes canal-ponto {
+    0%, 80%, 100% { transform: translateY(0); opacity: .35; }
+    40% { transform: translateY(-3px); opacity: .9; }
+  }
+  .canal-mockup__dia {
+    align-self: center;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .85);
+    font-size: 11.5px;
+    color: var(--uno-ink-2);
+  }
+  .canal-mockup__troca { display: inline-grid; }
+  .canal-mockup__troca > span { grid-area: 1 / 1; }
+  /* Estado final (sem animação): só os elementos transitórios ficam ocultos. */
+  .canal-mockup:not(.is-animando) [data-ate] { visibility: hidden; }
+  /* Durante a animação, cada etapa ocupa seu espaço desde o início, sem deslocar o layout. */
+  .canal-mockup.is-animando [data-passo] {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .4s ease, transform .4s ease, visibility 0s linear .4s;
+  }
+  .canal-mockup.is-animando [data-passo].is-visivel {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .canal-mockup.is-animando .canal-mockup__tags li:nth-child(2) { transition-delay: .15s; }
 
   .canal-bloco { padding: clamp(56px, 8vw, 96px) 0; }
   .canal-bloco--linha { border-block: 1px solid var(--uno-line); }
