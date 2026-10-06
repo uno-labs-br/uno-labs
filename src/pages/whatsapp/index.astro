@@ -3,14 +3,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Contato from '../../components/home/Contato.astro';
-import { canonicalURL } from '../../data/site';
+import { canonicalURL, site } from '../../data/site';
 
-const description = 'Número virtual dedicado (DDD 11 ou 37) e perfil comercial no WhatsApp para escritórios, imobiliárias e clínicas. Implantação a partir de R$ 297. Mensalidade a partir de R$ 97.';
+const description = 'WhatsApp Business gerenciado no número da sua empresa, com qualquer DDD. Perfil comercial, respostas de horário e CRM com histórico. Atendimento em todo o Brasil. Planos a partir de R$ 147 por mês.';
+const planos = [
+  { nome: 'Essencial', implantacao: 297, mensalidade: 147 },
+  { nome: 'Equipe', implantacao: 497, mensalidade: 247 },
+];
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Canal WhatsApp gerenciado',
-  serviceType: 'Canal de WhatsApp Business com número dedicado (DDD 11 ou 37)',
+  serviceType: 'Gestão de canal de WhatsApp Business',
   url: canonicalURL('/whatsapp/'),
   description,
   provider: {
@@ -19,43 +23,38 @@ const serviceSchema = {
     url: 'https://unolabs.com.br/',
   },
   areaServed: {
-    '@type': 'City',
-    name: 'Curitiba',
+    '@type': 'Country',
+    name: 'Brasil',
   },
-  offers: [
-    {
-      '@type': 'Offer',
-      name: 'Implantação',
-      priceCurrency: 'BRL',
-      priceSpecification: {
+  offers: planos.map((plano) => ({
+    '@type': 'Offer',
+    name: `Plano ${plano.nome}`,
+    priceCurrency: 'BRL',
+    priceSpecification: [
+      {
+        '@type': 'UnitPriceSpecification',
+        name: 'Mensalidade',
+        price: plano.mensalidade,
+        priceCurrency: 'BRL',
+        unitCode: 'MON',
+      },
+      {
         '@type': 'PriceSpecification',
-        minPrice: 297,
-        maxPrice: 497,
+        name: 'Implantação',
+        price: plano.implantacao,
         priceCurrency: 'BRL',
       },
-    },
-    {
-      '@type': 'Offer',
-      name: 'Mensalidade',
-      priceCurrency: 'BRL',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: 97,
-        maxPrice: 197,
-        priceCurrency: 'BRL',
-        unitText: 'mês',
-      },
-    },
-  ],
+    ],
+  })),
 };
 const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
 ---
 <BaseLayout
-  title="Canal WhatsApp gerenciado em Curitiba | UNO Labs"
+  title="Canal WhatsApp gerenciado para empresas | UNO Labs"
   description={description}
   path="/whatsapp/"
   social
-  imageAlt="UNO Labs: Canal WhatsApp gerenciado com número dedicado (DDD 11 ou 37)."
+  imageAlt="UNO Labs: Canal WhatsApp gerenciado no número da sua empresa."
 >
   <script slot="head" is:inline type="application/ld+json" set:html={structuredData} />
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -63,17 +62,18 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   <main id="conteudo" class="canal-conteudo">
     <section class="canal-hero" aria-labelledby="canal-titulo">
       <div class="container">
-        <p class="rotulo">Serviço · Curitiba</p>
-        <h1 id="canal-titulo">Canal WhatsApp gerenciado</h1>
-        <p class="canal-lead">Um número virtual dedicado (DDD 11 ou 37), perfil comercial, histórico no CRM e respostas de horário. Você fala com quem já chegou. A Uno cuida da estrutura técnica.</p>
+        <p class="rotulo">Canal WhatsApp gerenciado · Todo o Brasil</p>
+        <h1 id="canal-titulo">Nenhum cliente sem resposta, nem fora do expediente.</h1>
+        <p class="canal-lead">A Uno configura e opera o WhatsApp Business no número da sua empresa: perfil comercial, respostas de horário e histórico no CRM. O número continua sendo seu. Sua equipe só atende.</p>
         <div class="canal-acoes">
           <a class="btn btn--escuro" href="#contato">Pedir proposta do canal <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn--contorno" href={site.whatsapp} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_canal_hero" data-cta-position="canal_hero">Falar pelo WhatsApp</a>
           <a class="link-sublinhado" href="#entrega">O que entra no serviço</a>
         </div>
         <dl class="canal-fatos">
-          <div><dt>Número dedicado</dt><dd>DDD 11 ou 37, em nuvem, sem chip</dd></div>
-          <div><dt>Implantação</dt><dd>a partir de R$ 297</dd></div>
-          <div><dt>Mensalidade</dt><dd>a partir de R$ 97</dd></div>
+          <div><dt>Número</dt><dd>o da sua empresa, com qualquer DDD</dd></div>
+          <div><dt>Implantação</dt><dd>a partir de R$ {planos[0].implantacao}</dd></div>
+          <div><dt>Mensalidade</dt><dd>a partir de R$ {planos[0].mensalidade}</dd></div>
         </dl>
       </div>
     </section>
@@ -84,8 +84,8 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
         <h2 id="entrega-titulo">O que a Uno entrega</h2>
         <ul class="canal-lista">
           <li>
-            <h3>Número virtual dedicado (DDD 11 ou 37)</h3>
-            <p>Linha móvel na nuvem com DDD 11 ou 37 à sua escolha, sem precisar de chip físico ou aparelho exclusivo. O custo do número entra na mensalidade.</p>
+            <h3>Canal no número da sua empresa</h3>
+            <p>Usamos uma linha que a empresa já tem ou orientamos a contratação de uma nova no seu CNPJ, em qualquer operadora e com o DDD que preferir. O número fica sempre em seu nome.</p>
           </li>
           <li>
             <h3>Perfil do WhatsApp Business</h3>
@@ -100,7 +100,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
             <p>Saudação educada fora do expediente e orientação clara sobre quem responde. Sem robô engessado.</p>
           </li>
           <li>
-            <h3>Relatório semanal</h3>
+            <h3>Relatório semanal (plano Equipe)</h3>
             <p>Resumo com contatos novos, canal de origem e conversas que esquentaram na semana.</p>
           </li>
         </ul>
@@ -113,7 +113,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
               </div>
               <div>
                 <strong class="canal-mockup__nome">Sua Empresa · Atendimento</strong>
-                <span class="canal-mockup__status">Conta comercial oficial · (11) 9XXXX-XXXX</span>
+                <span class="canal-mockup__status">Perfil comercial · número da sua empresa</span>
               </div>
             </div>
             <div class="canal-mockup__mensagens">
@@ -153,12 +153,12 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           <div class="canal-passo">
             <span class="canal-passo__num" aria-hidden="true">01</span>
             <h3>Alinhamento e regras</h3>
-            <p>Mapeamos o perfil da sua empresa, horários de expediente e o tom das mensagens automáticas de saudação e ausência.</p>
+            <p>Definimos o número, mapeamos o perfil da sua empresa, os horários de expediente e o tom das mensagens de saudação e ausência.</p>
           </div>
           <div class="canal-passo">
             <span class="canal-passo__num" aria-hidden="true">02</span>
             <h3>Ativação técnica pela Uno</h3>
-            <p>Configuramos a linha virtual com DDD 11 ou 37, ativamos o perfil comercial no WhatsApp Business e conectamos o histórico do CRM.</p>
+            <p>Configuramos o WhatsApp Business no número da sua empresa, completamos o perfil comercial e conectamos o histórico do CRM.</p>
           </div>
           <div class="canal-passo">
             <span class="canal-passo__num" aria-hidden="true">03</span>
@@ -177,13 +177,15 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           <ul class="canal-itens">
             <li>Responde quando o contato já está quente.</li>
             <li>Aprova o tom e os modelos de mensagem.</li>
-            <li>Não mexe em chip, API nem painel técnico.</li>
+            <li>Mantém a linha ativa no nome da empresa.</li>
+            <li>Não mexe em configuração nem painel técnico.</li>
           </ul>
         </div>
         <div>
           <p class="rotulo">Fora deste serviço</p>
           <h2>O que não está incluído</h2>
           <ul class="canal-itens">
+            <li>A linha telefônica. O chip fica no nome da sua empresa, e um plano básico de celular basta.</li>
             <li>Disparo em massa em nome da empresa.</li>
             <li>Plantão humano da Uno, 24 horas.</li>
             <li>Anúncios pagos. Esse trabalho é um pacote à parte.</li>
@@ -195,7 +197,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     <section class="canal-bloco canal-bloco--linha" aria-labelledby="publico-titulo">
       <div class="container">
         <p class="rotulo">Para quem</p>
-        <h2 id="publico-titulo">Pequenas empresas em Curitiba que valorizam atendimento profissional.</h2>
+        <h2 id="publico-titulo">Pequenas empresas de todo o Brasil que valorizam atendimento profissional.</h2>
         <div class="canal-tres">
           <article>
             <h3>Advocacia</h3>
@@ -207,7 +209,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           </article>
           <article>
             <h3>Clínicas e consultórios</h3>
-            <p>Canal centralizado para confirmação de consultas, localização e orientações iniciais. Protege o número particular dos profissionais e evita mensagens fora de hora no celular pessoal.</p>
+            <p>Canal centralizado para confirmação de consultas, localização e orientações iniciais. Protege o número particular dos profissionais e evita mensagens fora de hora no celular pessoal. O histórico fica acessível só à equipe autorizada, como pede a LGPD para dados de saúde.</p>
           </article>
         </div>
       </div>
@@ -216,18 +218,40 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     <section class="canal-preco" aria-labelledby="preco-titulo">
       <div class="container">
         <div class="canal-preco__cartao escuro">
-          <div>
-            <h2 class="rotulo" id="preco-titulo">Investimento</h2>
-            <p class="canal-preco__de">Implantação a partir de</p>
-            <p class="canal-preco__valor"><small>R$</small> <strong>297</strong></p>
-            <p class="canal-preco__de">Mensalidade a partir de</p>
-            <p class="canal-preco__valor"><small>R$</small> <strong>97</strong> <span>por mês</span></p>
+          <div class="canal-preco__cab">
+            <p class="rotulo">Investimento</p>
+            <h2 id="preco-titulo">Dois planos, sem letra miúda.</h2>
+            <p>A linha telefônica fica no nome da sua empresa e não entra na mensalidade.</p>
           </div>
-          <div>
-            <p>A referência desta página fica entre R$ 297 e R$ 497 na implantação e entre R$ 97 e R$ 197 por mês. O valor fecha na proposta, conforme perfil, horário e volume de conversas.</p>
-            <p>O custo do número dedicado (DDD 11 ou 37) está na mensalidade. A proposta fecha o valor dentro dessa referência.</p>
+          <div class="canal-planos">
+            <article class="canal-plano">
+              <h3>Essencial</h3>
+              <p class="canal-plano__para">Para quem atende sozinho ou com uma pessoa de apoio.</p>
+              <p class="canal-preco__valor"><small>R$</small> <strong>{planos[0].mensalidade}</strong> <span>por mês</span></p>
+              <p class="canal-preco__de">Implantação única de R$ {planos[0].implantacao}</p>
+              <ul class="canal-itens">
+                <li>Até 2 atendentes</li>
+                <li>Perfil do WhatsApp Business completo</li>
+                <li>Respostas de horário e ausência</li>
+                <li>CRM com histórico e etiquetas</li>
+              </ul>
+            </article>
+            <article class="canal-plano">
+              <h3>Equipe</h3>
+              <p class="canal-plano__para">Para escritórios e clínicas com recepção ou time comercial.</p>
+              <p class="canal-preco__valor"><small>R$</small> <strong>{planos[1].mensalidade}</strong> <span>por mês</span></p>
+              <p class="canal-preco__de">Implantação única de R$ {planos[1].implantacao}</p>
+              <ul class="canal-itens">
+                <li>Até 4 atendentes ao mesmo tempo</li>
+                <li>Tudo do plano Essencial</li>
+                <li>Relatório semanal de contatos e origem</li>
+                <li>Revisão mensal das mensagens</li>
+              </ul>
+            </article>
+          </div>
+          <div class="canal-preco__rodape">
             <a class="btn btn--uno-mint" href="#contato">Pedir uma proposta <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <p class="canal-preco__seguranca">Sem fidelidade contratual · Ativação em até 3 dias úteis · Linha própria do seu negócio.</p>
+            <p class="canal-preco__seguranca">Sem fidelidade · Ativação em até 3 dias úteis com a linha disponível · O número é sempre da sua empresa.</p>
           </div>
         </div>
       </div>
@@ -238,21 +262,22 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
         <div class="duvidas__cab">
           <p class="rotulo">Dúvidas</p>
           <h2 class="titulo-medio" id="duvidas-titulo">Perguntas sobre o canal.</h2>
-          <p class="texto-apoio" style="margin-top:24px">Tem outra dúvida específica? <a href="#contato">Fale com a gente logo abaixo</a>.</p>
+          <p class="texto-apoio canal-duvidas__apoio">Tem outra dúvida específica? <a href="#contato">Fale com a gente logo abaixo</a>.</p>
         </div>
         <div class="faq">
-          <details open><summary>Preciso de um celular exclusivo ou chip físico?</summary><p>Não. A linha funciona na nuvem e pode ser acessada pelo WhatsApp Web, aplicativo no computador ou celular da sua equipe. Você não precisa comprar chip nem aparelho novo.</p></details>
-          <details><summary>Qual é o DDD do número virtual?</summary><p>Ativamos a linha virtual móvel com DDD 11 ou DDD 37 à sua escolha, operando 100% em nuvem e pronta para WhatsApp Business. O DDD 11 tem ampla aceitação e autoridade comercial em todo o país.</p></details>
+          <details open><summary>Preciso de um número novo?</summary><p>Não necessariamente. Podemos usar uma linha que a empresa já tenha. Se hoje ela é o seu WhatsApp pessoal, recomendamos separar: uma linha nova no CNPJ, em qualquer operadora, custa pouco, e orientamos a contratação.</p></details>
+          <details><summary>O DDD do número faz diferença?</summary><p>Não. O WhatsApp funciona igual com qualquer DDD, e atendemos empresas de todo o Brasil. O que passa confiança é um perfil completo, com nome, foto, descrição, site e horário de atendimento. Se o seu público é de uma cidade só, um número da região pode ajudar; a escolha é sua.</p></details>
+          <details><summary>Se eu cancelar, fico com o número?</summary><p>Sim. A linha está sempre em nome da sua empresa. No cancelamento, removemos nossos acessos e você continua com o número, a conta e as conversas.</p></details>
           <details><summary>Eu perco meu WhatsApp pessoal?</summary><p>Não. O canal empresarial é uma conta e um número separados. Sua vida pessoal e sua empresa não se misturam.</p></details>
-          <details><summary>Mais de uma pessoa pode atender ao mesmo tempo?</summary><p>Sim. A estrutura permite múltiplos acessos simultâneos para que sua equipe atenda sem filas nem conflitos de conexão.</p></details>
-          <details><summary>Existe fidelidade ou multa de cancelamento?</summary><p>Não há fidelidade forçada. Você mantém o serviço enquanto fizer sentido para o seu negócio.</p></details>
+          <details><summary>Mais de uma pessoa pode atender ao mesmo tempo?</summary><p>Sim. O plano Essencial comporta até 2 atendentes e o plano Equipe até 4, cada um no próprio computador ou celular.</p></details>
+          <details><summary>Existe fidelidade ou multa de cancelamento?</summary><p>Não. Você mantém o serviço enquanto fizer sentido para o seu negócio. A implantação é cobrada uma única vez.</p></details>
         </div>
       </div>
     </section>
 
     <Contato
       titulo="Vamos estruturar o WhatsApp da sua empresa."
-      subtitulo="Envie os dados do seu negócio para receber uma proposta com número dedicado (DDD 11 ou 37) e operação gerenciada."
+      subtitulo="Envie os dados do seu negócio para receber uma proposta do canal gerenciado no número da sua empresa."
       servicoPadrao="whatsapp"
     />
   </main>
@@ -347,8 +372,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-lista p,
   .canal-itens li,
   .canal-duas article p,
-  .canal-tres article p,
-  .canal-preco__cartao p {
+  .canal-tres article p {
     margin-top: 8px;
     font-size: 16px;
     line-height: 1.6;
@@ -595,23 +619,39 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .canal-preco { padding: 0 0 clamp(72px, 10vw, 120px); }
   .canal-preco__cartao {
     display: grid;
-    gap: 36px;
+    gap: clamp(28px, 4vw, 44px);
     padding: clamp(32px, 5vw, 56px);
     border-radius: var(--uno-radius-xl);
     background: var(--uno-pine);
     color: var(--uno-off-white);
   }
-  @media (min-width: 800px) {
-    .canal-preco__cartao { grid-template-columns: 1fr 1.1fr; align-items: end; gap: 64px; }
+  .canal-preco__cab h2 {
+    max-width: 22ch;
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--uno-off-white);
+    text-wrap: balance;
   }
-  .canal-preco__de {
-    margin: 18px 0 0;
-    font-size: 15px;
-    color: var(--uno-mint-2);
+  .canal-preco__cab p:last-child { margin-top: 14px; color: var(--uno-sage-2); max-width: 52ch; }
+  .canal-planos { display: grid; gap: 20px; }
+  @media (min-width: 800px) { .canal-planos { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  .canal-plano {
+    padding: clamp(24px, 3vw, 32px);
+    border-radius: var(--uno-radius-md);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
   }
+  .canal-plano h3 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--uno-mint);
+  }
+  .canal-plano__para { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--uno-sage-2); }
   .canal-preco__valor {
-    margin-top: 4px;
-    font-size: clamp(40px, 5vw, 64px);
+    margin-top: 20px;
+    font-size: clamp(40px, 5vw, 56px);
     line-height: 1;
     font-weight: 600;
     letter-spacing: -0.04em;
@@ -619,15 +659,17 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   }
   .canal-preco__valor small { font-size: .45em; font-weight: 600; }
   .canal-preco__valor span { font-size: 18px; font-weight: 500; letter-spacing: 0; color: var(--uno-sage); }
-  .canal-preco__cartao p { color: var(--uno-sage-2); max-width: 46ch; }
-  .canal-preco__cartao p + p { margin-top: 14px; }
-  .canal-preco__cartao .btn { margin-top: 28px; }
-  .canal-preco__seguranca {
-    margin-top: 18px !important;
-    font-size: 13px !important;
-    color: var(--uno-sage) !important;
-    letter-spacing: .01em;
+  .canal-preco__de { margin-top: 10px; font-size: 15px; color: var(--uno-mint-2); }
+  .canal-plano .canal-itens li { font-size: 15px; color: var(--uno-sage-2); }
+  .canal-plano .canal-itens li::before { background: var(--uno-mint); }
+  .canal-preco__rodape {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
   }
+  .canal-preco__seguranca { font-size: 13px; color: var(--uno-sage); letter-spacing: .01em; }
+  .canal-duvidas__apoio { margin-top: 24px; }
   @media (max-width: 599px) {
     .canal-fatos { grid-template-columns: 1fr; gap: 18px; }
     .canal-fatos > div { padding: 0; border-left: 0; }

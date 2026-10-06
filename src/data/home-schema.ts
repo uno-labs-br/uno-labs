@@ -108,12 +108,12 @@ export const homeSchema = {
             "itemOffered": {
               "@type": "Service",
               "name": "Canal WhatsApp gerenciado",
-              "description": "Número dedicado, perfil comercial, histórico e respostas básicas de horário para empresas de Curitiba."
+              "description": "WhatsApp Business gerenciado no número da empresa, com perfil comercial, histórico e respostas de horário, para empresas de todo o Brasil."
             },
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": 97,
-              "maxPrice": 197,
+              "minPrice": 147,
+              "maxPrice": 247,
               "priceCurrency": "BRL"
             }
           }
