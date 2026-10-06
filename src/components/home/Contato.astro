@@ -3,13 +3,16 @@ interface Props {
   titulo?: string;
   subtitulo?: string;
   servicoPadrao?: string;
+  variante?: 'padrao' | 'whatsapp';
 }
 
 const {
   titulo = 'Sua empresa já tem valor. Vamos fazer o digital mostrar isso.',
   subtitulo = 'Conte o momento da sua empresa e o que você quer construir. A conversa começa pelo contexto para chegar a uma proposta coerente.',
   servicoPadrao,
+  variante = 'padrao',
 } = Astro.props;
+const canal = variante === 'whatsapp';
 ---
 <section class="contato" id="contato" aria-labelledby="contato-titulo">
   <div class="container contato__grade">
@@ -33,7 +36,7 @@ const {
       <p class="form-requer-js">Para enviar o formulário, ative o JavaScript. Você também pode escrever para <a href="mailto:contato@unolabs.com.br" data-contact-channel="email" data-cta-id="email_nojs" data-cta-position="form_nojs">contato@unolabs.com.br</a> ou conversar pelo <a href="https://wa.me/5527936185141" data-contact-channel="whatsapp" data-cta-id="whatsapp_nojs" data-cta-position="form_nojs">WhatsApp: (27) 93618-5141</a>.</p>
       <!-- data-endpoint: rota que recebe o formulário (Worker na Cloudflare ou api/contato.php na hospedagem tradicional).
            data-turnstile: chave PÚBLICA do Cloudflare Turnstile (deixe vazio para desligar). -->
-      <form class="form" id="form-contato" action="/api/contato" method="post" novalidate data-endpoint="/api/contato" data-turnstile="">
+      <form class="form" id="form-contato" action="/api/contato" method="post" novalidate data-endpoint="/api/contato" data-turnstile="" data-variante={variante}>
         <div class="campos">
           <div class="campo">
             <label for="f-nome">Seu nome</label>
@@ -55,34 +58,64 @@ const {
             <input id="f-site" name="site" type="text" autocomplete="url" inputmode="url" maxlength="300" placeholder="www.suaempresa.com.br">
           </div>
         </div>
-        <fieldset class="campo">
-          <legend>Do que você precisa?</legend>
-          <div class="opcoes">
-            <label><input type="checkbox" name="servicos" value="site">Site</label>
-            <label><input type="checkbox" name="servicos" value="seo">SEO</label>
-            <label><input type="checkbox" name="servicos" value="google-ads">Google Ads</label>
-            <label><input type="checkbox" name="servicos" value="meta-ads">Meta Ads</label>
-            <label><input type="checkbox" name="servicos" value="manutencao">Manutenção</label>
-            <label><input type="checkbox" name="servicos" value="whatsapp" checked={servicoPadrao === 'whatsapp'}>Canal WhatsApp</label>
-          </div>
-        </fieldset>
-        <div class="campo">
-          <label for="f-contexto">O que você quer construir ou melhorar?</label>
-          <textarea id="f-contexto" name="contexto" rows="4" required maxlength="4000" aria-describedby="f-contexto-ajuda f-contexto-erro"></textarea>
-          <span class="ajuda" id="f-contexto-ajuda">Conte o objetivo, a situação atual e o que é importante para você.</span>
-          <span class="erro" id="f-contexto-erro">Descreva o projeto com pelo menos 10 caracteres.</span>
-        </div>
-        <div class="campo">
-          <label for="f-invest">Investimento previsto</label>
-          <select id="f-invest" name="invest">
-            <option value="">Selecione</option>
-            <option value="ate-3k">Até R$ 3 mil</option>
-            <option value="3-6k">De R$ 3 mil a R$ 6 mil</option>
-            <option value="6-10k">De R$ 6 mil a R$ 10 mil</option>
-            <option value="10k">Acima de R$ 10 mil</option>
-            <option value="indefinido">Ainda não definido</option>
-          </select>
-        </div>
+        {canal ? (
+          <>
+            <input type="hidden" name="servicos" value="whatsapp">
+            <input type="hidden" id="f-contexto" name="contexto" value="">
+            <fieldset class="campo">
+              <legend>Plano de interesse</legend>
+              <div class="opcoes">
+                <label><input type="radio" name="plano" value="essencial">Essencial</label>
+                <label><input type="radio" name="plano" value="equipe">Equipe</label>
+                <label><input type="radio" name="plano" value="indefinido" checked>Ainda não sei</label>
+              </div>
+            </fieldset>
+            <fieldset class="campo">
+              <legend>A empresa já tem um número para o canal?</legend>
+              <div class="opcoes">
+                <label><input type="radio" name="numero" value="sim" checked>Sim, um número da empresa</label>
+                <label><input type="radio" name="numero" value="pessoal">Uso meu WhatsApp pessoal</label>
+                <label><input type="radio" name="numero" value="nao">Ainda não</label>
+              </div>
+            </fieldset>
+            <div class="campo">
+              <label for="f-observacoes">Algo mais que devemos saber? <span>(opcional)</span></label>
+              <textarea id="f-observacoes" name="observacoes" rows="3" maxlength="3600" aria-describedby="f-observacoes-ajuda"></textarea>
+              <span class="ajuda" id="f-observacoes-ajuda">Por exemplo: ramo, quantas pessoas atendem e o horário de expediente.</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <fieldset class="campo">
+              <legend>Do que você precisa?</legend>
+              <div class="opcoes">
+                <label><input type="checkbox" name="servicos" value="site">Site</label>
+                <label><input type="checkbox" name="servicos" value="seo">SEO</label>
+                <label><input type="checkbox" name="servicos" value="google-ads">Google Ads</label>
+                <label><input type="checkbox" name="servicos" value="meta-ads">Meta Ads</label>
+                <label><input type="checkbox" name="servicos" value="manutencao">Manutenção</label>
+                <label><input type="checkbox" name="servicos" value="whatsapp" checked={servicoPadrao === 'whatsapp'}>Canal WhatsApp</label>
+              </div>
+            </fieldset>
+            <div class="campo">
+              <label for="f-contexto">O que você quer construir ou melhorar?</label>
+              <textarea id="f-contexto" name="contexto" rows="4" required maxlength="4000" aria-describedby="f-contexto-ajuda f-contexto-erro"></textarea>
+              <span class="ajuda" id="f-contexto-ajuda">Conte o objetivo, a situação atual e o que é importante para você.</span>
+              <span class="erro" id="f-contexto-erro">Descreva o projeto com pelo menos 10 caracteres.</span>
+            </div>
+            <div class="campo">
+              <label for="f-invest">Investimento previsto</label>
+              <select id="f-invest" name="invest">
+                <option value="">Selecione</option>
+                <option value="ate-3k">Até R$ 3 mil</option>
+                <option value="3-6k">De R$ 3 mil a R$ 6 mil</option>
+                <option value="6-10k">De R$ 6 mil a R$ 10 mil</option>
+                <option value="10k">Acima de R$ 10 mil</option>
+                <option value="indefinido">Ainda não definido</option>
+              </select>
+            </div>
+          </>
+        )}
         <div class="armadilha" aria-hidden="true">
           <label for="f-website">Deixe este campo em branco</label>
           <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
@@ -92,7 +125,7 @@ const {
         <p class="form-recuperacao" hidden>Se preferir, <a href="https://wa.me/5527936185141" data-contact-channel="whatsapp" data-cta-id="whatsapp_recuperacao" data-cta-position="form_recuperacao">fale pelo WhatsApp</a> ou <a href="mailto:contato@unolabs.com.br" data-contact-channel="email" data-cta-id="email_recuperacao" data-cta-position="form_recuperacao">escreva para contato@unolabs.com.br</a>.</p>
         <div class="form__rodape">
           <p>Seus dados são usados para avaliar o projeto e responder ao contato. <a href="/politica-de-privacidade/">Política de privacidade</a>.</p>
-          <button class="btn btn--escuro" type="submit" disabled>Enviar contexto do projeto</button>
+          <button class="btn btn--escuro" type="submit" disabled>{canal ? 'Pedir proposta do canal' : 'Enviar contexto do projeto'}</button>
         </div>
       </form>
       <div class="sucesso" id="form-sucesso">

@@ -100,6 +100,14 @@ export function iniciarFormulario(): void {
     const opcao = form.querySelector<HTMLInputElement>('input[name="servicos"][value="whatsapp"]');
     if (opcao) opcao.checked = true;
   }
+  const variante = form.getAttribute('data-variante');
+  // Os botões dos planos pré-selecionam o plano no formulário do canal.
+  document.querySelectorAll<HTMLElement>('[data-plano]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const opcao = form.querySelector<HTMLInputElement>(`input[name="plano"][value="${link.dataset.plano}"]`);
+      if (opcao) opcao.checked = true;
+    });
+  });
   const textoBotao = botao.textContent;
   const recuperacao = form.querySelector<HTMLElement>('.form-recuperacao');
   const endpoint = form.getAttribute('data-endpoint') || '/api/contato';
@@ -109,6 +117,16 @@ export function iniciarFormulario(): void {
   let enviando = false;
 
   const valor = (nome: string): string => obterCampo(nome)?.value.trim() ?? '';
+  const opcaoMarcada = (nome: string): string =>
+    form.querySelector<HTMLInputElement>(`input[name="${nome}"]:checked`)?.closest('label')?.textContent?.trim() || 'Não informado';
+  /** No formulário do canal, as escolhas estruturadas viram o contexto que o backend já recebe. */
+  const montarContextoCanal = (): void => {
+    const campo = obterCampo('contexto');
+    if (variante !== 'whatsapp' || !campo) return;
+    const observacoes = valor('observacoes');
+    campo.value = `Plano de interesse: ${opcaoMarcada('plano')}.\nNúmero para o canal: ${opcaoMarcada('numero')}.`
+      + (observacoes ? `\n\nObservações: ${observacoes}` : '');
+  };
   const marcar = (nome: CampoValidado, valido: boolean): void => {
     const campo = obterCampo(nome);
     const caixa = campo?.closest('.campo');
@@ -209,6 +227,7 @@ export function iniciarFormulario(): void {
   form.addEventListener('submit', async (evento) => {
     evento.preventDefault();
     if (enviando) return;
+    montarContextoCanal();
     let primeiroErro: CampoFormulario | null = null;
     for (const nome of camposObrigatorios) {
       const valido = regras[nome](valor(nome));
@@ -229,7 +248,7 @@ export function iniciarFormulario(): void {
       empresa: valor('empresa'),
       canal: valor('canal'),
       site: valor('site'),
-      servicos: Array.from(form.querySelectorAll<HTMLInputElement>('input[name="servicos"]:checked')).map((campo) => campo.value),
+      servicos: Array.from(form.querySelectorAll<HTMLInputElement>('input[name="servicos"]:checked, input[type="hidden"][name="servicos"]')).map((campo) => campo.value),
       contexto: valor('contexto'),
       invest: valor('invest'),
       website: valor('website'),

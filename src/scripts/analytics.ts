@@ -56,8 +56,10 @@ const CTAS_PERMITIDOS = new Set([
   'email_recuperacao',
   'whatsapp_nojs',
   'email_nojs',
+  'whatsapp_canal_hero',
+  'whatsapp_canal_teste',
 ]);
-const POSICOES_PERMITIDAS = new Set(['contato', 'form_recuperacao', 'form_nojs']);
+const POSICOES_PERMITIDAS = new Set(['contato', 'form_recuperacao', 'form_nojs', 'canal_hero', 'canal_teste']);
 
 /** Verifica se a execução está no ambiente oficial de produção (HTTPS e hostname permitido). */
 export function isAmbientePermitido(): boolean {

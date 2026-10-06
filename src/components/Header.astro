@@ -3,6 +3,9 @@ const homePrefix = Astro.url.pathname === '/' ? '' : '/';
 const homeLink = (section: string) => `${homePrefix}#${section}`;
 const isBlog = Astro.url.pathname.startsWith('/blog/');
 const isWhatsapp = Astro.url.pathname.startsWith('/whatsapp');
+// Na página do canal, o CTA leva ao formulário da própria página.
+const ctaHref = isWhatsapp ? '#contato' : homeLink('contato');
+const ctaTexto = isWhatsapp ? 'Pedir proposta do canal' : 'Conversar sobre meu projeto';
 ---
 <header class="topo">
   <div class="container topo__in">
@@ -15,7 +18,7 @@ const isWhatsapp = Astro.url.pathname.startsWith('/whatsapp');
       <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
       <a href={homeLink('contato')}>Contato</a>
     </nav>
-    <a class="btn btn--escuro topo__cta" href={homeLink('contato')}>Conversar sobre meu projeto <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="btn btn--escuro topo__cta" href={ctaHref}>{ctaTexto} <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu">
       <svg class="ico-abrir" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="#0E2B24" stroke-width="1.6" stroke-linecap="round"/></svg>
       <svg class="ico-fechar" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="#0E2B24" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -28,6 +31,6 @@ const isWhatsapp = Astro.url.pathname.startsWith('/whatsapp');
     <a href={homeLink('abordagem')}>Abordagem</a>
     <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
     <a href={homeLink('contato')}>Contato</a>
-    <a class="btn btn--escuro" href={homeLink('contato')}>Conversar sobre meu projeto</a>
+    <a class="btn btn--escuro" href={ctaHref}>{ctaTexto}</a>
   </nav>
 </header>
