@@ -101,6 +101,21 @@ export const homeSchema = {
               "name": "Manutenção e evolução de sites",
               "description": "Atualizações, segurança, ajustes de conteúdo e melhorias contínuas."
             }
+          },
+          {
+            "@type": "Offer",
+            "url": "https://unolabs.com.br/whatsapp/",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Canal WhatsApp gerenciado",
+              "description": "WhatsApp Business gerenciado no número da empresa, com perfil comercial, histórico e respostas de horário, para empresas de todo o Brasil."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 147,
+              "maxPrice": 247,
+              "priceCurrency": "BRL"
+            }
           }
         ]
       }

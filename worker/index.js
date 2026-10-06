@@ -17,7 +17,7 @@
 
 const LIMITE_CORPO = 16 * 1024; // 16 KB
 const MAXIMO = { nome: 120, empresa: 160, canal: 160, site: 300, contexto: 4000, pagina: 200 };
-const SERVICOS = { 'site': 'Site', 'seo': 'SEO', 'google-ads': 'Google Ads', 'meta-ads': 'Meta Ads', 'manutencao': 'Manutenção' };
+const SERVICOS = { 'site': 'Site', 'seo': 'SEO', 'google-ads': 'Google Ads', 'meta-ads': 'Meta Ads', 'manutencao': 'Manutenção', 'whatsapp': 'Canal WhatsApp' };
 const INVESTIMENTO = {
   '': 'Não informado',
   'ate-3k': 'Até R$ 3 mil',

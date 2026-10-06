@@ -58,6 +58,16 @@ test('contrato do Worker sem mensagens externas', async (t) => {
       assert.equal((await worker.fetch(request(dados, { Origin: 'https://terceiro.example.invalid' }), env)).status, 403);
       assert.equal((await worker.fetch(new Request('https://uno.example.invalid/api/contato'), env)).status, 405);
     });
+    await t.test('Canal WhatsApp entra no texto encaminhado e valor desconhecido sai', async () => {
+      globalThis.fetch = async (_url, options) => {
+        payload = JSON.parse(options.body);
+        return Response.json({ ok: true, encaminhamento: 'smtp_aceito' });
+      };
+      const resposta = await worker.fetch(request({ ...dados, servicos: ['whatsapp', 'desconhecido', 'whatsapp'] }), env);
+      assert.equal(resposta.status, 200);
+      assert.deepEqual(payload.servicos, ['whatsapp']);
+      assert.equal(payload.servicosTexto, 'Canal WhatsApp');
+    });
     await t.test('honeypot descarta sem encaminhar', async () => {
       let passou = false;
       globalThis.fetch = async () => { passou = true; throw new Error('não deveria chamar'); };

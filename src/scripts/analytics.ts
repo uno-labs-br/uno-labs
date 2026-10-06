@@ -56,8 +56,13 @@ const CTAS_PERMITIDOS = new Set([
   'email_recuperacao',
   'whatsapp_nojs',
   'email_nojs',
+  'whatsapp_canal_topo',
+  'whatsapp_canal_hero',
+  'whatsapp_canal_teste',
+  'whatsapp_canal_plano',
+  'whatsapp_canal_contato',
 ]);
-const POSICOES_PERMITIDAS = new Set(['contato', 'form_recuperacao', 'form_nojs']);
+const POSICOES_PERMITIDAS = new Set(['contato', 'form_recuperacao', 'form_nojs', 'canal_topo', 'canal_hero', 'canal_teste', 'canal_planos', 'canal_contato']);
 
 /** Verifica se a execução está no ambiente oficial de produção (HTTPS e hostname permitido). */
 export function isAmbientePermitido(): boolean {
@@ -127,7 +132,7 @@ export function sanitizarPageReferrer(referrerBruto = document.referrer): string
     if (parsed.origin !== window.location.origin) {
       return `${parsed.origin}/`;
     }
-    const caminhosPublicos = new Set(['/', '/blog/', '/politica-de-privacidade/']);
+    const caminhosPublicos = new Set(['/', '/blog/', '/politica-de-privacidade/', '/whatsapp/']);
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
     if (canonical) caminhosPublicos.add(new URL(canonical).pathname);
     return caminhosPublicos.has(parsed.pathname) ? `${parsed.origin}${parsed.pathname}` : `${parsed.origin}/`;

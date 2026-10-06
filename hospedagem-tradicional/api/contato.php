@@ -92,7 +92,7 @@ if (!is_array($d)) responder(400, ['ok' => false, 'erro' => 'json_invalido']);
 if (limpar($d['website'] ?? '', 200) !== '') responder(200, ['ok' => true]);
 
 // ---- Validação ----
-$servicosValidos = ['site' => 'Site', 'seo' => 'SEO', 'google-ads' => 'Google Ads', 'meta-ads' => 'Meta Ads', 'manutencao' => 'Manutenção'];
+$servicosValidos = ['site' => 'Site', 'seo' => 'SEO', 'google-ads' => 'Google Ads', 'meta-ads' => 'Meta Ads', 'manutencao' => 'Manutenção', 'whatsapp' => 'Canal WhatsApp'];
 $investimentos = [
     '' => 'Não informado', 'ate-3k' => 'Até R$ 3 mil', '3-6k' => 'De R$ 3 mil a R$ 6 mil',
     '6-10k' => 'De R$ 6 mil a R$ 10 mil', '10k' => 'Acima de R$ 10 mil', 'indefinido' => 'Ainda não definido',

@@ -1,9 +1,22 @@
+---
+interface Props {
+  titulo?: string;
+  subtitulo?: string;
+  servicoPadrao?: string;
+}
+
+const {
+  titulo = 'Sua empresa já tem valor. Vamos fazer o digital mostrar isso.',
+  subtitulo = 'Conte o momento da sua empresa e o que você quer construir. A conversa começa pelo contexto para chegar a uma proposta coerente.',
+  servicoPadrao,
+} = Astro.props;
+---
 <section class="contato" id="contato" aria-labelledby="contato-titulo">
   <div class="container contato__grade">
     <div>
       <p class="rotulo">Contato</p>
-      <h2 class="titulo-medio" id="contato-titulo">Sua empresa já tem valor. Vamos fazer o digital mostrar isso.</h2>
-      <p class="texto-apoio" style="margin-top:24px">Conte o momento da sua empresa e o que você quer construir. A conversa começa pelo contexto para chegar a uma proposta coerente.</p>
+      <h2 class="titulo-medio" id="contato-titulo">{titulo}</h2>
+      <p class="texto-apoio" style="margin-top:24px">{subtitulo}</p>
       <div class="canais">
         <a class="canal" href="https://wa.me/5527936185141" target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_contato" data-cta-position="contato">
           <span><small>Prefere conversar agora?</small><b>WhatsApp · (27) 93618-5141</b></span>
@@ -50,6 +63,7 @@
             <label><input type="checkbox" name="servicos" value="google-ads">Google Ads</label>
             <label><input type="checkbox" name="servicos" value="meta-ads">Meta Ads</label>
             <label><input type="checkbox" name="servicos" value="manutencao">Manutenção</label>
+            <label><input type="checkbox" name="servicos" value="whatsapp" checked={servicoPadrao === 'whatsapp'}>Canal WhatsApp</label>
           </div>
         </fieldset>
         <div class="campo">
