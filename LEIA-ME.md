@@ -1,4 +1,4 @@
-> Atualização de 03/10/2026: a publicação dos seis artigos e a hospedagem Vercel do domínio oficial são descritas em [docs/blog/publicacao-2026-10-03.md](docs/blog/publicacao-2026-10-03.md). As descrições abaixo de artigos em revisão e de proteção global Vercel registram o estado anterior. A produção Vercel passa a usar o build de produção; somente o blog é liberado do cabeçalho fixo noindex.
+> Atualização de 03/10/2026: a publicação dos seis artigos é descrita em [docs/blog/publicacao-2026-10-03.md](docs/blog/publicacao-2026-10-03.md). No mesmo dia, o domínio oficial deixou a Vercel e passou a ser servido pelo Worker `unolabs-site` na Cloudflare, que publica cada versão da `main` (seção 7, “Publicação no domínio oficial”). A Vercel continua apenas como ambiente de teste com `noindex`. As descrições abaixo de artigos em revisão registram o estado anterior.
 
 # UNO Labs — instruções do site
 
@@ -20,7 +20,7 @@ A base editorial usa MDX e Content Collections. Ela permite validar e gerar arti
 
 A stack é Astro `7.3.5`, `@astrojs/mdx` `8.0.2`, TypeScript `6.0.3` com `astro/tsconfigs/strict`, npm e lockfile. A saída é estática: sem adaptador de servidor, SSR, SPA ou framework de interface adicional. A origem canônica continua `https://unolabs.com.br`; isso não afirma que esse domínio já serve o build Astro.
 
-O Worker, `wrangler.jsonc`, PHP alternativo e workflow n8n foram preservados. A integração da hospedagem oficial, do backend e da medição continua para outras tarefas. O antigo atalho `npm run deploy` foi substituído por um bloqueio local, sem rede, pois a configuração Cloudflare ainda aponta para `public/`, que já não contém as páginas completas.
+O Worker, `wrangler.jsonc`, PHP alternativo e workflow n8n foram preservados. O antigo atalho `npm run deploy` foi substituído por um bloqueio local, sem rede, porque o `wrangler.jsonc` legado aponta para `public/`, que já não contém as páginas completas. A publicação oficial usa `wrangler.production.jsonc`, descrita na seção 7.
 
 ## 2. Onde editar
 
@@ -188,15 +188,19 @@ Verificação local sem publicar: `npm run build`, seguido de `npx wrangler depl
 
 Resultados locais e limites: [verificação da prévia Cloudflare](docs/verificacoes/cloudflare-workers-preview.md).
 
-A configuração separada do Worker de produção, os domínios oficiais e os requisitos para a troca estão em [migração do domínio para Workers](docs/cloudflare-dominio-producao.md). Sua presença no repositório não comprova publicação: usar somente a versão aprovada da `main`, com build `production` e artigos aprovados.
+A configuração separada do Worker de produção, os domínios oficiais e o histórico da troca de hospedagem estão em [migração do domínio para Workers](docs/cloudflare-dominio-producao.md). O fluxo em uso está descrito a seguir.
 
 ### Publicação no domínio oficial
 
-A configuração Cloudflare preservada ainda usa `assets.directory = ./public`. Depois da migração, publicar essa pasta enviaria ativos sem o frontend completo. O dry run legado não corrige essa incompatibilidade; `npm run deploy` encerra localmente com a orientação de integração futura. Não usar `npx wrangler deploy` para contornar o bloqueio.
+Desde 03/10/2026, `unolabs.com.br` e `www.unolabs.com.br` são servidos pelo Worker `unolabs-site` na Cloudflare; `www` redireciona para a raiz. O Workers Builds acompanha a `main`: cada integração compila com `UNO_DEPLOY_TARGET=production npm run build` e publica `dist/` com `npx wrangler deploy --config wrangler.production.jsonc`. Rotas `/api/*` passam pelo Worker antes dos ativos.
 
-A futura tarefa de hospedagem deve definir como servir `dist/`, manter o contrato de contato, conferir 404 e cabeçalhos, homologar o fluxo e autorizar a publicação da versão integrada na `main`. Não aplicar automaticamente a antiga proposta de adapter Cloudflare ou rota SSR: esta entrega é estática e preserva o Worker separado. A alternativa Apache/PHP continua no repositório, sem homologação para o build Astro. Enviar somente `public/` ou copiar as antigas instruções HostGator já não publica o site completo.
+Não há etapa manual de publicação: **integrar um PR na `main` coloca a versão no domínio oficial em poucos minutos**. Por isso, a autorização para integrar equivale à autorização para publicar; pendências de conteúdo, preço ou texto precisam ser resolvidas antes do merge.
 
-Cloudflare permanece a hospedagem oficial planejada; HostGator, o serviço SMTP previsto. DNS, custom domains, redirects, secrets, SMTP e contas não foram configurados por esta migração. Clarity, pixels, Search Console e ativação do Turnstile ficam para etapas posteriores.
+Para conferir cada publicação, aguardar o check “Workers Builds: unolabs-site” do commit de merge terminar com sucesso e só então verificar o domínio. Antes disso, o domínio ainda serve a versão anterior. Exemplo: o merge do PR #15 (`cb153f6`) foi publicado às 02:18 UTC de 06/10/2026, cerca de dois minutos após a integração.
+
+O `wrangler.jsonc` legado ainda usa `assets.directory = ./public` e não serve o site completo; `npm run deploy` continua bloqueado localmente para impedir esse uso. Não publicar manualmente a partir de uma branch de tarefa nem usar `npx wrangler deploy` sem `--config wrangler.production.jsonc`. A alternativa Apache/PHP continua no repositório, sem homologação para o build Astro. Enviar somente `public/` ou seguir as antigas instruções HostGator não publica o site completo.
+
+HostGator continua como o serviço SMTP previsto. As pendências de backend de contato, SMTP e medição estão na seção 8.
 
 ### Medição de audiência (Google Analytics 4 e Consentimento)
 
@@ -218,8 +222,6 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
   3. Verificação no DebugView durante navegação de teste.
   4. Marcação de `generate_lead` como evento chave/conversão, se desejado.
   *Verificação:* `node tests/analytics-browser.cjs` validou 73 condições, inclusive transporte do SDK oficial com os envios de teste interceptados. Após o PR #12, a publicação no Cloudflare e a recepção inicial de `page_view`, `first_visit` e `session_start` foram confirmadas na propriedade. Seis dimensões foram cadastradas e `generate_lead` marcado como evento principal sem valor fictício. Fuso São Paulo, BRL e retenção de 14 meses conferidos. Evidências e limites no [relatório GA4](docs/verificacoes/ga4/RELATORIO.md).
-
-**Cloudflare confirmado em 03/10/2026:** o Worker `unolabs-site` acompanha `main`, compila com `UNO_DEPLOY_TARGET=production npm run build` e publica com `npx wrangler deploy --config wrangler.production.jsonc`. Usar essa configuração com assets em `dist/`; o arquivo Wrangler legado e o atalho bloqueado não são o fluxo de produção. As referências anteriores à integração Astro pendente descrevem o estado da migração, antes desta conferência.
 
 ## 8. Pendências comerciais e de homologação
 
