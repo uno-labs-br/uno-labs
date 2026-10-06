@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import Contato from '../../components/home/Contato.astro';
 import { canonicalURL, site } from '../../data/site';
 
 const description = 'WhatsApp Business gerenciado no número da sua empresa, com qualquer DDD. Perfil comercial, respostas de horário e CRM com histórico. Atendimento em todo o Brasil. Planos a partir de R$ 147 por mês.';
@@ -10,6 +9,10 @@ const planos = [
   { nome: 'Essencial', implantacao: 297, mensalidade: 147 },
   { nome: 'Equipe', implantacao: 497, mensalidade: 247 },
 ];
+// Todo contato desta página acontece no WhatsApp, com a mensagem inicial já preenchida.
+const linkWhatsapp = (mensagem: string) => `${site.whatsapp}?text=${encodeURIComponent(mensagem)}`;
+const whatsappCanal = linkWhatsapp('Olá! Quero saber mais sobre o Canal WhatsApp gerenciado.');
+const whatsappPlano = (nome: string) => linkWhatsapp(`Olá! Tenho interesse no plano ${nome} do Canal WhatsApp.`);
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -67,8 +70,8 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           <h1 id="canal-titulo">Nenhum cliente sem resposta, nem fora do expediente.</h1>
           <p class="canal-lead">A Uno configura e opera o WhatsApp Business no número da sua empresa: perfil comercial, respostas de horário e histórico no CRM. O número continua sendo seu. Sua equipe só atende.</p>
           <div class="canal-acoes">
-            <a class="btn btn--escuro" href="#contato">Pedir proposta do canal <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="btn btn--contorno" href={site.whatsapp} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_canal_hero" data-cta-position="canal_hero">Falar pelo WhatsApp</a>
+            <a class="btn btn--escuro" href={whatsappCanal} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_canal_hero" data-cta-position="canal_hero">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn btn--contorno" href="#planos">Ver planos</a>
           </div>
           <dl class="canal-fatos">
             <div><dt>Número</dt><dd>o da sua empresa, qualquer DDD</dd></div>
@@ -249,7 +252,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       </div>
     </section>
 
-    <section class="canal-preco" aria-labelledby="preco-titulo">
+    <section class="canal-preco" id="planos" aria-labelledby="preco-titulo">
       <div class="container">
         <div class="canal-preco__cartao escuro">
           <div class="canal-preco__cab">
@@ -269,7 +272,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
                 <li>Respostas de horário e ausência</li>
                 <li>CRM com histórico e etiquetas</li>
               </ul>
-              <a class="btn canal-plano__btn" href="#contato" data-plano="essencial">Escolher o Essencial</a>
+              <a class="btn canal-plano__btn" href={whatsappPlano('Essencial')} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_canal_plano" data-cta-position="canal_planos">Quero o Essencial</a>
             </article>
             <article class="canal-plano canal-plano--destaque">
               <p class="canal-plano__selo">Recomendado para equipes</p>
@@ -283,7 +286,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
                 <li>Relatório semanal de contatos e origem</li>
                 <li>Revisão mensal das mensagens</li>
               </ul>
-              <a class="btn btn--uno-mint canal-plano__btn" href="#contato" data-plano="equipe">Escolher o Equipe <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="btn btn--uno-mint canal-plano__btn" href={whatsappPlano('Equipe')} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_canal_plano" data-cta-position="canal_planos">Quero o Equipe <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </article>
           </div>
           <ul class="canal-garantias">
@@ -301,7 +304,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
         <div class="duvidas__cab">
           <p class="rotulo">Dúvidas</p>
           <h2 class="titulo-medio" id="duvidas-titulo">Perguntas sobre o canal.</h2>
-          <p class="texto-apoio canal-duvidas__apoio">Tem outra dúvida específica? <a href="#contato">Fale com a gente logo abaixo</a>.</p>
+          <p class="texto-apoio canal-duvidas__apoio">Tem outra dúvida específica? <a href="#contato">Fale com a gente pelo WhatsApp</a>.</p>
         </div>
         <div class="faq">
           <details open><summary>Preciso de um número novo?</summary><p>Não necessariamente. Podemos usar uma linha que a empresa já tenha. Se hoje ela é o seu WhatsApp pessoal, recomendamos separar: uma linha nova no CNPJ, em qualquer operadora, custa pouco, e orientamos a contratação.</p></details>
@@ -316,20 +319,26 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       </div>
     </section>
 
-    <Contato
-      titulo="Vamos estruturar o WhatsApp da sua empresa."
-      subtitulo="Envie os dados do seu negócio para receber uma proposta do canal gerenciado no número da sua empresa."
-      servicoPadrao="whatsapp"
-      variante="whatsapp"
-    />
+    <section class="canal-contato" id="contato" aria-labelledby="contato-titulo">
+      <div class="container canal-contato__grade">
+        <div>
+          <p class="rotulo">Contato</p>
+          <h2 id="contato-titulo">Vamos estruturar o WhatsApp da sua empresa.</h2>
+          <p>Chame a Uno no WhatsApp. Conte o ramo, quantas pessoas atendem e qual plano faz sentido. Respondemos com a proposta.</p>
+        </div>
+        <div class="canal-contato__cartao">
+          <p class="canal-contato__rotulo">WhatsApp da Uno</p>
+          <p class="canal-contato__numero">(27) 93618-5141</p>
+          <a class="btn btn--escuro" href={whatsappCanal} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_canal_contato" data-cta-position="canal_contato">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer />
 </BaseLayout>
 <script>
   import '../../scripts/interno';
-  import { iniciarFormulario } from '../../scripts/formulario';
   import { iniciarMockupCanal } from '../../scripts/canal-mockup';
-  iniciarFormulario();
   iniciarMockupCanal();
 </script>
 <style>
@@ -751,7 +760,29 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
 
   .duvidas { padding: clamp(56px, 7vw, 96px) 0; }
   .canal-duvidas__apoio { margin-top: 24px; }
-  .canal-conteudo :global(.contato) { padding-top: clamp(56px, 7vw, 96px); }
+  .canal-contato { padding: clamp(56px, 7vw, 96px) 0; background: var(--uno-off-white-2); }
+  .canal-contato__grade { display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 900px) { .canal-contato__grade { grid-template-columns: 1.2fr 1fr; gap: 64px; } }
+  .canal-contato h2 {
+    max-width: 18ch;
+    font-size: clamp(30px, 3.6vw, 48px);
+    line-height: 1.06;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--uno-pine);
+    text-wrap: balance;
+  }
+  .canal-contato__grade > div:first-child > p:last-child { margin-top: 18px; max-width: 48ch; font-size: 17px; line-height: 1.6; color: var(--uno-ink-2); }
+  .canal-contato__cartao {
+    padding: clamp(24px, 3.5vw, 40px);
+    border-radius: var(--uno-radius-lg);
+    background: var(--uno-white);
+    border: 1px solid var(--uno-line);
+    box-shadow: var(--uno-shadow);
+  }
+  .canal-contato__rotulo { font-size: 15px; color: var(--uno-ink-2); }
+  .canal-contato__numero { margin-top: 4px; font-size: clamp(28px, 3vw, 36px); font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
+  .canal-contato__cartao .btn { margin-top: 24px; }
 
   @media (max-width: 599px) {
     .canal-fatos { grid-template-columns: 1fr; gap: 16px; }
