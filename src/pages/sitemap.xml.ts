@@ -14,6 +14,7 @@ export const GET: APIRoute = async () => {
     { path: '/' },
     { path: '/politica-de-privacidade/' },
     { path: '/whatsapp/' },
+    { path: '/email-marketing/' },
     { path: '/blog/' },
     ...(await getPublishedArticles()).map((article) => ({
       path: articlePath(article.id),

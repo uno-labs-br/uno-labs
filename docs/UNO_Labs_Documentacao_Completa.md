@@ -47,6 +47,7 @@ Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a refer�
 | Google Ads | Mensal | Verba de mídia paga direto à plataforma — **confirmar** |
 | Meta Ads | Mensal | Verba de mídia paga direto à plataforma — **confirmar** |
 | Plano de manutenção e evolução | Mensal | Única forma de alterar o site depois de entregue |
+| E-mail marketing gerenciado (`/email-marketing/`) | Mensal | Instância exclusiva por cliente; preço público **sob consulta** até Bruno e Urias fecharem valor e provedor de envio. Nunca prometer chegada à caixa de entrada |
 
 Hospedagem, domínio e e-mail corporativo como serviços oferecidos: **confirmar** antes de anunciar. **E-commerce:** fora do escopo por enquanto.
 
@@ -165,6 +166,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e Wh
 | Termos comerciais de prazo e garantia | Informar as condições na proposta de cada escopo; não preencher números ou marcadores provisórios na home | Não |
 | Verba de mídia paga direto às plataformas | Confirmar | Não |
 | Hospedagem, domínio e e-mail como serviços | Confirmar | Não |
+| E-mail marketing gerenciado | Definir preço público, provedor de envio (AWS SES ou SendGrid) e escopo dos planos | Não; a página publica "sob consulta" |
 | Perfil de Empresa no Google | Não existe; depende de endereço verificável | Não, mas limita o SEO local |
 | Cases reais com autorização (La Bella Mesa e outros) | Pendência futura | Não |
 | Escolha final de tipografia (A, B ou C) | Em avaliação | Não |

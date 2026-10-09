@@ -5,13 +5,18 @@ const homePrefix = Astro.url.pathname === '/' ? '' : '/';
 const homeLink = (section: string) => `${homePrefix}#${section}`;
 const isBlog = Astro.url.pathname.startsWith('/blog/');
 const isWhatsapp = Astro.url.pathname.startsWith('/whatsapp');
-// Na página do canal, o contato acontece só pelo WhatsApp.
-const ctaHref = isWhatsapp
-  ? `${site.whatsapp}?text=${encodeURIComponent('Olá! Quero saber mais sobre o Canal WhatsApp gerenciado.')}`
+// Nas páginas de serviço, o contato acontece só pelo WhatsApp.
+const paginasServico = [
+  { prefixo: '/whatsapp', mensagem: 'Olá! Quero saber mais sobre o Canal WhatsApp gerenciado.', id: 'canal' },
+  { prefixo: '/email-marketing', mensagem: 'Olá! Quero saber mais sobre o E-mail marketing gerenciado.', id: 'email' },
+];
+const paginaServico = paginasServico.find(({ prefixo }) => Astro.url.pathname.startsWith(prefixo));
+const ctaHref = paginaServico
+  ? `${site.whatsapp}?text=${encodeURIComponent(paginaServico.mensagem)}`
   : homeLink('contato');
-const ctaTexto = isWhatsapp ? 'Falar no WhatsApp' : 'Conversar sobre meu projeto';
-const ctaAtributos = isWhatsapp
-  ? { target: '_blank', rel: 'noopener', 'data-contact-channel': 'whatsapp', 'data-cta-id': 'whatsapp_canal_topo', 'data-cta-position': 'canal_topo' }
+const ctaTexto = paginaServico ? 'Falar no WhatsApp' : 'Conversar sobre meu projeto';
+const ctaAtributos = paginaServico
+  ? { target: '_blank', rel: 'noopener', 'data-contact-channel': 'whatsapp', 'data-cta-id': `whatsapp_${paginaServico.id}_topo`, 'data-cta-position': `${paginaServico.id}_topo` }
   : {};
 ---
 <header class="topo">
