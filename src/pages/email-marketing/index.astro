@@ -40,12 +40,12 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     <section class="email-hero" aria-labelledby="email-titulo">
       <div class="container email-hero__grade">
         <div>
-          <p class="rotulo">E-mail marketing gerenciado · Todo o Brasil</p>
-          <h1 id="email-titulo">Quem pediu orçamento e não fechou volta a falar com você.</h1>
-          <p class="email-lead">A Uno monta e cuida do e-mail marketing da sua empresa por uma mensalidade. Seus contatos recebem mensagens automáticas e sua equipe só atende quem voltou a se interessar.</p>
+          <p class="email-hero__rotulo">E-mail marketing gerenciado · Todo o Brasil</p>
+          <h1 id="email-titulo">Quem pediu orçamento e não fechou <em>volta a falar com você.</em></h1>
+          <p class="email-lead">A Uno monta e cuida do e-mail marketing da sua empresa por uma mensalidade. Cada contato recebe a mensagem certa no tempo certo, e seu vendedor só liga para quem voltou a se interessar.</p>
           <div class="email-acoes">
-            <a class="btn btn--escuro" href={whatsappEmail} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_email_hero" data-cta-position="email_hero">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="btn btn--contorno" href="#entrega">Ver o que entregamos</a>
+            <a class="btn btn--uno-mint" href={whatsappEmail} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_email_hero" data-cta-position="email_hero">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn email-btn-claro" href="#exemplo">Ver um exemplo</a>
           </div>
           <dl class="email-fatos">
             <div><dt>Quem faz</dt><dd>a Uno monta e opera</dd></div>
@@ -54,20 +54,66 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           </dl>
         </div>
 
-        <figure class="email-jornada" aria-labelledby="email-jornada-legenda">
-          <span class="email-jornada__badge">Exemplo: mensagens automáticas para móveis planejados</span>
-          <ol class="email-jornada__etapas">
-            <li><strong>Pediu orçamento de uma cozinha</strong><span>É separado por ambiente e recebe o projeto por e-mail.</span></li>
-            <li><strong>Não fechou na hora</strong><span>Semanas depois recebe casos e ambientes parecidos com o dele.</span></li>
-            <li><strong>Clicou nas condições</strong><span>Vira prioridade e recebe o convite para rever o projeto com o vendedor.</span></li>
-            <li class="email-jornada__fim"><strong>Cliente quente</strong><span>Sua equipe é avisada com o histórico do contato.</span></li>
-          </ol>
-          <figcaption id="email-jornada-legenda">Ilustração: cada contato recebe a próxima mensagem conforme o que fez, sem envio manual.</figcaption>
+        <figure class="email-caixa" aria-labelledby="email-caixa-legenda">
+          <div class="email-caixa__lista">
+            <p class="email-caixa__topo"><span>Caixa de entrada da Ana</span><span class="email-caixa__nota">exemplo ilustrativo</span></p>
+            <ol>
+              <li class="email-msg"><span class="email-dia">Dia 0</span><span class="email-msg__txt"><strong>Seu projeto de cozinha chegou</strong><span>Obrigado pelo orçamento, Ana. O projeto está aqui.</span></span><span class="email-msg__status">abriu</span></li>
+              <li class="email-msg"><span class="email-dia">Dia 7</span><span class="email-msg__txt"><strong>3 cozinhas parecidas com a sua</strong><span>Projetos do mesmo tamanho, entregues este ano.</span></span><span class="email-msg__status">clicou</span></li>
+              <li class="email-msg email-msg--agora"><span class="email-dia">Dia 21</span><span class="email-msg__txt"><strong>Condição especial para fechar este mês</strong><span>Revise o projeto com o vendedor, sem compromisso.</span></span><span class="email-msg__status">agora</span></li>
+            </ol>
+          </div>
+          <div class="email-aberto" aria-hidden="true">
+            <div class="email-aberto__img"><span>Cozinha planejada · seu projeto</span></div>
+            <div class="email-aberto__corpo">
+              <p>Oi, Ana. Seu projeto continua guardado. Neste mês temos uma condição especial para quem fecha.</p>
+              <span class="email-aberto__botao">Ver condições</span>
+            </div>
+          </div>
+          <p class="email-alerta"><strong>Aviso para o vendedor</strong>Ana clicou em “Ver condições”. Hoje é um bom dia para ligar.</p>
+          <figcaption id="email-caixa-legenda" class="sr">Exemplo ilustrativo: a Ana pediu orçamento de uma cozinha e recebeu três e-mails automáticos, nos dias 0, 7 e 21. Quando ela clicou nas condições, o vendedor foi avisado.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="email-bloco email-bloco--linha" id="entrega" aria-labelledby="entrega-titulo">
+    <section class="email-comparar" id="exemplo" aria-labelledby="exemplo-titulo">
+      <div class="container">
+        <p class="rotulo">Exemplo</p>
+        <h2 id="exemplo-titulo">O mesmo orçamento, nos 30 dias seguintes.</h2>
+        <div class="email-linhas" data-foco="com">
+          <div class="email-linhas__cab">
+            <p class="email-linhas__titulo">O orçamento da Ana, cozinha planejada</p>
+            <div class="email-alternar" role="group" aria-label="Destacar cenário">
+              <button type="button" data-cenario="sem" aria-pressed="false">Sem a Uno</button>
+              <button type="button" data-cenario="com" aria-pressed="true">Com a Uno</button>
+            </div>
+          </div>
+          <div class="email-linha email-linha--sem">
+            <h3>Sem a Uno</h3>
+            <ol>
+              <li><span class="email-linha__dia">Dia 0</span><strong>Orçamento enviado</strong><span>PDF pelo WhatsApp.</span></li>
+              <li class="email-linha__vazio"><span class="email-linha__dia">Dia 3</span><span>Silêncio.</span></li>
+              <li class="email-linha__vazio"><span class="email-linha__dia">Dia 7</span><span>Silêncio.</span></li>
+              <li class="email-linha__vazio"><span class="email-linha__dia">Dia 21</span><span>O vendedor esquece.</span></li>
+              <li><span class="email-linha__dia">Dia 30</span><strong>Fechou com outra loja</strong></li>
+            </ol>
+          </div>
+          <div class="email-linha email-linha--com">
+            <h3>Com a Uno</h3>
+            <ol>
+              <li><span class="email-linha__dia">Dia 0</span><strong>Projeto por e-mail</strong><span>Abriu.</span></li>
+              <li><span class="email-linha__dia">Dia 3</span><strong>Dicas de acabamento</strong><span>Abriu.</span></li>
+              <li><span class="email-linha__dia">Dia 7</span><strong>3 cozinhas parecidas</strong><span>Clicou.</span></li>
+              <li><span class="email-linha__dia">Dia 21</span><strong>Condição do mês</strong><span>Clicou em condições.</span></li>
+              <li class="email-linha__fim"><span class="email-linha__dia">Dia 21</span><strong>Vendedor avisado</strong><span>“Ana voltou. Ligar hoje.”</span></li>
+            </ol>
+          </div>
+        </div>
+        <p class="email-comparar__nota">Exemplo ilustrativo. Cada empresa tem sua sequência, montada com a Uno e aprovada por você.</p>
+      </div>
+    </section>
+
+    <section class="email-bloco email-bloco--tom" id="entrega" aria-labelledby="entrega-titulo">
       <div class="container">
         <p class="rotulo">Entrega</p>
         <h2 id="entrega-titulo">O que a Uno entrega</h2>
@@ -149,7 +195,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       </div>
     </section>
 
-    <section class="email-bloco email-bloco--linha" aria-labelledby="publico-titulo">
+    <section class="email-bloco email-bloco--tom" aria-labelledby="publico-titulo">
       <div class="container">
         <p class="rotulo">Para quem</p>
         <h2 id="publico-titulo">Para empresas com contatos parados e pouco relacionamento com eles.</h2>
@@ -215,108 +261,249 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
 </BaseLayout>
 <script>
   import '../../scripts/interno';
+  import { aoDOMPronto } from '../../scripts/comum';
+
+  function iniciarComparacao(): void {
+    const linhas = document.querySelector<HTMLElement>('.email-linhas');
+    if (!linhas) return;
+    const botoes = linhas.querySelectorAll<HTMLButtonElement>('[data-cenario]');
+    botoes.forEach((botao) => {
+      botao.addEventListener('click', () => {
+        linhas.dataset.foco = botao.dataset.cenario;
+        botoes.forEach((outro) => outro.setAttribute('aria-pressed', String(outro === botao)));
+      });
+    });
+    if (!('IntersectionObserver' in window)) {
+      linhas.classList.add('is-visivel');
+      return;
+    }
+    const observador = new IntersectionObserver((entradas) => {
+      if (!entradas.some((entrada) => entrada.isIntersecting)) return;
+      linhas.classList.add('is-visivel');
+      observador.disconnect();
+    }, { rootMargin: '0px 0px -15% 0px' });
+    observador.observe(linhas);
+  }
+
+  aoDOMPronto(iniciarComparacao);
 </script>
 <style>
   .email-hero {
-    padding: clamp(32px, 4vw, 56px) 0 clamp(48px, 6vw, 80px);
-    background-image:
-      linear-gradient(rgba(16, 32, 28, .045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(16, 32, 28, .045) 1px, transparent 1px);
-    background-size: 80px 80px;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 7vw, 104px);
+    color: var(--uno-off-white);
+    background:
+      radial-gradient(900px 520px at 80% 25%, rgba(125, 211, 168, .2), transparent 62%),
+      radial-gradient(700px 500px at 0% 100%, rgba(61, 170, 120, .16), transparent 60%),
+      var(--uno-pine);
   }
-  .email-hero__grade { display: grid; gap: 48px; align-items: start; }
+  .email-hero__grade { display: grid; gap: 56px; align-items: center; }
   @media (min-width: 1000px) {
-    .email-hero__grade { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 64px; }
+    .email-hero__grade { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 64px; }
   }
+  .email-hero__rotulo { margin: 0 0 18px; font-size: 15px; font-weight: 600; color: var(--uno-mint); }
   h1 {
-    font-size: clamp(38px, 4.6vw, 62px);
+    font-size: clamp(38px, 4.6vw, 64px);
     line-height: 1.03;
     font-weight: 600;
-    letter-spacing: -0.04em;
-    color: var(--uno-pine);
+    letter-spacing: -0.045em;
+    color: var(--uno-off-white);
     text-wrap: balance;
   }
+  h1 em { font-style: normal; color: var(--uno-mint); }
   .email-lead {
-    max-width: 40rem;
+    max-width: 36rem;
     margin-top: 24px;
     font-size: clamp(17px, 1.5vw, 20px);
     line-height: 1.55;
-    color: var(--uno-ink-2);
+    color: rgba(243, 247, 243, .8);
     text-wrap: pretty;
   }
   .email-acoes { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: 32px; }
+  .email-btn-claro { color: var(--uno-off-white); box-shadow: inset 0 0 0 1px rgba(243, 247, 243, .35); }
+  .email-btn-claro:hover { color: var(--uno-off-white); background: rgba(243, 247, 243, .08); }
+  .email-hero :focus-visible { outline-color: var(--uno-mint); }
   .email-fatos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 40px; }
   .email-fatos > div {
     display: flex;
     flex-direction: column;
     gap: 6px;
     padding: 0 18px;
-    border-left: 1px solid rgba(16, 32, 28, .15);
+    border-left: 1px solid var(--uno-line-dark);
   }
   .email-fatos > div:first-child { padding-left: 0; border-left: 0; }
-  .email-fatos dt { font-size: 16px; font-weight: 600; color: var(--uno-pine); }
-  .email-fatos dd { font-size: 15px; color: var(--uno-ink-2); }
+  .email-fatos dt { font-size: 15px; font-weight: 600; color: var(--uno-mint); }
+  .email-fatos dd { font-size: 15px; color: rgba(243, 247, 243, .78); }
 
-  .email-jornada {
-    margin: 0;
-    padding: clamp(20px, 3vw, 28px);
+  .email-caixa { position: relative; margin: 0; padding: 0 0 96px; }
+  .email-caixa__lista {
+    margin-right: clamp(0px, 4vw, 56px);
+    padding: 20px;
     border-radius: var(--uno-radius-lg);
-    background: var(--uno-white);
-    border: 1px solid var(--uno-line);
-    box-shadow: 0 18px 48px rgba(18, 54, 45, .08);
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid var(--uno-line-dark);
   }
-  .email-jornada__badge {
-    display: inline-flex;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(14, 43, 36, .08);
-    font-size: 12px;
-    font-weight: 600;
+  @media (min-width: 600px) { .email-caixa__lista { padding-bottom: 180px; } }
+  .email-caixa__topo { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: rgba(243, 247, 243, .72); }
+  .email-caixa__nota { font-family: var(--uno-font-mono); font-size: 12px; }
+  .email-caixa ol { margin: 6px 0 0; padding: 0; list-style: none; }
+  .email-msg {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    margin-top: 10px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .07);
+  }
+  .email-msg__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .email-msg__txt strong { font-size: 15px; font-weight: 600; }
+  .email-msg__txt span { font-size: 13px; color: rgba(243, 247, 243, .66); }
+  .email-msg__status { font-family: var(--uno-font-mono); font-size: 12px; color: var(--uno-mint); }
+  .email-dia {
+    padding: 6px 0;
+    border-radius: 8px;
+    background: var(--uno-mint);
     color: var(--uno-pine);
+    font-family: var(--uno-font-mono);
+    font-size: 11px;
+    text-align: center;
+    text-transform: uppercase;
   }
-  .email-jornada__etapas { margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
-  .email-jornada__etapas li {
-    position: relative;
+  .email-msg--agora { background: var(--uno-off-white); color: var(--uno-ink); box-shadow: 0 20px 50px rgba(0, 0, 0, .25); }
+  .email-msg--agora .email-msg__txt span { color: var(--uno-ink-2); }
+  .email-msg--agora .email-msg__status { color: var(--uno-mint-deep); }
+  @media (min-width: 1000px) { .email-msg--agora { transform: translateX(24px); } }
+  .email-aberto {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: min(330px, 78%);
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--uno-white);
+    color: var(--uno-ink);
+    box-shadow: 0 40px 90px rgba(0, 0, 0, .35);
+  }
+  .email-aberto__img {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 0 0 20px 28px;
+    align-items: flex-end;
+    height: 110px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #D9C6A8, #A88A64);
+    color: var(--uno-white);
+    font-size: 13px;
+    font-weight: 600;
   }
-  .email-jornada__etapas li::before {
-    content: '';
+  .email-aberto__corpo { padding: 16px 18px 18px; font-size: 14px; line-height: 1.5; color: var(--uno-ink-2); }
+  .email-aberto__botao { display: inline-block; margin-top: 12px; padding: 9px 16px; border-radius: 999px; background: var(--uno-pine); color: var(--uno-off-white); font-size: 13px; font-weight: 600; }
+  .email-alerta {
     position: absolute;
     left: 0;
-    top: 5px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--uno-mint-deep);
-    background: var(--uno-white);
-  }
-  .email-jornada__etapas li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 21px;
-    bottom: 0;
-    width: 2px;
-    background: var(--uno-line);
-  }
-  .email-jornada__etapas li.email-jornada__fim { padding-bottom: 0; }
-  .email-jornada__etapas li.email-jornada__fim::before { background: var(--uno-mint-deep); }
-  .email-jornada__etapas strong { font-size: 15px; font-weight: 600; color: var(--uno-pine); }
-  .email-jornada__etapas span { font-size: 14px; line-height: 1.5; color: var(--uno-ink-2); }
-  .email-jornada figcaption {
-    margin-top: 20px;
-    padding-top: 14px;
-    border-top: 1px solid var(--uno-line);
+    bottom: 40px;
+    width: min(300px, 70%);
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: var(--uno-mint);
+    color: var(--uno-pine);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .3);
     font-size: 14px;
-    line-height: 1.5;
-    color: var(--uno-ink-2);
+    line-height: 1.45;
   }
+  .email-alerta strong { display: block; font-size: 13px; }
+  @media (min-width: 1000px) { .email-alerta { left: -32px; } }
+  @media (max-width: 599px) {
+    .email-caixa { padding-bottom: 0; }
+    .email-msg { grid-template-columns: 52px minmax(0, 1fr); }
+    .email-msg__status { display: none; }
+    .email-aberto, .email-alerta { position: relative; width: auto; left: auto; right: auto; bottom: auto; }
+    .email-aberto { margin: -12px 12px 0 32px; }
+    .email-alerta { margin: -8px 40px 0 0; }
+  }
+
+  @keyframes email-entra { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .email-msg, .email-aberto, .email-alerta { animation: email-entra .6s cubic-bezier(.2, .7, .2, 1) both; }
+    .email-msg:nth-child(1) { animation-delay: .2s; }
+    .email-msg:nth-child(2) { animation-delay: .7s; }
+    .email-msg:nth-child(3) { animation-delay: 1.2s; }
+    .email-aberto { animation-delay: 1.8s; }
+    .email-alerta { animation-delay: 2.5s; }
+  }
+
+  .email-comparar {
+    padding: clamp(56px, 8vw, 104px) 0;
+    background:
+      radial-gradient(700px 420px at 12% 0%, rgba(125, 211, 168, .28), transparent 62%),
+      radial-gradient(600px 420px at 100% 60%, rgba(167, 229, 197, .35), transparent 62%),
+      linear-gradient(180deg, #E4EFE8, var(--uno-off-white));
+  }
+  .email-comparar h2 {
+    max-width: 22ch;
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--uno-pine);
+    text-wrap: balance;
+  }
+  .email-linhas {
+    margin-top: 40px;
+    padding: clamp(20px, 3vw, 32px);
+    border-radius: var(--uno-radius-xl);
+    background: rgba(255, 255, 255, .62);
+    border: 1px solid rgba(16, 32, 28, .08);
+    box-shadow: var(--uno-shadow);
+  }
+  .email-linhas__cab { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+  .email-linhas__titulo { font-size: 18px; font-weight: 600; color: var(--uno-pine); }
+  .email-alternar { display: none; padding: 4px; border-radius: 999px; background: var(--uno-off-white-2); border: 1px solid var(--uno-line); }
+  :global(html.js) .email-alternar { display: inline-flex; }
+  .email-alternar button {
+    min-height: 40px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--uno-ink-2);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .email-alternar button[aria-pressed="true"] { background: var(--uno-pine); color: var(--uno-off-white); }
+  .email-linha { display: grid; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(16, 32, 28, .18); transition: opacity .3s ease; }
+  .email-linha h3 { font-size: 15px; font-weight: 600; color: var(--uno-pine); }
+  .email-linha ol { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 900px) {
+    .email-linha { grid-template-columns: 120px minmax(0, 1fr); align-items: center; }
+    .email-linha ol { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  }
+  .email-linha li { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 14px; font-size: 13px; line-height: 1.4; }
+  .email-linha strong { font-size: 14px; font-weight: 600; }
+  .email-linha__dia { font-family: var(--uno-font-mono); font-size: 11px; text-transform: uppercase; opacity: .8; }
+  .email-linha--sem li { background: #E8ECE9; color: #56655E; }
+  .email-linha--sem .email-linha__vazio { background: transparent; border: 1px dashed rgba(16, 32, 28, .15); }
+  .email-linha--com li { background: var(--uno-white); border: 1px solid rgba(61, 170, 120, .4); color: var(--uno-ink-2); }
+  .email-linha--com strong { color: var(--uno-pine); }
+  .email-linha--com .email-linha__fim { background: var(--uno-pine); border-color: var(--uno-pine); color: rgba(243, 247, 243, .82); }
+  .email-linha--com .email-linha__fim strong { color: var(--uno-mint); }
+  .email-linhas[data-foco="com"] .email-linha--sem,
+  .email-linhas[data-foco="sem"] .email-linha--com { opacity: .55; }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.js) .email-linhas:not(.is-visivel) .email-linha--com li { opacity: 0; transform: translateY(10px); }
+    .email-linha--com li { transition: opacity .5s ease, transform .5s ease; }
+    .email-linha--com li:nth-child(2) { transition-delay: .25s; }
+    .email-linha--com li:nth-child(3) { transition-delay: .5s; }
+    .email-linha--com li:nth-child(4) { transition-delay: .75s; }
+    .email-linha--com li:nth-child(5) { transition-delay: 1s; }
+  }
+  .email-comparar__nota { margin-top: 16px; font-size: 14px; color: var(--uno-ink-2); }
 
   .email-bloco { padding: clamp(56px, 8vw, 96px) 0; }
   .email-bloco--linha { border-block: 1px solid var(--uno-line); }
+  .email-bloco--tom { background: linear-gradient(180deg, var(--uno-off-white-2), #E2ECE5); }
   .email-bloco h2 {
     max-width: 26ch;
     font-size: clamp(28px, 3.2vw, 44px);
@@ -329,11 +516,12 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .email-bloco h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
   .email-bloco p { font-size: 16px; line-height: 1.6; color: var(--uno-ink-2); }
 
-  .email-entrega { display: grid; gap: 32px 40px; margin: 40px 0 0; padding: 0; list-style: none; }
+  .email-entrega { display: grid; gap: 16px; margin: 40px 0 0; padding: 0; list-style: none; }
   @media (min-width: 640px) { .email-entrega { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1000px) { .email-entrega { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .email-entrega svg { color: var(--uno-mint-deep); }
-  .email-entrega h3 { margin-top: 14px; }
+  .email-entrega li { padding: 24px; border-radius: var(--uno-radius-md); background: rgba(255, 255, 255, .7); border: 1px solid rgba(16, 32, 28, .07); }
+  .email-entrega svg { box-sizing: content-box; padding: 10px; border-radius: 12px; background: var(--uno-pine); color: var(--uno-mint); }
+  .email-entrega h3 { margin-top: 16px; }
   .email-entrega p { margin-top: 6px; }
 
   .email-passos { display: grid; gap: 16px; margin: 40px 0 0; padding: 0; list-style: none; }
@@ -406,7 +594,9 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
 
   .duvidas { padding: clamp(56px, 7vw, 96px) 0; }
   .email-duvidas__apoio { margin-top: 24px; }
-  .email-contato { padding: clamp(56px, 7vw, 96px) 0; background: var(--uno-off-white-2); }
+  .email-contato { padding: clamp(56px, 7vw, 96px) 0; color: var(--uno-off-white); background: radial-gradient(700px 420px at 90% 10%, rgba(125, 211, 168, .18), transparent 62%), var(--uno-pine); }
+  .email-contato .rotulo { color: var(--uno-mint); }
+  .email-contato :focus-visible { outline-color: var(--uno-mint); }
   .email-contato__grade { display: grid; gap: 32px; align-items: center; }
   @media (min-width: 900px) { .email-contato__grade { grid-template-columns: 1.2fr 1fr; gap: 64px; } }
   .email-contato h2 {
@@ -415,10 +605,10 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     line-height: 1.06;
     font-weight: 600;
     letter-spacing: -0.03em;
-    color: var(--uno-pine);
+    color: var(--uno-off-white);
     text-wrap: balance;
   }
-  .email-contato__grade > div:first-child > p:last-child { margin-top: 18px; max-width: 48ch; font-size: 17px; line-height: 1.6; color: var(--uno-ink-2); }
+  .email-contato__grade > div:first-child > p:last-child { margin-top: 18px; max-width: 48ch; font-size: 17px; line-height: 1.6; color: rgba(243, 247, 243, .8); }
   .email-contato__cartao {
     padding: clamp(24px, 3.5vw, 40px);
     border-radius: var(--uno-radius-lg);
