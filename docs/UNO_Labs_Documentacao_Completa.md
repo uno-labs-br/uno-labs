@@ -166,7 +166,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e Wh
 | Termos comerciais de prazo e garantia | Informar as condições na proposta de cada escopo; não preencher números ou marcadores provisórios na home | Não |
 | Verba de mídia paga direto às plataformas | Confirmar | Não |
 | Hospedagem, domínio e e-mail como serviços | Confirmar | Não |
-| E-mail marketing gerenciado | Definir preço público, provedor de envio (AWS SES ou SendGrid) e escopo dos planos | Não; a página publica "sob consulta" |
+| E-mail marketing gerenciado | Definir preço público e escopo dos planos. Provedor de envio em avaliação: AWS SES (nova tentativa de aprovação em andamento), plano B SendGrid, alternativa MillionSend (código aberto) a avaliar. Móveis planejados confirmado como segmento prioritário (08/10/2026); demais segmentos a validar. Valores internos não entram neste repositório público; nomes de ferramentas e provedores não entram no site | Não; a página publica "sob consulta" |
 | Perfil de Empresa no Google | Não existe; depende de endereço verificável | Não, mas limita o SEO local |
 | Cases reais com autorização (La Bella Mesa e outros) | Pendência futura | Não |
 | Escolha final de tipografia (A, B ou C) | Em avaliação | Não |

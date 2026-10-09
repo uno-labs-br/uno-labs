@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { canonicalURL, site } from '../../data/site';
 
-const description = 'E-mail marketing gerenciado para empresas com bases grandes: plataforma exclusiva, jornadas automáticas, pontuação de leads e relatórios. A Uno estrutura e opera. Atendimento em todo o Brasil.';
+const description = 'E-mail marketing gerenciado para empresas com bases grandes: plataforma exclusiva, jornadas automáticas, pontuação de leads e relatórios. Foco em móveis planejados. A Uno estrutura e opera. Atendimento em todo o Brasil.';
 // Todo contato desta página acontece no WhatsApp, com a mensagem inicial já preenchida.
 const whatsappEmail = `${site.whatsapp}?text=${encodeURIComponent('Olá! Quero saber mais sobre o E-mail marketing gerenciado.')}`;
 const serviceSchema = {
@@ -42,7 +42,7 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
         <div>
           <p class="rotulo">E-mail marketing gerenciado · Todo o Brasil</p>
           <h1 id="email-titulo">Sua base de contatos trabalhando todo mês.</h1>
-          <p class="email-lead">A Uno estrutura e opera a automação de e-mail da sua empresa: listas, segmentos, jornadas e relatórios, numa plataforma exclusiva. Para empresas com bases grandes que pagam caro por ferramentas cobradas por faixa de contatos.</p>
+          <p class="email-lead">A Uno estrutura e opera a automação de e-mail da sua empresa: listas, segmentos, jornadas e relatórios, numa plataforma exclusiva. Com foco em móveis planejados e em empresas com bases grandes que pagam caro por ferramentas cobradas por faixa de contatos.</p>
           <div class="email-acoes">
             <a class="btn btn--escuro" href={whatsappEmail} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_email_hero" data-cta-position="email_hero">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <a class="btn btn--contorno" href="#entrega">Ver o que entregamos</a>
@@ -55,11 +55,11 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
         </div>
 
         <figure class="email-jornada" aria-labelledby="email-jornada-legenda">
-          <span class="email-jornada__badge">Exemplo de jornada automática</span>
+          <span class="email-jornada__badge">Exemplo: jornada de móveis planejados</span>
           <ol class="email-jornada__etapas">
-            <li><strong>Baixou um material</strong><span>Entra no segmento do tema e recebe o conteúdo.</span></li>
-            <li><strong>Abriu e clicou</strong><span>Ganha pontos e recebe um caso relacionado dias depois.</span></li>
-            <li><strong>Visitou a página de preços</strong><span>Recebe a oferta de uma conversa com o comercial.</span></li>
+            <li><strong>Pediu orçamento de uma cozinha</strong><span>Entra no segmento do ambiente e recebe o projeto por e-mail.</span></li>
+            <li><strong>Não fechou na hora</strong><span>Semanas depois recebe casos e ambientes parecidos com o dele.</span></li>
+            <li><strong>Clicou nas condições</strong><span>Ganha pontos e recebe o convite para rever o projeto com o vendedor.</span></li>
             <li class="email-jornada__fim"><strong>Lead quente</strong><span>Sua equipe é avisada com o histórico do contato.</span></li>
           </ol>
           <figcaption id="email-jornada-legenda">Ilustração: cada contato recebe a próxima mensagem conforme o que fez, sem envio manual.</figcaption>
@@ -153,11 +153,20 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       <div class="container">
         <p class="rotulo">Para quem</p>
         <h2 id="publico-titulo">Para empresas com muitos contatos e pouco relacionamento com eles.</h2>
-        <div class="email-publico">
-          <div>
-            <h3>Móveis planejados e projetos</h3>
-            <p>Orçamentos que esfriaram voltam a receber inspiração, casos e condições, até o cliente estar pronto.</p>
+        <article class="email-destaque" aria-labelledby="moveis-titulo">
+          <div class="email-destaque__texto">
+            <p class="email-destaque__selo">Foco da Uno</p>
+            <h3 id="moveis-titulo">Móveis planejados</h3>
+            <p>Marcenarias, lojas e projetistas acumulam orçamentos que esfriaram. A jornada devolve esses contatos à conversa com inspiração, casos reais e condições, até o cliente estar pronto para fechar. Pode ser combinada com anúncios pagos, contratados à parte, para trazer novos contatos.</p>
           </div>
+          <ul class="email-itens">
+            <li>Orçamentos antigos reativados por ambiente: cozinha, quarto, closet.</li>
+            <li>Aviso ao vendedor quando o cliente volta a se interessar.</li>
+            <li>Relatório mensal de quem reabriu a conversa.</li>
+          </ul>
+        </article>
+        <p class="email-publico__titulo">Também atendemos</p>
+        <div class="email-publico">
           <div>
             <h3>Indústrias e distribuidores</h3>
             <p>Revendas e compradores recebem lançamentos e tabelas por segmento, sem disparo genérico.</p>
@@ -365,8 +374,33 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     transform: translateY(-4px);
   }
 
-  .email-publico { display: grid; gap: 28px; margin-top: 36px; }
-  @media (min-width: 900px) { .email-publico { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; } }
+  .email-destaque {
+    display: grid;
+    gap: 24px;
+    margin-top: 36px;
+    padding: clamp(24px, 3.5vw, 40px);
+    border-radius: var(--uno-radius-lg);
+    background: var(--uno-white);
+    border: 1px solid var(--uno-line);
+    border-left: 4px solid var(--uno-mint-deep);
+    box-shadow: var(--uno-shadow);
+  }
+  @media (min-width: 900px) { .email-destaque { grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; } }
+  .email-bloco .email-destaque__selo {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(14, 43, 36, .08);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--uno-pine);
+  }
+  .email-destaque h3 { margin-top: 12px; font-size: clamp(24px, 2.6vw, 32px); }
+  .email-destaque__texto > p:last-child { margin-top: 10px; }
+  .email-destaque .email-itens { margin-top: 0; }
+  .email-bloco .email-publico__titulo { margin-top: 40px; font-size: 14px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--uno-ink-2); }
+  .email-publico { display: grid; gap: 28px; margin-top: 20px; }
+  @media (min-width: 700px) { .email-publico { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; } }
   .email-publico > div { padding-left: 18px; border-left: 2px solid var(--uno-mint-deep); }
   .email-publico p { margin-top: 6px; }
 
