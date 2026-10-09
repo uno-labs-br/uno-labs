@@ -15,7 +15,8 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
   const error = read('404.html');
   const blog = read('blog/index.html');
   const whatsapp = read('whatsapp/index.html');
-  for (const html of [home, privacy, error, blog, whatsapp]) {
+  const email = read('email-marketing/index.html');
+  for (const html of [home, privacy, error, blog, whatsapp, email]) {
     assert.match(html, /<html lang="pt-BR"/);
     assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1);
     assert.doesNotMatch(html, /astro-island|src="[^" ]+\.ts(?:"|\?)/);
@@ -25,6 +26,7 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
     assert.match(home, /name="robots" content="index, follow, max-image-preview:large"/);
     assert.doesNotMatch(privacy, /noindex/);
     assert.doesNotMatch(whatsapp, /noindex/);
+    assert.doesNotMatch(email, /noindex/);
     assert.match(error, /name="robots" content="noindex"/);
   }
   assert.match(home, /rel="canonical" href="https:\/\/unolabs\.com\.br\/"/);
@@ -33,6 +35,9 @@ test('HTML estático, canonical, metadados e proteção por ambiente', () => {
   assert.match(whatsapp, /Canal WhatsApp gerenciado/);
   assert.equal((whatsapp.match(/<h1(?:\s|>)/g) || []).length, 1);
   assert.doesNotMatch(whatsapp, /<main[^>]+class="(?:[^"]*\s)?canal(?:\s[^"]*)?"/);
+  assert.match(email, /rel="canonical" href="https:\/\/unolabs\.com\.br\/email-marketing\/"/);
+  assert.match(email, /E-mail marketing gerenciado/);
+  assert.match(home, /href="\/email-marketing\/"/);
   // Consentimento é global; o módulo adicional da home cuida de sua interface.
   assert.equal((home.match(/<script[^>]+type="module"/g) || []).length, 2);
   for (const html of [privacy, error]) {
@@ -74,8 +79,9 @@ test('índice do blog e distribuição sem código legado, documentos ou fixture
   assert.equal(existsSync(new URL('assets/js/site.js', dist)), false);
   assert.equal(existsSync(new URL('assets/css/site.css', dist)), false);
   const sitemap = read('sitemap.xml');
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 10);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 11);
   assert.match(sitemap, /<loc>https:\/\/unolabs\.com\.br\/whatsapp\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/unolabs\.com\.br\/email-marketing\/<\/loc>/);
   assert.match(sitemap, /<loc>https:\/\/unolabs\.com\.br\/blog\/<\/loc>/);
   assert.doesNotMatch(sitemap, /404|api\/|fixture/);
   const robots = read('robots.txt');

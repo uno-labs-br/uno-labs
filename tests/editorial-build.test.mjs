@@ -72,7 +72,7 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
       assert.match(index, /href="\/#servicos"/);
       assert.match(index, /href="\/#contato"/);
       assert.match(index, /href="\/blog\/" aria-current="page"/);
-      assert.deepEqual(sitemapLocations(await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8')), ['https://unolabs.com.br/', 'https://unolabs.com.br/politica-de-privacidade/', 'https://unolabs.com.br/whatsapp/', 'https://unolabs.com.br/blog/']);
+      assert.deepEqual(sitemapLocations(await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8')), ['https://unolabs.com.br/', 'https://unolabs.com.br/politica-de-privacidade/', 'https://unolabs.com.br/whatsapp/', 'https://unolabs.com.br/email-marketing/', 'https://unolabs.com.br/blog/']);
     });
 
     const validData = {
@@ -136,7 +136,7 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
       assert.equal(json.datePublished, '2000-01-01T00:00:00.000Z');
       assert.equal(json.dateModified, '2000-01-02T00:00:00.000Z');
       const sitemap = await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8');
-      assert.deepEqual(sitemapLocations(sitemap), ['https://unolabs.com.br/', 'https://unolabs.com.br/politica-de-privacidade/', 'https://unolabs.com.br/whatsapp/', 'https://unolabs.com.br/blog/', 'https://unolabs.com.br/blog/editorial-render/']);
+      assert.deepEqual(sitemapLocations(sitemap), ['https://unolabs.com.br/', 'https://unolabs.com.br/politica-de-privacidade/', 'https://unolabs.com.br/whatsapp/', 'https://unolabs.com.br/email-marketing/', 'https://unolabs.com.br/blog/', 'https://unolabs.com.br/blog/editorial-render/']);
       assert.match(sitemap, /<lastmod>2000-01-02<\/lastmod>/);
       assert.doesNotMatch(sitemap, /editorial-(draft|default|future|review)/);
       const index = await readFile(join(root, 'dist', 'blog', 'index.html'), 'utf8');
@@ -222,7 +222,7 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
         } else assert.equal((html.match(/<script[^>]*type="module"/g) || []).length, 1, 'Módulo global de consentimento presente no artigo.');
       }
       const sitemap = await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8');
-      assert.equal(sitemapLocations(sitemap).length, 10);
+      assert.equal(sitemapLocations(sitemap).length, 11);
       assert.ok(sitemapLocations(sitemap).includes('https://unolabs.com.br/whatsapp/'));
       for (const article of sourceArticles) assert.ok(sitemapLocations(sitemap).includes(`https://unolabs.com.br/blog/${article.slug}/`));
       const production = await runAstro(root, 'build', 'production');
