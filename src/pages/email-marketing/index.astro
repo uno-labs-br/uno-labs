@@ -116,43 +116,49 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     <section class="email-bloco email-bloco--tom" id="entrega" aria-labelledby="entrega-titulo">
       <div class="container">
         <p class="rotulo">Entrega</p>
-        <h2 id="entrega-titulo">O que a Uno entrega</h2>
-        <ul class="email-entrega">
-          <li>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/></svg>
-            <h3>Ferramenta só sua</h3>
-            <p>Seus contatos ficam numa ferramenta exclusiva da sua empresa, que a Uno instala e mantém.</p>
-          </li>
-          <li>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <h3>Contatos organizados</h3>
-            <p>Importamos e limpamos a lista e separamos por interesse. Todo e-mail tem opção de descadastro.</p>
-          </li>
-          <li>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="12" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="6" r="2" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="18" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 11l10-4M7 13l10 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h2 id="entrega-titulo">O que a Uno entrega, mostrado como é.</h2>
+        <ul class="email-bento">
+          <li class="email-cel email-cel--largo">
             <h3>Mensagens automáticas</h3>
-            <p>Cada pessoa recebe o próximo e-mail conforme o que fez com o anterior, sem envio manual.</p>
+            <p>Cada pessoa recebe o próximo e-mail conforme o que fez com o anterior.</p>
+            <div class="email-fluxo" aria-hidden="true">
+              <span class="email-fluxo__passo"><b>Dia 0</b>Projeto</span>
+              <span class="email-fluxo__seta">abriu →</span>
+              <span class="email-fluxo__passo"><b>Dia 7</b>Inspiração</span>
+              <span class="email-fluxo__seta">clicou →</span>
+              <span class="email-fluxo__passo email-fluxo__passo--fim"><b>Dia 21</b>Condição</span>
+            </div>
           </li>
-          <li>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+          <li class="email-cel email-cel--escuro">
             <h3>Aviso de quem está interessado</h3>
-            <p>Quem abre e clica mais ganha destaque, e sua equipe é avisada na hora certa de ligar.</p>
+            <p>Sua equipe sabe a hora certa de ligar.</p>
+            <div class="email-notif" aria-hidden="true"><span class="email-notif__ponto"></span><span><b>Rafael abriu os 3 últimos e-mails</b>Closet · ligar esta semana</span></div>
           </li>
-          <li>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <h3>Envio configurado</h3>
-            <p>Configuramos o domínio de envio e acompanhamos rejeições e reclamações para manter a entrega saudável.</p>
+          <li class="email-cel">
+            <h3>Contatos organizados</h3>
+            <p>Lista limpa e separada por interesse.</p>
+            <div class="email-chips" aria-hidden="true"><span>Cozinha</span><span>Quarto</span><span>Closet</span><span>Orçamento antigo</span><span class="email-chips__off">Descadastrados</span></div>
           </li>
-          <li>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <li class="email-cel email-cel--largo email-cel--menta">
             <h3>Relatório mensal</h3>
-            <p>Quantos abriram, clicaram e voltaram a conversar, e quais contatos passaram para o comercial.</p>
+            <p>Quem abriu, clicou e voltou a conversar.</p>
+            <div class="email-barras" aria-hidden="true"><i style="--h:32%"></i><i style="--h:44%"></i><i style="--h:40%"></i><i style="--h:58%"></i><i style="--h:55%"></i><i style="--h:74%"></i><i style="--h:88%"></i></div>
+          </li>
+          <li class="email-cel">
+            <h3>Ferramenta só sua</h3>
+            <p>Contatos da sua empresa, exportáveis quando quiser.</p>
+            <div class="email-chips" aria-hidden="true"><span class="email-chips__forte">Exportar contatos ↓</span></div>
+          </li>
+          <li class="email-cel email-cel--largo">
+            <h3>Envio configurado</h3>
+            <p>Domínio autenticado e entrega acompanhada todo mês.</p>
+            <div class="email-chips" aria-hidden="true"><span class="email-chips__ok">✓ Domínio verificado</span><span class="email-chips__ok">✓ Rejeições acompanhadas</span><span class="email-chips__ok">✓ Descadastro em todo e-mail</span></div>
           </li>
         </ul>
       </div>
     </section>
 
-    <section class="email-bloco" aria-labelledby="passos-titulo">
+    <section class="email-passos-faixa" aria-labelledby="passos-titulo">
       <div class="container">
         <p class="rotulo">Como funciona</p>
         <h2 id="passos-titulo">Do contato parado às mensagens no ar em 3 passos.</h2>
@@ -160,35 +166,34 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
           <li class="email-passo">
             <span class="email-passo__num" aria-hidden="true">01</span>
             <h3>Conversa inicial</h3>
-            <p>Entendemos quantos contatos você tem, de onde vieram, quantos e-mails quer enviar e o que sua equipe precisa receber.</p>
+            <p>Quantos contatos, de onde vieram e o que sua equipe precisa receber.</p>
           </li>
           <li class="email-passo">
             <span class="email-passo__num" aria-hidden="true">02</span>
             <h3>Implantação pela Uno</h3>
-            <p>Instalamos a ferramenta, configuramos o domínio, importamos os contatos e montamos as primeiras mensagens automáticas.</p>
+            <p>Ferramenta, domínio, importação e as primeiras mensagens automáticas.</p>
           </li>
           <li class="email-passo">
             <span class="email-passo__num" aria-hidden="true">03</span>
             <h3>Operação mensal</h3>
-            <p>Acompanhamos os envios, ajustamos as mensagens e enviamos o relatório. Você aprova o conteúdo.</p>
+            <p>Ajustes, acompanhamento e relatório. Você aprova o conteúdo.</p>
           </li>
         </ol>
-
         <div class="email-divisao">
-          <div>
+          <div class="email-divisao__card email-divisao__card--sua">
             <h3>Sua parte</h3>
-            <ul class="email-itens">
-              <li>Fornecer a base de contatos que consentiram em receber.</li>
-              <li>Aprovar o conteúdo e as ofertas de cada campanha.</li>
+            <ul class="email-itens email-itens--ok">
+              <li>Fornecer contatos que consentiram em receber.</li>
+              <li>Aprovar o conteúdo e as ofertas.</li>
               <li>Atender quem voltou a se interessar.</li>
             </ul>
           </div>
-          <div>
+          <div class="email-divisao__card">
             <h3>Fora deste serviço</h3>
-            <ul class="email-itens">
-              <li>Compra de listas ou envio para quem não autorizou.</li>
-              <li>Garantia de chegada à caixa de entrada, que depende também dos provedores.</li>
-              <li>Anúncios pagos e criação de site, que são pacotes à parte.</li>
+            <ul class="email-itens email-itens--nao">
+              <li>Listas compradas ou envio sem autorização.</li>
+              <li>Garantia de caixa de entrada, que depende dos provedores.</li>
+              <li>Anúncios pagos e criação de site, pacotes à parte.</li>
             </ul>
           </div>
         </div>
@@ -198,28 +203,27 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     <section class="email-bloco email-bloco--tom" aria-labelledby="publico-titulo">
       <div class="container">
         <p class="rotulo">Para quem</p>
-        <h2 id="publico-titulo">Para empresas com contatos parados e pouco relacionamento com eles.</h2>
+        <h2 id="publico-titulo">Para empresas com contatos parados.</h2>
         <article class="email-destaque" aria-labelledby="moveis-titulo">
           <div class="email-destaque__texto">
             <p class="email-destaque__selo">Foco da Uno</p>
             <h3 id="moveis-titulo">Móveis planejados</h3>
-            <p>Marcenarias, lojas e projetistas acumulam orçamentos que esfriaram. As mensagens automáticas devolvem esses contatos à conversa com inspiração, casos reais e condições, até o cliente estar pronto para fechar. Pode ser combinada com anúncios pagos, contratados à parte, para trazer novos contatos.</p>
+            <p>Marcenarias, lojas e projetistas acumulam orçamentos que esfriaram. As mensagens devolvem esses clientes à conversa até eles estarem prontos para fechar. Combina com anúncios pagos, contratados à parte.</p>
           </div>
-          <ul class="email-itens">
-            <li>Orçamentos antigos retomados por ambiente: cozinha, quarto, closet.</li>
-            <li>Aviso ao vendedor quando o cliente volta a se interessar.</li>
-            <li>Relatório mensal de quem reabriu a conversa.</li>
+          <ul class="email-orcs" aria-label="Exemplo ilustrativo de orçamentos retomados">
+            <li><span class="email-orcs__amb">Cozinha</span><span class="email-orcs__tempo">parado há 40 dias</span><span class="email-orcs__tag">retomado</span></li>
+            <li><span class="email-orcs__amb">Closet</span><span class="email-orcs__tempo">parado há 25 dias</span><span class="email-orcs__tag">retomado</span></li>
+            <li><span class="email-orcs__amb">Quarto</span><span class="email-orcs__tempo">parado há 60 dias</span><span class="email-orcs__tag email-orcs__tag--quente">ligar hoje</span></li>
           </ul>
         </article>
-        <p class="email-publico__titulo">Também atendemos</p>
         <div class="email-publico">
-          <div>
-            <h3>Indústrias e distribuidores</h3>
-            <p>Revendas e compradores recebem lançamentos e tabelas conforme o tipo de cliente, sem disparo genérico.</p>
+          <div class="email-publico__card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 20V10l6 3V10l6 3V6l6 3v11H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <div><h3>Indústrias e distribuidores</h3><p>Lançamentos e tabelas conforme o tipo de cliente.</p></div>
           </div>
-          <div>
-            <h3>Escolas e cursos</h3>
-            <p>Interessados de cada turma são nutridos até a matrícula, e ex-alunos recebem novas ofertas.</p>
+          <div class="email-publico__card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5L2 9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.6"/></svg>
+            <div><h3>Escolas e cursos</h3><p>Interessados nutridos até a matrícula.</p></div>
           </div>
         </div>
       </div>
@@ -246,13 +250,14 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
       <div class="container email-contato__grade">
         <div>
           <p class="rotulo">Contato</p>
-          <h2 id="contato-titulo">Vamos colocar sua base para trabalhar.</h2>
-          <p>Chame a Uno no WhatsApp. Conte quantos contatos você tem, se usa alguma ferramenta hoje e o que quer automatizar. Respondemos com a proposta.</p>
+          <h2 id="contato-titulo">Vamos colocar seus contatos para trabalhar.</h2>
+          <p>Conte quantos contatos você tem e o que quer automatizar. Respondemos com a proposta.</p>
         </div>
         <div class="email-contato__cartao">
-          <p class="email-contato__rotulo">WhatsApp da Uno</p>
-          <p class="email-contato__numero">(27) 93618-5141</p>
-          <a class="btn btn--escuro" href={whatsappEmail} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_email_contato" data-cta-position="email_contato">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <p class="email-contato__rotulo">Sua mensagem já vai pronta</p>
+          <p class="email-contato__balao">Olá! Quero saber mais sobre o E-mail marketing gerenciado.</p>
+          <a class="btn btn--uno-mint" href={whatsappEmail} target="_blank" rel="noopener" data-contact-channel="whatsapp" data-cta-id="whatsapp_email_contato" data-cta-position="email_contato">Falar no WhatsApp <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <p class="email-contato__numero">WhatsApp da Uno: (27) 93618-5141</p>
         </div>
       </div>
     </section>
@@ -516,81 +521,131 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
   .email-bloco h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
   .email-bloco p { font-size: 16px; line-height: 1.6; color: var(--uno-ink-2); }
 
-  .email-entrega { display: grid; gap: 16px; margin: 40px 0 0; padding: 0; list-style: none; }
-  @media (min-width: 640px) { .email-entrega { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (min-width: 1000px) { .email-entrega { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .email-entrega li { padding: 24px; border-radius: var(--uno-radius-md); background: rgba(255, 255, 255, .7); border: 1px solid rgba(16, 32, 28, .07); }
-  .email-entrega svg { box-sizing: content-box; padding: 10px; border-radius: 12px; background: var(--uno-pine); color: var(--uno-mint); }
-  .email-entrega h3 { margin-top: 16px; }
-  .email-entrega p { margin-top: 6px; }
-
-  .email-passos { display: grid; gap: 16px; margin: 40px 0 0; padding: 0; list-style: none; }
-  @media (min-width: 800px) { .email-passos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
-  .email-passo {
-    padding: 24px;
-    border-radius: var(--uno-radius-md);
-    background: var(--uno-white);
-    border: 1px solid var(--uno-line);
+  .email-bento { display: grid; gap: 16px; margin: 40px 0 0; padding: 0; list-style: none; }
+  @media (min-width: 700px) { .email-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1000px) {
+    .email-bento { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .email-cel--largo { grid-column: span 2; }
   }
-  .email-passo__num { font-size: 13px; font-weight: 600; color: var(--uno-mint-deep); font-family: var(--uno-font-mono); }
-  .email-passo h3 { margin-top: 10px; }
-  .email-passo p { margin-top: 8px; font-size: 15px; line-height: 1.55; }
-
-  .email-divisao {
-    display: grid;
-    gap: 32px;
-    margin-top: 48px;
-    padding-top: 40px;
-    border-top: 1px solid var(--uno-line);
-  }
-  @media (min-width: 800px) { .email-divisao { grid-template-columns: 1fr 1fr; gap: 48px; } }
-  .email-itens { margin: 16px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .email-itens li {
+  .email-cel {
     display: flex;
-    gap: 12px;
-    align-items: baseline;
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--uno-ink-2);
+    flex-direction: column;
+    gap: 6px;
+    min-height: 220px;
+    padding: 24px;
+    border-radius: var(--uno-radius-lg);
+    background: rgba(255, 255, 255, .78);
+    border: 1px solid rgba(16, 32, 28, .07);
   }
-  .email-itens li::before {
-    content: '';
-    flex: none;
-    width: 12px;
-    height: 2px;
-    background: var(--uno-mint-deep);
-    transform: translateY(-4px);
+  .email-bloco .email-cel p { font-size: 15px; line-height: 1.5; }
+  .email-cel > div, .email-cel > .email-fluxo { margin-top: auto; padding-top: 20px; }
+  .email-cel--escuro { background: var(--uno-pine); border-color: var(--uno-pine); }
+  .email-bloco .email-cel--escuro h3 { color: var(--uno-off-white); }
+  .email-bloco .email-cel--escuro p { color: rgba(243, 247, 243, .75); }
+  .email-cel--menta { background: var(--uno-mint-2); border-color: transparent; }
+  .email-bloco .email-cel--menta p { color: var(--uno-pine-3); }
+
+  .email-fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .email-fluxo__passo { display: flex; flex-direction: column; padding: 10px 14px; border-radius: 14px; background: var(--uno-off-white-2); border: 1px solid var(--uno-line); font-size: 14px; color: var(--uno-ink-2); }
+  .email-fluxo__passo b { font-family: var(--uno-font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; color: var(--uno-mint-deep); }
+  .email-fluxo__passo--fim { background: var(--uno-pine); border-color: var(--uno-pine); color: var(--uno-off-white); }
+  .email-fluxo__passo--fim b { color: var(--uno-mint); }
+  .email-fluxo__seta { font-family: var(--uno-font-mono); font-size: 12px; color: var(--uno-ink-2); }
+
+  .email-notif { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 16px; background: var(--uno-mint); color: var(--uno-pine); font-size: 13px; line-height: 1.4; }
+  .email-notif b { display: block; font-size: 14px; }
+  .email-notif__ponto { flex: none; width: 10px; height: 10px; margin-top: 4px; border-radius: 50%; background: var(--uno-pine); box-shadow: 0 0 0 4px rgba(14, 43, 36, .15); }
+
+  .email-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .email-chips span { padding: 6px 12px; border-radius: 999px; background: var(--uno-off-white-2); border: 1px solid var(--uno-line); font-size: 13px; font-weight: 500; color: var(--uno-pine); }
+  .email-chips .email-chips__off { color: #7A8882; text-decoration: line-through; }
+  .email-chips .email-chips__forte { background: var(--uno-pine); border-color: var(--uno-pine); color: var(--uno-off-white); }
+  .email-chips .email-chips__ok { background: rgba(61, 170, 120, .12); border-color: rgba(61, 170, 120, .35); }
+
+  .email-barras { display: flex; align-items: flex-end; gap: 8px; height: 90px; }
+  .email-barras i { flex: 1; height: var(--h); border-radius: 8px 8px 0 0; background: var(--uno-pine); }
+  .email-barras i:last-child { background: var(--uno-mint-deep); }
+
+  .email-passos-faixa {
+    padding: clamp(56px, 8vw, 104px) 0;
+    color: var(--uno-off-white);
+    background: radial-gradient(800px 460px at 0% 0%, rgba(125, 211, 168, .16), transparent 62%), var(--uno-pine);
   }
+  .email-passos-faixa .rotulo { color: var(--uno-mint); }
+  .email-passos-faixa h2 {
+    max-width: 22ch;
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .email-passos-faixa h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; }
+  .email-passos { position: relative; display: grid; gap: 28px; margin: 48px 0 0; padding: 0; list-style: none; }
+  @media (min-width: 800px) {
+    .email-passos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+    .email-passos::before { content: ''; position: absolute; left: 0; right: 0; top: 30px; height: 2px; background: repeating-linear-gradient(90deg, rgba(125, 211, 168, .5) 0 8px, transparent 8px 14px); }
+  }
+  .email-passo { position: relative; }
+  .email-passo__num {
+    display: inline-grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--uno-mint);
+    color: var(--uno-pine);
+    font-family: var(--uno-font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 0 0 8px var(--uno-pine);
+  }
+  .email-passo h3 { margin-top: 20px; }
+  .email-passo p { margin-top: 8px; font-size: 16px; line-height: 1.55; color: rgba(243, 247, 243, .75); max-width: 30ch; }
+
+  .email-divisao { display: grid; gap: 16px; margin-top: 56px; }
+  @media (min-width: 800px) { .email-divisao { grid-template-columns: 1fr 1fr; } }
+  .email-divisao__card { padding: 28px; border-radius: var(--uno-radius-lg); background: rgba(255, 255, 255, .06); border: 1px solid var(--uno-line-dark); }
+  .email-divisao__card--sua { background: var(--uno-mint); border-color: var(--uno-mint); color: var(--uno-pine); }
+  .email-itens { margin: 16px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .email-itens li { display: flex; gap: 12px; align-items: baseline; font-size: 16px; line-height: 1.5; }
+  .email-itens li::before { flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 12px; font-weight: 700; transform: translateY(2px); }
+  .email-itens--ok li::before { content: '✓'; background: var(--uno-pine); color: var(--uno-mint); }
+  .email-itens--nao li { color: rgba(243, 247, 243, .8); }
+  .email-itens--nao li::before { content: '✕'; background: rgba(255, 255, 255, .1); color: rgba(243, 247, 243, .8); }
 
   .email-destaque {
     display: grid;
-    gap: 24px;
+    gap: 28px;
     margin-top: 36px;
     padding: clamp(24px, 3.5vw, 40px);
-    border-radius: var(--uno-radius-lg);
+    border-radius: var(--uno-radius-xl);
     background: var(--uno-white);
-    border: 1px solid var(--uno-line);
-    border-left: 4px solid var(--uno-mint-deep);
     box-shadow: var(--uno-shadow);
   }
-  @media (min-width: 900px) { .email-destaque { grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; } }
+  @media (min-width: 900px) { .email-destaque { grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; } }
   .email-bloco .email-destaque__selo {
     display: inline-flex;
     padding: 4px 10px;
     border-radius: 999px;
-    background: rgba(14, 43, 36, .08);
+    background: var(--uno-mint-2);
     font-size: 12px;
     font-weight: 600;
     color: var(--uno-pine);
   }
-  .email-destaque h3 { margin-top: 12px; font-size: clamp(24px, 2.6vw, 32px); }
+  .email-destaque h3 { margin-top: 12px; font-size: clamp(26px, 2.8vw, 36px); letter-spacing: -0.03em; }
   .email-destaque__texto > p:last-child { margin-top: 10px; }
-  .email-destaque .email-itens { margin-top: 0; }
-  .email-bloco .email-publico__titulo { margin-top: 40px; font-size: 14px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--uno-ink-2); }
-  .email-publico { display: grid; gap: 28px; margin-top: 20px; }
-  @media (min-width: 700px) { .email-publico { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; } }
-  .email-publico > div { padding-left: 18px; border-left: 2px solid var(--uno-mint-deep); }
-  .email-publico p { margin-top: 6px; }
+  .email-orcs { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 16px; list-style: none; border-radius: var(--uno-radius-md); background: linear-gradient(135deg, #EFE6D6, #E0CFB4); }
+  .email-orcs li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'amb tag' 'tempo tag'; align-items: center; padding: 12px 14px; border-radius: 14px; background: rgba(255, 255, 255, .88); }
+  .email-orcs__amb { grid-area: amb; font-weight: 600; color: var(--uno-pine); }
+  .email-orcs__tempo { grid-area: tempo; font-size: 13px; color: var(--uno-ink-2); }
+  .email-orcs__tag { grid-area: tag; padding: 4px 10px; border-radius: 999px; background: rgba(61, 170, 120, .14); color: var(--uno-pine); font-size: 12px; font-weight: 600; }
+  .email-orcs__tag--quente { background: var(--uno-pine); color: var(--uno-mint); }
+  .email-publico { display: grid; gap: 16px; margin-top: 16px; }
+  @media (min-width: 700px) { .email-publico { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .email-publico__card { display: flex; gap: 16px; align-items: flex-start; padding: 22px; border-radius: var(--uno-radius-lg); background: rgba(255, 255, 255, .7); border: 1px solid rgba(16, 32, 28, .07); }
+  .email-publico__card svg { flex: none; box-sizing: content-box; padding: 10px; border-radius: 12px; background: var(--uno-pine); color: var(--uno-mint); }
+  .email-publico__card p { margin-top: 4px; font-size: 15px; }
 
   .duvidas { padding: clamp(56px, 7vw, 96px) 0; }
   .email-duvidas__apoio { margin-top: 24px; }
@@ -608,17 +663,22 @@ const structuredData = JSON.stringify(serviceSchema).replace(/</g, '\\u003c');
     color: var(--uno-off-white);
     text-wrap: balance;
   }
-  .email-contato__grade > div:first-child > p:last-child { margin-top: 18px; max-width: 48ch; font-size: 17px; line-height: 1.6; color: rgba(243, 247, 243, .8); }
-  .email-contato__cartao {
-    padding: clamp(24px, 3.5vw, 40px);
-    border-radius: var(--uno-radius-lg);
-    background: var(--uno-white);
-    border: 1px solid var(--uno-line);
-    box-shadow: var(--uno-shadow);
+  .email-contato__grade > div:first-child > p:last-child { margin-top: 18px; max-width: 42ch; font-size: 17px; line-height: 1.6; color: rgba(243, 247, 243, .8); }
+  .email-contato__cartao { padding: clamp(24px, 3.5vw, 36px); border-radius: var(--uno-radius-lg); background: rgba(255, 255, 255, .06); border: 1px solid var(--uno-line-dark); }
+  .email-contato__rotulo { font-size: 14px; color: rgba(243, 247, 243, .7); }
+  .email-contato__balao {
+    position: relative;
+    margin: 12px 0 0 auto;
+    max-width: 30ch;
+    padding: 14px 16px;
+    border-radius: 18px 18px 4px 18px;
+    background: var(--uno-mint-2);
+    color: var(--uno-pine);
+    font-size: 16px;
+    line-height: 1.45;
   }
-  .email-contato__rotulo { font-size: 15px; color: var(--uno-ink-2); }
-  .email-contato__numero { margin-top: 4px; font-size: clamp(28px, 3vw, 36px); font-weight: 600; letter-spacing: -0.02em; color: var(--uno-pine); }
-  .email-contato__cartao .btn { margin-top: 24px; }
+  .email-contato__cartao .btn { width: 100%; margin-top: 24px; }
+  .email-contato__numero { margin-top: 14px; font-size: 14px; text-align: center; color: rgba(243, 247, 243, .72); }
 
   @media (max-width: 599px) {
     .email-fatos { grid-template-columns: 1fr; gap: 16px; }
