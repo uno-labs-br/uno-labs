@@ -30,6 +30,23 @@
 
 Quando o pedido autorizar uma mudança no site, executar o fluxo até entregar a branch e o PR para revisão, sem solicitar novamente autorização para cada etapa rotineira. A revisão/aprovação para integração continua obrigatória.
 
+## Issues, milestones e painel — decisão de 09/10/2026
+
+- **Fonte de verdade:** as issues do GitHub. O painel é a aba **Issues** do [Plano de oferta UNO Labs](https://claude.ai/artifact/MMmPWfjdqrwi9uURfNpubf#issues), com status e conclusão por milestone.
+- **Status:** *feita* = fechada como `completed`; *cancelada* = fechada como `not planned`, com comentário do motivo; *priorizada* = aberta com a label `prioridade`; *pendente* = demais abertas.
+- **Milestones:** fases `F1` a `F6` do épico #35 e `Base · Operação, legal e conteúdo` para o resto. Toda issue nova recebe um milestone.
+- **Ao tratar uma issue, sempre:**
+  1. Ajustar milestone e label `prioridade` se mudaram.
+  2. Fechar com o motivo certo: `Closes #N` no PR (fecha como `completed` ao integrar) ou `gh issue close N --reason "not planned" --comment "<motivo>"`.
+  3. Marcar o item correspondente no épico #35, quando houver.
+  4. Atualizar o painel. Com a ferramenta Artifact (Claude Code): ler o artefato, substituir o conteúdo de `<script type="application/json" id="dados-issues">` por `{"atualizado":"<UTC ISO>","repo":"uno-labs-br/uno-labs","issues":<saída abaixo>}` e republicar na mesma URL, sem mudar o resto da página. Sem essa ferramenta: escrever "painel de issues pendente de atualização" no PR.
+
+```bash
+gh issue list -R uno-labs-br/uno-labs --state all --limit 200 \
+  --json number,title,state,stateReason,labels,milestone,closedAt |
+jq -c '[.[]|{n:.number,t:.title,s:(if .state=="OPEN" then (if any(.labels[];.name=="prioridade") then "priorizada" else "pendente" end) elif .stateReason=="NOT_PLANNED" then "cancelada" else "feita" end),m:(.milestone.title // null),c:(.closedAt // null)}]|sort_by(.n)'
+```
+
 ## Proteção do trabalho compartilhado
 
 - Nunca usar `git reset --hard`, `git clean -fd`, descarte de arquivos ou resolução de conflitos que elimine trabalho de outra pessoa sem autorização explícita.
