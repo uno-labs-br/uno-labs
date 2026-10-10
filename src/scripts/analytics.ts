@@ -72,7 +72,10 @@ export function isAmbientePermitido(): boolean {
   if (target !== 'production') return false;
   const proto = window.location.protocol;
   const host = window.location.hostname;
-  return proto === 'https:' && (host === 'unolabs.com.br' || host === 'www.unolabs.com.br');
+  return proto === 'https:' && (
+    host === 'unolabs.com.br' || host === 'www.unolabs.com.br' ||
+    host === 'sites.unolabs.com.br' || host === 'chat.unolabs.com.br' || host === 'mail.unolabs.com.br'
+  );
 }
 
 /** Verifica se um valor de parâmetro parece conter e-mail ou telefone. */
@@ -335,6 +338,7 @@ function configurarMedicaoGA(): void {
   if (!configEnviado) {
     window.gtag?.('config', GA_MEASUREMENT_ID, {
       send_page_view: false,
+      cookie_domain: 'unolabs.com.br',
       restricted_data_processing: true,
       allow_google_signals: false,
       allow_ad_personalization_signals: false,

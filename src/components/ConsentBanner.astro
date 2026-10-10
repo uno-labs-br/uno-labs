@@ -1,4 +1,5 @@
 ---
+import { site } from '../data/site';
 const deployTarget = import.meta.env.UNO_DEPLOY_TARGET ?? 'preview';
 ---
 <aside
@@ -26,7 +27,7 @@ const deployTarget = import.meta.env.UNO_DEPLOY_TARGET ?? 'preview';
       </div>
       <p class="banner-consentimento__texto">
         Usamos cookies de análise para entender a navegação e melhorar o site para você. Você pode aceitar ou continuar sem cookies.{' '}
-        <a href="/politica-de-privacidade/">Política de privacidade</a>.
+        <a href={`${site.origin}/politica-de-privacidade/`}>Política de privacidade</a>.
       </p>
     </div>
     <div class="banner-consentimento__acoes" role="group" aria-label="Opções de consentimento">

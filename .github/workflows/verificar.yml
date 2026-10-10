@@ -22,6 +22,9 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: npm run lint
       - run: npm run build
-      - run: node --test tests/contato.test.mjs tests/build.test.mjs tests/editorial.test.mjs
+      - run: node --test tests/contato.test.mjs tests/build.test.mjs tests/editorial.test.mjs tests/subdomains.test.mjs
       - run: node --test tests/editorial-build.test.mjs
+      - run: UNO_DEPLOY_TARGET=production UNO_PRODUCT_DOMAINS_READY=true npm run build
+      - run: node --test tests/subdomains-build.test.mjs

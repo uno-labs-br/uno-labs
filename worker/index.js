@@ -1,9 +1,8 @@
 /**
  * UNO Labs — Cloudflare Worker
  *
- * Os arquivos de public/ são servidos diretamente pela Cloudflare (Static Assets),
- * sem passar por aqui e sem contar na cota de requisições do Worker.
- * Este código só roda para caminhos que NÃO existem em public/:
+ * Na configuração de produção, todas as requisições passam pelo Worker para
+ * selecionar o domínio, aplicar os redirects e então buscar os assets de dist/.
  *   - POST /api/contato  → valida o formulário e encaminha ao webhook do n8n
  *   - qualquer outro     → devolve para os assets (que respondem com 404.html)
  *
@@ -30,6 +29,31 @@ const INVESTIMENTO = {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const product = { 'sites.unolabs.com.br': 'sites', 'chat.unolabs.com.br': 'chat', 'mail.unolabs.com.br': 'mail' }[url.hostname];
+    const domainsReady = env.UNO_PRODUCT_DOMAINS_READY === 'true';
+
+    if (product) {
+      if (!domainsReady) return new Response('Subdomínio ainda não publicado.', { status: 503, headers: { 'X-Robots-Tag': 'noindex, nofollow' } });
+      if (url.pathname === '/robots.txt') return new Response(`User-agent: *\nAllow: /\nSitemap: ${url.origin}/sitemap.xml\n`, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+      if (url.pathname === '/sitemap.xml') {
+        const entry = product === 'sites' ? '' : `<url><loc>${url.origin}/</loc></url>`;
+        return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entry}</urlset>`, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
+      }
+      if (url.pathname === '/') {
+        if (product === 'sites') return new Response('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://sites.unolabs.com.br/"><title>UNO Sites em preparação</title></head><body><h1>UNO Sites em preparação</h1></body></html>', { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex, nofollow' } });
+        const asset = new URL(product === 'chat' ? '/whatsapp/' : '/email-marketing/', url);
+        return env.ASSETS.fetch(new Request(asset, request));
+      }
+      if (!/^\/(?:assets\/|favicon\.ico$|site\.webmanifest$)/.test(url.pathname)) {
+        return new Response('Não encontrado', { status: 404, headers: { 'X-Robots-Tag': 'noindex' } });
+      }
+      return env.ASSETS.fetch(request);
+    }
+
+    if (domainsReady && (request.method === 'GET' || request.method === 'HEAD')) {
+      const destination = { '/whatsapp/': 'https://chat.unolabs.com.br/', '/email-marketing/': 'https://mail.unolabs.com.br/' }[url.pathname];
+      if (destination) return Response.redirect(`${destination}${url.search}`, 301);
+    }
 
     if (url.pathname === '/api/contato' || url.pathname === '/api/contato/') {
       if (request.method !== 'POST') {

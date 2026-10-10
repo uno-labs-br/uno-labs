@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { cp, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, readdir, realpath, rm, symlink, unlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -42,7 +42,7 @@ function sitemapLocations(xml) {
 }
 
 test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais', { timeout: 300_000 }, async (context) => {
-  const root = await mkdtemp(join(tmpdir(), 'uno-editorial-build-'));
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'uno-editorial-build-')));
   const nodeModules = join(root, 'node_modules');
   let linked = false;
   try {
@@ -69,9 +69,9 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
       assert.deepEqual((await outputFiles(join(root, 'dist'))).filter((path) => path.startsWith('blog/')), ['blog/index.html']);
       const index = await readFile(join(root, 'dist', 'blog', 'index.html'), 'utf8');
       assert.match(index, /Nenhum artigo publicado por enquanto/);
-      assert.match(index, /href="\/#servicos"/);
-      assert.match(index, /href="\/#contato"/);
-      assert.match(index, /href="\/blog\/" aria-current="page"/);
+      assert.match(index, /href="https:\/\/unolabs\.com\.br\/#servicos"/);
+      assert.match(index, /href="https:\/\/unolabs\.com\.br\/#contato"/);
+      assert.match(index, /href="https:\/\/unolabs\.com\.br\/blog\/" aria-current="page"/);
       assert.deepEqual(sitemapLocations(await readFile(join(root, 'dist', 'sitemap.xml'), 'utf8')), ['https://unolabs.com.br/', 'https://unolabs.com.br/politica-de-privacidade/', 'https://unolabs.com.br/whatsapp/', 'https://unolabs.com.br/email-marketing/', 'https://unolabs.com.br/blog/']);
     });
 
@@ -240,8 +240,9 @@ test('build editorial isolado: vazio, MDX, filtros e falhas de validação reais
   } finally {
     // Desvincular antes de remover a raiz garante que a junction não alcance dependências compartilhadas.
     if (linked) await unlink(nodeModules);
-    assert.equal(dirname(root), tmpdir());
-    assert.ok(root.startsWith(join(tmpdir(), 'uno-editorial-build-')));
+    const temporaryDirectory = await realpath(tmpdir());
+    assert.equal(dirname(root), temporaryDirectory);
+    assert.ok(root.startsWith(join(temporaryDirectory, 'uno-editorial-build-')));
     await rm(root, { recursive: true, force: true });
   }
 });

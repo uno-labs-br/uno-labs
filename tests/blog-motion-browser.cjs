@@ -89,7 +89,7 @@ async function screenshot(page, name) {
     await openHome(page);
     check('movimento reduzido inicia completo', (await searchState(page)).text === phrase && (await searchState(page)).opacity === 1);
 
-    await page.locator('.topo__nav a[href="/blog/"]').click();
+    await page.locator('.topo__nav a[href="https://unolabs.com.br/blog/"]').click();
     check('Blog do menu abre índice próprio', new URL(page.url()).pathname === '/blog/');
     await page.waitForFunction(() => document.documentElement.classList.contains('js'));
     check('índice oculta menu móvel no desktop', await page.locator('#menu-movel').isHidden());

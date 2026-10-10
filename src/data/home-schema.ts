@@ -1,4 +1,5 @@
 // Dados estruturados preservados da implementação aprovada.
+import { canonicalURL } from './site';
 export const homeSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -104,7 +105,7 @@ export const homeSchema = {
           },
           {
             "@type": "Offer",
-            "url": "https://unolabs.com.br/whatsapp/",
+            "url": canonicalURL('/whatsapp/'),
             "itemOffered": {
               "@type": "Service",
               "name": "Canal WhatsApp gerenciado",
