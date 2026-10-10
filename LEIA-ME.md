@@ -227,14 +227,14 @@ A integração do Google Analytics 4 (`G-ZKM57KG6V9`) foi adicionada no frontend
 
 | Pendência | O que falta |
 |---|---|
-| Pacote inicial a partir de R$ 1.490 | Definir escopo e entregáveis; não inventar quantidades |
+| Oferta UNO Sites por assinatura | Planos e preços decididos na issue #30 ([documentação, §0.14](docs/UNO_Labs_Documentacao_Completa.md)); falta confirmação de Urias e atualização da home (#36). Até lá, o site mantém “a partir de R$ 1.490” |
 | CNPJ e razão social | Informar ou confirmar dados empresariais |
 | Privacidade | Contato público confirmado: `contato@unolabs.com.br`; completar identificação legal, infraestrutura e guarda; revisar o texto |
 | Worker, n8n e SMTP | Configuração real, credenciais, remetente e contrato de confirmação |
 | Recebimento real | Evidências separadas do backend, SMTP e caixa `contato@unolabs.com.br` |
 | Hospedagem Astro | Integração `dist/` e deploy automático da `main` confirmados no Cloudflare; verificar cada publicação no domínio |
 | Artigos | Produzir e revisar 4 a 6 artigos-pilar; depois seguir a frequência aprovada |
-| Mídia paga | Confirmar pagamento da verba diretamente às plataformas |
+| Mídia paga | Decidido na #30: verba à parte, paga pelo cliente; confirmar com Urias |
 | Configuração do painel GA4 | Dimensões e evento principal configurados; recepção inicial confirmada em tempo real. Recepção de lead real depende da homologação do backend |
 
 Garantia e prazo seguem a proposta de cada escopo; nenhum número provisório entra na home. Cargos, biografias e fotografias da equipe foram aprovados em 01/10/2026: Urias Loures e Bruno Gonzaga, cofundadores; Milena Dias, Comunicação e Conteúdo. Preservar os textos integrais registrados na documentação completa. Não confundir aprovação da apresentação da equipe com autoria editorial.
