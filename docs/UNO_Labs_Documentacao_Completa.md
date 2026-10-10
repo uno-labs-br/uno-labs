@@ -1,6 +1,6 @@
 # UNO Labs — Documentação completa de marca, posicionamento e site
 
-**Versão 1.7 · 02 de outubro de 2026. Incorpora a migração do frontend para Astro 7 + TypeScript. A Parte 0 prevalece sobre o restante.**
+**Versão 1.8 · 09 de outubro de 2026. Registra a identidade, o escopo e o catálogo de produtos decididos na issue #30 (confirmação de Urias pendente). A Parte 0 prevalece sobre o restante.**
 **Destinatários:** direção da UNO Labs, Claude, Codex, profissionais de marca, design e desenvolvimento.
 
 > **Sites sob medida para negócios que precisam ser percebidos à altura do que entregam.**
@@ -15,7 +15,7 @@ A documentação orienta a marca e o site. A implementação vigente tem fontes 
 
 ## Conteúdo
 
-0. Decisões vigentes (v1.7), que prevalecem sobre as demais partes.
+0. Decisões vigentes (v1.8), que prevalecem sobre as demais partes.
 1. Marca, posicionamento e geração de valor.
 2. Especificação estratégica, criativa e funcional do site.
 3. Copy proposta para as páginas e interações.
@@ -28,17 +28,19 @@ Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a refer�
 ---
 
 
-# PARTE 0 — Decisões vigentes (v1.7 · 02/10/2026)
+# PARTE 0 — Decisões vigentes (v1.8 · 09/10/2026)
 
-**Esta parte prevalece sobre as Partes I a VI.** Ela reúne as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta e os contatos de 30/09/2026, a equipe e fotografias aprovadas em 01/10/2026 e a migração Astro autorizada em 02/10/2026. As Partes I a VI conservam propostas e registros históricos; não autorizam reintroduzir HTML sem framework, instalar integrações adiadas ou tratar decisões antigas como implementação comprovada. Em caso de conflito, valem as decisões mais recentes registradas aqui.
+**Esta parte prevalece sobre as Partes I a VI.** Ela reúne as respostas do usuário (Urias Loures) de 29/09/2026, a padronização da pasta e os contatos de 30/09/2026, a equipe e fotografias aprovadas em 01/10/2026, a migração Astro autorizada em 02/10/2026 e a identidade, o escopo e o catálogo de produtos de 09/10/2026 (§0.14). As Partes I a VI conservam propostas e registros históricos; não autorizam reintroduzir HTML sem framework, instalar integrações adiadas ou tratar decisões antigas como implementação comprovada. Em caso de conflito, valem as decisões mais recentes registradas aqui.
 
 ## 0.1 A empresa
 
 1. **UNO Labs** é o nome definitivo do que seria a “Audaro — Engenharia Digital”, que nunca chegou a existir publicamente. Não há domínio antigo para redirecionar.
-2. A **Audaro — Engenharia de Resultado** (consultoria de IA, desenvolvimento de software) é outra empresa, com outro foco. Automações, agentes de IA e atendimento via WhatsApp/RAG pertencem a ela, não à UNO Labs. Não misturar as duas na comunicação.
+2. A **Audaro — Engenharia de Resultado** (consultoria de IA, desenvolvimento de software) é outra empresa, com outro foco. Automações, agentes de IA e atendimento via WhatsApp/RAG pertencem a ela, não à UNO Labs. Não misturar as duas na comunicação. **[v1.8]** O atendimento no WhatsApp com equipe humana passa a ser o produto UNO Chat (§0.14). Automação e consultoria de IA continuam fora da UNO até decisão registrada na §0.14.
 3. **Domínio:** unolabs.com.br (registrado).
 
 ## 0.2 Serviços ativos
+
+**[v1.8]** O catálogo abaixo foi reorganizado em produtos e adicionais na §0.14: criação de sites e manutenção viram a assinatura UNO Sites, sem projeto com pagamento único; Ads e SEO local viram adicionais; hospedagem, domínio e e-mail no domínio entram na assinatura; o e-mail marketing vira UNO Mail. A tabela fica como registro até a home ser atualizada (#36).
 
 | Serviço | Formato | Observação |
 |---|---|---|
@@ -52,6 +54,8 @@ Este arquivo, em `04 - SITE/docs/UNO_Labs_Documentacao_Completa.md`, é a refer�
 Hospedagem, domínio e e-mail corporativo como serviços oferecidos: **confirmar** antes de anunciar. **E-commerce:** fora do escopo por enquanto.
 
 ## 0.3 Condições comerciais
+
+**[v1.8]** Os itens 1, 2 e 4 são substituídos pelos planos, preços e prazos da §0.14 depois da confirmação de Urias; até a home mudar (#36), o site publicado continua com o item 1.
 
 1. **Preço público:** “Projetos a partir de R$ 1.490,00 em até 10x sem juros”. É o único valor publicável.
 2. **Ticket desejado:** projetos bem acima do piso, até cerca de R$ 10 mil.
@@ -100,7 +104,7 @@ A ordem de cada article é retrato, h3 com o nome, cargo e os dois parágrafos a
 
 1. **Headline:** “Presença digital que atrai clientes.” (escolha do usuário). A assinatura da marca continua: “Presença digital que gera oportunidades.”
 2. **Promessa permitida:** os serviços **podem** tornar a empresa mais fácil de encontrar no Google e percebida com mais autoridade. **Proibido:** garantir posição, vendas ou resultado.
-3. **“Rápido”** descreve qualidade técnica (o site carrega rápido), nunca prazo de entrega.
+3. **“Rápido”** descreve qualidade técnica (o site carrega rápido), nunca prazo de entrega. **[v1.8]** Exceção: os prazos fixos do UNO Sites (5 e 10 dias úteis, §0.14) podem ser anunciados como prazo, sem usar “rápido” para descrevê-los.
 
 ## 0.7 Identidade visual
 
@@ -156,7 +160,7 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e Wh
 
 | Item | Situação | Bloqueia publicação? |
 |---|---|---|
-| Pacote inicial a partir de R$ 1.490 | Escopo e entregáveis ainda não definidos; definir antes de vender o preço público | Sim |
+| Pacote inicial a partir de R$ 1.490 | **[v1.8]** Substituído pelos planos do UNO Sites (§0.14); confirmar com Urias e atualizar a home (#36) | Sim |
 | CNPJ e razão social | Dados empresariais a informar ou confirmar | Sim, para formalizar cobrança e identificação da empresa |
 | Caixa `contato@unolabs.com.br` | Endereço confirmado; existência e recebimento na caixa ainda não homologados | Sim |
 | Política de privacidade | Rascunho em `src/pages/politica-de-privacidade/index.astro`; completar o fluxo real, responsável, contato de privacidade, local do n8n, prazo de guarda e data; fazer revisão jurídica | Sim |
@@ -164,8 +168,8 @@ Os contatos confirmados já estão no HTML e no JSON-LD; os links `mailto:` e Wh
 | Homologação do e-mail | Registrar em separado a aceitação do backend, a aceitação/encaminhamento pelo SMTP e o recebimento observado na caixa de destino | Sim |
 | Equipe | Cargos, textos integrais e fotografias aprovados em 01/10/2026 na Parte 0, §0.5; conferir a aplicação no site antes da publicação | Não |
 | Termos comerciais de prazo e garantia | Informar as condições na proposta de cada escopo; não preencher números ou marcadores provisórios na home | Não |
-| Verba de mídia paga direto às plataformas | Confirmar | Não |
-| Hospedagem, domínio e e-mail como serviços | Confirmar | Não |
+| Verba de mídia paga direto às plataformas | **[v1.8]** Decidido: verba à parte, paga pelo cliente (§0.14); confirmar com Urias | Não |
+| Hospedagem, domínio e e-mail como serviços | **[v1.8]** Decidido: incluídos na assinatura do UNO Sites (§0.14); confirmar com Urias | Não |
 | E-mail marketing gerenciado | Definir preço público e escopo dos planos. Provedor de envio em avaliação: AWS SES (nova tentativa de aprovação em andamento), plano B SendGrid, alternativa MillionSend (código aberto) a avaliar. Móveis planejados confirmado como segmento prioritário (08/10/2026); demais segmentos a validar. Valores internos não entram neste repositório público; nomes de ferramentas e provedores não entram no site | Não; a página publica "sob consulta" |
 | Perfil de Empresa no Google | Não existe; depende de endereço verificável | Não, mas limita o SEO local |
 | Cases reais com autorização (La Bella Mesa e outros) | Pendência futura | Não |
@@ -203,6 +207,66 @@ A pasta `03 - ANALISE LP/uno-labs-main` é **a extração ZIP histórica do prot
 O Git inicial da pasta geral `01 - UNO LABS - LP` é separado e não possui o papel de repositório do site. Não executar push do site por ele. A documentação vigente foi reunida em `04 - SITE/docs`, incluindo as referências visuais, para acompanhar o código no GitHub.
 
 **Fluxo geral:** fetch do remoto correto → branch baseada na `main` atualizada → alterações e verificações → commit → push somente da branch → PR para `main` → revisão e autorização humana para integrar. Somente na migração de 02/10/2026, Urias autorizou antecipadamente commit, push, PR e merge tecnicamente validado, sem nova aprovação humana; proteções reais e checks continuam obrigatórios. A exceção não autoriza publicação oficial nem se aplica a trabalhos futuros. Um PR aberto não comprova integração; integração não comprova publicação. O relatório registra o estado comprovado.
+
+## 0.14 Identidade, escopo e catálogo (D31 a D38 · 09/10/2026)
+
+**Origem e status:** decisões de Bruno em 09/10/2026, registradas na issue #30 (épico #35), em resposta à pergunta de Urias: “Qual o escopo da UNO? O que a gente quer de fato SER?”. **Preços e decisões aguardam a confirmação de Urias.** Esta seção orienta a reestruturação do site; o site publicado só muda pelos PRs das issues derivadas (#29, #31 a #33 e #36 a #38). Não publicar os novos preços antes da confirmação.
+
+**Motivo:** a UNO começou com sites, SEO e anúncios e foi somando WhatsApp, e-mail, consultoria e automação; a home deixou de explicar o que a empresa faz.
+
+### Arquitetura de marca
+
+UNO Labs é a **marca guarda-chuva**, com home institucional (#29). Cada produto tem landing page própria em subdomínio; os endereços dos subdomínios ainda não foram definidos.
+
+| Produto | O que é | Prioridade | Página atual | Issues |
+|---|---|---|---|---|
+| **UNO Sites** | Site por assinatura | 1 | Home atual | #31, #36, #38 |
+| **UNO Chat** | Atendimento da empresa no WhatsApp, com Chatwoot e WhatsApp Cloud API | 1 | `/whatsapp/` | #33, #37 |
+| **UNO Mail** | E-mail marketing gerenciado | 2 | `/email-marketing/` | #32 |
+| **UNO CRM** | — | Adiado | — | #34 (fechada) |
+
+### UNO Sites — somente assinatura de 12 meses
+
+| Plano | Entrada | Mensalidade | No ar em |
+|---|---|---|---|
+| Página única | R$ 497 | R$ 197/mês | 5 dias úteis |
+| Institucional (até 5 páginas) | R$ 997 | R$ 297/mês | 10 dias úteis |
+| Projetos maiores | Sob consulta | Sob consulta | Sob consulta |
+
+1. **Inclui:** site, hospedagem, domínio, 1 caixa de e-mail no domínio, ajustes mensais e relatório.
+2. **Textos:** o cliente envia o material; a UNO escreve e revisa.
+3. **Caixa de e-mail extra:** R$ 49/mês por caixa.
+4. **Cancelamento antes de 12 meses:** multa de 50% das mensalidades restantes. Termos no contrato (#38).
+5. **Sem venda de projeto com pagamento único.**
+
+### UNO Chat
+
+1. **Planos mantidos:** Essencial R$ 147/mês + R$ 297 de implantação; Equipe R$ 247/mês + R$ 497 de implantação.
+2. **Combo:** quem assina o UNO Sites ganha a implantação do UNO Chat.
+3. **Tecnologia:** Chatwoot + WhatsApp Cloud API (#37).
+
+### Adicionais (fora do destaque da home)
+
+| Adicional | Preço público | Condições |
+|---|---|---|
+| Google Ads ou Meta Ads | A partir de R$ 1.290/mês | Verba de mídia à parte, paga pelo cliente; mínimo de 3 meses |
+| SEO local | A partir de R$ 990/mês | Nunca prometer posição (§0.6) |
+| UNO Mail | Sob consulta | Até o provedor de envio estar definido (§0.11) |
+
+### Posicionamento
+
+1. **Não competir por preço com sites feitos por IA.** Diferenciais: prazo curto, site ligado ao WhatsApp e acompanhamento depois de publicado.
+2. **Frase proposta para o UNO Sites (home atual):** “Site no ar em 5 dias, ligado ao seu WhatsApp, e a gente cuida depois.”
+3. Continuam valendo as proibições da §0.6: não garantir posição, vendas ou resultado.
+
+### Em aberto
+
+- [ ] Confirmação de Urias sobre preços e decisões desta seção.
+- [ ] Frase de posicionamento institucional da UNO Labs (guarda-chuva).
+- [ ] Onde entram automação/consultoria de IA e vídeos em motion: dentro de um produto, produto próprio ou fora por enquanto. Até a decisão, seguem fora da comunicação (§0.1).
+- [ ] Referências de empresas com esse modelo (Urias vai levantar).
+- [ ] Endereços dos subdomínios dos produtos.
+- [ ] Início da contagem dos prazos de 5 e 10 dias úteis, escopo dos ajustes mensais e conteúdo do relatório: definir no contrato (#38).
 
 ---
 
@@ -1502,7 +1566,7 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 | D07 | Estudos conceituais permanecem identificados | Base documental e regra editorial | Não convertê-los em clientes ou resultados |
 | D08 | Inter como baseline do protótipo | Proposta conservadora | Registrar escolha final do sistema web |
 | D09 | Selecionar um único pacote técnico de logos | Pendente de ativo e validação | Não combinar margens, geometria e variantes entre kits |
-| D10 | Oferta central; complementos subordinados e validados | Proposta baseada nas fontes | Não publicar catálogo ampliado por inferência |
+| D10 | Oferta central; complementos subordinados e validados | Proposta baseada nas fontes | Não publicar catálogo ampliado por inferência; catálogo definido em D31 a D36 |
 | D11 | Sem números comerciais inventados | Regra de integridade | Termos e prazos definidos por escopo na proposta; contatos confirmados em §0.10, funcionamento ainda não homologado |
 | D12 | Acessibilidade, desempenho e honestidade como condições de qualidade | Requisito de projeto | Efeitos não compensam falhas críticas de uso |
 | D13 | UNO Labs substitui a “Audaro — Engenharia Digital”; Audaro — Engenharia de Resultado é outra empresa | Decisão do usuário (v1.1) | Sem redirecionamento; automação/IA fora da UNO |
@@ -1523,6 +1587,14 @@ O HTML inclui conteúdo comercial de referência e links de WhatsApp sem número
 | D28 | Migrar agora para Astro 7 + TypeScript, sem aguardar artigos; preparar MDX com coleção vazia | Decisão de Urias em 02/10/2026; substitui o adiamento da v1.3 | Fontes em `src/`, saída `dist/`, artigos e integração oficial em etapas posteriores; evidências no relatório |
 | D29 | `04 - SITE` é a única pasta oficial para análises, Impeccable, localhost, alterações e Git; documentação em `docs/`; `03 - ANALISE LP` é histórico | Padronização solicitada pelo usuário (v1.4) | Ver Parte 0, §0.13 e `AGENTS.md` |
 | D30 | Retratos reais convertidos em derivados WebP locais e apresentados na ordem retrato, nome, cargo e dois parágrafos | Aprovação do usuário em 01/10/2026 | Ver Parte 0, §0.5; preservar originais, sem retoques ou geração, com exibição máxima de 320 px |
+| D31 | UNO Labs como marca guarda-chuva; produtos UNO Sites, UNO Chat, UNO Mail e UNO CRM com landing page própria em subdomínio | Decisão de Bruno em 09/10/2026 (#30); confirmação de Urias pendente | Ver Parte 0, §0.14; home institucional em #29 |
+| D32 | Prioridade: UNO Sites e UNO Chat; UNO Mail em seguida; UNO CRM adiado | Decisão de Bruno em 09/10/2026 (#30) | #34 fechada |
+| D33 | UNO Sites só por assinatura de 12 meses: Página única R$ 497 + R$ 197/mês; Institucional R$ 997 + R$ 297/mês; sem projeto com pagamento único | Decisão de Bruno em 09/10/2026 (#30); confirmação de Urias pendente | Substitui D15 e o pacote de R$ 1.490 após a confirmação; home em #36, contrato em #38 |
+| D34 | Hospedagem, domínio, 1 caixa de e-mail, ajustes mensais e relatório incluídos na assinatura; caixa extra R$ 49/mês | Decisão de Bruno em 09/10/2026 (#30) | Resolve a pendência de hospedagem, domínio e e-mail como serviços (§0.11) |
+| D35 | UNO Chat mantém Essencial e Equipe; implantação grátis para assinantes do UNO Sites; Chatwoot + WhatsApp Cloud API | Decisão de Bruno em 09/10/2026 (#30) | Ajusta D13: atendimento humano no WhatsApp entra na UNO; infraestrutura em #37 |
+| D36 | Google/Meta Ads a partir de R$ 1.290/mês (mídia à parte, mínimo 3 meses) e SEO local a partir de R$ 990/mês como adicionais | Decisão de Bruno em 09/10/2026 (#30) | Resolve a pendência da verba de mídia; fora do destaque da home |
+| D37 | Diferencial frente a sites feitos por IA: prazo curto, site ligado ao WhatsApp e acompanhamento depois de publicado | Decisão de Bruno em 09/10/2026 (#30) | Permite anunciar os prazos fixos do UNO Sites (§0.6, item 3) |
+| D38 | Automação/consultoria de IA e vídeos em motion sem lugar definido no catálogo | Em aberto (#30) | Seguem fora da comunicação até decisão |
 
 ## 6. Registro de informações a confirmar
 
