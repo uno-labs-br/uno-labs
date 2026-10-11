@@ -4,8 +4,15 @@ Frontend estático em Astro 7 + TypeScript, base editorial MDX e backend de cont
 
 **Pasta oficial no computador de Urias:** `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`. Seu conteúdo corresponde diretamente à raiz de [uno-labs-br/uno-labs](https://github.com/uno-labs-br/uno-labs); execute Git e npm nela.
 
+## Plano de oferta (doc oficial)
+
+Oferta, preços, contratos e canvas da UNO Labs, UNO Sites e UNO Chat, decididos por Bruno e Urias em 09/10/2026: **[Plano de oferta UNO Labs](https://claude.ai/artifact/MMmPWfjdqrwi9uURfNpubf)**. É a referência oficial para oferta e preços; em caso de divergência com os documentos de `docs/`, prevalece o plano. Preços sujeitos à confirmação do Urias.
+
+## Referências
+
 | Uso | Referência |
 |---|---|
+| Oferta, preços e contratos | [Plano de oferta UNO Labs](https://claude.ai/artifact/MMmPWfjdqrwi9uURfNpubf) — doc oficial |
 | Operação, comandos, preview e pendências | [LEIA-ME.md](LEIA-ME.md) — manual central |
 | Fontes da home e páginas auxiliares | `src/pages/` e `src/components/` |
 | Estilos e interações | `src/styles/` e `src/scripts/` |
