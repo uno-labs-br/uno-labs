@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { canonicalURL } from '../data/site.ts';
+import { canonicalURL, productDomainsReady } from '../data/site.ts';
 import { articlePath, getPublishedArticles } from '../lib/blog.ts';
 import { utcCalendarDay } from '../lib/editorial.ts';
 
@@ -13,8 +13,7 @@ export const GET: APIRoute = async () => {
   const pages: { path: string; modified?: Date }[] = [
     { path: '/' },
     { path: '/politica-de-privacidade/' },
-    { path: '/whatsapp/' },
-    { path: '/email-marketing/' },
+    ...(!productDomainsReady ? [{ path: '/whatsapp/' }, { path: '/email-marketing/' }] : []),
     { path: '/blog/' },
     ...(await getPublishedArticles()).map((article) => ({
       path: articlePath(article.id),

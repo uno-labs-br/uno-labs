@@ -1,8 +1,9 @@
 ---
-import { site } from '../data/site';
+import { productHref, site } from '../data/site';
 
-const homePrefix = Astro.url.pathname === '/' ? '' : '/';
+const homePrefix = Astro.url.pathname === '/' ? '' : site.origin + '/';
 const homeLink = (section: string) => `${homePrefix}#${section}`;
+const blogLink = `${site.origin}/blog/`;
 const isBlog = Astro.url.pathname.startsWith('/blog/');
 const isWhatsapp = Astro.url.pathname.startsWith('/whatsapp');
 const isEmail = Astro.url.pathname.startsWith('/email-marketing');
@@ -25,11 +26,11 @@ const ctaAtributos = paginaServico
     <a class="topo__marca" href={homeLink('topo')}><img src="/assets/img/uno-labs-horizontal-principal.svg" alt="UNO Labs, início" width="187" height="52"></a>
     <nav class="topo__nav" aria-label="Principal">
       <a href={homeLink('servicos')}>Serviços</a>
-      <a href="/whatsapp/" aria-current={isWhatsapp ? 'page' : undefined}>Canal WhatsApp</a>
-      <a href="/email-marketing/" aria-current={isEmail ? 'page' : undefined}>E-mail marketing</a>
+      <a href={productHref('/whatsapp/')} aria-current={isWhatsapp ? 'page' : undefined}>Canal WhatsApp</a>
+      <a href={productHref('/email-marketing/')} aria-current={isEmail ? 'page' : undefined}>E-mail marketing</a>
       <a href={homeLink('projetos')}>Projetos</a>
       <a href={homeLink('abordagem')}>Abordagem</a>
-      <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
+      <a href={blogLink} aria-current={isBlog ? 'page' : undefined}>Blog</a>
       <a href={homeLink('contato')}>Contato</a>
     </nav>
     <a class="btn btn--escuro topo__cta" href={ctaHref} {...ctaAtributos}>{ctaTexto} <svg class="seta" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -40,11 +41,11 @@ const ctaAtributos = paginaServico
   </div>
   <nav class="menu-movel" id="menu-movel" aria-label="Menu">
     <a href={homeLink('servicos')}>Serviços</a>
-    <a href="/whatsapp/" aria-current={isWhatsapp ? 'page' : undefined}>Canal WhatsApp</a>
-    <a href="/email-marketing/" aria-current={isEmail ? 'page' : undefined}>E-mail marketing</a>
+    <a href={productHref('/whatsapp/')} aria-current={isWhatsapp ? 'page' : undefined}>Canal WhatsApp</a>
+    <a href={productHref('/email-marketing/')} aria-current={isEmail ? 'page' : undefined}>E-mail marketing</a>
     <a href={homeLink('projetos')}>Projetos</a>
     <a href={homeLink('abordagem')}>Abordagem</a>
-    <a href="/blog/" aria-current={isBlog ? 'page' : undefined}>Blog</a>
+    <a href={blogLink} aria-current={isBlog ? 'page' : undefined}>Blog</a>
     <a href={homeLink('contato')}>Contato</a>
     <a class="btn btn--escuro" href={ctaHref} {...ctaAtributos}>{ctaTexto}</a>
   </nav>

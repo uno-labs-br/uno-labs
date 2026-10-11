@@ -1,6 +1,7 @@
 ---
+import { productHref, site } from '../data/site';
 const homePrefix = Astro.url.pathname === '/' ? '' : '/';
-const homeLink = (section: string) => `${homePrefix}#${section}`;
+const homeLink = (section: string) => `${homePrefix === '' ? '' : site.origin + '/'}#${section}`;
 ---
 <footer class="rodape">
   <div class="container">
@@ -14,7 +15,7 @@ const homeLink = (section: string) => `${homePrefix}#${section}`;
         <a href={homeLink('servicos')}>Serviços</a>
         <a href={homeLink('projetos')}>Projetos</a>
         <a href={homeLink('abordagem')}>Abordagem</a>
-        <a href="/blog/">Blog</a>
+        <a href={`${site.origin}/blog/`}>Blog</a>
         <a href={homeLink('contato')}>Contato</a>
       </nav>
       <div class="rodape__col">
@@ -24,8 +25,8 @@ const homeLink = (section: string) => `${homePrefix}#${section}`;
         <a href={homeLink('servicos')}>Google Ads</a>
         <a href={homeLink('servicos')}>Meta Ads</a>
         <a href={homeLink('servicos')}>Manutenção</a>
-        <a href="/whatsapp/">Canal WhatsApp</a>
-        <a href="/email-marketing/">E-mail marketing</a>
+        <a href={productHref('/whatsapp/')}>Canal WhatsApp</a>
+        <a href={productHref('/email-marketing/')}>E-mail marketing</a>
       </div>
       <div class="rodape__col">
         <span class="tit">Atendimento</span>
@@ -37,7 +38,7 @@ const homeLink = (section: string) => `${homePrefix}#${section}`;
     <div class="rodape__base">
       <span>© <span data-ano>2026</span> UNO Labs · unolabs.com.br</span>
       <button type="button" class="btn-preferencias-cookies" data-abrir-cookies>Preferências de cookies</button>
-      <a href="/politica-de-privacidade/">Política de privacidade</a>
+      <a href={`${site.origin}/politica-de-privacidade/`}>Política de privacidade</a>
     </div>
   </div>
 </footer>

@@ -2,6 +2,23 @@
 
 # UNO Labs — instruções do site
 
+## Infraestrutura de subdomínios (issue #41)
+
+Domínios reservados: `sites.unolabs.com.br` (UNO Sites), `chat.unolabs.com.br` (UNO Chat) e `mail.unolabs.com.br` (UNO Mail). A arquitetura escolhida é **um único build Astro estático e um Worker Cloudflare com roteamento por host**, reutilizando os ativos de `dist/`. O Worker já atende o domínio institucional. Isso evita três builds divergentes enquanto as landing pages das issues #31, #33 e #32 são concluídas. A decisão pode ser revista se os produtos precisarem de ciclos de publicação independentes.
+
+O código novo mantém `UNO_PRODUCT_DOMAINS_READY=false` no Worker e o build mantém o mesmo valor por padrão. Assim, o site atual continua nas rotas antigas até a ativação coordenada. Quando a flag estiver ativa nos **dois** lugares, `chat.` serve a página atual de `/whatsapp/` na raiz, `mail.` serve `/email-marketing/`, e essas rotas antigas respondem 301 para os novos domínios (incluindo a query string). `sites.` responde 503 com `noindex` até a landing page da issue #31; não apontar anúncios nem publicar esse host como produto pronto. O Worker fornece `robots.txt` e `sitemap.xml` próprios para cada host; o sitemap de `sites.` fica vazio. O sitemap institucional deixa de listar as rotas migradas quando o build recebe a flag.
+
+Em produção, `wrangler.production.jsonc` usa `run_worker_first: true` para que a escolha do host e os 301 ocorram antes dos ativos estáticos. Isso aumenta o número de requisições processadas pelo Worker; observar volume e custo após ativação. As prévias Vercel permanecem com `UNO_DEPLOY_TARGET=preview` e `noindex`; nunca configurar `UNO_PRODUCT_DOMAINS_READY=true` em prévias. O GA4 usa o mesmo ID nos hosts autorizados e grava `_ga` em `unolabs.com.br` somente após consentimento. A escolha de consentimento fica no `localStorage` de cada origem, portanto precisa ser feita em cada subdomínio.
+
+Ativação após aprovação e merge, fora desta branch:
+
+1. Concluir e revisar as landing pages de UNO Sites, UNO Chat e UNO Mail; validar texto, navegação e política de privacidade em cada host.
+2. Confirmar a zona `unolabs.com.br` na Cloudflare e adicionar os três Custom Domains ao Worker `unolabs-site` (no painel ou nas `routes` de `wrangler.production.jsonc`). Conferir DNS, certificado HTTPS e ausência de conflito com registros existentes. [Cloudflare Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
+3. Em um PR de ativação, mudar `UNO_PRODUCT_DOMAINS_READY` para `true` no build de produção do Workers Builds **e** em `wrangler.production.jsonc`; verificar que a Vercel continua em `preview` e `noindex`. Publicar somente pela `main` aprovada.
+4. Conferir `canonical`, `robots.txt` e `sitemap.xml` separadamente nos quatro hosts; testar 301 de `/whatsapp/` e `/email-marketing/`, preservação de query, 404 e páginas internas. Confirmar cookie `_ga` no domínio `unolabs.com.br` e eventos no GA4 após consentimento, sem carregar a tag antes dele. [Google Tag e cookies](https://developers.google.com/tag-platform/security/guides/customize-cookies).
+
+Nenhum DNS, domínio personalizado, variável remota ou deploy é alterado por esta issue.
+
 **Atualização: 02/10/2026 — migração do frontend para Astro 7 + TypeScript.**
 
 Esta é a única pasta oficial neste computador: `D:\00 - PROJETOS\01 - UNO LABS - LP\04 - SITE`. Seu conteúdo corresponde diretamente à raiz do repositório [uno-labs-br/uno-labs](https://github.com/uno-labs-br/uno-labs). Execute Git e npm nesta raiz; o Git da pasta geral é separado.
@@ -89,6 +106,7 @@ O desenvolvimento é Astro, normalmente em `http://localhost:4321`; conferir a U
 |---|---|
 | `npm ci` | Instalar exatamente o lockfile |
 | `npm run dev` | Desenvolver o frontend Astro |
+| `npm run lint` | Verificar sintaxe dos scripts JavaScript e whitespace do diff |
 | `npm run check` | Executar `astro check` |
 | `npm run build` | Executar `astro check && astro build`; gerar `dist/` |
 | `npm run preview` | Servir o build de `dist/` localmente |

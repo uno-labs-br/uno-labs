@@ -4,6 +4,8 @@
 
 Este documento descreve a implementação local e a hospedagem pretendida. Não comprova publicação em `unolabs.com.br`; conferir a integração na `main`, as pendências e o estado real do deploy.
 
+**Subdomínios planejados (#41):** `sites.unolabs.com.br`, `chat.unolabs.com.br` e `mail.unolabs.com.br` compartilharão o build Astro e o Worker, com seleção por host. A ativação exige DNS/Custom Domains, landing pages e flags de build/runtime coordenadas. Até lá, as URLs `/whatsapp/` e `/email-marketing/` permanecem. Procedimento e limites no [LEIA-ME](../LEIA-ME.md#infraestrutura-de-subdomínios-issue-41).
+
 Este documento descreve **o que** foi construído para o site da UNO Labs, **como** foi construído e **por que** cada decisão foi tomada. A origem canônica `unolabs.com.br` não comprova que esse domínio serve a versão descrita. Serve para dois usos:
 
 1. **Manutenção:** qualquer pessoa (ou IA) que for mexer no site entende a lógica antes de alterar.

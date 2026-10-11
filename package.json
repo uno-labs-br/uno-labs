@@ -5,10 +5,12 @@
   "description": "UNO Labs: frontend estático Astro 7 e TypeScript; backend de contato preservado.",
   "scripts": {
     "dev": "astro dev",
+    "lint": "node scripts/lint.mjs",
     "check": "astro check",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "test:worker": "node --test tests/contato.test.mjs",
+    "test:subdomains": "node --test tests/subdomains.test.mjs",
     "verificar:legado": "wrangler deploy --dry-run",
     "deploy": "node scripts/bloquear-deploy.mjs"
   },

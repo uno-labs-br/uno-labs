@@ -13,6 +13,20 @@ if (target !== 'preview' && target !== 'production') {
 }
 export const isPreview = target === 'preview';
 
+export const productOrigins = {
+  sites: 'https://sites.unolabs.com.br',
+  chat: 'https://chat.unolabs.com.br',
+  mail: 'https://mail.unolabs.com.br',
+} as const;
+
+export const productDomainsReady = import.meta.env.UNO_PRODUCT_DOMAINS_READY === 'true';
+
 export function canonicalURL(path: string): string {
+  if (productDomainsReady && path === '/whatsapp/') return `${productOrigins.chat}/`;
+  if (productDomainsReady && path === '/email-marketing/') return `${productOrigins.mail}/`;
   return new URL(path, site.origin).href;
+}
+
+export function productHref(path: '/whatsapp/' | '/email-marketing/'): string {
+  return productDomainsReady ? canonicalURL(path) : path;
 }
